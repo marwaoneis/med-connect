@@ -11,12 +11,28 @@
 
 ### User Stories
 
+Patient:
+
 - As a patient, I want to effortlessly request medication refills through the app, so I can ensure a smooth process and timely access to my prescriptions.
 - As a user seeking health information, I want to interact with the ChatBot to receive accurate and helpful responses to basic health queries, so I can make precise decisions about my health.
-- As a doctor, I want to conduct virtual consultations with patients through the Tele-medicine feature, so I can provide a flexible and efficient way to deliver healthcare services.
-- As a pharmacy, I want to seamlessly integrate with the app to receive electronic prescriptions and coordinate efficiently with healthcare providers, so I can ensure accurate and timely medication dispensing.
+- As a patient experiencing symptoms, I want to input my symptoms into the app's Symptom Checker, receiving AI-powered assessments and suggestions for appropriate next steps, so I can better understand and manage my health.
+- As a patient in need of healthcare services, I want to utilize Geo-location services to easily find nearby healthcare providers, pharmacies, or medical facilities, so I can ensure accessibility and convenience.
+- As a patient, I want the option for virtual consultations with doctors through the Tele-medicine feature, providing a convenient and flexible healthcare experience without the need to physically visit a clinic.
+- As a user, I want to schedule appointments seamlessly through the app, so I can save time and ensure timely access to healthcare services.
+- As a patient, I expect healthcare providers to electronically prescribe medications through the app, streamlining the process and allowing prescriptions to be sent directly to my preferred pharmacies.
+- As a patient managing multiple medications, I want to set up reminders and track my medication adherence within the app, so I can stay on top of my prescribed treatment plan.
 
-<br><br>
+Doctor:
+
+- As a doctor, I want to conduct virtual consultations with patients through the Tele-medicine feature, so I can provide a flexible and efficient way to deliver healthcare services.
+- As a healthcare provider, I want to efficiently manage appointments through the app, so I can ensure a smooth scheduling process and effective use of my time.
+- As a doctor, I want to electronically prescribe medications to patients through the app, so I can simplify the prescription process and improve coordination with pharmacies.
+
+Pharmacy:
+
+- As a pharmacy, I want to seamlessly integrate with the app to receive electronic prescriptions and coordinate efficiently with healthcare providers, so I can ensure accurate and timely medication dispensing.
+- As a pharmacy, I want to receive and process medication refill requests from patients through the app, streamlining the refill process and enhancing customer service.
+  <br><br>
 
 <!-- Prototyping -->
 <img src="./readme/title3.svg"/>
