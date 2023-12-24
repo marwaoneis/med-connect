@@ -120,9 +120,18 @@ _Below is an example of how you can instruct your audience on installing and set
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = "ENTER YOUR API";
+4. Go to nodejs-server directory
+   ```sh
+     cd nodejs-server
    ```
+5. Enter your URI in `monoDb.configs.js`
+   ```js
+   MONGODB_URI = "ENTER YOUR URI";
+   ```
+6. Run the server
+   ```sh
+       nodemon .
+   ```
+7. Install [Flutter SDK](https://docs.flutter.dev/get-started/install?gclid=Cj0KCQiAveebBhD_ARIsAFaAvrEXbca0gKEuW9ROxwC86eiEtJUUO5tm-AIIzds41AXpzsjkbESCw2EaAsTwEALw_wcB&gclsrc=aw.ds)
 
 Now, you should be able to run MedConnect locally and explore its features.
