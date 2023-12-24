@@ -122,7 +122,7 @@ _Below is an example of how you can instruct your audience on installing and set
    ```
 4. Go to nodejs-server directory
    ```sh
-     cd nodejs-server
+   cd nodejs-server
    ```
 5. Enter your URI in `monoDb.configs.js`
    ```js
@@ -130,16 +130,16 @@ _Below is an example of how you can instruct your audience on installing and set
    ```
 6. Run the server
    ```sh
-       nodemon .
+   nodemon .
    ```
 7. Install [Flutter SDK](https://docs.flutter.dev/get-started/install?gclid=Cj0KCQiAveebBhD_ARIsAFaAvrEXbca0gKEuW9ROxwC86eiEtJUUO5tm-AIIzds41AXpzsjkbESCw2EaAsTwEALw_wcB&gclsrc=aw.ds)
 8. Go to flutter_app directory
    ```sh
-       cd flutter_app
+   cd flutter_app
    ```
 9. Run flutter_app
    ```sh
-       flutter run
+   flutter run
    ```
 
 Now, you should be able to run MedConnect locally and explore its features.
