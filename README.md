@@ -81,11 +81,15 @@ Pharmacy:
 
 ### MedConnect is built using the following technologies:
 
-- This project uses the [Flutter app development framework](https://flutter.dev/). Flutter is a cross-platform hybrid app development platform which allows us to use a single codebase for apps on mobile, desktop, and the web.
-- For persistent storage (database), the app uses the [MongoDB](https://hivedb.dev/) package which allows the app to create a custom storage schema and save it to a local database.
-- To send local push notifications, the app uses the [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications) package which supports Android, iOS, and macOS.
-  - 🚨 Currently, notifications aren't working on macOS. This is a known issue that we are working to resolve!
-- The app uses the font ["Work Sans"](https://fonts.google.com/specimen/Work+Sans) as its main font, and the design of the app adheres to the material design guidelines.
+Here's a brief high-level overview of the tech stack the Well app uses:
+
+This project uses the [Flutter app development framework](https://flutter.dev/). Flutter is a cross-platform hybrid app development platform which allows us to use a single codebase for apps on mobile, desktop, and the web.
+
+The app uses [Node.js](https://nodejs.org/en/)for the backend. Node.js is a JavaScript runtime environment that allow running JavaScript code outside of a browser. Node.js is designed to build scalable network applications. Using [Express.js](https://expressjs.com/) which is a web application framework for Node.js. It provides a robust set of features to develop web and mobile applications.
+
+For trusted database foundation, the app uses the [MongoDB Atlas](https://www.mongodb.com/atlas/database) that enables you to work with data the way you want – easily and effortlessly.
+
+For notifications, the app uses [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging) which is a cross-platform messaging solution that lets you reliably deliver messages at no cost.
 
 <br><br>
 
