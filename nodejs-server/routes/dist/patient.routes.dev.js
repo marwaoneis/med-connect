@@ -4,7 +4,7 @@ var express = require("express");
 
 var router = express.Router(); // Import controllers
 
-var patientController = require("./controllers/patient.controller"); // Patient routes
+var patientController = require("../controllers/patient.controller"); // Patient routes
 
 
 router.get("/patients", patientController.getAllPatients);

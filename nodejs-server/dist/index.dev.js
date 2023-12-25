@@ -15,10 +15,9 @@ app.use(express.json());
 app.get("/hello", function (req, res) {
   console.log("HELLO MARWAAAA!!");
 }); // auth route
-
-var authRoutes = require("./routes/auth.routes");
-
-app.use("/auth", authRoutes); // patient routes
+// const authRoutes = require("./routes/auth.routes");
+// app.use("/auth", authRoutes);
+// patient routes
 
 var patientRoutes = require("./routes/patient.routes");
 
