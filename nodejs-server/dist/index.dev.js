@@ -2,7 +2,7 @@
 
 var express = require("express");
 
-var _require = require("./configs/monoDb.configs"),
+var _require = require("./config/mongoDb.config"),
     connectToMongoDB = _require.connectToMongoDB;
 
 require("dotenv").config();

@@ -1,5 +1,5 @@
 const express = require("express");
-const { connectToMongoDB } = require("./configs/monoDb.configs");
+const { connectToMongoDB } = require("./config/mongoDb.config");
 require("dotenv").config();
 const cors = require("cors");
 
