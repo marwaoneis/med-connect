@@ -1,17 +1,16 @@
 const mongoose = require("mongoose");
 
-const AiAssessmentSchema = new mongoose.Schema(
+const messageSchema = new mongoose.Schema(
   {
-    patientId: {
+    senderId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Patient",
       required: true,
     },
-    symptoms: {
-      type: String,
+    receiverId: {
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
-    aiAssessment: {
+    content: {
       type: String,
       required: true,
     },
@@ -19,7 +18,7 @@ const AiAssessmentSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const appointmentSchema = new mongoose.Schema(
+const chatSchema = new mongoose.Schema(
   {
     patientId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -31,13 +30,9 @@ const appointmentSchema = new mongoose.Schema(
       ref: "Doctor",
       required: true,
     },
-    aiAssessment: AiAssessmentSchema,
-    status: {
-      type: String,
-      enum: ["Scheduled", "Completed", "Cancelled"],
-    },
+    messages: [messageSchema],
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Appointment", appointmentSchema);
+module.exports = mongoose.model("Chat", chatSchema);

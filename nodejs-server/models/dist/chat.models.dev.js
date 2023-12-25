@@ -2,24 +2,23 @@
 
 var mongoose = require("mongoose");
 
-var AiAssessmentSchema = new mongoose.Schema({
-  patientId: {
+var messageSchema = new mongoose.Schema({
+  senderId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Patient",
     required: true
   },
-  symptoms: {
-    type: String,
+  receiverId: {
+    type: mongoose.Schema.Types.ObjectId,
     required: true
   },
-  aiAssessment: {
+  content: {
     type: String,
     required: true
   }
 }, {
   timestamps: true
 });
-var appointmentSchema = new mongoose.Schema({
+var chatSchema = new mongoose.Schema({
   patientId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Patient",
@@ -30,13 +29,9 @@ var appointmentSchema = new mongoose.Schema({
     ref: "Doctor",
     required: true
   },
-  aiAssessment: AiAssessmentSchema,
-  status: {
-    type: String,
-    "enum": ["Scheduled", "Completed", "Cancelled"]
-  }
+  messages: [messageSchema]
 }, {
   timestamps: true
 });
-module.exports = mongoose.model("Appointment", appointmentSchema);
-//# sourceMappingURL=appointment.model.dev.js.map
+module.exports = mongoose.model("Chat", chatSchema);
+//# sourceMappingURL=chat.models.dev.js.map
