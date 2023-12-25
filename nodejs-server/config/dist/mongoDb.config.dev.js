@@ -1,5 +1,10 @@
 "use strict";
 
+var _require = require("mongoose"),
+    mongoose = _require["default"];
+
+var mogoose = require("mongoose");
+
 var connectToMongoDB = function connectToMongoDB() {
   mogoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/medconnect_db");
   var connection = mongoose.connection;

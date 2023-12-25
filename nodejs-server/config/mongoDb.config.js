@@ -1,3 +1,6 @@
+const { default: mongoose } = require("mongoose");
+const mogoose = require("mongoose");
+
 const connectToMongoDB = () => {
   mogoose.connect(
     process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/medconnect_db"
