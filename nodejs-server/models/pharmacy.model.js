@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 
-const userSchema = new mongoose.Schema({
+const pharmacySchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
@@ -16,33 +16,17 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 6,
   },
-  firstName: {
+  address: {
     type: String,
     required: true,
-    minlength: 2,
   },
-  lastName: {
+  phone: {
     type: String,
     required: true,
-    minlength: 2,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    validate: [validator.isEmail, "Please provide a valid email"],
-  },
-  userType: {
-    type: String,
-    enum: ["Patient", "Doctor", "Pharmacy"],
-  },
-  profileInfoId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "ProfileInfo",
   },
 });
 
-userSchema.pre(
+pharmacySchema.pre(
   "save",
   async function (next) {
     try {
@@ -59,4 +43,4 @@ userSchema.pre(
   }
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Pharmacy", pharmacySchema);

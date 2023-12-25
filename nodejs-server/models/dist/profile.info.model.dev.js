@@ -1,31 +1,29 @@
-const mongoose = require("mongoose");
+"use strict";
 
-const profileInfoSchema = new mongoose.Schema({
+var mongoose = require("mongoose");
+
+var profileInfoSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "User"
   },
   address: {
     type: String,
-    required: true,
+    required: true
   },
   phone: {
     type: String,
-    required: true,
+    required: true
   },
   additionalInfo: {
     type: Map,
-    of: String, // or mongoose.Schema.Types.Mixed if the structure is not consistent
-  },
+    of: String // or mongoose.Schema.Types.Mixed if the structure is not consistent
+
+  }
 });
-
-module.exports = mongoose.model("ProfileInfo", profileInfoSchema);
-
-// To structure the `AdditionalInfo` field in your MongoDB schema for the MedConnect application with the specified fields for each user type (patient, doctor, pharmacy), you will need to customize the JSON object for each. Here's how you can structure it:
-
+module.exports = mongoose.model("ProfileInfo", profileInfoSchema); // To structure the `AdditionalInfo` field in your MongoDB schema for the MedConnect application with the specified fields for each user type (patient, doctor, pharmacy), you will need to customize the JSON object for each. Here's how you can structure it:
 // ### Patient `AdditionalInfo` Structure
 // For patients, the `AdditionalInfo` JSON object can include fields like medical history, emergency contacts, and other health-related information:
-
 // ```json
 // {
 //   "DateOfBirth": "1980-01-01",
@@ -48,10 +46,8 @@ module.exports = mongoose.model("ProfileInfo", profileInfoSchema);
 //   "Weight": "60kg"
 // }
 // ```
-
 // ### Doctor `AdditionalInfo` Structure
 // For doctors, the `AdditionalInfo` could include their specialization, qualifications, and experience:
-
 // ```json
 // {
 //   "Specialization": "Cardiology",
@@ -59,39 +55,31 @@ module.exports = mongoose.model("ProfileInfo", profileInfoSchema);
 //   "YearsOfExperience": 15
 // }
 // ```
-
 // ### Pharmacy `AdditionalInfo` Structure
 // For pharmacies, the `AdditionalInfo` might be simpler, focusing on insurance information:
-
 // ```json
 // {
 //   "InsuranceInfo": ["Provider A", "Provider B", "Provider C"]
 // }
 // ```
-
 // ### Implementing in MongoDB with Mongoose
 // Here's how you could implement this in your Mongoose schema:
-
 // ```javascript
 // const mongoose = require('mongoose');
 // const Schema = mongoose.Schema;
-
 // const profileInfoSchema = new Schema({
 //   // Common fields for all user types
 //   FullName: String,
 //   Address: String,
 //   Phone: String,
 //   // ...
-
 //   // AdditionalInfo as a Map to store JSON data
 //   AdditionalInfo: {
 //     type: Map,
 //     of: String
 //   }
 // });
-
 // const ProfileInfo = mongoose.model('ProfileInfo', profileInfoSchema);
-
 // // Example of adding a new patient
 // let newPatient = new ProfileInfo({
 //   FullName: "Jane Doe",
@@ -118,13 +106,11 @@ module.exports = mongoose.model("ProfileInfo", profileInfoSchema);
 //     Weight: "60kg"
 //   }
 // });
-
 // newPatient.save();
 // ```
-
 // In this implementation:
 // - Each user type has a customized `AdditionalInfo` JSON object.
 // - Use `JSON.stringify()` for nested objects within `AdditionalInfo`.
 // - Ensure the frontend forms and API endpoints are designed to handle these data structures.
-
 // Remember to handle sensitive information securely and comply with relevant privacy laws, especially when dealing with medical data.
+//# sourceMappingURL=profile.info.model.dev.js.map
