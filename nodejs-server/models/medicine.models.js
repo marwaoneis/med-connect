@@ -29,7 +29,7 @@ const medicineSchema = new mongoose.Schema(
       ref: "Pharmacy",
       required: true,
     },
-    medicineDetails: [MedicineDetails],
+    medicineDetails: [medicineDetailsSchema],
     stockLevel: {
       type: Number,
       required: true,
