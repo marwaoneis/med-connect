@@ -1,4 +1,4 @@
-const MedicationOrder = require("../models/medicationOrder.model");
+const MedicationOrder = require("../models/medication.order.model");
 
 // Create a new medication order
 const createMedicationOrder = async (req, res) => {
