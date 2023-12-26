@@ -17,11 +17,8 @@ const getMedicinesByPharmacyId = async (req, res) => {
     const medicines = await Medicine.find({
       pharmacyId: req.params.pharmacyId,
     });
-    // console.log("Pharmacy ID:", req.params.pharmacyId);
-    // console.log("Medicines found:", medicines);
     res.status(200).json(medicines);
   } catch (error) {
-    // console.log(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
@@ -65,7 +62,7 @@ const deleteMedicineById = async (req, res) => {
     if (!medicine) {
       return res.status(404).json({ error: "Medicine not found" });
     }
-    res.status(204).json(); // No content
+    res.status(204).json({ message: "Patient deleted" });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
