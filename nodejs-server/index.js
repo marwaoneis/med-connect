@@ -23,6 +23,30 @@ app.use("/patient", patientRoutes);
 const prescriptionRoutes = require("./routes/prescription.routes");
 app.use("/prescription", prescriptionRoutes);
 
+// pharmacy routes
+const pharmacyRoutes = require("./routes/pharmacy.routes");
+app.use("/pharmacy", pharmacyRoutes);
+
+// medicine routes
+const medicineRoutes = require("./routes/medicine.routes");
+app.use("/medicine", medicineRoutes);
+
+// medication order routes
+const medicationOrderRoutes = require("./routes/medication.order.routes");
+app.use("/medication-order", medicationOrderRoutes);
+
+// doctor routes
+const doctorRoutes = require("./routes/doctor.routes");
+app.use("/doctor", doctorRoutes);
+
+// chat routes
+const chatRoutes = require("./routes/chat.routes");
+app.use("/chat", chatRoutes);
+
+// appointment routes
+const appointmentRoutes = require("./routes/appintment.routes");
+app.use("/appointment", appointmentRoutes);
+
 app.use(cors({ origin: "http://localhost:3000" }));
 
 //Listening on server port and logging status
