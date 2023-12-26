@@ -1,54 +1,192 @@
 const Patient = require("../models/patient.model");
 
-exports.getAllPatients = async (req, res) => {
+// Get all patients
+const getAllPatients = async (req, res) => {
   try {
     const patients = await Patient.find();
-    res.json(patients);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(200).json(patients);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
-exports.getPatient = async (req, res) => {
+// Get a specific patient by ID
+const getPatient = async (req, res) => {
   try {
+    if (!req.params.id) {
+      res
+        .status(400)
+        .json({ error: "Bad Request, PatientId Id should be provided" });
+    }
     const patient = await Patient.findById(req.params.id);
-    if (!patient) return res.status(404).json({ message: "Patient not found" });
-    res.json(patient);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    if (!patient) {
+      return res.status(404).json({ error: "Patient not found" });
+    }
+    res.status(200).json(patient);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
-exports.createPatient = async (req, res) => {
-  const patient = new Patient(req.body);
+// Create a new patient
+const createPatient = async (req, res) => {
   try {
-    const newPatient = await patient.save();
-    res.status(201).json(newPatient);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
+    // Validate required parameters
+    const {
+      username,
+      password,
+      firstName,
+      lastName,
+      email,
+      address,
+      phone,
+      dateOfBirth,
+      gender,
+    } = req.body;
+    if (
+      !username ||
+      !password ||
+      !firstName ||
+      !lastName ||
+      !email ||
+      !address ||
+      !phone ||
+      !dateOfBirth ||
+      !gender
+    ) {
+      return res
+        .status(400)
+        .json({ error: "All required parameters must be provided" });
+    }
+
+    const patient = new Patient(req.body);
+    await patient.save();
+    res.status(201).json(patient);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
-exports.updatePatient = async (req, res) => {
+// Update a patient by ID
+const updatePatient = async (req, res) => {
   try {
-    const updatedPatient = await Patient.findByIdAndUpdate(
+    const {
+      username,
+      password,
+      firstName,
+      lastName,
+      email,
+      address,
+      phone,
+      dateOfBirth,
+      gender,
+    } = req.body;
+
+    // Check if at least one field is present for update
+    if (
+      !username &&
+      !password &&
+      !firstName &&
+      !lastName &&
+      !email &&
+      !address &&
+      !phone &&
+      !dateOfBirth &&
+      !gender
+    ) {
+      return res
+        .status(400)
+        .json({ error: "At least one field must be provided for update" });
+    }
+
+    const patient = await Patient.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+
+    if (!patient) {
+      return res.status(404).json({ error: "Patient not found" });
+    }
+
+    res.status(200).json(patient);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+// Delete a patient by ID
+const deletePatient = async (req, res) => {
+  try {
+    const patient = await Patient.findByIdAndRemove(req.params.id);
+    if (!patient) {
+      return res.status(404).json({ error: "Patient not found" });
+    }
+    res.status(204).end(); // No content
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+// Insert entry to additional info in a patient by ID
+const insertAdditionalInfo = async (req, res) => {
+  try {
+    const { key, value } = req.body;
+
+    // Check if key and value are present for insertion
+    if (!key || !value) {
+      return res
+        .status(400)
+        .json({ error: "Both key and value must be provided for insertion" });
+    }
+
+    const patient = await Patient.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      { $set: { [`additionalInfo.${key}`]: value } }, // Use $set to insert the key-value pair
       { new: true }
     );
-    res.json(updatedPatient);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
+
+    if (!patient) {
+      return res.status(404).json({ error: "Patient not found" });
+    }
+
+    res.status(200).json(patient);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
-exports.deletePatient = async (req, res) => {
+// Delete entry from additional info in a patient by ID
+const deleteAdditionalInfo = async (req, res) => {
   try {
-    const patient = await Patient.findById(req.params.id);
-    if (!patient) return res.status(404).json({ message: "Patient not found" });
-    await patient.remove();
-    res.json({ message: "Deleted Patient" });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    const { key } = req.params;
+
+    // Check if key is present for deletion
+    if (!key) {
+      return res
+        .status(400)
+        .json({ error: "Key must be provided for deletion" });
+    }
+
+    const patient = await Patient.findByIdAndUpdate(
+      req.params.id,
+      { $unset: { [`additionalInfo.${key}`]: 1 } }, // Use $unset to delete the key-value pair
+      { new: true }
+    );
+
+    if (!patient) {
+      return res.status(404).json({ error: "Patient not found" });
+    }
+
+    res.status(200).json(patient);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
   }
+};
+module.exports = {
+  getAllPatients,
+  getPatient,
+  createPatient,
+  updatePatient,
+  deletePatient,
+  insertAdditionalInfo,
+  deleteAdditionalInfo,
 };
