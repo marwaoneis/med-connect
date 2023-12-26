@@ -74,7 +74,7 @@ const deleteMedicationOrderById = async (req, res) => {
     if (!medicationOrder) {
       return res.status(404).json({ error: "Medication Order not found" });
     }
-    res.status(204).json(); // No content
+    res.status(204).json({ message: "Pharmacy Deleted" });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
