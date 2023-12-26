@@ -1,4 +1,4 @@
-const Doctor = require('./../models/doctor.model');
+const Doctor = require("./../models/doctor.model");
 
 // Create a new doctor
 const createDoctor = async (req, res) => {
@@ -37,7 +37,9 @@ const getDoctorById = async (req, res) => {
 // Update a doctor by ID
 const updateDoctorById = async (req, res) => {
   try {
-    const doctor = await Doctor.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const doctor = await Doctor.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     if (!doctor) {
       return res.status(404).json({ error: "Doctor not found" });
     }
@@ -54,7 +56,7 @@ const deleteDoctorById = async (req, res) => {
     if (!doctor) {
       return res.status(404).json({ error: "Doctor not found" });
     }
-    res.status(204).json(); // No content
+    res.status(204).json({ message: "Doctor Deleted" });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -79,5 +81,5 @@ module.exports = {
   getDoctorById,
   updateDoctorById,
   deleteDoctorById,
-  getDoctorByUsername
+  getDoctorByUsername,
 };

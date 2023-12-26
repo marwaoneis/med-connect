@@ -62,7 +62,7 @@ const deleteMedicineById = async (req, res) => {
     if (!medicine) {
       return res.status(404).json({ error: "Medicine not found" });
     }
-    res.status(204).json({ message: "Patient deleted" });
+    res.status(204).json({ message: "Medicine deleted" });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
