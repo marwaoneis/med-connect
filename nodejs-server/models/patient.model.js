@@ -50,7 +50,7 @@ const patientSchema = new mongoose.Schema({
   },
   additionalInfo: {
     type: Map,
-    of: String, // or mongoose.Schema.Types.Mixed if the structure is not consistent
+    of: mongoose.Schema.Types.Mixed, // or mongoose.Schema.Types.Mixed if the structure is not consistent
   },
 });
 

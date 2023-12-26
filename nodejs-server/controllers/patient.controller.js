@@ -109,18 +109,18 @@ const updatePatient = async (req, res) => {
 
     res.status(200).json(patient);
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: error.message });
   }
 };
 
 // Delete a patient by ID
 const deletePatient = async (req, res) => {
   try {
-    const patient = await Patient.findByIdAndRemove(req.params.id);
+    const patient = await Patient.findByIdAndDelete(req.params.id);
     if (!patient) {
       return res.status(404).json({ error: "Patient not found" });
     }
-    res.status(204).end(); // No content
+    res.status(200).json({ message: "Patient deleted" });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }

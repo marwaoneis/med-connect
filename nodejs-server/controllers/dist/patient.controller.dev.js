@@ -179,7 +179,7 @@ var updatePatient = function updatePatient(req, res) {
           _context4.prev = 12;
           _context4.t0 = _context4["catch"](0);
           res.status(500).json({
-            error: "Internal Server Error"
+            error: _context4.t0.message
           });
 
         case 15:
@@ -199,7 +199,7 @@ var deletePatient = function deletePatient(req, res) {
         case 0:
           _context5.prev = 0;
           _context5.next = 3;
-          return regeneratorRuntime.awrap(Patient.findByIdAndRemove(req.params.id));
+          return regeneratorRuntime.awrap(Patient.findByIdAndDelete(req.params.id));
 
         case 3:
           patient = _context5.sent;
@@ -214,8 +214,9 @@ var deletePatient = function deletePatient(req, res) {
           }));
 
         case 6:
-          res.status(204).end(); // No content
-
+          res.status(200).json({
+            message: "Patient deleted"
+          });
           _context5.next = 12;
           break;
 
