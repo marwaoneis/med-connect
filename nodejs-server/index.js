@@ -7,9 +7,9 @@ const cors = require("cors");
 const app = express();
 app.use(express.json());
 
-app.get("/hello", (req, res) => {
-  console.log("HELLO MARWAAAA!!");
-});
+// Middlewares for parsing JSON and URL-encoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // auth route
 // const authRoutes = require("./routes/auth.routes");
@@ -17,40 +17,41 @@ app.get("/hello", (req, res) => {
 
 // patient routes
 const patientRoutes = require("./routes/patient.routes");
-app.use("/patient", patientRoutes);
+app.use("/", patientRoutes);
 
 // prescription routes
 const prescriptionRoutes = require("./routes/prescription.routes");
-app.use("/prescription", prescriptionRoutes);
+app.use("/", prescriptionRoutes);
 
 // pharmacy routes
 const pharmacyRoutes = require("./routes/pharmacy.routes");
-app.use("/pharmacy", pharmacyRoutes);
+app.use("/", pharmacyRoutes);
 
 // medicine routes
 const medicineRoutes = require("./routes/medicine.routes");
-app.use("/medicine", medicineRoutes);
+app.use("/", medicineRoutes);
 
 // medication order routes
 const medicationOrderRoutes = require("./routes/medication.order.routes");
-app.use("/medication-order", medicationOrderRoutes);
+app.use("/", medicationOrderRoutes);
 
 // doctor routes
 const doctorRoutes = require("./routes/doctor.routes");
-app.use("/doctor", doctorRoutes);
+app.use("/", doctorRoutes);
 
 // chat routes
 const chatRoutes = require("./routes/chat.routes");
-app.use("/chat", chatRoutes);
+app.use("/", chatRoutes);
 
 // appointment routes
 const appointmentRoutes = require("./routes/appintment.routes");
-app.use("/appointment", appointmentRoutes);
+app.use("/", appointmentRoutes);
 
 app.use(cors({ origin: "http://localhost:3000" }));
 
 //Listening on server port and logging status
-app.listen(process.env.PORT, () => {
-  console.log("Server listining on PORT: ", process.env.PORT);
+const PORT = process.env.PORT;
+app.listen(PORT, () => {
+  console.log("Server listining on PORT: ", PORT);
   connectToMongoDB();
 });
