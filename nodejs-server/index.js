@@ -19,6 +19,10 @@ app.get("/hello", (req, res) => {
 const patientRoutes = require("./routes/patient.routes");
 app.use("/patient", patientRoutes);
 
+// prescription routes
+const prescriptionRoutes = require("./routes/prescription.routes");
+app.use("/prescription", prescriptionRoutes);
+
 app.use(cors({ origin: "http://localhost:3000" }));
 
 //Listening on server port and logging status
