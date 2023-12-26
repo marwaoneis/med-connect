@@ -1,4 +1,4 @@
-const Pharmacy = require('./../models/pharmacy.model');
+const Pharmacy = require("./../models/pharmacy.model");
 
 // Create a new pharmacy
 const createPharmacy = async (req, res) => {
@@ -37,7 +37,9 @@ const getPharmacyById = async (req, res) => {
 // Update a pharmacy by ID
 const updatePharmacyById = async (req, res) => {
   try {
-    const pharmacy = await Pharmacy.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const pharmacy = await Pharmacy.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     if (!pharmacy) {
       return res.status(404).json({ error: "Pharmacy not found" });
     }
@@ -54,7 +56,7 @@ const deletePharmacyById = async (req, res) => {
     if (!pharmacy) {
       return res.status(404).json({ error: "Pharmacy not found" });
     }
-    res.status(204).json(); // No content
+    res.status(200).json({ message: "Pharmacy Deleted" });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -90,5 +92,5 @@ module.exports = {
   updatePharmacyById,
   deletePharmacyById,
   getPharmacyByUsername,
-  getPharmaciesByAddress
+  getPharmaciesByAddress,
 };
