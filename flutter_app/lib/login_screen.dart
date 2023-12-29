@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 25), // Adjust the space as needed
             Image.asset('assets/logo.png',
                 height: 200), // Place your logo asset
-            const SizedBox(height: 30), // Space between logo and the white box
+            const SizedBox(height: 25), // Space between logo and the white box
             // White box with top rounded corners
             Container(
               width: double.infinity,
@@ -34,8 +34,7 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const SizedBox(
-                        height: 20), // Spacing at the top inside the box
+                    const SizedBox(height: 15),
                     const Text(
                       'Login',
                       textAlign: TextAlign.left,
@@ -45,7 +44,15 @@ class LoginScreen extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    const SizedBox(height: 24), // Spacing after title
+                    Divider(
+                      color: const Color(0xFF71717A), // Color of the line
+                      thickness: 1, // Thickness of the line
+                      indent: 7,
+                      height: 6,
+                      endIndent: MediaQuery.of(context).size.width -
+                          95, // Right spacing to make the line 50 width
+                    ),
+                    const SizedBox(height: 30), // Spacing after title
                     const Text(
                       'Email',
                       style: TextStyle(fontSize: 16),
@@ -93,7 +100,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 30), // Spacing before login button
+                    const SizedBox(height: 25), // Spacing before login button
                     ElevatedButton(
                       onPressed: () {
                         // Implement login functionality
@@ -138,7 +145,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 25),
                     const Row(
                       children: [
                         Expanded(
@@ -159,12 +166,9 @@ class LoginScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 35),
-                    // Add social media buttons here
-                    // Example for one social media button
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        // Facebook Button
                         ElevatedButton(
                           onPressed: () {
                             // Implement Facebook sign-in functionality
@@ -183,7 +187,7 @@ class LoginScreen extends StatelessWidget {
                             'assets/facebook.svg',
                           ),
                         ),
-                        // Google Button
+                        const SizedBox(height: 15),
                         ElevatedButton(
                           onPressed: () {
                             // Implement Google sign-in functionality
@@ -205,7 +209,7 @@ class LoginScreen extends StatelessWidget {
                             'assets/chrome.svg',
                           ),
                         ),
-                        // Apple Button
+                        const SizedBox(height: 15),
                         ElevatedButton(
                           onPressed: () {
                             // Implement Apple sign-in functionality
@@ -226,6 +230,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 15),
                   ],
                 ),
               ),
