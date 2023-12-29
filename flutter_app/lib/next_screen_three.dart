@@ -72,7 +72,7 @@ class NextScreenThree extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset(
-                            'ssets/doctor_consultation_3.png',
+                            'assets/doctor_consultation_3.png',
                           ),
                         ],
                       ),
@@ -97,7 +97,7 @@ class NextScreenThree extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const Login()),
+                                  builder: (context) => const LoginScreen()),
                             );
                           },
                           child: const Text(
