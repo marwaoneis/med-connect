@@ -170,11 +170,10 @@ class LoginScreen extends StatelessWidget {
                             // Implement Facebook sign-in functionality
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(
-                                0xFF0D4C92), // Facebook button color
+                            backgroundColor: const Color(0xFF0D4C92),
                             foregroundColor:
                                 const Color(0xFF4676ED), // Icon color
-                            minimumSize: const Size(50, 50), // Square size
+                            minimumSize: const Size(100, 50), // Square size
                             shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(10), // Rounded corners
@@ -193,7 +192,7 @@ class LoginScreen extends StatelessWidget {
                             backgroundColor: const Color(
                                 0xFF0D4C92), // Fa, // Google button color
                             foregroundColor: Colors.grey, // Icon color
-                            minimumSize: const Size(50, 50), // Square size
+                            minimumSize: const Size(100, 50), // Square size
                             shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(10), // Rounded corners
@@ -215,16 +214,14 @@ class LoginScreen extends StatelessWidget {
                             backgroundColor:
                                 const Color(0xFF0D4C92), // Apple button color
                             foregroundColor: Colors.black, // Icon color
-                            minimumSize: const Size(50, 50), // Square size
+                            minimumSize: const Size(100, 50), // Square size
                             shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(10), // Rounded corners
                             ),
                           ),
                           child: SvgPicture.asset(
-                            'assets/apple.svg', // Replace with your asset name
-                            width: 24,
-                            height: 24,
+                            'assets/apple.svg',
                           ),
                         ),
                       ],
