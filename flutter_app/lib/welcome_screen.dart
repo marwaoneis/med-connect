@@ -25,7 +25,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     Future.delayed(const Duration(seconds: 5), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const NextScreen()),
+        MaterialPageRoute(builder: (context) => const NextScreenOne()),
       );
     });
   }

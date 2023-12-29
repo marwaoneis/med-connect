@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'next_screen_three.dart';
+import 'login_screen.dart';
 
-class NextScreenTwo extends StatelessWidget {
-  const NextScreenTwo({super.key});
+class NextScreenThree extends StatelessWidget {
+  const NextScreenThree({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +22,9 @@ class NextScreenTwo extends StatelessWidget {
                   child: Column(
                     children: [
                       const Text(
-                        'Log your Symptoms',
+                        'Integration with Pharmacy Systems',
                         style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 24,
                           fontWeight: FontWeight.w900,
                           color: Colors.black,
                         ),
@@ -33,7 +33,7 @@ class NextScreenTwo extends StatelessWidget {
                       const Padding(
                         padding: EdgeInsets.only(top: 8.0),
                         child: Text(
-                          ' AI-Powered assessments for next steps based on user symptom entry.',
+                          'improve coordination between healthcare providers and pharmacists.',
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.black,
@@ -46,7 +46,7 @@ class NextScreenTwo extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(
-                              3, (index) => _buildIndicatorDot(index == 1)),
+                              3, (index) => _buildIndicatorDot(index == 2)),
                         ),
                       ),
                     ],
@@ -72,7 +72,7 @@ class NextScreenTwo extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset(
-                            'assets/doctor_consultation_2.png',
+                            'ssets/doctor_consultation_3.png',
                           ),
                         ],
                       ),
@@ -97,8 +97,7 @@ class NextScreenTwo extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      const NextScreenThree()),
+                                  builder: (context) => const Login()),
                             );
                           },
                           child: const Text(
