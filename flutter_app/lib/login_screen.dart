@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'doctor_screen.dart';
 
 enum UserType { patient, doctor, pharmacy }
 
@@ -19,7 +20,7 @@ class LoginScreenState extends State<LoginScreen> {
   String _username = '';
   String _password = '';
   bool _isLoading = false;
-  final _storage = FlutterSecureStorage();
+  final _storage = const FlutterSecureStorage();
 
   Future<void> _login() async {
     if (!_formKey.currentState!.validate()) return;
