@@ -194,7 +194,7 @@ class LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 25),
+                        const SizedBox(height: 10),
                         // User Type Selection
                         DropdownButton<UserType>(
                           value: _selectedUserType,
@@ -291,12 +291,10 @@ class LoginScreenState extends State<LoginScreen> {
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF0D4C92),
-                                foregroundColor:
-                                    const Color(0xFF4676ED), // Icon color
-                                minimumSize: const Size(100, 50), // Square size
+                                foregroundColor: const Color(0xFF4676ED),
+                                minimumSize: const Size(100, 50),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      10), // Rounded corners
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
                               child: Image.asset(
@@ -305,21 +303,16 @@ class LoginScreenState extends State<LoginScreen> {
                             ),
                             const SizedBox(height: 15),
                             ElevatedButton(
-                              onPressed: () {
-                                // Implement Google sign-in functionality
-                              },
+                              onPressed: () {},
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(
-                                    0xFF0D4C92), // Fa, // Google button color
-                                foregroundColor: Colors.grey, // Icon color
-                                minimumSize: const Size(100, 50), // Square size
+                                backgroundColor: const Color(0xFF0D4C92),
+                                foregroundColor: Colors.grey,
+                                minimumSize: const Size(100, 50),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
                                       10), // Rounded corners
                                 ),
-                                side: const BorderSide(
-                                    color: Colors
-                                        .grey), // Border color for visibility
+                                side: const BorderSide(color: Colors.grey),
                               ),
                               child: SvgPicture.asset(
                                 'assets/chrome.svg',
