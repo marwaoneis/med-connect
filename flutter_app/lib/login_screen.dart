@@ -299,8 +299,8 @@ class LoginScreenState extends State<LoginScreen> {
                                       10), // Rounded corners
                                 ),
                               ),
-                              child: SvgPicture.asset(
-                                'assets/facebook.svg',
+                              child: Image.asset(
+                                'assets/facebook.png',
                               ),
                             ),
                             const SizedBox(height: 15),
