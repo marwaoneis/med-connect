@@ -8,7 +8,7 @@ class SignUpFormData {
   String address = '';
   DateTime? dateOfBirth;
   String gender = '';
-  String additionalInfo = '';
+  Map? additionalInfo;
 
   // Add any other fields or methods as needed
 }
