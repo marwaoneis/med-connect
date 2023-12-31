@@ -4,6 +4,7 @@ import '../widgets/search_bar.dart';
 import '../widgets/menu_grid.dart';
 import '../widgets/appointment_card.dart';
 import '../widgets/pharmacy_list.dart';
+import '../widgets/specialist_list.dart';
 
 class PatientScreen extends StatelessWidget {
   const PatientScreen({super.key});
@@ -20,6 +21,8 @@ class PatientScreen extends StatelessWidget {
           AppointmentCard(),
           SizedBox(height: 10),
           PharmacyList(),
+          SizedBox(height: 10),
+          SpecialistList(),
         ],
       ),
     );
