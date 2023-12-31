@@ -14,13 +14,11 @@ class WelcomeScreenState extends State<WelcomeScreen> {
   @override
   void initState() {
     super.initState();
-    // Start the animation when the widget is first built
     Future.delayed(Duration.zero, () {
       setState(() {
         _opacity = 1;
       });
     });
-    // Navigate to the next page after 5 seconds
     Future.delayed(const Duration(seconds: 5), () {
       Navigator.pushReplacement(
         context,
