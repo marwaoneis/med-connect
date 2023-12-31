@@ -11,7 +11,7 @@ class PatientScreen extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.pushReplacementNamed(context, '/'),
         ),
       ),
       body: Padding(
