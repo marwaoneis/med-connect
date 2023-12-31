@@ -90,6 +90,19 @@ class SignUpScreenPart2State extends State<SignUpScreenPart2> {
     );
   }
 
+  Map<String, dynamic> _parseAdditionalInfo(String additionalInfo) {
+    // Assuming the format is "MedicalInfo: [info] BloodGroup: [group]"
+    // You need to adjust the parsing logic based on the actual format of the string
+    var infoParts = additionalInfo.split('BloodGroup:');
+    var medicalInfo = infoParts[0].split('MedicalInfo:').last.trim();
+    var bloodGroup = infoParts.length > 1 ? infoParts[1].trim() : '';
+
+    return {
+      'MedicalInfo': medicalInfo,
+      'BloodGroup': bloodGroup,
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,7 +163,12 @@ class SignUpScreenPart2State extends State<SignUpScreenPart2> {
                   labelText: 'Additional Info',
                   hintText: 'Medical Info and Blood Group',
                 ),
-                onSaved: (value) => widget.formData.additionalInfo = value!,
+                onSaved: (value) {
+                  if (value != null) {
+                    widget.formData.additionalInfo =
+                        _parseAdditionalInfo(value);
+                  }
+                },
               ),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Password'),
