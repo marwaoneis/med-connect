@@ -17,6 +17,8 @@ exports.registerPatient = async (req, res) => {
 };
 
 exports.loginPatient = async (req, res) => {
+  console.log("Received login request for patient");
+
   try {
     const { username, password } = req.body;
 
