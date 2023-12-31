@@ -17,7 +17,7 @@ class SignUpScreenPart1State extends State<SignUpScreenPart1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Sign Up - Part 1')),
+      backgroundColor: const Color(0xFFC7D3E1),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
