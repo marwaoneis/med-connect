@@ -124,11 +124,30 @@ class SignUpScreenPart2State extends State<SignUpScreenPart2> {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Form(
                   key: _formKey,
-                  child: ListView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      const SizedBox(height: 15),
+                      const Text(
+                        'Signup',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Divider(
+                        color: const Color(0xFF71717A),
+                        thickness: 1,
+                        indent: 7,
+                        height: 6,
+                        endIndent: MediaQuery.of(context).size.width - 95,
+                      ),
+                      const SizedBox(height: 15),
                       TextFormField(
                         decoration: const InputDecoration(labelText: 'Address'),
                         onSaved: (value) => widget.formData.address = value!,
@@ -198,11 +217,28 @@ class SignUpScreenPart2State extends State<SignUpScreenPart2> {
                             : null,
                         onSaved: (value) => widget.formData.password = value!,
                       ),
+                      const SizedBox(height: 25),
                       _isLoading
                           ? const CircularProgressIndicator()
                           : ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(
+                                    0xFF0D4C92), // Button background color
+                                foregroundColor:
+                                    Colors.white, // Button text color
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(35),
+                                ),
+                                minimumSize: const Size(double.infinity,
+                                    50), // Setting the height to 40
+                              ),
                               onPressed: _register,
-                              child: const Text('Sign Up'),
+                              child: const Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.normal),
+                              ),
                             ),
                     ],
                   ),
