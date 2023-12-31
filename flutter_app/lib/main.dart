@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/login_screen.dart';
 import 'screens/welcome_screen.dart';
 import 'screens/patient_screen.dart';
 import 'screens/doctor_screen.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) =>
             const WelcomeScreen(), // Replace with your home screen
+        '/login': (context) => const LoginScreen(),
         '/patientScreen': (context) => const PatientScreen(),
         '/doctorScreen': (context) => const DoctorScreen(),
         '/pharmacyScreen': (context) => const PharmacyScreen(),

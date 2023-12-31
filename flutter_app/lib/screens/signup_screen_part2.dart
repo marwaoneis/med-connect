@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../data/sign_up_form_data.dart';
+import '../screens/patient_screen.dart';
 
 class SignUpScreenPart2 extends StatefulWidget {
   final SignUpFormData formData;
@@ -52,8 +53,10 @@ class SignUpScreenPart2State extends State<SignUpScreenPart2> {
               backgroundColor: Colors.green,
             ),
           );
-          // Navigate to the login screen or home page
-          // Navigator.pushReplacementNamed(context, '/loginScreen');
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const PatientScreen()),
+          );
         }
       } else {
         // Handle error
@@ -107,18 +110,6 @@ class SignUpScreenPart2State extends State<SignUpScreenPart2> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFC7D3E1),
-      // appBar: PreferredSize(
-      //   preferredSize: const Size.fromHeight(0),
-      //   child: AppBar(
-      //     backgroundColor:
-      //         Colors.transparent, // Set the AppBar background to transparent
-      //     elevation: 0,
-      //     leading: IconButton(
-      //       icon: const Icon(Icons.arrow_back, color: Colors.black),
-      //       onPressed: () => Navigator.of(context).pop(),
-      //     ),
-      //   ),
-      // ),
       body: Stack(
         children: [
           SafeArea(
