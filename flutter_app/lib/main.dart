@@ -19,11 +19,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/', // Optional: Define the initial route
+      initialRoute: '/WelcomeScreen',
       routes: {
-        '/': (context) =>
+        '/WelcomeScreen': (context) =>
             const WelcomeScreen(), // Replace with your home screen
-        '/login': (context) => const LoginScreen(),
+        '/': (context) => const LoginScreen(),
         '/patientScreen': (context) => const PatientScreen(),
         '/doctorScreen': (context) => const DoctorScreen(),
         '/pharmacyScreen': (context) => const PharmacyScreen(),
