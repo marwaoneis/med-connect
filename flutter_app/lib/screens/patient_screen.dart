@@ -14,27 +14,6 @@ class PatientScreen extends StatelessWidget {
           onPressed: () => Navigator.pushReplacementNamed(context, '/'),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'Welcome, Patient!',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const SizedBox(height: 20),
-            // Example content: Add widgets that are relevant for the doctor's screen
-            Text(
-              'Appointments',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            // Here you might list upcoming appointments, etc.
-            // ...
-            // Add more widgets as needed for the doctor's functionalities
-          ],
-        ),
-      ),
     );
   }
 }
