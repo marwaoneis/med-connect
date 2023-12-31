@@ -38,8 +38,27 @@ class SignUpScreenPart1State extends State<SignUpScreenPart1> {
                 padding: const EdgeInsets.all(20.0),
                 child: Form(
                   key: _formKey,
-                  child: ListView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      const SizedBox(height: 15),
+                      const Text(
+                        'Signup',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Divider(
+                        color: const Color(0xFF71717A),
+                        thickness: 1,
+                        indent: 7,
+                        height: 6,
+                        endIndent: MediaQuery.of(context).size.width - 95,
+                      ),
+                      const SizedBox(height: 30),
                       TextFormField(
                         decoration:
                             const InputDecoration(labelText: 'First Name'),
@@ -70,12 +89,12 @@ class SignUpScreenPart1State extends State<SignUpScreenPart1> {
                                 : null,
                         onSaved: (value) => widget.formData.email = value!,
                       ),
+                      const SizedBox(height: 24.0),
                       ElevatedButton(
                         child: const Text('Next'),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
-                            // Navigate to part 2 of the sign-up screen
                             Navigator.push(
                               context,
                               MaterialPageRoute(
