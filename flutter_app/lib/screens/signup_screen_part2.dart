@@ -217,7 +217,7 @@ class SignUpScreenPart2State extends State<SignUpScreenPart2> {
                             : null,
                         onSaved: (value) => widget.formData.password = value!,
                       ),
-                      const SizedBox(height: 25),
+                      const SizedBox(height: 35),
                       _isLoading
                           ? const CircularProgressIndicator()
                           : ElevatedButton(
