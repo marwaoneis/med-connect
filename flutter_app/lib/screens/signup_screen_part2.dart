@@ -240,6 +240,7 @@ class SignUpScreenPart2State extends State<SignUpScreenPart2> {
                                     fontWeight: FontWeight.normal),
                               ),
                             ),
+                      const SizedBox(height: 10),
                     ],
                   ),
                 ),
