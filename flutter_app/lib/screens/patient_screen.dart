@@ -11,7 +11,7 @@ class PatientScreen extends StatelessWidget {
       appBar: const TopBar(),
       body: ListView(
         children: [
-          const SearchBar(),
+          const CustomSearchBar(),
         ],
       ),
     );
