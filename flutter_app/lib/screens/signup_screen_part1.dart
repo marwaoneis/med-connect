@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/login_screen.dart';
 import 'signup_screen_part2.dart';
 import '../data/sign_up_form_data.dart';
 
@@ -91,7 +92,21 @@ class SignUpScreenPart1State extends State<SignUpScreenPart1> {
                       ),
                       const SizedBox(height: 24.0),
                       ElevatedButton(
-                        child: const Text('Next'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(
+                              0xFF0D4C92), // Button background color
+                          foregroundColor: Colors.white, // Button text color
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(35),
+                          ),
+                          minimumSize: const Size(
+                              double.infinity, 50), // Setting the height to 40
+                        ),
+                        child: const Text(
+                          'Next',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.normal),
+                        ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
@@ -104,6 +119,18 @@ class SignUpScreenPart1State extends State<SignUpScreenPart1> {
                             );
                           }
                         },
+                      ),
+                      const SizedBox(height: 16.0),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginScreen(),
+                            ),
+                          );
+                        },
+                        child: Text('Already have an account? Login'),
                       ),
                     ],
                   ),

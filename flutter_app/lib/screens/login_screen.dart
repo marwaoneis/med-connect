@@ -226,8 +226,7 @@ class LoginScreenState extends State<LoginScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(35),
                             ),
-                            minimumSize: const Size(double.infinity,
-                                50), // Setting the height to 40
+                            minimumSize: const Size(double.infinity, 50),
                           ),
                           child: _isLoading
                               ? const CircularProgressIndicator()
