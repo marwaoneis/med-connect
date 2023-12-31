@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/next_screen_one.dart';
+import 'next_screen_one.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
