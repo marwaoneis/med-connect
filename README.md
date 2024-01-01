@@ -14,7 +14,6 @@
 Patient:
 
 - As a patient, I want to effortlessly request medication refills through the app, so I can ensure a smooth process and timely access to my prescriptions.
-- As a user seeking health information, I want to interact with the ChatBot to receive accurate and helpful responses to basic health queries, so I can make precise decisions about my health.
 - As a patient experiencing symptoms, I want to input my symptoms into the app's Symptom Checker, receiving AI-powered assessments and suggestions for appropriate next steps, so I can better understand and manage my health.
 - As a patient in need of healthcare services, I want to utilize Geo-location services to easily find nearby healthcare providers, pharmacies, or medical facilities, so I can ensure accessibility and convenience.
 - As a patient, I want the option for virtual consultations with doctors through the Tele-medicine feature, providing a convenient and flexible healthcare experience without the need to physically visit a clinic.
