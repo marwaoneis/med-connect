@@ -10,25 +10,23 @@ import '../api/api_service.dart';
 class PatientScreen extends StatefulWidget {
   const PatientScreen({super.key});
   @override
-  _PatientScreenState createState() => _PatientScreenState();
+  PatientScreenState createState() => PatientScreenState();
 }
 
-class _PatientScreenState extends State<PatientScreen> {
+class PatientScreenState extends State<PatientScreen> {
   late Future<Map<String, String>> patientData;
 
   @override
   void initState() {
     super.initState();
-    // Initialize ApiService with your API base URL
-    ApiService apiService =
-        ApiService(baseUrl: 'https://your-api-endpoint.com');
+    ApiService apiService = ApiService(baseUrl: 'http://10.0.2.2:3001/');
     patientData = _fetchPatientData(apiService);
   }
 
   Future<Map<String, String>> _fetchPatientData(ApiService apiService) async {
     // Use the fetchData function from your ApiService
-    var data = await apiService.fetchData(
-        'patient_data_endpoint'); // replace with your actual endpoint
+    var data = await apiService
+        .fetchData('patients/'); // replace with your actual endpoint
     return {
       "firstName":
           data['firstName'], // replace with actual keys if they are different

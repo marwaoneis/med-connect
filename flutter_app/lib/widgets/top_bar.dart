@@ -9,8 +9,7 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor:
-          const Color(0xFF0D4C92), // Set the background color as specified
+      backgroundColor: const Color(0xFF0D4C92),
       shape: const ContinuousRectangleBorder(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(50),
