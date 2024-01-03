@@ -49,13 +49,12 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
           icon: const Icon(Icons.notifications_none, color: Colors.white),
           onPressed: () {},
         ),
-        const SizedBox(width: 16), // For some padding at the end
+        const SizedBox(width: 16),
       ],
-      elevation: 0, // Removes shadow from the AppBar
+      elevation: 0,
     );
   }
 
   @override
-  Size get preferredSize =>
-      const Size.fromHeight(140); // Set the AppBar height as specified
+  Size get preferredSize => const Size.fromHeight(140);
 }

@@ -5,7 +5,6 @@ class AppointmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Replace this with a Card widget for actual appointment details
     return Container(height: 100, color: Colors.green);
   }
 }

@@ -5,7 +5,6 @@ class MenuGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Replace this with a GridView.builder for actual menu items
     return Container(height: 100, color: Colors.blue);
   }
 }

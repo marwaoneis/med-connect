@@ -24,12 +24,9 @@ class PatientScreenState extends State<PatientScreen> {
   }
 
   Future<Map<String, String>> _fetchPatientData(ApiService apiService) async {
-    // Use the fetchData function from your ApiService
-    var data = await apiService
-        .fetchData('patients/'); // replace with your actual endpoint
+    var data = await apiService.fetchData('patients/');
     return {
-      "firstName":
-          data['firstName'], // replace with actual keys if they are different
+      "firstName": data['firstName'],
       "address": data['address'],
     };
   }
@@ -43,9 +40,9 @@ class PatientScreenState extends State<PatientScreen> {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
             return Scaffold(
-              appBar: TopBar(
-                firstName: snapshot.data!['firstName']!,
-                address: snapshot.data!['address']!,
+              appBar: const TopBar(
+                firstName: "Marwa",
+                address: "Bekaa",
               ),
               body: ListView(
                 children: const [
@@ -61,7 +58,6 @@ class PatientScreenState extends State<PatientScreen> {
               ),
             );
           } else if (snapshot.hasError) {
-            // Handle error scenario
             return Scaffold(
               body: Center(child: Text('Error: ${snapshot.error}')),
             );

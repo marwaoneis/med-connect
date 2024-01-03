@@ -21,8 +21,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/WelcomeScreen',
       routes: {
-        '/WelcomeScreen': (context) =>
-            const WelcomeScreen(), // Replace with your home screen
+        '/WelcomeScreen': (context) => const WelcomeScreen(),
         '/': (context) => const LoginScreen(),
         '/patientScreen': (context) => const PatientScreen(),
         '/doctorScreen': (context) => const DoctorScreen(),

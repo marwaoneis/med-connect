@@ -5,7 +5,6 @@ class SpecialistList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Replace this with a ListView.builder for actual specialist list
     return Container(height: 100, color: Colors.purple);
   }
 }
