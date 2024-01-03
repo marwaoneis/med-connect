@@ -323,9 +323,7 @@ class LoginScreenState extends State<LoginScreen> {
                           ),
                           const SizedBox(height: 15),
                           ElevatedButton(
-                            onPressed: () {
-                              // Implement Apple sign-in functionality
-                            },
+                            onPressed: () {},
                             style: ElevatedButton.styleFrom(
                               backgroundColor:
                                   const Color(0xFF0D4C92), // Apple button color
