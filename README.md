@@ -37,6 +37,9 @@ Pharmacy:
 <img src="./readme/title3.svg"/>
 
 > We designed MedConnect using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
+> The database structure was first drafted in [Excalidraw](https://excalidraw.com/) for basic planning, then refined with detailed designs and animations in Figma.
+
+> <img src="./readme/app-diagram.svg"/>
 
 ### Wireframes
 
