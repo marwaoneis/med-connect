@@ -7,7 +7,7 @@ class RequestConfig {
     'Content-Type': 'application/json'
   };
 
-  Map<String, String> getHeaders(context) {
+  static Map<String, String> getHeaders(context) {
     final token = Provider.of<Auth>(context, listen: false).getToken;
     if (token != null) {
       return {...headers, 'Authorization': 'Bearer $token'};
