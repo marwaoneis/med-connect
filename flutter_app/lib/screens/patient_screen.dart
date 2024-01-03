@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/top_bar.dart';
 import '../widgets/search_bar.dart';
 import '../widgets/menu_grid.dart';
 import '../widgets/appointment_card.dart';
@@ -40,7 +39,6 @@ class PatientScreenState extends State<PatientScreen> {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
             return Scaffold(
-              appBar: const TopBar(),
               body: ListView(
                 children: const [
                   CustomSearchBar(),
