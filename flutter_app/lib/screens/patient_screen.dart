@@ -40,10 +40,7 @@ class PatientScreenState extends State<PatientScreen> {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
             return Scaffold(
-              appBar: const TopBar(
-                firstName: "Marwa",
-                address: "Bekaa",
-              ),
+              appBar: const TopBar(),
               body: ListView(
                 children: const [
                   CustomSearchBar(),
