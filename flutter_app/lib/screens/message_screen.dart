@@ -38,7 +38,7 @@ class MessageScreen extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 180,
+          height: 175,
           decoration: const BoxDecoration(
             color: Color(0xFF0D4C92),
             borderRadius: BorderRadius.only(
@@ -49,7 +49,7 @@ class MessageScreen extends StatelessWidget {
         ),
         Column(
           children: [
-            const SizedBox(height: 45),
+            const SizedBox(height: 50),
             Container(
               color: Colors.white.withOpacity(0.9),
               height: 45,
@@ -79,7 +79,7 @@ class MessageScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 45),
             const CustomSearchBar(),
           ],
         ),
