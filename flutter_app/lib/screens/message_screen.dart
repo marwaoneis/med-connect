@@ -38,23 +38,23 @@ class MessageScreen extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 200,
+          height: 180,
           decoration: const BoxDecoration(
             color: Color(0xFF0D4C92),
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(50),
-              bottomRight: Radius.circular(50),
+              bottomLeft: Radius.elliptical(50, 30),
+              bottomRight: Radius.elliptical(50, 20),
             ),
           ),
         ),
         Column(
           children: [
-            const SizedBox(height: 32), // Space from the top of the screen
+            const SizedBox(height: 45),
             Container(
               color: Colors.white.withOpacity(0.9),
-              height: 40,
+              height: 45,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -65,11 +65,7 @@ class MessageScreen extends StatelessWidget {
                             color: Colors.black)),
                     IconButton(
                       icon: SvgPicture.asset(
-                        '../../assets/back_arrow.svg',
-                        colorFilter: const ColorFilter.mode(
-                          Colors.black,
-                          BlendMode.srcIn,
-                        ),
+                        'assets/back_arrow.svg',
                       ),
                       onPressed: () {
                         Navigator.pushReplacement(
@@ -83,7 +79,7 @@ class MessageScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 55),
+            const SizedBox(height: 40),
             const CustomSearchBar(),
           ],
         ),

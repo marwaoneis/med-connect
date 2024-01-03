@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class MessageList extends StatelessWidget {
   const MessageList({super.key});
@@ -9,19 +8,13 @@ class MessageList extends StatelessWidget {
     return ListView.builder(
       itemCount: 20,
       itemBuilder: (context, index) {
-        return ListTile(
+        return const ListTile(
           leading: CircleAvatar(
-            child: SvgPicture.asset(
-              'assets/profile_placeholder.svg',
-              fit: BoxFit
-                  .cover, // This is optional, depending on how you want it to fit
-              width: double.infinity, // Ensures the SVG fills the circle
-              height: double.infinity, // Ensures the SVG fills the circle
-            ),
+            backgroundImage: AssetImage('assets/profile_placeholder.png'),
           ),
-          title: const Text('Dr Name'),
-          subtitle: const Text('Message Content'),
-          trailing: const Text('Date/time'),
+          title: Text('Dr Name'),
+          subtitle: Text('Message Content'),
+          trailing: Text('Date/time'),
         );
       },
     );
