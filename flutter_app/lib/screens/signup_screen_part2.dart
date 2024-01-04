@@ -16,7 +16,7 @@ class SignUpScreenPart2 extends StatefulWidget {
 class SignUpScreenPart2State extends State<SignUpScreenPart2> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
-  String? _dateOfBirthError; // Add this line
+  String? _dateOfBirthError;
 
   Future<void> _register() async {
     if (!_formKey.currentState!.validate()) return;
@@ -178,7 +178,6 @@ class SignUpScreenPart2State extends State<SignUpScreenPart2> {
                                   widget.formData.dateOfBirth =
                                       DateTime.parse(value);
                                 } catch (e) {
-                                  // Set the state to display an error message
                                   setState(() => _dateOfBirthError =
                                       'Invalid date format');
                                   widget.formData.dateOfBirth = null;
@@ -232,15 +231,13 @@ class SignUpScreenPart2State extends State<SignUpScreenPart2> {
                               ? const CircularProgressIndicator()
                               : ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(
-                                        0xFF0D4C92), // Button background color
-                                    foregroundColor:
-                                        Colors.white, // Button text color
+                                    backgroundColor: const Color(0xFF0D4C92),
+                                    foregroundColor: Colors.white,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(35),
                                     ),
-                                    minimumSize: const Size(double.infinity,
-                                        50), // Setting the height to 40
+                                    minimumSize:
+                                        const Size(double.infinity, 50),
                                   ),
                                   onPressed: _register,
                                   child: const Text(

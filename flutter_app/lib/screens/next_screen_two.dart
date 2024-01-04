@@ -6,19 +6,17 @@ class NextScreenTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // MediaQuery provides the dimensions of the screen
     final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
         backgroundColor: Colors.white,
         body: Center(
-          // Centers the child horizontally
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  width: 334, // Set your desired width here
+                  width: 334,
                   child: Column(
                     children: [
                       const Text(
@@ -59,8 +57,7 @@ class NextScreenTwo extends StatelessWidget {
                     Container(
                       width: screenSize.width * 0.8,
                       height: screenSize.height * 0.5,
-                      margin: const EdgeInsets.only(
-                          top: 100), // Space above the gradient box
+                      margin: const EdgeInsets.only(top: 100),
                       decoration: const BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topCenter,
@@ -83,13 +80,11 @@ class NextScreenTwo extends StatelessWidget {
                         cursor: SystemMouseCursors.click,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(
-                                0xFF0D4C92), // Button background color
-                            foregroundColor: Colors.white, // Text color
-                            fixedSize: const Size(238, 78), // Button size
+                            backgroundColor: const Color(0xFF0D4C92),
+                            foregroundColor: Colors.white,
+                            fixedSize: const Size(238, 78),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  30), // Button border radius
+                              borderRadius: BorderRadius.circular(30),
                             ),
                             elevation: 0,
                           ),
@@ -113,9 +108,7 @@ class NextScreenTwo extends StatelessWidget {
                     )
                   ],
                 ),
-                const SizedBox(
-                    height:
-                        78 / 2), // Space for the overflowing part of the button
+                const SizedBox(height: 78 / 2),
               ],
             ),
           ),
@@ -125,7 +118,7 @@ class NextScreenTwo extends StatelessWidget {
   Widget _buildIndicatorDot(bool isActive) {
     return Container(
       width: isActive ? 30 : 15,
-      height: 10, // Height is the same for both active and inactive dots
+      height: 10,
       margin: const EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
         color: isActive ? const Color(0xFF0D4C92) : Colors.grey,

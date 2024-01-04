@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 import '../config/request_config.dart';
-import '../models/exception_model.dart';
+// import '../models/exception_model.dart';
 import '../data/sign_up_form_data.dart';
 
 enum UserType { patient, doctor, pharmacy }
@@ -16,7 +16,6 @@ class Auth with ChangeNotifier {
   String? get getUserId => userId;
   String? get getToken => token;
 
-  // Login
   Future<void> login(
       String username, String password, UserType userType) async {
     String url;
@@ -49,7 +48,6 @@ class Auth with ChangeNotifier {
     }
   }
 
-  // Sign Up
   Future<void> signUp(SignUpFormData formData) async {
     const url = 'http://10.0.2.2:3001/patient/auth/register';
 
@@ -71,7 +69,6 @@ class Auth with ChangeNotifier {
     }
   }
 
-  // Log out
   Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.clear();

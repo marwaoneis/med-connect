@@ -96,14 +96,12 @@ class SignUpScreenPart1State extends State<SignUpScreenPart1> {
                         const SizedBox(height: 25),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(
-                                0xFF0D4C92), // Button background color
-                            foregroundColor: Colors.white, // Button text color
+                            backgroundColor: const Color(0xFF0D4C92),
+                            foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(35),
                             ),
-                            minimumSize: const Size(double.infinity,
-                                50), // Setting the height to 40
+                            minimumSize: const Size(double.infinity, 50),
                           ),
                           child: const Text(
                             'Next',
@@ -130,8 +128,7 @@ class SignUpScreenPart1State extends State<SignUpScreenPart1> {
                               "Don't have an account? ",
                               style: TextStyle(
                                 fontSize: 14,
-                                color:
-                                    Colors.grey, // Set the text color to grey
+                                color: Colors.grey,
                               ),
                             ),
                             TextButton(
@@ -147,8 +144,7 @@ class SignUpScreenPart1State extends State<SignUpScreenPart1> {
                                 'Login',
                                 style: TextStyle(
                                   fontSize: 14,
-                                  color: Colors
-                                      .black, // Set the text color to grey
+                                  color: Colors.black,
                                 ),
                               ),
                             ),
@@ -179,9 +175,7 @@ class SignUpScreenPart1State extends State<SignUpScreenPart1> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             ElevatedButton(
-                              onPressed: () {
-                                // Implement Facebook sign-in functionality
-                              },
+                              onPressed: () {},
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF0D4C92),
                                 foregroundColor: const Color(0xFF4676ED),
@@ -202,8 +196,7 @@ class SignUpScreenPart1State extends State<SignUpScreenPart1> {
                                 foregroundColor: Colors.grey,
                                 minimumSize: const Size(100, 50),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      10), // Rounded corners
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
                                 side: const BorderSide(color: Colors.grey),
                               ),
@@ -213,17 +206,13 @@ class SignUpScreenPart1State extends State<SignUpScreenPart1> {
                             ),
                             const SizedBox(height: 15),
                             ElevatedButton(
-                              onPressed: () {
-                                // Implement Apple sign-in functionality
-                              },
+                              onPressed: () {},
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(
-                                    0xFF0D4C92), // Apple button color
-                                foregroundColor: Colors.black, // Icon color
-                                minimumSize: const Size(100, 50), // Square size
+                                backgroundColor: const Color(0xFF0D4C92),
+                                foregroundColor: Colors.black,
+                                minimumSize: const Size(100, 50),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      10), // Rounded corners
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
                               child: SvgPicture.asset(

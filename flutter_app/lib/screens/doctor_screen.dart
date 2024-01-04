@@ -19,14 +19,11 @@ class DoctorScreen extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 20),
-            // Example content: Add widgets that are relevant for the doctor's screen
             Text(
               'Appointments',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            // Here you might list upcoming appointments, etc.
-            // ...
-            // Add more widgets as needed for the doctor's functionalities
+            // list upcoming appointments, etc.
           ],
         ),
       ),

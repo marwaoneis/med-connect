@@ -19,14 +19,10 @@ class PharmacyScreen extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 20),
-            // Example content: Add widgets that are relevant for the Pharmacy's screen
             Text(
               'Appointments',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            // Here you might list upcoming appointments, etc.
-            // ...
-            // Add more widgets as needed for the Pharmacy's functionalities
           ],
         ),
       ),

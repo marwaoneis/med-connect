@@ -28,7 +28,6 @@ class MessageScreen extends StatelessWidget {
             icon: Icon(Icons.message),
             label: 'Messages',
           ),
-          // Add more items if needed
         ],
       ),
     );

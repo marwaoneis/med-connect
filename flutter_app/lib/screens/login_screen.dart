@@ -52,7 +52,6 @@ class LoginScreenState extends State<LoginScreen> {
         final responseData = json.decode(response.body);
         await _storage.write(key: 'token', value: responseData['token']);
 
-        // Navigate based on user type
         switch (_selectedUserType) {
           case UserType.patient:
             Navigator.pushReplacementNamed(context, '/patientScreen');
@@ -65,7 +64,6 @@ class LoginScreenState extends State<LoginScreen> {
             break;
         }
       } else {
-        // Show error message
         final responseData = json.decode(response.body);
         _showErrorDialog(responseData['error']);
       }
@@ -132,12 +130,11 @@ class LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       Divider(
-                        color: const Color(0xFF71717A), // Color of the line
-                        thickness: 1, // Thickness of the line
+                        color: const Color(0xFF71717A),
+                        thickness: 1,
                         indent: 7,
                         height: 6,
-                        endIndent: MediaQuery.of(context).size.width -
-                            95, // Right spacing to make the line 50 width
+                        endIndent: MediaQuery.of(context).size.width - 95,
                       ),
                       const SizedBox(height: 30),
                       TextFormField(
@@ -180,7 +177,7 @@ class LoginScreenState extends State<LoginScreen> {
                         alignment: Alignment.centerRight,
                         child: TextButton(
                           onPressed: () {
-                            // Implement forgot password functionality
+                            // forgot password functionality
                           },
                           style: TextButton.styleFrom(
                             padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
@@ -190,13 +187,12 @@ class LoginScreenState extends State<LoginScreen> {
                             'Forgot Password ?',
                             style: TextStyle(
                               fontSize: 14,
-                              color: Colors.grey, // Set the text color to grey
+                              color: Colors.grey,
                             ),
                           ),
                         ),
                       ),
                       const SizedBox(height: 10),
-                      // User Type Selection
                       DropdownButton<UserType>(
                         value: _selectedUserType,
                         onChanged: (UserType? newValue) {
@@ -212,13 +208,12 @@ class LoginScreenState extends State<LoginScreen> {
                           );
                         }).toList(),
                       ),
-                      const SizedBox(height: 25), // Spacing before login button
+                      const SizedBox(height: 25),
                       ElevatedButton(
                         onPressed: _isLoading ? null : _login,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(
-                              0xFF0D4C92), // Button background color
-                          foregroundColor: Colors.white, // Button text color
+                          backgroundColor: const Color(0xFF0D4C92),
+                          foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(35),
                           ),
@@ -240,7 +235,7 @@ class LoginScreenState extends State<LoginScreen> {
                             "Don't have an account? ",
                             style: TextStyle(
                               fontSize: 14,
-                              color: Colors.grey, // Set the text color to grey
+                              color: Colors.grey,
                             ),
                           ),
                           TextButton(
@@ -257,8 +252,7 @@ class LoginScreenState extends State<LoginScreen> {
                               'Sign-up',
                               style: TextStyle(
                                 fontSize: 14,
-                                color:
-                                    Colors.black, // Set the text color to grey
+                                color: Colors.black,
                               ),
                             ),
                           ),
@@ -289,9 +283,7 @@ class LoginScreenState extends State<LoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ElevatedButton(
-                            onPressed: () {
-                              // Implement Facebook sign-in functionality
-                            },
+                            onPressed: () {},
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF0D4C92),
                               foregroundColor: const Color(0xFF4676ED),
@@ -312,8 +304,7 @@ class LoginScreenState extends State<LoginScreen> {
                               foregroundColor: Colors.grey,
                               minimumSize: const Size(100, 50),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    10), // Rounded corners
+                                borderRadius: BorderRadius.circular(10),
                               ),
                               side: const BorderSide(color: Colors.grey),
                             ),
@@ -325,13 +316,11 @@ class LoginScreenState extends State<LoginScreen> {
                           ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  const Color(0xFF0D4C92), // Apple button color
-                              foregroundColor: Colors.black, // Icon color
-                              minimumSize: const Size(100, 50), // Square size
+                              backgroundColor: const Color(0xFF0D4C92),
+                              foregroundColor: Colors.black,
+                              minimumSize: const Size(100, 50),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    10), // Rounded corners
+                                borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                             child: SvgPicture.asset(

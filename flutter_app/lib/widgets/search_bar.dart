@@ -11,8 +11,7 @@ class CustomSearchBar extends StatelessWidget {
       width: 380.0,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
-        borderRadius:
-            BorderRadius.circular(15.0), // Same border radius as TextField
+        borderRadius: BorderRadius.circular(15.0),
       ),
       child: TextField(
         decoration: InputDecoration(
