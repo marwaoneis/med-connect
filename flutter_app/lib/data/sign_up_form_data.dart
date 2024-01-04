@@ -10,5 +10,16 @@ class SignUpFormData {
   String gender = '';
   Map? additionalInfo;
 
-  // Add any other fields or methods as needed
+  Map<String, dynamic> toJson() => {
+        'firstName': firstName,
+        'lastName': lastName,
+        'username': username,
+        'email': email,
+        'password': password,
+        'phone': phone,
+        'address': address,
+        'dateOfBirth': dateOfBirth?.toIso8601String(),
+        'gender': gender,
+        'additionalInfo': additionalInfo,
+      };
 }

@@ -51,9 +51,24 @@ class Auth with ChangeNotifier {
 
   // Sign Up
   Future<void> signUp(SignUpFormData formData) async {
-    // Define URL based on userType in formData
-    // Send request similar to login method
-    // Handle response and save user data
+    const url = 'http://10.0.2.2:3001/patient/auth/register';
+
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: RequestConfig.headers,
+        body: json.encode(formData.toJson()),
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+        _saveUserData(responseData);
+      } else {
+        throw Exception('Failed to sign up');
+      }
+    } catch (e) {
+      rethrow;
+    }
   }
 
   // Log out
