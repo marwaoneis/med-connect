@@ -1,18 +1,22 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../data/sign_up_form_data.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+
 import '../config/request_config.dart';
+import '../models/exception_model.dart';
+import '../data/sign_up_form_data.dart';
 
 enum UserType { patient, doctor, pharmacy }
 
 class Auth with ChangeNotifier {
-  final _storage = const FlutterSecureStorage();
-  String? _token;
+  String? userId;
+  String? token;
 
-  String? get token => _token;
+  String? get getUserId => userId;
+  String? get getToken => token;
 
+  // Login
   Future<void> login(
       String username, String password, UserType userType) async {
     String url;
@@ -30,46 +34,44 @@ class Auth with ChangeNotifier {
 
     final response = await http.post(
       Uri.parse(url),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode({'username': username, 'password': password}),
+      headers: RequestConfig.headers,
+      body: json.encode({
+        'username': username,
+        'password': password,
+      }),
     );
 
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
-      _token = responseData['token'];
-      await _storage.write(key: 'token', value: _token);
-      notifyListeners();
+      _saveUserData(responseData);
     } else {
-      throw Exception('Failed to login');
+      throw Exception('Failed to log in');
     }
   }
 
-  Future<void> register(SignUpFormData formData) async {
-    const url = RequestConfig.url + '/patient/auth/register';
-
-    final response = await http.post(
-      Uri.parse(url),
-      headers: RequestConfig.headers,
-      body: json.encode({
-        'firstName': formData.firstName,
-        'lastName': formData.lastName,
-        // ... (rest of the formData fields)
-      }),
-    );
-
-    if (response.statusCode == 201) {
-      final responseData = json.decode(response.body);
-      _token = responseData['token'];
-      await _storage.write(key: 'token', value: _token);
-      notifyListeners();
-    } else {
-      throw Exception('Failed to register');
-    }
+  // Sign Up
+  Future<void> signUp(SignUpFormData formData) async {
+    // Define URL based on userType in formData
+    // Send request similar to login method
+    // Handle response and save user data
   }
 
+  // Log out
   Future<void> logout() async {
-    await _storage.delete(key: 'token');
-    _token = null;
+    final prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+    userId = null;
+    token = null;
+    notifyListeners();
+  }
+
+  // Save user data
+  void _saveUserData(dynamic responseData) async {
+    final prefs = await SharedPreferences.getInstance();
+    userId = responseData['user_id'];
+    token = responseData['token'];
+    await prefs.setString('user_id', userId!);
+    await prefs.setString('token', token!);
     notifyListeners();
   }
 }
