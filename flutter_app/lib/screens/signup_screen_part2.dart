@@ -59,7 +59,6 @@ class SignUpScreenPart2State extends State<SignUpScreenPart2> {
           );
         }
       } else {
-        // Handle error
         final responseData = json.decode(response.body);
         _showErrorDialog(responseData['error'] ?? 'An unknown error occurred.');
       }

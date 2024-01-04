@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screens/chat_screen.dart'; // Replace with the actual import path
+import '../screens/chat_screen.dart';
 
 class MessageList extends StatelessWidget {
   const MessageList({super.key});

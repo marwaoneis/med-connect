@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/login_screen.dart';
-import 'package:flutter_app/screens/patient_screen.dart';
 import 'screens/welcome_screen.dart';
 import 'screens/patient_screen.dart';
 import 'screens/doctor_screen.dart';
