@@ -37,13 +37,23 @@ const getPharmacyById = async (req, res) => {
 // Update a pharmacy by ID
 const updatePharmacyById = async (req, res) => {
   try {
-    const pharmacy = await Pharmacy.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const pharmacyId = req.params.id;
+    const updateData = req.body;
+
+    const pharmacy = await Pharmacy.findById(pharmacyId);
+
     if (!pharmacy) {
       return res.status(404).json({ error: "Pharmacy not found" });
     }
-    res.status(200).json(pharmacy);
+
+    if (updateData.username) pharmacy.username = updateData.username;
+    if (updateData.password) pharmacy.password = updateData.password;
+    if (updateData.address) pharmacy.address = updateData.address;
+    if (updateData.phone) pharmacy.phone = updateData.phone;
+
+    const updatedPharmacy = await pharmacy.save();
+
+    res.status(200).json(updatedPharmacy);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
