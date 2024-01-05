@@ -37,13 +37,31 @@ const getDoctorById = async (req, res) => {
 // Update a doctor by ID
 const updateDoctorById = async (req, res) => {
   try {
-    const doctor = await Doctor.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const doctor = await Doctor.findById(req.params.id);
+
     if (!doctor) {
       return res.status(404).json({ error: "Doctor not found" });
     }
-    res.status(200).json(doctor);
+
+    const updateData = req.body;
+    if (updateData.username) doctor.username = updateData.username;
+    if (updateData.password) doctor.password = updateData.password;
+    if (updateData.firstName) doctor.firstName = updateData.firstName;
+    if (updateData.lastName) doctor.lastName = updateData.lastName;
+    if (updateData.email) doctor.email = updateData.email;
+    if (updateData.phone) doctor.phone = updateData.phone;
+    if (updateData.gender) doctor.gender = updateData.gender;
+    if (updateData.specialization)
+      doctor.specialization = updateData.specialization;
+    if (updateData.yearsOfExperience)
+      doctor.yearsOfExperience = updateData.yearsOfExperience;
+    if (updateData.appointmentPrice)
+      doctor.appointmentPrice = updateData.appointmentPrice;
+    if (updateData.timing) doctor.timing = updateData.timing;
+
+    const updatedDoctor = await doctor.save();
+
+    res.status(200).json(updatedDoctor);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }

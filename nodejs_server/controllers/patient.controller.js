@@ -73,7 +73,6 @@ const updatePatient = async (req, res) => {
     const patientId = req.params.id;
     const updateData = req.body;
 
-    // Find the patient document
     const patient = await Patient.findById(patientId);
 
     if (!patient) {
