@@ -46,7 +46,7 @@ class SignUpScreenPart1State extends State<SignUpScreenPart1> {
                       children: [
                         const SizedBox(height: 15),
                         const Text(
-                          'Signup',
+                          'Sign Up',
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontSize: 24,

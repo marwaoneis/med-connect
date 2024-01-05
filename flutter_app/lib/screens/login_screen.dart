@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'signup_screen_part1.dart';
 import '../data/sign_up_form_data.dart';
-
-enum UserType { patient, doctor, pharmacy }
+import 'package:provider/provider.dart';
+import '../providers/auth_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -17,58 +14,36 @@ class LoginScreen extends StatefulWidget {
 
 class LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  UserType _selectedUserType = UserType.patient;
+  UserType _userType = UserType.patient;
   String _username = '';
   String _password = '';
   bool _isLoading = false;
-  final _storage = const FlutterSecureStorage();
 
   Future<void> _login() async {
     if (!_formKey.currentState!.validate()) return;
     _formKey.currentState!.save();
     setState(() => _isLoading = true);
 
-    String url;
-    switch (_selectedUserType) {
-      case UserType.patient:
-        url = 'http://10.0.2.2:3001/patient/auth/login';
-        break;
-      case UserType.doctor:
-        url = 'http://10.0.2.2:3001/doctor/auth/login';
-        break;
-      case UserType.pharmacy:
-        url = 'http://10.0.2.2:3001/pharmacy/auth/login';
-        break;
-    }
-
     try {
-      final response = await http.post(
-        Uri.parse(url),
-        headers: {'Content-Type': 'application/json'},
-        body: json.encode({'username': _username, 'password': _password}),
+      await Provider.of<Auth>(context, listen: false).login(
+        _username,
+        _password,
+        _userType,
       );
 
-      if (response.statusCode == 200) {
-        final responseData = json.decode(response.body);
-        await _storage.write(key: 'token', value: responseData['token']);
-
-        switch (_selectedUserType) {
-          case UserType.patient:
-            Navigator.pushReplacementNamed(context, '/patientScreen');
-            break;
-          case UserType.doctor:
-            Navigator.pushReplacementNamed(context, '/doctorScreen');
-            break;
-          case UserType.pharmacy:
-            Navigator.pushReplacementNamed(context, '/pharmacyScreen');
-            break;
-        }
-      } else {
-        final responseData = json.decode(response.body);
-        _showErrorDialog(responseData['error']);
+      switch (_userType) {
+        case UserType.patient:
+          Navigator.pushReplacementNamed(context, '/patientScreen');
+          break;
+        case UserType.doctor:
+          Navigator.pushReplacementNamed(context, '/doctorScreen');
+          break;
+        case UserType.pharmacy:
+          Navigator.pushReplacementNamed(context, '/pharmacyScreen');
+          break;
       }
-    } catch (e) {
-      _showErrorDialog('Failed to connect to the server');
+    } catch (error) {
+      _showErrorDialog(error.toString());
     }
 
     setState(() => _isLoading = false);
@@ -121,7 +96,7 @@ class LoginScreenState extends State<LoginScreen> {
                     children: [
                       const SizedBox(height: 15),
                       const Text(
-                        'Login',
+                        'Log In',
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontSize: 24,
@@ -194,10 +169,10 @@ class LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 10),
                       DropdownButton<UserType>(
-                        value: _selectedUserType,
+                        value: _userType,
                         onChanged: (UserType? newValue) {
                           setState(() {
-                            _selectedUserType = newValue!;
+                            _userType = newValue!;
                           });
                         },
                         items: UserType.values
@@ -222,7 +197,7 @@ class LoginScreenState extends State<LoginScreen> {
                         child: _isLoading
                             ? const CircularProgressIndicator()
                             : const Text(
-                                'Login',
+                                'Log In',
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.normal),
@@ -249,7 +224,7 @@ class LoginScreenState extends State<LoginScreen> {
                               );
                             },
                             child: const Text(
-                              'Sign-up',
+                              'Sign Up',
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.black,
