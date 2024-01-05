@@ -70,44 +70,30 @@ const createPatient = async (req, res) => {
 // Update a patient by ID
 const updatePatient = async (req, res) => {
   try {
-    const {
-      username,
-      password,
-      firstName,
-      lastName,
-      email,
-      address,
-      phone,
-      dateOfBirth,
-      gender,
-    } = req.body;
+    const patientId = req.params.id;
+    const updateData = req.body;
 
-    // Check if at least one field is present for update
-    if (
-      !username &&
-      !password &&
-      !firstName &&
-      !lastName &&
-      !email &&
-      !address &&
-      !phone &&
-      !dateOfBirth &&
-      !gender
-    ) {
-      return res
-        .status(400)
-        .json({ error: "At least one field must be provided for update" });
-    }
-
-    const patient = await Patient.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    // Find the patient document
+    const patient = await Patient.findById(patientId);
 
     if (!patient) {
       return res.status(404).json({ error: "Patient not found" });
     }
 
-    res.status(200).json(patient);
+    if (updateData.username) patient.username = updateData.username;
+    if (updateData.password) patient.password = updateData.password;
+    if (updateData.firstName) patient.firstName = updateData.firstName;
+    if (updateData.lastName) patient.lastName = updateData.lastName;
+    if (updateData.email) patient.email = updateData.email;
+    if (updateData.address) patient.address = updateData.address;
+    if (updateData.phone) patient.phone = updateData.phone;
+    if (updateData.dateOfBirth) patient.dateOfBirth = updateData.dateOfBirth;
+    if (updateData.gender) patient.gender = updateData.gender;
+
+    // Save the document
+    const updatedPatient = await patient.save();
+
+    res.status(200).json(updatedPatient);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
