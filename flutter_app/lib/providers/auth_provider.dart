@@ -77,7 +77,6 @@ class Auth with ChangeNotifier {
     notifyListeners();
   }
 
-  // Save user data
   void _saveUserData(dynamic responseData) async {
     final prefs = await SharedPreferences.getInstance();
     userId = responseData['user_id'];
