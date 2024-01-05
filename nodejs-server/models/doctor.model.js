@@ -71,7 +71,7 @@ const doctorSchema = new mongoose.Schema({
     },
   },
 });
-
+// ismodified in mongo
 doctorSchema.pre(
   "save",
   async function (next) {
