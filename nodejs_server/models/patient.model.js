@@ -50,13 +50,17 @@ const patientSchema = new mongoose.Schema({
   },
   additionalInfo: {
     type: Map,
-    of: mongoose.Schema.Types.Mixed, // or mongoose.Schema.Types.Mixed if the structure is not consistent
+    of: mongoose.Schema.Types.Mixed,
   },
 });
 
 patientSchema.pre(
   "save",
   async function (next) {
+    if (!this.isModified("password")) {
+      return next();
+    }
+
     try {
       const salt = await bcrypt.genSalt(10);
       this.password = await bcrypt.hash(this.password, salt);
