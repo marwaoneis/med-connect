@@ -58,14 +58,16 @@ class Auth with ChangeNotifier {
         body: json.encode(formData.toJson()),
       );
 
-      if (response.statusCode == 200) {
-        final responseData = json.decode(response.body);
+      final responseData = json.decode(response.body);
+      if (response.statusCode == 200 || response.statusCode == 201) {
         _saveUserData(responseData);
       } else {
-        throw Exception('Failed to sign up');
+        throw Exception(responseData['error'] ?? 'Failed to sign up');
       }
-    } catch (e) {
-      rethrow;
+    } on http.ClientException catch (error) {
+      throw Exception('Network error: ${error.message}');
+    } catch (error) {
+      throw Exception('An error occurred: $error');
     }
   }
 

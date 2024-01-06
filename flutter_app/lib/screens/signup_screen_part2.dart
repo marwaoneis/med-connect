@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import '../providers/auth_provider.dart';
 import '../data/sign_up_form_data.dart';
 import '../screens/patient_screen.dart';
 
@@ -22,48 +22,30 @@ class SignUpScreenPart2State extends State<SignUpScreenPart2> {
     if (!_formKey.currentState!.validate()) return;
     _formKey.currentState!.save();
 
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+
     setState(() {
       _isLoading = true;
     });
 
-    const url = 'http://10.0.2.2:3001/patient/auth/register';
     try {
-      final response = await http.post(
-        Uri.parse(url),
-        headers: {'Content-Type': 'application/json'},
-        body: json.encode({
-          'firstName': widget.formData.firstName,
-          'lastName': widget.formData.lastName,
-          'username': widget.formData.username,
-          'email': widget.formData.email,
-          'password': widget.formData.password,
-          'phone': widget.formData.phone,
-          'address': widget.formData.address,
-          'dateOfBirth': widget.formData.dateOfBirth?.toIso8601String(),
-          'gender': widget.formData.gender,
-          'additionalInfo': widget.formData.additionalInfo,
-        }),
-      );
+      await Provider.of<Auth>(context, listen: false).signUp(widget.formData);
 
-      if (response.statusCode == 201) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Registration successful!'),
-              backgroundColor: Colors.green,
-            ),
-          );
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const PatientScreen()),
-          );
-        }
-      } else {
-        final responseData = json.decode(response.body);
-        _showErrorDialog(responseData['error'] ?? 'An unknown error occurred.');
+      if (mounted) {
+        scaffoldMessenger.showSnackBar(
+          const SnackBar(
+            content: Text('Registration successful!'),
+            backgroundColor: Colors.green,
+          ),
+        );
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const PatientScreen()),
+        );
       }
-    } catch (e) {
-      _showErrorDialog('Failed to connect to the server.');
+    } catch (error) {
+      _showErrorDialog(error.toString());
     } finally {
       if (mounted) {
         setState(() {
@@ -74,7 +56,6 @@ class SignUpScreenPart2State extends State<SignUpScreenPart2> {
   }
 
   void _showErrorDialog(String message) {
-    if (!mounted) return;
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -93,8 +74,6 @@ class SignUpScreenPart2State extends State<SignUpScreenPart2> {
   }
 
   Map<String, dynamic> _parseAdditionalInfo(String additionalInfo) {
-    // Assuming the format is "MedicalInfo: [info] BloodGroup: [group]"
-    // You need to adjust the parsing logic based on the actual format of the string
     var infoParts = additionalInfo.split('BloodGroup:');
     var medicalInfo = infoParts[0].split('MedicalInfo:').last.trim();
     var bloodGroup = infoParts.length > 1 ? infoParts[1].trim() : '';
