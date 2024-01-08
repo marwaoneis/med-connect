@@ -3,13 +3,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class Footer extends StatelessWidget {
   final VoidCallback onHomeTap;
-  final VoidCallback onSearchTap;
+  final VoidCallback onAppointmentTap;
   final VoidCallback onChatTap;
   final VoidCallback onProfileTap;
 
   const Footer(
       {required this.onHomeTap,
-      required this.onSearchTap,
+      required this.onAppointmentTap,
       required this.onChatTap,
       required this.onProfileTap,
       super.key});
@@ -21,23 +21,19 @@ class Footer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           IconButton(
-            icon: SvgPicture.asset(
-                'assets/home_icon.svg'), // Import your SVG icon
+            icon: SvgPicture.asset('assets/home_icon.svg'),
             onPressed: onHomeTap,
           ),
           IconButton(
-            icon: SvgPicture.asset(
-                'assets/search_icon.svg'), // Import your SVG icon
-            onPressed: onSearchTap,
+            icon: SvgPicture.asset('assets/appointment_icon.svg'),
+            onPressed: onAppointmentTap,
           ),
           IconButton(
-            icon: SvgPicture.asset(
-                'assets/chat_icon.svg'), // Import your SVG icon
+            icon: SvgPicture.asset('assets/chat_icon.svg'),
             onPressed: onChatTap,
           ),
           IconButton(
-            icon: SvgPicture.asset(
-                'assets/profile_icon.svg'), // Import your SVG icon
+            icon: SvgPicture.asset('assets/profile_icon.svg'),
             onPressed: onProfileTap,
           ),
         ],

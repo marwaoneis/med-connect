@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/login_screen.dart';
+import 'package:flutter_app/screens/patient_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/search_bar.dart';
 import '../widgets/message_list.dart';
+import '../widgets/footer.dart';
 
 class MessageScreen extends StatelessWidget {
   const MessageScreen({super.key});
@@ -18,17 +20,31 @@ class MessageScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: 'Messages',
-          ),
-        ],
+      bottomNavigationBar: Footer(
+        onHomeTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const PatientScreen()),
+          );
+        },
+        onAppointmentTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const PatientScreen()),
+          );
+        },
+        onChatTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const MessageScreen()),
+          );
+        },
+        onProfileTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const MessageScreen()),
+          );
+        },
       ),
     );
   }

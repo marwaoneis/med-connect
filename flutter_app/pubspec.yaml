@@ -68,6 +68,10 @@ flutter:
     - assets/back_arrow.svg
     - assets/profile_placeholder.png
     - assets/search_icon.svg
+    - assets/home_icon.svg
+    - assets/appointment_icon.svg
+    - assets/chat_icon.svg
+    - assets/profile_icon.svg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
