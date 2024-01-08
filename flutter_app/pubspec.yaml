@@ -72,6 +72,12 @@ flutter:
     - assets/appointment_icon.svg
     - assets/chat_icon.svg
     - assets/profile_icon.svg
+    - assets/notification_icon.svg
+    - assets/book_appointment.png
+    - assets/choose_pharmacy.png
+    - assets/symptom_checker.png
+    - assets/medicines.png
+    - assets/setup_reminders.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

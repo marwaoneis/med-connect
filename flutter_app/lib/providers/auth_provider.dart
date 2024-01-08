@@ -13,8 +13,21 @@ class Auth with ChangeNotifier {
   String? userId;
   String? token;
 
-  String? get getUserId => userId;
-  String? get getToken => token;
+  String? get getUserId {
+    if (userId != null) {
+      return userId;
+    }
+
+    return null;
+  }
+
+  String? get getToken {
+    if (token != null) {
+      return token;
+    }
+
+    return null;
+  }
 
   Future<void> login(
       String username, String password, UserType userType) async {
@@ -79,12 +92,21 @@ class Auth with ChangeNotifier {
     notifyListeners();
   }
 
-  void _saveUserData(dynamic responseData) async {
+  Future<void> _saveUserData(dynamic responseData) async {
     final prefs = await SharedPreferences.getInstance();
-    userId = responseData['user_id'];
+    userId = responseData['_id'];
     token = responseData['token'];
-    await prefs.setString('user_id', userId!);
-    await prefs.setString('token', token!);
+
+    // Check if userId and token are not null before saving
+    if (userId != null && token != null) {
+      await prefs.setString('_id', userId!);
+      await prefs.setString('token', token!);
+    } else {
+      print("Error: User ID or Token is null.");
+    }
+
+    print("User ID in _saveUserData: $userId");
+    print("User token in _saveUserData: $token");
     notifyListeners();
   }
 }
