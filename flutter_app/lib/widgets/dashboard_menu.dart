@@ -52,6 +52,8 @@ class DashboardMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       padding: const EdgeInsets.all(8),
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         crossAxisSpacing: 8,
@@ -70,17 +72,30 @@ class DashboardMenu extends StatelessWidget {
       child: InkWell(
         onTap: item.onTap,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment
+              .stretch, // Ensure the widgets fill the card width
           children: <Widget>[
-            Expanded(child: Image.asset(item.imagePath)),
+            Expanded(
+              // Use Expanded to give the image a flexible height, but not the text
+              child: Container(
+                // Define a max height for the image container if needed
+                constraints: const BoxConstraints(
+                  minHeight: 120, // Maximum height for the image
+                ),
+                child: Image.asset(
+                  item.imagePath,
+                  fit: BoxFit
+                      .contain, // The image should be contained within the bounds of the Container
+                ),
+              ),
+            ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.fromLTRB(
+                  8, 8, 8, 8), // Add padding around the text
               child: Text(
                 item.title,
                 textAlign: TextAlign.center,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium, // Updated text style
+                style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
           ],

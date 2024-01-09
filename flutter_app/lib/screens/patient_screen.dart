@@ -56,18 +56,19 @@ class PatientScreenState extends State<PatientScreen> {
             final String address = snapshot.data?['address'] ?? 'N/A';
 
             return Scaffold(
-              body: ListView(
+              body: Column(
                 children: <Widget>[
                   _buildTopBarWithBackground(context, firstName, address),
-                  Column(children: [
-                    DashboardMenu(),
-                    const SizedBox(height: 10),
-                    const AppointmentCard(),
-                    const SizedBox(height: 10),
-                    const PharmacyList(),
-                    const SizedBox(height: 10),
-                    const SpecialistList(),
-                  ]),
+                  SizedBox(
+                    height: 300,
+                    child: DashboardMenu(),
+                  ),
+                  const SizedBox(height: 10),
+                  const AppointmentCard(),
+                  const SizedBox(height: 10),
+                  const PharmacyList(),
+                  const SizedBox(height: 10),
+                  const SpecialistList(),
                 ],
               ),
               bottomNavigationBar: Footer(
@@ -132,41 +133,36 @@ Widget _buildTopBarWithBackground(
       Column(
         children: [
           const SizedBox(height: 50),
-          Positioned(
-            top: 50,
-            left: 0,
-            right: 0,
-            child: Container(
-              color: Colors.white.withOpacity(0.9),
-              height: 45,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      // backgroundImage: const NetworkImage(
-                      //     'http://10.0.2.2:3001/path_to_avatar'),
-                      backgroundColor: Colors.grey[200],
-                      child: Text(firstName[0]),
+          Container(
+            color: Colors.white.withOpacity(0.9),
+            height: 45,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    // backgroundImage: const NetworkImage(
+                    //     'http://10.0.2.2:3001/path_to_avatar'),
+                    backgroundColor: Colors.grey[200],
+                    child: Text(firstName[0]),
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    '$firstName, $address',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
-                    const SizedBox(width: 8),
-                    Text(
-                      '$firstName, $address',
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                    const Spacer(),
-                    IconButton(
-                      icon: SvgPicture.asset('assets/notification_icon.svg'),
-                      onPressed: () {
-                        // Your existing code
-                      },
-                    ),
-                  ],
-                ),
+                  ),
+                  const Spacer(),
+                  IconButton(
+                    icon: SvgPicture.asset('assets/notification_icon.svg'),
+                    onPressed: () {
+                      // Your existing code
+                    },
+                  ),
+                ],
               ),
             ),
           ),
