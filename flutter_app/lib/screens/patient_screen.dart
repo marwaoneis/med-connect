@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import '../screens/message_screen.dart';
 import '../widgets/footer.dart';
 import '../widgets/popular_specialties.dart';
+import '../tools/no_glow_scroll.dart';
 
 class PatientScreen extends StatefulWidget {
   const PatientScreen({super.key});
@@ -61,22 +62,24 @@ class PatientScreenState extends State<PatientScreen> {
                 children: <Widget>[
                   _buildTopBarWithBackground(context, firstName, address),
                   Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          const SizedBox(height: 5),
-                          SizedBox(
-                            height: 250,
-                            child: DashboardMenu(),
-                          ),
-                          PopularSpecialtiesWidget(),
-                          const SizedBox(height: 10),
-                          const AppointmentCard(),
-                          const SizedBox(height: 10),
-                          const PharmacyList(),
-                          const SizedBox(height: 10),
-                          const SpecialistList(),
-                        ],
+                    child: NoGlowScrollWrapper(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: <Widget>[
+                            const SizedBox(height: 5),
+                            SizedBox(
+                              height: 250,
+                              child: DashboardMenu(),
+                            ),
+                            PopularSpecialtiesWidget(),
+                            const SizedBox(height: 10),
+                            const AppointmentCard(),
+                            const SizedBox(height: 10),
+                            const PharmacyList(),
+                            const SizedBox(height: 10),
+                            const SpecialistList(),
+                          ],
+                        ),
                       ),
                     ),
                   ),
