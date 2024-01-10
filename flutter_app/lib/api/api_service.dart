@@ -8,11 +8,16 @@ class ApiService {
 
   ApiService({required this.baseUrl});
 
-  Future<dynamic> fetchData(String endpoint) async {
+  Future<dynamic> fetchData(String endpoint, {String? token}) async {
     var url = Uri.parse('$baseUrl/$endpoint');
 
+    var headers = {
+      'Content-Type': 'application/json',
+      if (token != null) 'Authorization': 'Bearer $token',
+    };
+
     try {
-      var response = await http.get(url);
+      var response = await http.get(url, headers: headers);
 
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
