@@ -56,8 +56,8 @@ class DashboardMenu extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
+        crossAxisSpacing: 3,
+        mainAxisSpacing: 3,
       ),
       itemCount: gridItems.length,
       itemBuilder: (context, index) {
