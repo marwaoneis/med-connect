@@ -64,11 +64,11 @@ class PatientScreenState extends State<PatientScreen> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
+                          const SizedBox(height: 5),
                           SizedBox(
-                            height: 300,
+                            height: 250,
                             child: DashboardMenu(),
                           ),
-                          const SizedBox(height: 10),
                           PopularSpecialtiesWidget(),
                           const SizedBox(height: 10),
                           const AppointmentCard(),

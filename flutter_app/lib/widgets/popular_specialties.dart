@@ -14,30 +14,84 @@ class PopularSpecialtiesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100, // Adjust the height as needed
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: specialties.length,
-        itemBuilder: (context, index) {
-          return Container(
-            width: 80, // Diameter of the circle
-            height: 80, // Diameter of the circle
-            alignment: Alignment.center,
-            margin: const EdgeInsets.all(10), // Spacing between circles
-            decoration: const BoxDecoration(
-              color: Colors.blue, // The color of the circle
-              shape: BoxShape.circle,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15.0),
+          child: Text(
+            "Most popular Specialties",
+            style: TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.w900,
             ),
-            child: SvgPicture.asset(
-              specialties[index].iconPath,
-              color: Colors.white, // SVG icon color, if applicable
-              semanticsLabel: specialties[index].name,
+          ),
+        ),
+        const SizedBox(height: 15),
+        SizedBox(
+          height: 120,
+          child: ScrollConfiguration(
+            behavior:
+                NoGlowBehaviour(), // Create a custom ScrollBehavior that removes the glow and the stretching
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: specialties.length,
+              physics:
+                  const ClampingScrollPhysics(), // This should be respected now
+              itemBuilder: (context, index) {
+                var specialty = specialties[index];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        width: 60,
+                        height: 60,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF0D4C92).withOpacity(0.2),
+                          shape: BoxShape.circle,
+                        ),
+                        child: SvgPicture.asset(
+                          specialty.iconPath,
+                          semanticsLabel: specialty.name,
+                          width: 35,
+                          height: 35,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        specialty.name,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
-          );
-        },
-      ),
+          ),
+        ),
+      ],
     );
+  }
+}
+
+// Custom ScrollBehavior that removes the overscroll glow and stretching
+class NoGlowBehaviour extends ScrollBehavior {
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child; // This removes the glow effect
+  }
+
+  @override
+  ScrollPhysics getScrollPhysics(BuildContext context) {
+    return const ClampingScrollPhysics(); // This should enforce clamping physics
   }
 }
 
