@@ -56,8 +56,9 @@ class DashboardMenu extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        crossAxisSpacing: 3,
-        mainAxisSpacing: 3,
+        crossAxisSpacing: 1,
+        mainAxisSpacing: 1,
+        childAspectRatio: (50 / 43),
       ),
       itemCount: gridItems.length,
       itemBuilder: (context, index) {
@@ -68,30 +69,27 @@ class DashboardMenu extends StatelessWidget {
 
   Widget _buildGridItem(BuildContext context, GridItem item) {
     return Card(
+      elevation: 2,
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: item.onTap,
-        child: Stack(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Positioned(
-              child: Image.asset(
-                item.imagePath,
-                fit: BoxFit.contain,
-              ),
+            Image.asset(
+              item.imagePath,
+              fit: BoxFit.contain,
             ),
-            Positioned(
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: Container(
-                height: 45.0,
-                color: Colors.white,
-                padding: const EdgeInsets.fromLTRB(2.0, 2.0, 8.0, 8.0),
+            Container(
+              height: 30.0,
+              color: Colors.white,
+              padding: const EdgeInsets.all(2.0),
+              child: Center(
                 child: Text(
                   item.title,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    fontSize: 13.0,
+                    fontSize: 12.0,
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
