@@ -51,7 +51,7 @@ class DashboardMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(12),
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -73,10 +73,10 @@ class DashboardMenu extends StatelessWidget {
         onTap: item.onTap,
         child: Stack(
           children: <Widget>[
-            Positioned.fill(
+            Positioned(
               child: Image.asset(
                 item.imagePath,
-                fit: BoxFit.fill,
+                fit: BoxFit.contain,
               ),
             ),
             Positioned(
@@ -91,7 +91,7 @@ class DashboardMenu extends StatelessWidget {
                   item.title,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    fontSize: 14.0,
+                    fontSize: 13.0,
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
