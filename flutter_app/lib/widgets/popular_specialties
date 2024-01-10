@@ -14,7 +14,28 @@ class PopularSpecialtiesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      
+      height: 100, // Adjust the height as needed
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: specialties.length,
+        itemBuilder: (context, index) {
+          return Container(
+            width: 80, // Diameter of the circle
+            height: 80, // Diameter of the circle
+            alignment: Alignment.center,
+            margin: EdgeInsets.all(10), // Spacing between circles
+            decoration: BoxDecoration(
+              color: Colors.blue, // The color of the circle
+              shape: BoxShape.circle,
+            ),
+            child: SvgPicture.asset(
+              specialties[index].iconPath,
+              color: Colors.white, // SVG icon color, if applicable
+              semanticsLabel: specialties[index].name,
+            ),
+          );
+        },
+      ),
     );
   }
 }
