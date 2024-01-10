@@ -8,6 +8,7 @@ import 'screens/welcome_screen.dart';
 import 'screens/doctor_screen.dart';
 import 'screens/pharmacy_screen.dart';
 // import 'screens/message_screen.dart';
+import 'providers/user_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,8 +19,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => Auth(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (context) => Auth()), // Existing provider
+        ChangeNotifierProvider(
+            create: (context) => UserProvider()), // Add UserProvider
+        // ... add other providers if any
+      ],
       child: MaterialApp(
         title: 'MedConnect',
         theme: ThemeData(

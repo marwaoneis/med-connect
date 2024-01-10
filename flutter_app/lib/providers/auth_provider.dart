@@ -55,6 +55,7 @@ class Auth with ChangeNotifier {
 
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
+      print("Here is the data: $responseData");
       _saveUserData(responseData);
     } else {
       throw Exception('Failed to log in');
@@ -94,12 +95,11 @@ class Auth with ChangeNotifier {
 
   Future<void> _saveUserData(dynamic responseData) async {
     final prefs = await SharedPreferences.getInstance();
-    userId = responseData['_id'];
+    userId = responseData['id'];
     token = responseData['token'];
 
-    // Check if userId and token are not null before saving
     if (userId != null && token != null) {
-      await prefs.setString('_id', userId!);
+      await prefs.setString('id', userId!);
       await prefs.setString('token', token!);
     } else {
       print("Error: User ID or Token is null.");
