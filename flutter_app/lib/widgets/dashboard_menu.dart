@@ -71,31 +71,31 @@ class DashboardMenu extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: item.onTap,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment
-              .stretch, // Ensure the widgets fill the card width
+        child: Stack(
           children: <Widget>[
-            Expanded(
-              // Use Expanded to give the image a flexible height, but not the text
-              child: Container(
-                // Define a max height for the image container if needed
-                constraints: const BoxConstraints(
-                  minHeight: 120, // Maximum height for the image
-                ),
-                child: Image.asset(
-                  item.imagePath,
-                  fit: BoxFit
-                      .contain, // The image should be contained within the bounds of the Container
-                ),
+            Positioned.fill(
+              child: Image.asset(
+                item.imagePath,
+                fit: BoxFit.fill,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(
-                  8, 8, 8, 8), // Add padding around the text
-              child: Text(
-                item.title,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleMedium,
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Container(
+                height: 45.0,
+                color: Colors.white,
+                padding: const EdgeInsets.fromLTRB(2.0, 2.0, 8.0, 8.0),
+                child: Text(
+                  item.title,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
           ],
