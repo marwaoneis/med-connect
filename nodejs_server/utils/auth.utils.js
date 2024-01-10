@@ -10,7 +10,7 @@ const generateToken = (user) => {
 
 const sendResponseWithToken = (user, statusCode, res) => {
   const token = generateToken(user);
-  res.status(statusCode).json({ token });
+  res.status(statusCode).json({ id: user._id, token });
 };
 
 module.exports = {
