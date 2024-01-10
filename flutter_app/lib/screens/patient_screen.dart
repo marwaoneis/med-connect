@@ -59,16 +59,24 @@ class PatientScreenState extends State<PatientScreen> {
               body: Column(
                 children: <Widget>[
                   _buildTopBarWithBackground(context, firstName, address),
-                  SizedBox(
-                    height: 300,
-                    child: DashboardMenu(),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 300,
+                            child: DashboardMenu(),
+                          ),
+                          const SizedBox(height: 10),
+                          const AppointmentCard(),
+                          const SizedBox(height: 10),
+                          const PharmacyList(),
+                          const SizedBox(height: 10),
+                          const SpecialistList(),
+                        ],
+                      ),
+                    ),
                   ),
-                  const SizedBox(height: 10),
-                  const AppointmentCard(),
-                  const SizedBox(height: 10),
-                  const PharmacyList(),
-                  const SizedBox(height: 10),
-                  const SpecialistList(),
                 ],
               ),
               bottomNavigationBar: Footer(
