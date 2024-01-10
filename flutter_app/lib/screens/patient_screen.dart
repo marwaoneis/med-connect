@@ -9,6 +9,8 @@ import '../api/api_service.dart';
 import '../providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 import '../screens/message_screen.dart';
+import '../widgets/footer.dart';
+import '../widgets/popular_specialties.dart';
 
 class PatientScreen extends StatefulWidget {
   const PatientScreen({super.key});
@@ -67,7 +69,7 @@ class PatientScreenState extends State<PatientScreen> {
                             child: DashboardMenu(),
                           ),
                           const SizedBox(height: 10),
-                          const PopularSpecialtiesWidget;
+                          PopularSpecialtiesWidget(),
                           const SizedBox(height: 10),
                           const AppointmentCard(),
                           const SizedBox(height: 10),
