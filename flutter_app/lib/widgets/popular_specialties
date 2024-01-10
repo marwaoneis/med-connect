@@ -1,0 +1,27 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+
+class PopularSpecialtiesWidget extends StatelessWidget {
+  final List<Specialty> specialties = [
+    Specialty("Cardiology", "assets/cardiology.svg"),
+    Specialty("Neurology", "assets/neurology.svg"),
+    Specialty("Orthopedics", "assets/orthopedics.svg"),
+    Specialty("Pediatrics", "assets/pediatrics.svg"),
+    Specialty("Dermatology", "assets/dermatology.svg"),
+    // Add more specialties as needed
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      
+    );
+  }
+}
+
+class Specialty {
+  final String name;
+  final String iconPath;
+
+  Specialty(this.name, this.iconPath);
+}
