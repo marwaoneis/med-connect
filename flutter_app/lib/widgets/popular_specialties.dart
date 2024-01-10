@@ -5,12 +5,11 @@ class PopularSpecialtiesWidget extends StatelessWidget {
   PopularSpecialtiesWidget({super.key});
 
   final List<Specialty> specialties = [
-    Specialty("Cardiology", "assets/cardiology.svg"),
-    Specialty("Neurology", "assets/neurology.svg"),
-    Specialty("Orthopedics", "assets/orthopedics.svg"),
-    Specialty("Pediatrics", "assets/pediatrics.svg"),
-    Specialty("Dermatology", "assets/dermatology.svg"),
-    // Add more specialties as needed
+    Specialty("Eye Specialist", "assets/eye.svg"),
+    Specialty("Dentist", "assets/dentist.svg"),
+    Specialty("Cardiologist", "assets/cardiologist.svg"),
+    Specialty("Pulmonologist", "assets/pulmonologist.svg"),
+    Specialty("Physiotherapist", "assets/physiotherapist.svg"),
   ];
 
   @override
@@ -25,8 +24,8 @@ class PopularSpecialtiesWidget extends StatelessWidget {
             width: 80, // Diameter of the circle
             height: 80, // Diameter of the circle
             alignment: Alignment.center,
-            margin: EdgeInsets.all(10), // Spacing between circles
-            decoration: BoxDecoration(
+            margin: const EdgeInsets.all(10), // Spacing between circles
+            decoration: const BoxDecoration(
               color: Colors.blue, // The color of the circle
               shape: BoxShape.circle,
             ),
