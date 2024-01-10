@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../tools/no_glow_scroll.dart';
 
 class PopularSpecialtiesWidget extends StatelessWidget {
   PopularSpecialtiesWidget({super.key});
@@ -30,9 +31,7 @@ class PopularSpecialtiesWidget extends StatelessWidget {
         const SizedBox(height: 15),
         SizedBox(
           height: 120,
-          child: ScrollConfiguration(
-            behavior:
-                NoGlowBehaviour(), // Create a custom ScrollBehavior that removes the glow and the stretching
+          child: NoGlowScrollWrapper(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: specialties.length,
@@ -79,19 +78,6 @@ class PopularSpecialtiesWidget extends StatelessWidget {
         ),
       ],
     );
-  }
-}
-
-// Custom ScrollBehavior that removes the overscroll glow and stretching
-class NoGlowBehaviour extends ScrollBehavior {
-  Widget buildViewportChrome(
-      BuildContext context, Widget child, AxisDirection axisDirection) {
-    return child; // This removes the glow effect
-  }
-
-  @override
-  ScrollPhysics getScrollPhysics(BuildContext context) {
-    return const ClampingScrollPhysics(); // This should enforce clamping physics
   }
 }
 
