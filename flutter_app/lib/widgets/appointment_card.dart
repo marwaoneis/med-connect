@@ -6,99 +6,121 @@ class AppointmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                // Replace with an actual image of the doctor
-                CircleAvatar(
-                  radius: 24,
-                  backgroundColor: Colors.grey[300],
-                  child:
-                      const Text('DR'), // Placeholder for the doctor's initials
-                ),
-                const SizedBox(width: 16),
-                const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Dr. Shafiq Rahman',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: Card(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(color: Colors.grey, width: 1),
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        elevation: 5,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: <Widget>[
+              const Row(
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'Dr. Shafiq Rahman',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w800,
+                        ),
                       ),
-                    ),
-                    Text(
-                      'Emergency Medicine',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey,
+                      SizedBox(height: 5),
+                      Text(
+                        'Emergency Medicine',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            const Row(
-              children: <Widget>[
-                Icon(Icons.email, color: Colors.grey),
-                SizedBox(width: 8),
-                Text('shafiq.rahman@example.com'),
-                Spacer(),
-                Text('+7 (903) 880-93-38'),
-              ],
-            ),
-            const SizedBox(height: 16),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text('2024-01-01'),
-                Text('05:30'),
-              ],
-            ),
-            const SizedBox(height: 16),
-            const Row(
-              children: <Widget>[
-                Icon(Icons.location_on, color: Colors.grey),
-                SizedBox(width: 8),
-                Text('Great Falls, Maryland'),
-                Spacer(),
-                Text('Open in Google Maps'),
-              ],
-            ),
-            const Divider(height: 32),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                IconButton(
-                  icon: const Icon(Icons.email),
-                  onPressed: () {
-                    // Handle email tap
-                  },
-                ),
-                IconButton(
-                  icon: const Icon(Icons.phone),
-                  onPressed: () {
-                    // Handle phone tap
-                  },
-                ),
-                IconButton(
-                  icon: const Icon(Icons.edit),
-                  onPressed: () {
-                    // Handle edit tap
-                  },
-                ),
-              ],
-            ),
-          ],
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              const Row(
+                children: <Widget>[
+                  Icon(Icons.email_outlined,
+                      color: Color(0xFF0D4C92), size: 15),
+                  SizedBox(width: 8),
+                  Text(
+                    'shafiq.rahman@example.com',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  Spacer(),
+                  Icon(
+                    Icons.phone,
+                    color: Color(0xFF0D4C92),
+                    size: 15,
+                  ),
+                  SizedBox(width: 8),
+                  Text('+7 (903) 880-93-38', style: TextStyle(fontSize: 12)),
+                ],
+              ),
+              const SizedBox(height: 16),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Column(
+                    children: [
+                      Text('Date', style: TextStyle(fontSize: 14)),
+                      Text('2024-01-01',
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text('Time', style: TextStyle(fontSize: 14)),
+                      Text('05:30',
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              const Row(
+                children: <Widget>[
+                  Icon(Icons.location_on, color: Color(0xFF0D4C92)),
+                  SizedBox(width: 8),
+                  Text('Great Falls, Maryland'),
+                  Spacer(),
+                  Text('Open in Google Maps'),
+                ],
+              ),
+              const Divider(height: 32),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  IconButton(
+                    icon: const Icon(Icons.email, color: Color(0xFF0D4C92)),
+                    onPressed: () {
+                      // Handle email tap
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.phone, color: Color(0xFF0D4C92)),
+                    onPressed: () {
+                      // Handle phone tap
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.edit, color: Color(0xFF0D4C92)),
+                    onPressed: () {
+                      // Handle edit tap
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
