@@ -100,19 +100,31 @@ class AppointmentCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   IconButton(
-                    icon: const Icon(Icons.email, color: Color(0xFF0D4C92)),
+                    icon: const Icon(
+                      Icons.email,
+                      color: Color(0xFF0D4C92),
+                      size: 30,
+                    ),
                     onPressed: () {
                       // Handle email tap
                     },
                   ),
                   IconButton(
-                    icon: const Icon(Icons.phone, color: Color(0xFF0D4C92)),
+                    icon: const Icon(
+                      Icons.phone,
+                      color: Color(0xFF0D4C92),
+                      size: 30,
+                    ),
                     onPressed: () {
                       // Handle phone tap
                     },
                   ),
                   IconButton(
-                    icon: const Icon(Icons.edit, color: Color(0xFF0D4C92)),
+                    icon: const Icon(
+                      Icons.edit,
+                      color: Color(0xFF0D4C92),
+                      size: 30,
+                    ),
                     onPressed: () {
                       // Handle edit tap
                     },
