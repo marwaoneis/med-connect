@@ -76,7 +76,7 @@ class PatientScreenState extends State<PatientScreen> {
                             const SizedBox(height: 10),
                             const AppointmentCard(),
                             const SizedBox(height: 10),
-                            const PharmacyList(),
+                            const FindPharmacyWidget(),
                             const SizedBox(height: 10),
                             const SpecialistList(),
                           ],
