@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/patient_appointments.dart';
 
 class DashboardMenu extends StatelessWidget {
   DashboardMenu({super.key});
@@ -7,42 +8,51 @@ class DashboardMenu extends StatelessWidget {
     GridItem(
       title: 'Book Appointment',
       imagePath: 'assets/book_appointment.png',
-      onTap: () {
-        // Navigate to the Book Appointment page
+      onTap: (BuildContext context) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const BookAppointmentPage()),
+        );
       },
     ),
     GridItem(
       title: 'Choose Pharmacy',
       imagePath: 'assets/choose_pharmacy.png',
-      onTap: () {
-        // Navigate to the Choose Pharmacy page
+      onTap: (BuildContext context) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const BookAppointmentPage()),
+        );
       },
     ),
     GridItem(
       title: 'Symptom Checker',
       imagePath: 'assets/symptom_checker.png',
-      onTap: () {
-        // Navigate to the Symptom Checker page
+      onTap: (BuildContext context) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const BookAppointmentPage()),
+        );
       },
     ),
     GridItem(
       title: 'Medicines',
       imagePath: 'assets/medicines.png',
-      onTap: () {
+      onTap: (BuildContext context) {
         // Navigate to the Symptom Checker page
       },
     ),
     GridItem(
       title: 'Setup Redminders',
       imagePath: 'assets/setup_reminders.png',
-      onTap: () {
+      onTap: (BuildContext context) {
         // Navigate to the Symptom Checker page
       },
     ),
     GridItem(
       title: 'Consultations',
       imagePath: 'assets/consultations.png',
-      onTap: () {
+      onTap: (BuildContext context) {
         // Navigate to the Symptom Checker page
       },
     ),
@@ -72,7 +82,7 @@ class DashboardMenu extends StatelessWidget {
       elevation: 2,
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        onTap: item.onTap,
+        onTap: () => item.onTap(context),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -106,7 +116,7 @@ class DashboardMenu extends StatelessWidget {
 class GridItem {
   final String title;
   final String imagePath;
-  final VoidCallback onTap;
+  final Function(BuildContext) onTap;
 
   GridItem({
     required this.title,
