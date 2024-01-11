@@ -35,8 +35,7 @@ class PopularSpecialtiesWidget extends StatelessWidget {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: specialties.length,
-              physics:
-                  const ClampingScrollPhysics(), // This should be respected now
+              physics: const ClampingScrollPhysics(),
               itemBuilder: (context, index) {
                 var specialty = specialties[index];
                 return Padding(
