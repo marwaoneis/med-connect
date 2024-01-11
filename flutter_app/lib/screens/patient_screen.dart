@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/search_bar.dart';
 import '../widgets/dashboard_menu.dart';
 import '../widgets/appointment_card.dart';
-import '../widgets/pharmacy_list.dart';
+import '../widgets/find_pharmacy.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/specialist_list.dart';
 import '../api/api_service.dart';
@@ -71,6 +71,7 @@ class PatientScreenState extends State<PatientScreen> {
                               height: 250,
                               child: DashboardMenu(),
                             ),
+                            const SizedBox(height: 10),
                             PopularSpecialtiesWidget(),
                             const SizedBox(height: 10),
                             const AppointmentCard(),
