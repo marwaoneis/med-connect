@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../config/request_config.dart';
 import '../widgets/search_bar.dart';
 import '../widgets/dashboard_menu.dart';
 import '../widgets/appointment_card.dart';
@@ -38,11 +39,13 @@ class PatientScreenState extends State<PatientScreen> {
   }
 
   Future<Map<String, dynamic>> _fetchPatientData() async {
-    final apiService = ApiService(baseUrl: 'http://10.0.2.2:3001/');
+    var headers = RequestConfig.getHeaders(context);
+
+    final apiService =
+        ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
     final userId = Provider.of<Auth>(context, listen: false).getUserId;
     var data = await apiService.fetchData('patients/$userId');
-    print(
-        'Fetched patient data: $data'); // This will log the data to your console.
+    print('Fetched patient data: $data');
     return data;
   }
 

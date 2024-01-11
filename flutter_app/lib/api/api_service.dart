@@ -1,18 +1,17 @@
-// ignore_for_file: avoid_print
-
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiService {
   final String baseUrl;
+  final Map<String, String> headers;
 
-  ApiService({required this.baseUrl});
+  ApiService({required this.baseUrl, required this.headers});
 
   Future<dynamic> fetchData(String endpoint) async {
     var url = Uri.parse('$baseUrl/$endpoint');
 
     try {
-      var response = await http.get(url);
+      var response = await http.get(url, headers: headers);
 
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
