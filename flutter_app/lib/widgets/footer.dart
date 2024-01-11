@@ -19,7 +19,7 @@ class Footer extends StatelessWidget {
     return DecoratedBox(
       decoration: const BoxDecoration(
         border: Border(
-          top: BorderSide(color: Colors.grey, width: 1.0), // Grey top border
+          top: BorderSide(color: Colors.grey, width: 1.0),
         ),
       ),
       child: SizedBox(

@@ -71,7 +71,7 @@ class SpecialistList extends StatelessWidget {
                 child: const Text(
                   'View all >',
                   style: TextStyle(
-                      color: Colors.blue,
+                      color: Color(0xFF0D4C92),
                       fontSize: 14,
                       decoration: TextDecoration.none,
                       fontWeight: FontWeight.bold),
