@@ -95,11 +95,11 @@ class Auth with ChangeNotifier {
 
   Future<void> _saveUserData(dynamic responseData) async {
     final prefs = await SharedPreferences.getInstance();
-    userId = responseData['id'];
+    userId = responseData['_id'];
     token = responseData['token'];
 
     if (userId != null && token != null) {
-      await prefs.setString('id', userId!);
+      await prefs.setString('_id', userId!);
       await prefs.setString('token', token!);
     } else {
       print("Error: User ID or Token is null.");
