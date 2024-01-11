@@ -16,43 +16,35 @@ class Footer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          IconButton(
-            icon: SvgPicture.asset(
-              'assets/home_icon.svg',
-              height: 25,
-              width: 25,
+    return DecoratedBox(
+      decoration: const BoxDecoration(
+        border: Border(
+          top: BorderSide(color: Colors.grey, width: 1.0), // Grey top border
+        ),
+      ),
+      child: SizedBox(
+        height: 50,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            IconButton(
+              icon: SvgPicture.asset('assets/home_icon.svg'),
+              onPressed: onHomeTap,
             ),
-            onPressed: onHomeTap,
-          ),
-          IconButton(
-            icon: SvgPicture.asset(
-              'assets/appointment_icon.svg',
-              height: 25,
-              width: 25,
+            IconButton(
+              icon: SvgPicture.asset('assets/appointment_icon.svg'),
+              onPressed: onAppointmentTap,
             ),
-            onPressed: onAppointmentTap,
-          ),
-          IconButton(
-            icon: SvgPicture.asset(
-              'assets/chat_icon.svg',
-              height: 25,
-              width: 25,
+            IconButton(
+              icon: SvgPicture.asset('assets/chat_icon.svg'),
+              onPressed: onChatTap,
             ),
-            onPressed: onChatTap,
-          ),
-          IconButton(
-            icon: SvgPicture.asset(
-              'assets/profile_icon.svg',
-              height: 25,
-              width: 25,
+            IconButton(
+              icon: SvgPicture.asset('assets/profile_icon.svg'),
+              onPressed: onProfileTap,
             ),
-            onPressed: onProfileTap,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
