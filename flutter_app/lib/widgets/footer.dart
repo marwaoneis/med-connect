@@ -21,19 +21,35 @@ class Footer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           IconButton(
-            icon: SvgPicture.asset('assets/home_icon.svg'),
+            icon: SvgPicture.asset(
+              'assets/home_icon.svg',
+              height: 25,
+              width: 25,
+            ),
             onPressed: onHomeTap,
           ),
           IconButton(
-            icon: SvgPicture.asset('assets/appointment_icon.svg'),
+            icon: SvgPicture.asset(
+              'assets/appointment_icon.svg',
+              height: 25,
+              width: 25,
+            ),
             onPressed: onAppointmentTap,
           ),
           IconButton(
-            icon: SvgPicture.asset('assets/chat_icon.svg'),
+            icon: SvgPicture.asset(
+              'assets/chat_icon.svg',
+              height: 25,
+              width: 25,
+            ),
             onPressed: onChatTap,
           ),
           IconButton(
-            icon: SvgPicture.asset('assets/profile_icon.svg'),
+            icon: SvgPicture.asset(
+              'assets/profile_icon.svg',
+              height: 25,
+              width: 25,
+            ),
             onPressed: onProfileTap,
           ),
         ],

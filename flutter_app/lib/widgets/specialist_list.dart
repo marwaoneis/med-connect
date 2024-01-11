@@ -19,25 +19,25 @@ class SpecialistList extends StatelessWidget {
     Specialist(
       name: 'Miles, Esther',
       specialty: 'Neurology',
-      imageUrl: 'assets/esther.png',
+      imageUrl: 'assets/doctor_image.png',
       price: 80,
     ),
     Specialist(
       name: 'Flores, Juanita',
       specialty: 'Geriatrics',
-      imageUrl: 'assets/juanita.png',
+      imageUrl: 'assets/doctor_image.png',
       price: 60,
     ),
     Specialist(
       name: 'Miles, Esther',
       specialty: 'Neurology',
-      imageUrl: 'assets/esther.png',
+      imageUrl: 'assets/doctor_image.png',
       price: 80,
     ),
     Specialist(
       name: 'Flores, Juanita',
       specialty: 'Geriatrics',
-      imageUrl: 'assets/juanita.png',
+      imageUrl: 'assets/doctor_image.png',
       price: 60,
     ),
     // Add more specialists
@@ -81,24 +81,30 @@ class SpecialistList extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 200, // Adjust the height as needed
+          height: 300,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: specialists.length,
             itemBuilder: (BuildContext context, int index) {
               Specialist specialist = specialists[index];
               return Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.fromLTRB(12.0, 10.0, 12.0, 12.0),
                 child: Card(
                   child: SizedBox(
-                    width: 150, // Adjust the width as needed
+                    width: 170,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: Image.asset(
-                            specialist.imageUrl,
-                            fit: BoxFit.cover,
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            ),
+                            child: Image.asset(
+                              specialist.imageUrl,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                         Padding(
@@ -108,17 +114,24 @@ class SpecialistList extends StatelessWidget {
                             children: [
                               Text(
                                 specialist.specialty,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: const TextStyle(),
                               ),
-                              Text(specialist.name),
-                              const SizedBox(height: 8),
+                              Text(
+                                specialist.name,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              ),
+                              const SizedBox(height: 15.0),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('€${specialist.price}'),
+                                  Text(
+                                    '€${specialist.price}',
+                                    style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w900),
+                                  ),
                                   ElevatedButton(
                                     onPressed: () {
                                       // Handle chat button press

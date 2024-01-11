@@ -85,6 +85,7 @@ flutter:
     - assets/pulmonologist.svg
     - assets/physiotherapist.svg
     - assets/pharmacy_default.png
+    - assets/doctor_image.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
