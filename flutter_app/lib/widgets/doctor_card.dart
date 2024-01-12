@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/doctor_profile.dart';
+
 class DoctorCard extends StatelessWidget {
   final String name;
   final String specialty;
@@ -21,8 +23,8 @@ class DoctorCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.all(10.0),
       child: ListTile(
-        leading: Image.network(
-          'https://via.placeholder.com/150',
+        leading: Image.asset(
+          'assets/doctor_image.png',
           fit: BoxFit.cover,
         ),
         title: Text(name),
@@ -30,7 +32,11 @@ class DoctorCard extends StatelessWidget {
         trailing: Text(fee),
         isThreeLine: true,
         onTap: () {
-          // TODO: Navigate to doctor's detail or booking screen
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const DoctorProfileScreen()),
+          );
         },
       ),
     );
