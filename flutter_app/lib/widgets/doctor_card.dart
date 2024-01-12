@@ -24,9 +24,9 @@ class DoctorCard extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
             color: const Color.fromARGB(255, 228, 225, 225), width: 1),
-        borderRadius: BorderRadius.circular(5.0),
+        borderRadius: BorderRadius.circular(10.0),
       ),
-      margin: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+      margin: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 5.0),
       child: Card(
         color: Colors.white,
         elevation: 0,
@@ -34,7 +34,7 @@ class DoctorCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
               Row(
@@ -96,6 +96,7 @@ class DoctorCard extends StatelessWidget {
                   ),
                 ],
               ),
+              const SizedBox(height: 5.0),
               const Divider(color: Color.fromARGB(255, 228, 225, 225)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

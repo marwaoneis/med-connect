@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/widgets/no_glow_scroll.dart';
 import '../api/api_service.dart';
 import '../config/request_config.dart';
 import '../widgets/doctor_card.dart';
@@ -62,18 +63,21 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasData) {
-                    return ListView.builder(
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final doctor = snapshot.data![index];
-                        return DoctorCard(
-                          name: '${doctor['firstName']} ${doctor['lastName']}',
-                          specialty: doctor['specialization'],
-                          experience: doctor['yearsOfExperience'],
-                          rating: 4.5,
-                          fee: '€${doctor['appointmentPrice'].toString()}',
-                        );
-                      },
+                    return NoGlowScrollWrapper(
+                      child: ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final doctor = snapshot.data![index];
+                          return DoctorCard(
+                            name:
+                                '${doctor['firstName']} ${doctor['lastName']}',
+                            specialty: doctor['specialization'],
+                            experience: doctor['yearsOfExperience'],
+                            rating: 4.5,
+                            fee: '€${doctor['appointmentPrice'].toString()}',
+                          );
+                        },
+                      ),
                     );
                   } else if (snapshot.hasError) {
                     return Center(child: Text('Error: ${snapshot.error}'));
