@@ -29,7 +29,11 @@ class DoctorCard extends StatelessWidget {
         ),
         title: Text(name),
         subtitle: Text('$specialty\n$experience Years '),
-        trailing: Text(fee),
+        trailing: Text(
+          fee,
+          style: const TextStyle(
+              fontWeight: FontWeight.w900, fontSize: 18, color: Colors.black),
+        ),
         isThreeLine: true,
         onTap: () {
           Navigator.push(
