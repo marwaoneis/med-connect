@@ -118,7 +118,12 @@ class DoctorCard extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const DoctorProfileScreen(),
+                          builder: (context) => DoctorProfileScreen(
+                            name: name,
+                            specialty: specialty,
+                            yearsOfExperience: experience,
+                            fee: fee,
+                          ),
                         ),
                       );
                     },

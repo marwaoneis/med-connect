@@ -87,6 +87,7 @@ class BookAppointmentScreenState extends State<BookAppointmentScreen> {
               },
             ),
           ),
+          const SizedBox(height: 5)
         ],
       ),
     );

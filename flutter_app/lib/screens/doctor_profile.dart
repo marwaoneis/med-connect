@@ -1,84 +1,63 @@
 import 'package:flutter/material.dart';
 
 class DoctorProfileScreen extends StatelessWidget {
-  const DoctorProfileScreen({super.key});
+  final String name;
+  final String specialty;
+  final int yearsOfExperience;
+  final String fee;
+
+  const DoctorProfileScreen({
+    super.key,
+    required this.name,
+    required this.specialty,
+    required this.yearsOfExperience,
+    required this.fee,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Doctor Profile'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        title: Text(specialty),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.star_border),
+            onPressed: () {
+              // Handle favorite action
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: <Widget>[
-            const SizedBox(height: 20),
-            const CircleAvatar(
-              radius: 50,
-              backgroundImage: NetworkImage(
-                'https://via.placeholder.com/150',
+          children: [
+            ListTile(
+              leading: CircleAvatar(
+                backgroundImage: AssetImage('assets/doctor_image.png'),
+                radius: 40,
               ),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              'Dr. Jane Doe',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+              title: Text(
+                name,
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
+              subtitle: Text(specialty),
             ),
-            const Text(
-              'Cardiology',
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.grey,
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(16.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Text(
-                'Dr. Jane Doe has over 10 years of experience specializing in cardiology. She has worked with some of the top hospitals and clinics to provide care for patients with heart conditions.',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-                textAlign: TextAlign.center,
+                'Years of work: $yearsOfExperience',
+                style: TextStyle(fontSize: 18),
               ),
             ),
-            const ListTile(
-              leading: Icon(Icons.location_on),
-              title: Text('123 Clinic Street, Health City'),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Navigate to booking screen
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(50),
-                ),
-                child: const Text('Book Appointment'),
+            Card(
+              margin: EdgeInsets.all(10),
+              child: ListTile(
+                title: Text('In-Clinic Appointment'),
+                trailing: Text(fee),
               ),
             ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              child: OutlinedButton(
-                onPressed: () {
-                  // Option to contact the doctor
-                },
-                style: OutlinedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(50),
-                ),
-                child: const Text('Contact Doctor'),
-              ),
-            ),
+            // Additional information like availability, timing, location, and map view
+            // ...
           ],
         ),
       ),
