@@ -6,6 +6,9 @@ var router = express.Router();
 
 var pharmacyController = require("../controllers/pharmacy.controller");
 
+var _require = require("../middleware/pharmacy.middleware.js"),
+    pharmacyMiddleware = _require.pharmacyMiddleware;
+
 router.post("/pharmacies", pharmacyMiddleware, pharmacyController.createPharmacy);
 router.get("/pharmacies", pharmacyController.getAllPharmacies);
 router.get("/pharmacies/:id", pharmacyController.getPharmacyById);

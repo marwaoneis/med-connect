@@ -64,7 +64,21 @@ class PatientScreenState extends State<PatientScreen> {
             return Scaffold(
               body: Column(
                 children: <Widget>[
-                  TopBarWithBackground(firstName: firstName, address: address),
+                  TopBarWithBackground(
+                    leadingContent: CircleAvatar(
+                      backgroundColor: Colors.grey[200],
+                      child: Text(firstName[0]),
+                    ),
+                    titleContent: Text(
+                      '$firstName, $address',
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    trailingContent: IconButton(
+                      icon: SvgPicture.asset('assets/notification_icon.svg'),
+                      onPressed: () {},
+                    ),
+                  ),
                   Expanded(
                     child: NoGlowScrollWrapper(
                       child: SingleChildScrollView(

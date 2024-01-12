@@ -7,4 +7,6 @@ const pharmacyMiddleware = (req, res, next) => {
   }
 };
 
-export default pharmacyMiddleware;
+module.exports = {
+  pharmacyMiddleware,
+};

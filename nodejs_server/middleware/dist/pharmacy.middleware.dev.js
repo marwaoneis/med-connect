@@ -1,10 +1,5 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
 var pharmacyMiddleware = function pharmacyMiddleware(req, res, next) {
   var user = req.user;
 
@@ -15,6 +10,7 @@ var pharmacyMiddleware = function pharmacyMiddleware(req, res, next) {
   }
 };
 
-var _default = pharmacyMiddleware;
-exports["default"] = _default;
+module.exports = {
+  pharmacyMiddleware: pharmacyMiddleware
+};
 //# sourceMappingURL=pharmacy.middleware.dev.js.map

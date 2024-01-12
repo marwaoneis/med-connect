@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const pharmacyController = require("../controllers/pharmacy.controller");
+const { pharmacyMiddleware } = require("../middleware/pharmacy.middleware.js");
 
 router.post(
   "/pharmacies",
