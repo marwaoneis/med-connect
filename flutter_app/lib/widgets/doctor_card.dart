@@ -28,7 +28,7 @@ class DoctorCard extends StatelessWidget {
           fit: BoxFit.cover,
         ),
         title: Text(name),
-        subtitle: Text('$specialty\n$experience Years · $rating'),
+        subtitle: Text('$specialty\n$experience Years '),
         trailing: Text(fee),
         isThreeLine: true,
         onTap: () {
