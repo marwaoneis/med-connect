@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/widgets/top_bar_with_background.dart';
 import '../config/request_config.dart';
 import '../widgets/search_bar.dart';
 import '../widgets/dashboard_menu.dart';
@@ -63,7 +64,7 @@ class PatientScreenState extends State<PatientScreen> {
             return Scaffold(
               body: Column(
                 children: <Widget>[
-                  _buildTopBarWithBackground(context, firstName, address),
+                  TopBarWithBackground(firstName: firstName, address: address),
                   Expanded(
                     child: NoGlowScrollWrapper(
                       child: SingleChildScrollView(
@@ -134,63 +135,62 @@ class PatientScreenState extends State<PatientScreen> {
   }
 }
 
-Widget _buildTopBarWithBackground(
-    //convert it into another class and move it into a widget file
-    BuildContext context,
-    String firstName,
-    String address) {
-  return Stack(
-    children: [
-      Container(
-        height: 175,
-        decoration: const BoxDecoration(
-          color: Color(0xFF0D4C92),
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.elliptical(50, 30),
-            bottomRight: Radius.elliptical(50, 20),
-          ),
-        ),
-      ),
-      Column(
-        children: [
-          const SizedBox(height: 50),
-          Container(
-            color: Colors.white.withOpacity(0.9),
-            height: 45,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    // backgroundImage: const NetworkImage(
-                    //     'http://10.0.2.2:3001/path_to_avatar'),
-                    backgroundColor: Colors.grey[200],
-                    child: Text(firstName[0]),
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    '$firstName, $address',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  const Spacer(),
-                  IconButton(
-                    icon: SvgPicture.asset('assets/notification_icon.svg'),
-                    onPressed: () {
-                      // Your existing code
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 45),
-          const CustomSearchBar(),
-        ],
-      ),
-    ],
-  );
-}
+// Widget _buildTopBarWithBackground(
+//     BuildContext context,
+//     String firstName,
+//     String address) {
+//   return Stack(
+//     children: [
+//       Container(
+//         height: 175,
+//         decoration: const BoxDecoration(
+//           color: Color(0xFF0D4C92),
+//           borderRadius: BorderRadius.only(
+//             bottomLeft: Radius.elliptical(50, 30),
+//             bottomRight: Radius.elliptical(50, 20),
+//           ),
+//         ),
+//       ),
+//       Column(
+//         children: [
+//           const SizedBox(height: 50),
+//           Container(
+//             color: Colors.white.withOpacity(0.9),
+//             height: 45,
+//             child: Padding(
+//               padding: const EdgeInsets.symmetric(horizontal: 20.0),
+//               child: Row(
+//                 children: [
+//                   CircleAvatar(
+//                     // backgroundImage: const NetworkImage(
+//                     //     'http://10.0.2.2:3001/path_to_avatar'),
+//                     backgroundColor: Colors.grey[200],
+//                     child: Text(firstName[0]),
+//                   ),
+//                   const SizedBox(width: 8),
+//                   Text(
+//                     '$firstName, $address',
+//                     style: const TextStyle(
+//                       fontSize: 20,
+//                       fontWeight: FontWeight.bold,
+//                       color: Colors.black,
+//                     ),
+//                   ),
+//                   const Spacer(),
+//                   IconButton(
+//                     icon: SvgPicture.asset('assets/notification_icon.svg'),
+//                     onPressed: () {
+//                       // Your existing code
+//                     },
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//           const SizedBox(height: 45),
+//           const CustomSearchBar(),
+//         ],
+//       ),
+//     ],
+//   );
+// }

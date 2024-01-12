@@ -21,11 +21,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-            create: (context) => Auth()), // Existing provider
-        ChangeNotifierProvider(
-            create: (context) => UserProvider()), // Add UserProvider
-        // ... add other providers if any
+        ChangeNotifierProvider(create: (context) => Auth()),
+        ChangeNotifierProvider(create: (context) => UserProvider()),
       ],
       child: MaterialApp(
         title: 'MedConnect',
