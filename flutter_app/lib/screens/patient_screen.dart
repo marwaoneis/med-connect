@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/widgets/top_bar_with_background.dart';
 import '../config/request_config.dart';
-import '../widgets/search_bar.dart';
 import '../widgets/dashboard_menu.dart';
 import '../widgets/appointment_card.dart';
 import '../widgets/find_pharmacy.dart';
