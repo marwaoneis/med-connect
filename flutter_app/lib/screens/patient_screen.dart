@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 import '../screens/message_screen.dart';
 import '../widgets/footer.dart';
 import '../widgets/popular_specialties.dart';
-import '../tools/no_glow_scroll.dart';
+import '../widgets/no_glow_scroll.dart';
 
 class PatientScreen extends StatefulWidget {
   const PatientScreen({super.key});
@@ -135,7 +135,10 @@ class PatientScreenState extends State<PatientScreen> {
 }
 
 Widget _buildTopBarWithBackground(
-    BuildContext context, String firstName, String address) {
+    //convert it into another class and move it into a widget file
+    BuildContext context,
+    String firstName,
+    String address) {
   return Stack(
     children: [
       Container(

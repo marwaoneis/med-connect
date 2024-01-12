@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-
 import '../config/request_config.dart';
 // import '../models/exception_model.dart';
 import '../data/sign_up_form_data.dart';

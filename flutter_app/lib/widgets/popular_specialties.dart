@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../tools/no_glow_scroll.dart';
+import 'no_glow_scroll.dart';
 
 class PopularSpecialtiesWidget extends StatelessWidget {
   PopularSpecialtiesWidget({super.key});

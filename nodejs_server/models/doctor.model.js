@@ -70,6 +70,10 @@ const doctorSchema = new mongoose.Schema({
       required: true,
     },
   },
+  role: {
+    type: String,
+    default: "Doctor",
+  },
 });
 
 doctorSchema.pre(

@@ -52,6 +52,10 @@ const patientSchema = new mongoose.Schema({
     type: Map,
     of: mongoose.Schema.Types.Mixed,
   },
+  role: {
+    type: String,
+    default: "Patient",
+  },
 });
 
 patientSchema.pre(
