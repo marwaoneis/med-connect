@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import '../widgets/search_bar.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class TopBarWithBackground extends StatelessWidget {
-  final String firstName;
-  final String address;
+  final Widget leadingContent;
+  final Widget titleContent;
+  final Widget trailingContent;
 
   const TopBarWithBackground({
     super.key,
-    required this.firstName,
-    required this.address,
+    required this.leadingContent,
+    required this.titleContent,
+    required this.trailingContent,
   });
 
   @override
@@ -36,28 +37,11 @@ class TopBarWithBackground extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
                   children: [
-                    CircleAvatar(
-                      // backgroundImage: const NetworkImage(
-                      //     'http://10.0.2.2:3001/path_to_avatar'),
-                      backgroundColor: Colors.grey[200],
-                      child: Text(firstName[0]),
-                    ),
+                    leadingContent,
                     const SizedBox(width: 8),
-                    Text(
-                      '$firstName, $address',
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
+                    titleContent,
                     const Spacer(),
-                    IconButton(
-                      icon: SvgPicture.asset('assets/notification_icon.svg'),
-                      onPressed: () {
-                        // Your existing code
-                      },
-                    ),
+                    trailingContent,
                   ],
                 ),
               ),
