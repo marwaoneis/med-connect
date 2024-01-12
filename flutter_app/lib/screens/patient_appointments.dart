@@ -9,10 +9,10 @@ class BookAppointmentScreen extends StatefulWidget {
   const BookAppointmentScreen({super.key});
 
   @override
-  _BookAppointmentScreenState createState() => _BookAppointmentScreenState();
+  BookAppointmentScreenState createState() => BookAppointmentScreenState();
 }
 
-class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
+class BookAppointmentScreenState extends State<BookAppointmentScreen> {
   late Future<List<Map<String, dynamic>>> doctorsData;
 
   @override
