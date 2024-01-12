@@ -11,7 +11,8 @@ class DashboardMenu extends StatelessWidget {
       onTap: (BuildContext context) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const BookAppointmentPage()),
+          MaterialPageRoute(
+              builder: (context) => const BookAppointmentScreen()),
         );
       },
     ),
@@ -21,7 +22,8 @@ class DashboardMenu extends StatelessWidget {
       onTap: (BuildContext context) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const BookAppointmentPage()),
+          MaterialPageRoute(
+              builder: (context) => const BookAppointmentScreen()),
         );
       },
     ),
@@ -31,7 +33,8 @@ class DashboardMenu extends StatelessWidget {
       onTap: (BuildContext context) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const BookAppointmentPage()),
+          MaterialPageRoute(
+              builder: (context) => const BookAppointmentScreen()),
         );
       },
     ),
