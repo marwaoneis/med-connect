@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../models/doctor_model.dart';
 
@@ -111,6 +112,28 @@ class DoctorProfileScreen extends StatelessWidget {
     return ListTile(
       title: Text('Timing'),
       subtitle: Text(timing),
+    );
+  }
+
+  Widget _buildLocationSection(Doctor doctor) {
+    // Placeholder for doctor's clinic location
+    final clinicLocation =
+        LatLng(37.77483, -122.41942); // San Francisco coordinates
+
+    return SizedBox(
+      height: 200.0,
+      child: GoogleMap(
+        initialCameraPosition: CameraPosition(
+          target: clinicLocation,
+          zoom: 14.0,
+        ),
+        markers: {
+          Marker(
+            markerId: MarkerId('clinicLocation'),
+            position: clinicLocation,
+          ),
+        },
+      ),
     );
   }
 }
