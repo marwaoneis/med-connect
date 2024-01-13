@@ -80,4 +80,28 @@ class DoctorProfileScreen extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildAvailabilitySection(Doctor doctor) {
+    // Assuming `doctor.availability` is a list of available slots.
+    // This is a placeholder and should be replaced with actual data structure.
+    final availability = ['06:00 - 06:30', '06:30 - 07:00', '07:00 - 07:30'];
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text('Available Slots', style: TextStyle(fontSize: 18)),
+        ),
+        Wrap(
+          spacing: 8.0,
+          children: availability
+              .map((slot) => Chip(
+                    label: Text(slot),
+                    backgroundColor: Colors.blue[100],
+                  ))
+              .toList(),
+        ),
+      ],
+    );
+  }
 }
