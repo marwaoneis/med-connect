@@ -104,4 +104,13 @@ class DoctorProfileScreen extends StatelessWidget {
       ],
     );
   }
+
+  Widget _buildTimingSection(Doctor doctor) {
+    // Placeholder for timing data
+    final timing = 'Monday: 09:00 AM - 05:00 PM';
+    return ListTile(
+      title: Text('Timing'),
+      subtitle: Text(timing),
+    );
+  }
 }
