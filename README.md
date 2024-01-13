@@ -122,9 +122,9 @@ _Below is an example of how you can instruct your audience on installing and set
    ```sh
    npm install
    ```
-4. Go to nodejs_server directory
+4. Go to server directory
    ```sh
-   cd nodejs_server
+   cd server
    ```
 5. Enter your URI in `monoDb.configs.js`
    ```js
