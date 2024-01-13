@@ -4,6 +4,8 @@ import '../api/api_service.dart';
 import '../config/request_config.dart';
 import '../widgets/doctor_card.dart';
 import '../widgets/top_bar_with_background.dart';
+import '../models/doctor_model.dart';
+import '../screens/doctor_profile.dart';
 
 class BookAppointmentScreen extends StatefulWidget {
   const BookAppointmentScreen({super.key});
@@ -13,7 +15,7 @@ class BookAppointmentScreen extends StatefulWidget {
 }
 
 class BookAppointmentScreenState extends State<BookAppointmentScreen> {
-  late Future<List<Map<String, dynamic>>> doctorsData;
+  late Future<List<Doctor>> doctorsData;
 
   @override
   void initState() {
@@ -21,13 +23,14 @@ class BookAppointmentScreenState extends State<BookAppointmentScreen> {
     doctorsData = _fetchDoctorsData();
   }
 
-  Future<List<Map<String, dynamic>>> _fetchDoctorsData() async {
+  Future<List<Doctor>> _fetchDoctorsData() async {
     var headers = RequestConfig.getHeaders(context);
-
     final apiService =
         ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
     final data = await apiService.fetchData('doctors/');
-    return List<Map<String, dynamic>>.from(data);
+    return (data as List)
+        .map((doctorJson) => Doctor.fromJson(doctorJson))
+        .toList();
   }
 
   @override
@@ -58,7 +61,7 @@ class BookAppointmentScreenState extends State<BookAppointmentScreen> {
             ),
           ),
           Expanded(
-            child: FutureBuilder<List<Map<String, dynamic>>>(
+            child: FutureBuilder<List<Doctor>>(
               future: doctorsData,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
@@ -69,12 +72,18 @@ class BookAppointmentScreenState extends State<BookAppointmentScreen> {
                         itemBuilder: (BuildContext context, int index) {
                           final doctor = snapshot.data![index];
                           return DoctorCard(
-                            name:
-                                '${doctor['firstName']} ${doctor['lastName']}',
-                            specialty: doctor['specialization'],
-                            experience: doctor['yearsOfExperience'],
-                            rating: 4.5,
-                            fee: '€${doctor['appointmentPrice'].toString()}',
+                            doctor: doctor,
+                            rating:
+                                4.5, // Example rating, replace with actual data
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      DoctorProfileScreen(doctor: doctor),
+                                ),
+                              );
+                            },
                           );
                         },
                       ),
