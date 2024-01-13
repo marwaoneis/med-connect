@@ -34,7 +34,7 @@ class DoctorProfileScreen extends StatelessWidget {
           // Timing section
           _buildTimingSection(doctor),
           // Location section with map view
-          _buildLocationSection(doctor),
+          // _buildLocationSection(doctor),
         ],
       ),
     );
