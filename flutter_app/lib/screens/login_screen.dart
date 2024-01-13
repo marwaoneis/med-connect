@@ -286,7 +286,7 @@ class LoginScreenState extends State<LoginScreen> {
                                 side: const BorderSide(color: Colors.grey),
                               ),
                               child: SvgPicture.asset(
-                                'assets/chrome.svg',
+                                'assets/google.svg',
                               ),
                             ),
                             const SizedBox(height: 15),
@@ -294,7 +294,7 @@ class LoginScreenState extends State<LoginScreen> {
                               onPressed: () {},
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF0D4C92),
-                                foregroundColor: Colors.black,
+                                foregroundColor: Colors.white,
                                 minimumSize: const Size(100, 50),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
