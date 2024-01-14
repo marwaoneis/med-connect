@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/symptom_checker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -278,48 +279,68 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
   }
 
   Widget _buildAdditionalButtonsSection() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
+    return Container(
+      alignment: Alignment.centerRight,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          _buildSvgButton('assets/med.svg', 'Add Symptom', context),
-          _buildSvgButton('assets/medicine.svg', 'Add Medication', context),
-          _buildSvgButton('assets/calender.svg', 'Add Appointment', context),
-// Add more buttons as needed
+          _buildSvgButton('assets/med.svg', 'Add Symptom', () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const SymptomCheckerScreen()),
+            );
+          }),
+          _buildSvgButton('assets/medicine.svg', 'Add Medication', () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const MedicalHistoryScreen()),
+            );
+          }),
+          _buildSvgButton('assets/calender.svg', 'Add Appointment', () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const BookAppointmentScreen()),
+            );
+          }),
+          const SizedBox(
+            height: 15,
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildSvgButton(
-      String assetName, String tooltip, BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 8.0),
-      decoration: BoxDecoration(
-        color: const Color(0xFF0D4C92).withOpacity(0.2),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: InkWell(
-        onTap: () {
-// Define what each button does when tapped
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SvgPicture.asset(
+  Widget _buildSvgButton(String assetName, String label, VoidCallback onTap) {
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 8, 20, 0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              label.toUpperCase(),
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(width: 8),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: const Color(0xFF0D4C92).withOpacity(0.2),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: SvgPicture.asset(
                 assetName,
+                width: 35,
               ),
-              const SizedBox(width: 8), // Add space between icon and text
-              Text(
-                tooltip,
-                style: const TextStyle(
-                  color: Colors.white, // Adjust the color as needed
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

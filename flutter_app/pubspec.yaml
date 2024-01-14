@@ -96,6 +96,9 @@ flutter:
     - assets/logout.svg
     - assets/edit.svg
     - assets/print.svg
+    - assets/med.svg
+    - assets/medicine.svg
+    - assets/calender.svg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
