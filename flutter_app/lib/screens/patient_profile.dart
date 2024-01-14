@@ -97,15 +97,29 @@ class PatientProfileScreen extends StatelessWidget {
 
   Widget _buildOption(IconData icon, String title, String subtitle,
       {VoidCallback? onTap}) {
-    return Card(
+    Color iconBackgroundColor = const Color(0xFF0D4C92).withOpacity(0.2);
+    Color iconColor = const Color(0xFF0D4C92);
+
+    return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      elevation: 1,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: Colors.grey.shade400),
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: ListTile(
-        leading: Icon(icon, color: Colors.blue),
+        leading: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: iconBackgroundColor,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Icon(icon, color: iconColor, size: 24),
+        ),
         title: Text(title),
         subtitle: subtitle.isNotEmpty ? Text(subtitle) : null,
-        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+        trailing: const Icon(Icons.arrow_forward_ios,
+            size: 16, color: Color(0xFF0D4C92)),
         onTap: onTap,
       ),
     );
