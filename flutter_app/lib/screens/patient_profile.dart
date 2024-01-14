@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/symptom_checker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../widgets/footer.dart';
@@ -44,26 +45,50 @@ class PatientProfileScreen extends StatelessWidget {
             const SizedBox(height: 20),
             _buildOption("assets/medical.svg", 'Medical History',
                 'Check Your Medical History', onTap: () {
-              // TODO: Add Medical History action
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const MedicalHistoryScreen()),
+              );
             }),
             _buildOption('assets/medicine.svg', 'Medicine & Supplements', '',
                 onTap: () {
-              // TODO: Add Medicine & Supplements action
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const MedicalHistoryScreen()),
+              );
             }),
             _buildOption('assets/weight_scale.svg', 'Weight and Height', '',
                 onTap: () {
-              // TODO: Add Weight and Height action
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const BookAppointmentScreen()),
+              );
             }),
             _buildOption('assets/personal_info.svg', 'Personal Information', '',
                 onTap: () {
-              // TODO: Add Personal Information action
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const BookAppointmentScreen()),
+              );
             }),
             _buildOption('assets/health_safety.svg', 'Symptom Checker', '',
                 onTap: () {
-              // TODO: Add Symptom Checker action
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const SymptomCheckerScreen()),
+              );
             }),
             _buildOption('assets/logout.svg', 'Log Out', '', onTap: () {
-              // TODO: Add Log Out action
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const BookAppointmentScreen()),
+              );
             }),
           ],
         ),
