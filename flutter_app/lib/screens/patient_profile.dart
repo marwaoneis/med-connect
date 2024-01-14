@@ -61,4 +61,37 @@ class PatientProfileScreen extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildProfileCard() {
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      elevation: 3,
+      child: const Padding(
+        padding: EdgeInsets.all(16),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 40,
+              backgroundImage: NetworkImage('https://via.placeholder.com/150'),
+            ),
+            SizedBox(width: 20),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Cooper, Birnard',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text('04/12/1978', style: TextStyle(color: Colors.grey)),
+                  Text('(316) 555-0116', style: TextStyle(color: Colors.grey)),
+                ],
+              ),
+            ),
+            Icon(Icons.edit, color: Colors.blue),
+          ],
+        ),
+      ),
+    );
+  }
 }
