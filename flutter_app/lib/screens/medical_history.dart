@@ -120,18 +120,29 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
       {required String title, required Map<String, dynamic> infoList}) {
     List<Widget> infoWidgets = infoList.entries.map((entry) {
       return ListTile(
-        title: Text(entry.key),
+        title: Text(
+          entry.key,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         subtitle: Text(entry.value.toString()),
       );
     }).toList();
 
     return Card(
+      color: const Color(0xFFE7EEF5),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(title, style: Theme.of(context).textTheme.titleLarge),
+            Center(
+              child: Text(
+                title,
+                style:
+                    const TextStyle(fontSize: 26, fontWeight: FontWeight.w900),
+                textAlign: TextAlign.center,
+              ),
+            ),
             const SizedBox(height: 8),
             ...infoWidgets,
           ],
@@ -152,6 +163,7 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
     }
 
     return Card(
+      color: const Color(0xFFE7EEF5),
       margin: const EdgeInsets.only(top: 16.0),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -182,6 +194,7 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
     }
 
     return Card(
+      color: const Color(0xFFE7EEF5),
       margin: const EdgeInsets.only(top: 16.0),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
