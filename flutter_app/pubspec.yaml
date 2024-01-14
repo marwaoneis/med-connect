@@ -87,6 +87,7 @@ flutter:
     - assets/physiotherapist.svg
     - assets/pharmacy_default.png
     - assets/doctor_image.png
+    - assets/medical.svg
     - assets/medicine.svg
     - assets/weight_scale.svg
     - assets/personal_info.svg
