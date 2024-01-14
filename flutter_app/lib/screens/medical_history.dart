@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/providers/auth_provider.dart'; // Adjust the import path as necessary
-import 'package:flutter_app/api/api_service.dart';
-import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-
+import 'package:provider/provider.dart';
+import '../api/api_service.dart';
 import '../config/request_config.dart';
+import '../providers/auth_provider.dart';
 
 class MedicalHistoryScreen extends StatefulWidget {
   const MedicalHistoryScreen({super.key});
@@ -24,24 +23,30 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
 
   Future<Map<String, dynamic>> _fetchMedicalHistoryData() async {
     var headers = RequestConfig.getHeaders(context);
-    final authProvider = Provider.of<Auth>(context, listen: false);
+
     final apiService =
         ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
+    final authProvider = Provider.of<Auth>(context, listen: false);
     final userId = authProvider.getUserId;
-    try {
-      var response = await apiService.fetchData('patients/$userId');
-      var additionalInfo = response['additionalInfo'] ?? {};
-      return {
-        // other properties
-        'height': additionalInfo['height']?.toString() ?? 'N/A',
-        'weight': additionalInfo['weight']?.toString() ?? 'N/A',
-        // ...
-      };
-    } catch (e) {
-      // Handle exceptions by logging or returning an empty map
-      print('Error fetching medical history data: $e');
-      return {};
-    }
+    var data = await apiService.fetchData('patients/$userId');
+
+    // Ensure that additionalInfo exists and has a non-null value.
+    Map<String, dynamic> additionalInfo = data['additionalInfo'] ?? {};
+
+    return {
+      'firstName': data['firstName'] ?? 'N/A',
+      'lastName': data['lastName'] ?? 'N/A',
+      'gender': data['gender'] ?? 'N/A',
+      'dateOfBirth': data['dateOfBirth'] ?? 'N/A',
+      // Extract other fields from additionalInfo if they exist, otherwise use a default value
+      'height': additionalInfo['height'] ?? 'N/A',
+      'weight': additionalInfo['weight'] ?? 'N/A',
+      'bloodGroup': additionalInfo['bloodGroup'] ?? 'N/A',
+      'vaccinations': additionalInfo['vaccinations'] ?? [],
+      'priorSurgeries': additionalInfo['priorSurgeries'] ?? [],
+      'allergies': additionalInfo['allergies'] ?? [],
+      'emergencyContacts': additionalInfo['emergencyContacts'] ?? [],
+    };
   }
 
   @override
@@ -51,7 +56,6 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
         title: const Text('Medical History'),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        elevation: 0,
         centerTitle: true,
       ),
       body: FutureBuilder<Map<String, dynamic>>(
@@ -59,54 +63,7 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
-              final patientInfo = snapshot.data!;
-              final DateFormat dateFormat = DateFormat('dd/MM/yyyy');
-
-              // Extracting the data from the snapshot
-              final String firstName = patientInfo['firstName'] ?? 'N/A';
-              final String lastName = patientInfo['lastName'] ?? 'N/A';
-              final String gender = patientInfo['gender'] ?? 'N/A';
-              final String dateOfBirth = patientInfo['dateOfBirth'] != null
-                  ? dateFormat
-                      .format(DateTime.parse(patientInfo['dateOfBirth']))
-                  : 'N/A';
-              final String height =
-                  patientInfo['additionalInfo']['height']?.toString() ?? 'N/A';
-              final String weight =
-                  patientInfo['additionalInfo']['weight']?.toString() ?? 'N/A';
-              final String bloodGroup =
-                  patientInfo['additionalInfo']['bloodGroup'] ?? 'N/A';
-              final List vaccinations =
-                  patientInfo['additionalInfo']['vaccinations'] ?? [];
-              final List priorSurgeries =
-                  patientInfo['additionalInfo']['priorSurgeries'] ?? [];
-              final List allergies =
-                  patientInfo['additionalInfo']['allergies'] ?? [];
-              final List emergencyContacts =
-                  patientInfo['additionalInfo']['emergencyContacts'] ?? [];
-
-              return SingleChildScrollView(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildProfileHeader(patientInfo),
-                    const SizedBox(height: 20),
-                    _buildSectionTitle("Vaccinations"),
-                    _buildListSection(vaccinations),
-                    const SizedBox(height: 20),
-                    _buildSectionTitle("Prior Surgeries"),
-                    _buildListSection(priorSurgeries),
-                    const SizedBox(height: 20),
-                    _buildSectionTitle("Allergies"),
-                    _buildListSection(allergies),
-                    const SizedBox(height: 20),
-                    _buildSectionTitle("Emergency Contacts"),
-                    _buildContactSection(emergencyContacts),
-                    // ... Additional sections as needed ...
-                  ],
-                ),
-              );
+              return _buildMedicalHistoryContent(snapshot.data!);
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             }
@@ -117,69 +74,126 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
     );
   }
 
-  Widget _buildProfileHeader(Map<String, dynamic> patientInfo) {
-    final DateFormat dateFormat = DateFormat('dd/MM/yyyy');
+  Widget _buildMedicalHistoryContent(Map<String, dynamic> data) {
+// Format the date of birth if it's not 'N/A'
+    String formattedDateOfBirth = data['dateOfBirth'] != 'N/A'
+        ? DateFormat('dd/MM/yyyy').format(DateTime.parse(data['dateOfBirth']))
+        : 'N/A';
 
-    return Card(
-      child: ListTile(
-        title: Text(
-            '${patientInfo['firstName'] ?? 'N/A'} ${patientInfo['lastName'] ?? 'N/A'}'),
-        subtitle: Column(
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Gender: ${patientInfo['gender'] ?? 'N/A'}'),
-            Text(
-                'Birthday: ${patientInfo['dateOfBirth'] != null ? dateFormat.format(DateTime.parse(patientInfo['dateOfBirth'])) : 'N/A'}'),
-            Text('Height: ${patientInfo['height'] ?? 'N/A'}'),
-            Text('Weight: ${patientInfo['weight'] ?? 'N/A'}'),
-            Text('Blood Group: ${patientInfo['bloodGroup'] ?? 'N/A'}'),
+            _buildInfoSection(
+              title: "${data['firstName']} ${data['lastName']}",
+              infoList: {
+                'Gender': data['gender'],
+                'Birthday': formattedDateOfBirth,
+                'Height': data['height'],
+                'Weight': data['weight'],
+                'Blood Group': data['bloodGroup'],
+              },
+            ),
+            _buildListSection(
+              title: 'Vaccinations',
+              list: data['vaccinations'],
+            ),
+            _buildListSection(
+              title: 'Prior Surgeries',
+              list: data['priorSurgeries'],
+            ),
+            _buildListSection(
+              title: 'Allergies',
+              list: data['allergies'],
+            ),
+            _buildEmergencyContacts(data['emergencyContacts']),
+            // ... Add other sections as necessary
           ],
         ),
-        leading: const CircleAvatar(
-          backgroundImage: AssetImage(
-              'assets/user_avatar.png'), // Replace with actual image path
+      ),
+    );
+  }
+
+  Widget _buildInfoSection(
+      {required String title, required Map<String, dynamic> infoList}) {
+    List<Widget> infoWidgets = infoList.entries.map((entry) {
+      return ListTile(
+        title: Text(entry.key),
+        subtitle: Text(entry.value.toString()),
+      );
+    }).toList();
+
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(title, style: Theme.of(context).textTheme.titleLarge),
+            const SizedBox(height: 8),
+            ...infoWidgets,
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildSectionTitle(String title) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Text(
-        title,
-        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+  Widget _buildListSection(
+      {required String title, required List<dynamic> list}) {
+    List<Widget> listWidgets = list.map((item) {
+      return ListTile(
+          title: Text(item.toString(), style: const TextStyle(fontSize: 16)));
+    }).toList();
+
+    if (listWidgets.isEmpty) {
+      listWidgets = [const ListTile(title: Text('None'))];
+    }
+
+    return Card(
+      margin: const EdgeInsets.only(top: 16.0),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(title, style: Theme.of(context).textTheme.titleLarge),
+            ...listWidgets,
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildListSection(List items) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: items.map((item) {
-// Assuming item is a Map, adjust the code if the structure is different
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
-          child: Text('- ${item['name']} (${item['date']})'),
-        );
-      }).toList(),
-    );
-  }
+  Widget _buildEmergencyContacts(List<dynamic> contacts) {
+    List<Widget> contactWidgets = contacts.map((contact) {
+// Assuming each contact is a Map with name, phone, etc.
+      return ListTile(
+        title: Text(contact['name'] ?? 'N/A'),
+        subtitle: Text(contact['phone'] ?? 'N/A'),
+      );
+    }).toList();
 
-  Widget _buildContactSection(List contacts) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: contacts.map((contact) {
-// Assuming contact is a Map, adjust the code if the structure is different
-        return Card(
-          child: ListTile(
-            title: Text(contact['name']),
-            subtitle:
-                Text('Phone: ${contact['phone']}\nEmail: ${contact['email']}'),
-            leading: const Icon(Icons.person), // Placeholder for contact icon
-          ),
-        );
-      }).toList(),
+    if (contactWidgets.isEmpty) {
+      contactWidgets = [
+        const ListTile(title: Text('No emergency contacts listed'))
+      ];
+    }
+
+    return Card(
+      margin: const EdgeInsets.only(top: 16.0),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text('Emergency Contacts',
+                style: Theme.of(context).textTheme.titleLarge),
+            ...contactWidgets,
+          ],
+        ),
+      ),
     );
   }
 }
