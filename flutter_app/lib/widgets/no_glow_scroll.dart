@@ -17,11 +17,11 @@ class NoGlowScrollWrapper extends StatelessWidget {
 class NoGlowBehaviour extends ScrollBehavior {
   Widget buildViewportChrome(
       BuildContext context, Widget child, AxisDirection axisDirection) {
-    return child; // This removes the glow effect
+    return child;
   }
 
   @override
   ScrollPhysics getScrollPhysics(BuildContext context) {
-    return const ClampingScrollPhysics(); // This should enforce clamping physics
+    return const ClampingScrollPhysics();
   }
 }

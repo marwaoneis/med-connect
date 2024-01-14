@@ -3,9 +3,12 @@ import 'package:flutter_app/widgets/no_glow_scroll.dart';
 import '../api/api_service.dart';
 import '../config/request_config.dart';
 import '../widgets/doctor_card.dart';
+import '../widgets/footer.dart';
 import '../widgets/top_bar_with_background.dart';
 import '../models/doctor_model.dart';
 import '../screens/doctor_profile.dart';
+import 'message_screen.dart';
+import 'patient_screen.dart';
 
 class BookAppointmentScreen extends StatefulWidget {
   const BookAppointmentScreen({super.key});
@@ -98,6 +101,33 @@ class BookAppointmentScreenState extends State<BookAppointmentScreen> {
           ),
           const SizedBox(height: 5)
         ],
+      ),
+      bottomNavigationBar: Footer(
+        onHomeTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const PatientScreen()),
+          );
+        },
+        onAppointmentTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const BookAppointmentScreen()),
+          );
+        },
+        onChatTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const MessageScreen()),
+          );
+        },
+        onProfileTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const MessageScreen()),
+          );
+        },
       ),
     );
   }

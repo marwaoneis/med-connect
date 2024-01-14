@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/patient_appointments.dart';
 import 'package:flutter_app/widgets/top_bar_with_background.dart';
 import '../config/request_config.dart';
 import '../widgets/dashboard_menu.dart';
@@ -115,7 +116,7 @@ class PatientScreenState extends State<PatientScreen> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const PatientScreen()),
+                        builder: (context) => const BookAppointmentScreen()),
                   );
                 },
                 onChatTap: () {

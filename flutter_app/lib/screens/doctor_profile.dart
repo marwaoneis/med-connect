@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../models/doctor_model.dart';
+import '../widgets/no_glow_scroll.dart';
 
 class DoctorProfileScreen extends StatelessWidget {
   final Doctor doctor;
@@ -25,17 +26,19 @@ class DoctorProfileScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: ListView(
-        children: [
-          // Doctor details card
-          _buildDoctorDetailsCard(doctor),
-          // Availability section
-          _buildAvailabilitySection(doctor),
-          // Timing section
-          _buildTimingSection(doctor),
-          // Location section with map view
-          // _buildLocationSection(doctor),
-        ],
+      body: NoGlowScrollWrapper(
+        child: ListView(
+          children: [
+            // Doctor details card
+            _buildDoctorDetailsCard(doctor),
+            // Availability section
+            _buildAvailabilitySection(doctor),
+            // Timing section
+            _buildTimingSection(doctor),
+            // Location section with map view
+            // _buildLocationSection(doctor),
+          ],
+        ),
       ),
     );
   }

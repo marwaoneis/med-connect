@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'patient_appointments.dart';
+import '../widgets/footer.dart';
+import 'message_screen.dart';
+import 'patient_screen.dart';
 
 class SymptomCheckerScreen extends StatefulWidget {
   const SymptomCheckerScreen({super.key});
@@ -108,6 +112,33 @@ class SymptomCheckerScreenState extends State<SymptomCheckerScreen> {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: Footer(
+        onHomeTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const PatientScreen()),
+          );
+        },
+        onAppointmentTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const BookAppointmentScreen()),
+          );
+        },
+        onChatTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const MessageScreen()),
+          );
+        },
+        onProfileTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const MessageScreen()),
+          );
+        },
       ),
     );
   }
