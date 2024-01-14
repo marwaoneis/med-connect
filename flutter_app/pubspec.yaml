@@ -41,7 +41,6 @@ dependencies:
   firebase_core: ^2.24.2
   cloud_firestore: ^4.14.0
   firebase_storage: ^11.6.0
-  font_awesome_flutter: ^10.6.0
 
 dev_dependencies:
   flutter_test:
@@ -88,6 +87,11 @@ flutter:
     - assets/physiotherapist.svg
     - assets/pharmacy_default.png
     - assets/doctor_image.png
+    - assets/medicine.svg
+    - assets/weight_scale.svg
+    - assets/personal_info.svg
+    - assets/health_safety.svg
+    - assets/logout.svg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
