@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/patient_profile.dart';
 import 'package:flutter_app/widgets/no_glow_scroll.dart';
 import '../api/api_service.dart';
 import '../config/request_config.dart';
@@ -125,7 +126,8 @@ class BookAppointmentScreenState extends State<BookAppointmentScreen> {
         onProfileTap: () {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const MessageScreen()),
+            MaterialPageRoute(
+                builder: (context) => const PatientProfileScreen()),
           );
         },
       ),

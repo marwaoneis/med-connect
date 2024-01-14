@@ -18,7 +18,7 @@ class PatientProfileScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         actions: [
           IconButton(
-            icon: const Icon(Icons.edit, color: Colors.blue),
+            icon: const Icon(Icons.email_outlined, color: Color(0xFF0D4C92)),
             onPressed: () {
               // TODO: Add edit profile action
             },
@@ -88,7 +88,7 @@ class PatientProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Icon(Icons.edit, color: Colors.blue),
+            Icon(Icons.edit, color: Color(0xFF0D4C92)),
           ],
         ),
       ),

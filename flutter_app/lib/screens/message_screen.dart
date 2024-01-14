@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/login_screen.dart';
+import 'package:flutter_app/screens/patient_profile.dart';
 import 'package:flutter_app/screens/patient_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/search_bar.dart';
@@ -42,7 +43,8 @@ class MessageScreen extends StatelessWidget {
         onProfileTap: () {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const MessageScreen()),
+            MaterialPageRoute(
+                builder: (context) => const PatientProfileScreen()),
           );
         },
       ),

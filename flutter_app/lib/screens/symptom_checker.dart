@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/patient_profile.dart';
 import 'patient_appointments.dart';
 import '../widgets/footer.dart';
 import 'message_screen.dart';
@@ -136,7 +137,8 @@ class SymptomCheckerScreenState extends State<SymptomCheckerScreen> {
         onProfileTap: () {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const MessageScreen()),
+            MaterialPageRoute(
+                builder: (context) => const PatientProfileScreen()),
           );
         },
       ),
