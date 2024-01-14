@@ -37,11 +37,24 @@ class SymptomCheckerScreenState extends State<SymptomCheckerScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Tell us your Symptoms',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+                  const Center(
+                    child: Text(
+                      'Tell us your Symptoms',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  const Center(
+                    child: Text(
+                      'By just typing it below, We will suggest the best solution or doctor for you.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16, // Smaller font size
+                      ),
                     ),
                   ),
                   const SizedBox(height: 10),
