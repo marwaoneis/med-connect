@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../api/api_service.dart';
@@ -38,6 +39,12 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
 
     Map<String, dynamic> additionalInfo = data['additionalInfo'] ?? {};
 
+    dynamic ensureList(dynamic item) {
+      if (item == null) return [];
+      if (item is String) return [item];
+      return item;
+    }
+
     return {
       'firstName': data['firstName'] ?? 'N/A',
       'lastName': data['lastName'] ?? 'N/A',
@@ -46,10 +53,10 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
       'height': additionalInfo['height'] ?? 'N/A',
       'weight': additionalInfo['weight'] ?? 'N/A',
       'bloodGroup': additionalInfo['bloodGroup'] ?? 'N/A',
-      'vaccinations': additionalInfo['vaccinations'] ?? [],
-      'priorSurgeries': additionalInfo['priorSurgeries'] ?? [],
-      'allergies': additionalInfo['allergies'] ?? [],
-      'emergencyContacts': additionalInfo['emergencyContacts'] ?? [],
+      'vaccinations': ensureList(additionalInfo['vaccinations']),
+      'priorSurgeries': ensureList(additionalInfo['priorSurgeries']),
+      'allergies': ensureList(additionalInfo['allergies']),
+      'emergencyContacts': ensureList(additionalInfo['emergencyContacts']),
     };
   }
 
@@ -121,6 +128,11 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
       'Blood Group': data['bloodGroup'],
     };
 
+    // print('vaccinations type: ${data['vaccinations'].runtimeType}');
+    // print('priorSurgeries type: ${data['priorSurgeries'].runtimeType}');
+    // print('allergies type: ${data['allergies'].runtimeType}');
+    // print('emergencyContacts type: ${data['emergencyContacts'].runtimeType}');
+
     List<Widget> infoWidgets = infoList.entries.map((entry) {
       return ListTile(
         title: Text(
@@ -140,42 +152,70 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Card(
-          color: const Color(0xFFE7EEF5),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Center(
-                  child: Text(
-                    "${data['firstName']} ${data['lastName']}",
-                    style: const TextStyle(
-                        fontSize: 26, fontWeight: FontWeight.w900),
-                    textAlign: TextAlign.center,
-                  ),
+        child: Stack(
+          children: [
+            Card(
+              color: const Color(0xFFE7EEF5),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Center(
+                      child: Text(
+                        "${data['firstName']} ${data['lastName']}",
+                        style: const TextStyle(
+                            fontSize: 26, fontWeight: FontWeight.w900),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    const Divider(height: 24, thickness: 1),
+                    ...infoWidgets,
+                    _buildSectionDivider(),
+                    const Text(
+                      'Vaccinations',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    ...vaccinationWidgets,
+                    _buildSectionDivider(),
+                    const Text(
+                      'Prior Surgeries',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    ...surgeryWidgets,
+                    _buildSectionDivider(),
+                    const Text(
+                      'Allergies',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    ...allergyWidgets,
+                    _buildSectionDivider(),
+                    const Text(
+                      'Emergency Contacts',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    ...emergencyContactWidgets,
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          _buildSvgIconButton(
+                              'assets/edit.svg', 'Edit', context),
+                          _buildSvgIconButton(
+                              'assets/print.svg', 'Print', context),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                const Divider(height: 24, thickness: 1),
-                ...infoWidgets,
-                _buildSectionDivider(),
-                Text('Vaccinations',
-                    style: Theme.of(context).textTheme.titleLarge),
-                ...vaccinationWidgets,
-                _buildSectionDivider(),
-                Text('Prior Surgeries',
-                    style: Theme.of(context).textTheme.titleLarge),
-                ...surgeryWidgets,
-                _buildSectionDivider(),
-                Text('Allergies',
-                    style: Theme.of(context).textTheme.titleLarge),
-                ...allergyWidgets,
-                _buildSectionDivider(),
-                Text('Emergency Contacts',
-                    style: Theme.of(context).textTheme.titleLarge),
-                ...emergencyContactWidgets,
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
@@ -190,6 +230,9 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
   }
 
   List<Widget> _createEmergencyContactWidgets(List<dynamic> contacts) {
+    if (contacts.any((contact) => contact is! Map)) {
+      return [const ListTile(title: Text('Invalid emergency contact data'))];
+    }
     return contacts.map((contact) {
       return ListTile(
         title: Text(contact['name'] ?? 'N/A'),
@@ -202,6 +245,24 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
     return const Padding(
       padding: EdgeInsets.symmetric(vertical: 8.0),
       child: Divider(height: 1, thickness: 1),
+    );
+  }
+
+  Widget _buildSvgIconButton(
+      String assetName, String tooltip, BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0D4C92).withOpacity(0.2),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: IconButton(
+        onPressed: () {},
+        tooltip: tooltip,
+        icon: SvgPicture.asset(
+          assetName,
+        ),
+      ),
     );
   }
 }
