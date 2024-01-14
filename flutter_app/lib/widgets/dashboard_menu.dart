@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../screens/patient_appointments.dart';
+import '../screens/symptom_checker.dart';
 
 class DashboardMenu extends StatelessWidget {
   DashboardMenu({super.key});
@@ -33,8 +34,7 @@ class DashboardMenu extends StatelessWidget {
       onTap: (BuildContext context) {
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) => const BookAppointmentScreen()),
+          MaterialPageRoute(builder: (context) => const SymptomCheckerScreen()),
         );
       },
     ),

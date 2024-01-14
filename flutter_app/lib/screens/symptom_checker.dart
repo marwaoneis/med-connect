@@ -24,7 +24,7 @@ class SymptomCheckerScreenState extends State<SymptomCheckerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Symptom Checker'),
+        title: const Text('Symptom Checker'),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
@@ -33,18 +33,18 @@ class SymptomCheckerScreenState extends State<SymptomCheckerScreen> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Tell us your Symptoms',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   TextField(
                     onChanged: (value) {
                       _inputText = value;
@@ -52,37 +52,37 @@ class SymptomCheckerScreenState extends State<SymptomCheckerScreen> {
                     decoration: InputDecoration(
                       hintText: 'Type your symptoms here',
                       suffixIcon: IconButton(
-                        icon: Icon(Icons.search),
+                        icon: const Icon(Icons.search),
                         onPressed: _inputText.isNotEmpty ? _onSearch : null,
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      fillColor: Color(0xFFE5E5E5),
+                      fillColor: const Color(0xFFE5E5E5),
                       filled: true,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   if (_showResult) ...[
-                    Text(
+                    const Text(
                       'Possible Reason',
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                     ),
-                    SizedBox(height: 10),
-                    Text(
-                      // Your possible reason text goes here
+                    const SizedBox(height: 10),
+                    const Text(
+                      "Possible Reason",
                       style: TextStyle(fontSize: 16),
                     ),
-                    SizedBox(height: 20),
-                    Text(
+                    const SizedBox(height: 20),
+                    const Text(
                       'Recommended',
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                     ),
-                    SizedBox(height: 10),
-                    Text(
-                      // Your recommendations text goes here
+                    const SizedBox(height: 10),
+                    const Text(
+                      "Recommendations",
                       style: TextStyle(fontSize: 16),
                     ),
                   ],
