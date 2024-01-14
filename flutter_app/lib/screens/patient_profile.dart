@@ -94,4 +94,20 @@ class PatientProfileScreen extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildOption(IconData icon, String title, String subtitle,
+      {VoidCallback? onTap}) {
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      elevation: 1,
+      child: ListTile(
+        leading: Icon(icon, color: Colors.blue),
+        title: Text(title),
+        subtitle: subtitle.isNotEmpty ? Text(subtitle) : null,
+        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+        onTap: onTap,
+      ),
+    );
+  }
 }
