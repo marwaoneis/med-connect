@@ -99,7 +99,7 @@ class DoctorCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      doctor.appointmentPrice as String,
+                      '\$${doctor.appointmentPrice.toString()}',
                       style: const TextStyle(
                         fontWeight: FontWeight.w900,
                         fontSize: 20,
