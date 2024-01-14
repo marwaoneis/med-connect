@@ -75,7 +75,18 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
-                return _buildMedicalHistoryContent(snapshot.data!);
+                return Column(
+                  children: [
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          _buildMedicalHistoryContent(snapshot.data!),
+                          _buildAdditionalButtonsSection(),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
               } else if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
               }
@@ -261,6 +272,54 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
         tooltip: tooltip,
         icon: SvgPicture.asset(
           assetName,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAdditionalButtonsSection() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      child: Column(
+        children: [
+          _buildSvgButton('assets/med.svg', 'Add Symptom', context),
+          _buildSvgButton('assets/medicine.svg', 'Add Medication', context),
+          _buildSvgButton('assets/calender.svg', 'Add Appointment', context),
+// Add more buttons as needed
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSvgButton(
+      String assetName, String tooltip, BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 8.0),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0D4C92).withOpacity(0.2),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: InkWell(
+        onTap: () {
+// Define what each button does when tapped
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SvgPicture.asset(
+                assetName,
+              ),
+              const SizedBox(width: 8), // Add space between icon and text
+              Text(
+                tooltip,
+                style: const TextStyle(
+                  color: Colors.white, // Adjust the color as needed
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
