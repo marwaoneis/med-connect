@@ -52,28 +52,28 @@ class DoctorProfileScreen extends StatelessWidget {
           children: [
             Text(
               'Dr. ${doctor.firstName} ${doctor.lastName}',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               doctor.specialization,
-              style: TextStyle(fontSize: 18, color: Colors.grey),
+              style: const TextStyle(fontSize: 18, color: Colors.grey),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Years of Experience'),
+                    const Text('Years of Experience'),
                     Text('${doctor.yearsOfExperience} years'),
                   ],
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Appointment Price'),
+                    const Text('Appointment Price'),
                     Text('\$${doctor.appointmentPrice}'),
                   ],
                 ),
@@ -92,27 +92,29 @@ class DoctorProfileScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
+        const Padding(
+          padding: EdgeInsets.all(16.0),
           child: Text('Available Slots', style: TextStyle(fontSize: 18)),
         ),
-        Wrap(
-          spacing: 8.0,
-          children: availability
-              .map((slot) => Chip(
-                    label: Text(slot),
-                    backgroundColor: Colors.blue[100],
-                  ))
-              .toList(),
-        ),
+        Center(
+          child: Wrap(
+            spacing: 8.0,
+            children: availability
+                .map((slot) => Chip(
+                      label: Text(slot),
+                      backgroundColor: Colors.blue[100],
+                    ))
+                .toList(),
+          ),
+        )
       ],
     );
   }
 
   Widget _buildTimingSection(Doctor doctor) {
     // Placeholder for timing data
-    final timing = 'Monday: 09:00 AM - 05:00 PM';
-    return ListTile(
+    const timing = 'Monday: 09:00 AM - 05:00 PM';
+    return const ListTile(
       title: Text('Timing'),
       subtitle: Text(timing),
     );
