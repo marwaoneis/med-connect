@@ -37,39 +37,43 @@ class SymptomCheckerScreenState extends State<SymptomCheckerScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
                   const Center(
                     child: Text(
                       'Tell us your Symptoms',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 28,
+                        fontWeight: FontWeight.w900,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  const Center(
-                    child: Text(
-                      'By just typing it below, We will suggest the best solution or doctor for you.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16, // Smaller font size
-                      ),
-                    ),
+                  const SizedBox(height: 15),
+                  const Text(
+                    'By just typing it below, We will suggest the best solution or doctor for you.',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 15),
                   TextField(
                     onChanged: (value) {
                       _inputText = value;
                     },
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    minLines: 1,
                     decoration: InputDecoration(
                       hintText: 'Type your symptoms here',
                       suffixIcon: IconButton(
-                        icon: const Icon(Icons.search),
+                        icon: const Icon(
+                          Icons.search,
+                          size: 30,
+                        ),
                         onPressed: _inputText.isNotEmpty ? _onSearch : null,
                       ),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       fillColor: const Color(0xFFE5E5E5),
                       filled: true,
