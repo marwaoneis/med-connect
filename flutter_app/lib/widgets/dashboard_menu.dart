@@ -56,7 +56,11 @@ class DashboardMenu extends StatelessWidget {
       title: 'Consultations',
       imagePath: 'assets/consultations.png',
       onTap: (BuildContext context) {
-        // Navigate to the Symptom Checker page
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const BookAppointmentScreen()),
+        );
       },
     ),
   ];
