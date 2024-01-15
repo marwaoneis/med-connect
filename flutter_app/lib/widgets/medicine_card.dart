@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../models/medicine_model.dart';
+import '../screens/medicine_info.dart';
 
 class MedicineCard extends StatelessWidget {
   final Medicine medicine;
@@ -94,7 +95,18 @@ class MedicineCard extends StatelessWidget {
                       backgroundColor:
                           const Color(0xFF0D4C92), // Background color
                     ),
-                    onPressed: onTap,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MedicineInfoScreen(
+                            medicineDetails: medicine.medicineDetails[0],
+                            pharmacyName: pharmacyName,
+                            price: medicine.price,
+                          ),
+                        ),
+                      );
+                    },
                     child: const Text('Buy',
                         style: TextStyle(color: Colors.white)),
                   ),
