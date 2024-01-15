@@ -28,6 +28,9 @@ class BuyMedicineScreenState extends State<BuyMedicineScreen> {
     medicinesData = _fetchMedicinesData();
   }
 
+  String capitalize(String s) =>
+      s.isNotEmpty ? s[0].toUpperCase() + s.substring(1) : s;
+
   Future<List<Medicine>> _fetchMedicinesData() async {
     var headers = RequestConfig.getHeaders(context);
 
@@ -95,7 +98,8 @@ class BuyMedicineScreenState extends State<BuyMedicineScreen> {
                                   pharmacySnapshot.hasData) {
                                 return MedicineCard(
                                   medicine: medicine,
-                                  pharmacyName: pharmacySnapshot.data!.username,
+                                  pharmacyName: capitalize(
+                                      pharmacySnapshot.data!.username),
                                   onTap: () {
                                     // Handle the tap event
                                   },

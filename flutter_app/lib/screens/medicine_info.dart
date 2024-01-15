@@ -26,83 +26,124 @@ class MedicineInfoScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 150,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(coverImageUrl),
-                fit: BoxFit.cover,
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius:
+                  BorderRadius.circular(10.0), // Border radius for cover image
+              child: Container(
+                height: 150,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(coverImageUrl),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  medicineDetails.name,
-                  style: const TextStyle(
-                    fontSize: 23,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  pharmacyName,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.grey,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'Group: ${medicineDetails.group}',
-                  style: const TextStyle(fontSize: 18),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Uses: ${medicineDetails.description}',
-                  style: const TextStyle(fontSize: 18),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Side Effects: ${medicineDetails.sideEffects}',
-                  style: const TextStyle(fontSize: 18),
-                ),
-                const SizedBox(height: 16),
-                const Divider(),
-                Text(
-                  'Price: \$${price.toStringAsFixed(2)}',
-                  style: const TextStyle(
-                      fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 20),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-// Implement the buy action
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context)
-                          .colorScheme
-                          .secondary, // Use the secondary color of the theme, or choose your own
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 32.0, vertical: 12.0),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      medicineDetails.name,
+                      style: const TextStyle(
+                        fontSize: 23,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    child: const Text(
-                      'Buy Now',
-                      style: TextStyle(fontSize: 20),
+                    const SizedBox(height: 5),
+                    Text(
+                      pharmacyName,
+                      style: const TextStyle(
+                          fontSize: 23,
+                          color: Color(0xFF7E7E7E),
+                          fontWeight: FontWeight.bold),
                     ),
-                  ),
+                    const SizedBox(height: 10),
+                    const Divider(),
+                    const SizedBox(height: 16),
+                    const Text(
+                      'Group:',
+                      style: TextStyle(
+                          color: Color(0xFF7E7E7E),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      medicineDetails.group,
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(height: 15),
+                    const Text(
+                      'Uses:',
+                      style: TextStyle(
+                          color: Color(0xFF7E7E7E),
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      medicineDetails.description,
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(height: 15),
+                    const Text(
+                      'Side Effects:',
+                      style: TextStyle(
+                          color: Color(0xFF7E7E7E),
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      medicineDetails.sideEffects,
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(height: 16),
+                    const Divider(),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '\$${price.toStringAsFixed(2)}',
+                          style: const TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.w900),
+                        ),
+                        const SizedBox(height: 20),
+                        Center(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              // Implement the buy action
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF0D4C92),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 32.0, vertical: 12.0),
+                            ),
+                            child: const Text(
+                              'Add to Cart',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
