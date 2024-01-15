@@ -17,7 +17,7 @@ class MedicineCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imageUrl = "assets/medicine_img.png";
+    const imageUrl = "assets/medicine_img.png";
 
     final medicineDetail = medicine.medicineDetails.isNotEmpty
         ? medicine.medicineDetails.first

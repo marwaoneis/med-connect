@@ -97,18 +97,7 @@ class BuyMedicineScreenState extends State<BuyMedicineScreen> {
                                   medicine: medicine,
                                   pharmacyName: pharmacySnapshot.data!.username,
                                   onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            MedicineInfoScreen(
-                                          medicineDetails:
-                                              medicine.medicineDetails[0],
-                                          pharmacyName: pharmacyName,
-                                          price: medicine.price,
-                                        ),
-                                      ),
-                                    );
+                                    // Handle the tap event
                                   },
                                 );
                               } else if (pharmacySnapshot.hasError) {
