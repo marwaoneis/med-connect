@@ -11,6 +11,16 @@ const createMedicine = async (req, res) => {
   }
 };
 
+// Get all medicines
+const getAllMedicines = async (req, res) => {
+  try {
+    const medicines = await Medicine.find({});
+    res.status(200).json(medicines);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 // Get all medicines by pharmacyId
 const getMedicinesByPharmacyId = async (req, res) => {
   try {
@@ -70,6 +80,7 @@ const deleteMedicineById = async (req, res) => {
 
 module.exports = {
   createMedicine,
+  getAllMedicines,
   getMedicineById,
   updateMedicineById,
   deleteMedicineById,
