@@ -16,7 +16,7 @@ class MedicineCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imageUrl = "assets/medicine_img.svg";
+    final imageUrl = "assets/medicine_img.png";
 
     final medicineDetail = medicine.medicineDetails.isNotEmpty
         ? medicine.medicineDetails.first
@@ -43,11 +43,11 @@ class MedicineCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Medicine Image
-                  SvgPicture.asset(
+                  Image.asset(
                     imageUrl,
                     fit: BoxFit.cover,
-                    width: 50.0,
-                    height: 50.0,
+                    // width: 50.0,
+                    // height: 50.0,
                   ),
                   const SizedBox(width: 10),
                   // Medicine Details
