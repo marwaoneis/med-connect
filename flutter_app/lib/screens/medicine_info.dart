@@ -181,7 +181,17 @@ class MedicineInfoScreenState extends State<MedicineInfoScreen> {
                         Center(
                           child: ElevatedButton(
                             onPressed: () {
-                              // Implement the buy action
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MyCartScreen(
+                                    medicineDetails: widget.medicineDetails,
+                                    pharmacyName: widget.pharmacyName,
+                                    price: widget.price,
+                                    quantity: quantity,
+                                  ),
+                                ),
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF0D4C92),
