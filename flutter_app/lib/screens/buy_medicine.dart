@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import '../config/request_config.dart';
 import '../models/pharmacy_model.dart';
+import '../widgets/footer.dart';
 import '../widgets/medicine_card.dart';
 import '../models/medicine_model.dart';
 import '../api/api_service.dart';
 import '../widgets/no_glow_scroll.dart';
 import '../widgets/top_bar_with_background.dart';
+import 'message_screen.dart';
+import 'patient_appointments.dart';
+import 'patient_profile.dart';
+import 'patient_screen.dart';
 
 class BuyMedicineScreen extends StatefulWidget {
   const BuyMedicineScreen({super.key});
@@ -113,6 +118,34 @@ class BuyMedicineScreenState extends State<BuyMedicineScreen> {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: Footer(
+        onHomeTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const PatientScreen()),
+          );
+        },
+        onAppointmentTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const BookAppointmentScreen()),
+          );
+        },
+        onChatTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const MessageScreen()),
+          );
+        },
+        onProfileTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const PatientProfileScreen()),
+          );
+        },
       ),
     );
   }
