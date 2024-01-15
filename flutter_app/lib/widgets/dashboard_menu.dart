@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/buy_medicine.dart';
 import '../screens/patient_appointments.dart';
 import '../screens/symptom_checker.dart';
 
@@ -42,7 +43,10 @@ class DashboardMenu extends StatelessWidget {
       title: 'Medicines',
       imagePath: 'assets/medicines.png',
       onTap: (BuildContext context) {
-        // Navigate to the Symptom Checker page
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const BuyMedicineScreen()),
+        );
       },
     ),
     GridItem(
