@@ -44,7 +44,7 @@ class BookAppointmentScreenState extends State<BookAppointmentScreen> {
         children: <Widget>[
           TopBarWithBackground(
             leadingContent: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black),
+              icon: const Icon(Icons.arrow_back, color: Colors.white),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -54,11 +54,11 @@ class BookAppointmentScreenState extends State<BookAppointmentScreen> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: Colors.white,
               ),
             ),
             trailingContent: IconButton(
-              icon: const Icon(Icons.filter_list, color: Colors.black),
+              icon: const Icon(Icons.filter_list, color: Colors.white),
               onPressed: () {
                 // TODO: Sort action
               },
