@@ -67,16 +67,24 @@ class PatientScreenState extends State<PatientScreen> {
                 children: <Widget>[
                   TopBarWithBackground(
                     leadingContent: CircleAvatar(
-                      backgroundColor: Colors.grey[200],
-                      child: Text(firstName[0]),
+                      // backgroundColor: Colors.grey[200],
+                      child: Text(
+                        firstName[0],
+                        style: const TextStyle(color: Color(0xFF0D4C92)),
+                      ),
                     ),
                     titleContent: Text(
                       '$firstName, $address',
                       style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
+                          fontSize: 20,
+                          // fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     ),
                     trailingContent: IconButton(
-                      icon: SvgPicture.asset('assets/notification_icon.svg'),
+                      icon: SvgPicture.asset(
+                        'assets/notification_icon.svg',
+                        color: Colors.white,
+                      ),
                       onPressed: () {},
                     ),
                   ),

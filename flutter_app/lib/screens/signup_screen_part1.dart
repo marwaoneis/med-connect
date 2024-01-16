@@ -19,6 +19,7 @@ class SignUpScreenPart1State extends State<SignUpScreenPart1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: const Color(0xFFC7D3E1),
       body: SafeArea(
         child: SingleChildScrollView(

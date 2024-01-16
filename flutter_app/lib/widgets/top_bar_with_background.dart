@@ -31,7 +31,6 @@ class TopBarWithBackground extends StatelessWidget {
           children: [
             const SizedBox(height: 50),
             Container(
-              color: Colors.white.withOpacity(0.9),
               height: 45,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
