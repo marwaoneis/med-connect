@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/medicine_model.dart';
+import 'checkout_screen.dart';
 
 class MyCartScreen extends StatelessWidget {
   final MedicineDetails medicineDetails;
@@ -156,7 +157,20 @@ class MyCartScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    // Implement the checkout action
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CheckoutScreen(
+                          medicineDetails: medicineDetails,
+                          pharmacyName: pharmacyName,
+                          price: price,
+                          quantity: quantity,
+                          subtotal: subtotal,
+                          shipping: shipping,
+                          total: total,
+                        ),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF0D4C92),
