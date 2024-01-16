@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/doctor_appointment_card.dart';
 
 class DoctorScreen extends StatelessWidget {
   const DoctorScreen({super.key});
@@ -7,25 +8,32 @@ class DoctorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Doctor Dashboard'),
+        title: const Text('Doctor Screen'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.view_list),
+            onPressed: () {
+              // Implement view all action
+            },
+          ),
+        ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'Welcome, Doctor!',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const SizedBox(height: 20),
-            Text(
-              'Appointments',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            // list upcoming appointments, etc.
-          ],
-        ),
+      body: ListView(
+        children: const [
+          AppointmentCard(
+            name: 'Patient Name',
+            details: 'Age, Gender, Date, Time of request',
+            status: 'Confirmed',
+            statusColor: Colors.green,
+          ),
+          AppointmentCard(
+            name: 'Patient Name',
+            details: 'Age, Gender, Date, Time of request',
+            status: 'Declined',
+            statusColor: Colors.red,
+          ),
+          // Add more appointment cards...
+        ],
       ),
     );
   }

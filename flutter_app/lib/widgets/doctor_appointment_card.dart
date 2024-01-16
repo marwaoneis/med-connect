@@ -19,7 +19,6 @@ class AppointmentCard extends StatelessWidget {
     return Card(
       child: ListTile(
         leading: const CircleAvatar(
-          // Placeholder for patient image
           child: Icon(Icons.person),
         ),
         title: Text(name),
@@ -32,7 +31,6 @@ class AppointmentCard extends StatelessWidget {
             ] else if (status == 'Declined') ...[
               Icon(Icons.close, color: statusColor),
             ],
-            // Add more conditions for different statuses if needed
           ],
         ),
       ),
