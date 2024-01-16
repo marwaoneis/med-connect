@@ -87,6 +87,7 @@ class SignUpScreenPart2State extends State<SignUpScreenPart2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: const Color(0xFFC7D3E1),
       body: Stack(
         children: [
