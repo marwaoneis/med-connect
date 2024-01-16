@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/patient_screen.dart';
 import '../models/medicine_model.dart';
 
 class CheckoutScreen extends StatelessWidget {
@@ -151,7 +152,14 @@ class CheckoutScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   Center(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const PatientScreen(),
+                          ),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF0D4C92),
                         padding: const EdgeInsets.symmetric(
