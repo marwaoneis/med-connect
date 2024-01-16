@@ -59,50 +59,107 @@ class MyCartScreen extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            // Subtotal, Shipping, and Total
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('Subtotal'),
-                Text('\$${subtotal.toStringAsFixed(2)}'),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('Shipping'),
-                Text('\$${shipping.toStringAsFixed(2)}'),
-              ],
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Payment Method'),
-                Text('Cash'),
-              ],
-            ),
-            const Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('Total Amount'),
-                Text('\$${total.toStringAsFixed(2)}'),
-              ],
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Implement the checkout action
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
-                textStyle: const TextStyle(fontSize: 18),
-              ),
-              child: const Text('Checkout'),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(35),
+            topRight: Radius.circular(35),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 0,
+              blurRadius: 15,
+              offset: const Offset(0, -10), // changes position of shadow
             ),
           ],
+        ),
+        child: IntrinsicHeight(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Subtotal',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+                    ),
+                    Text(
+                      '\$${subtotal.toStringAsFixed(2)}',
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.w900),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Shipping',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w900)),
+                    Text(
+                      '\$${shipping.toStringAsFixed(2)}',
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.w900),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Payment Method',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w900)),
+                    Text(
+                      'Cash',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                const Divider(height: 30, thickness: 2),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Total Amount',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w900)),
+                    Text(
+                      '\$${total.toStringAsFixed(2)}',
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.w900),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    // Implement the checkout action
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF0D4C92),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 100, vertical: 15),
+                    textStyle:
+                        const TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                  child: const Text('Checkout',
+                      style: TextStyle(color: Colors.white)),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
