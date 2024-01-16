@@ -31,7 +31,15 @@ class MyCartScreen extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            Card(
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(
+                  color: Colors.grey,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(15), // Border radius
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Row(
@@ -48,8 +56,11 @@ class MyCartScreen extends StatelessWidget {
                           Text(medicineDetails.name,
                               style: const TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold)),
+                          const SizedBox(height: 10),
                           Text(pharmacyName),
+                          const SizedBox(height: 5),
                           Text('Amount: $quantity'),
+                          const SizedBox(height: 5),
                           Text('\$${price.toStringAsFixed(2)}'),
                         ],
                       ),
