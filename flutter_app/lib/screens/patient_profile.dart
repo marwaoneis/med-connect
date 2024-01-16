@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/buy_medicine.dart';
+import 'package:flutter_app/screens/login_screen.dart';
 import 'package:flutter_app/screens/medical_history.dart';
 import 'package:flutter_app/screens/symptom_checker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/auth_provider.dart';
 import '../widgets/footer.dart';
 import 'message_screen.dart';
 import 'patient_appointments.dart';
@@ -57,7 +61,7 @@ class PatientProfileScreen extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const MedicalHistoryScreen()),
+                    builder: (context) => const BuyMedicineScreen()),
               );
             }),
             _buildOption('assets/weight_scale.svg', 'Weight and Height', '',
@@ -84,12 +88,31 @@ class PatientProfileScreen extends StatelessWidget {
                     builder: (context) => const SymptomCheckerScreen()),
               );
             }),
-            _buildOption('assets/logout.svg', 'Log Out', '', onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const BookAppointmentScreen()),
-              );
+            _buildOption('assets/logout.svg', 'Log Out', '', onTap: () async {
+              final authProvider = Provider.of<Auth>(context, listen: false);
+              await authProvider.logout().then((_) {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                  (Route<dynamic> route) => false,
+                );
+              }).catchError((error) {
+                showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: const Text('Logout Failed'),
+                    content: Text('An error occurred: $error'),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text('Okay'),
+                        onPressed: () {
+                          Navigator.of(ctx).pop(); // Dismiss the dialog
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              });
             }),
           ],
         ),

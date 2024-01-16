@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_app/screens/symptom_checker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -78,7 +76,6 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
                       child: ListView(
                         children: [
                           _buildMedicalHistoryContent(snapshot.data!),
-                          _buildAdditionalButtonsSection(),
                         ],
                       ),
                     ),
@@ -269,74 +266,6 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
         tooltip: tooltip,
         icon: SvgPicture.asset(
           assetName,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAdditionalButtonsSection() {
-    return Container(
-      alignment: Alignment.centerRight,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          _buildSvgButton('assets/med.svg', 'Add Symptom', () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const SymptomCheckerScreen()),
-            );
-          }),
-          _buildSvgButton('assets/medicine.svg', 'Add Medication', () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const MedicalHistoryScreen()),
-            );
-          }),
-          _buildSvgButton('assets/calender.svg', 'Add Appointment', () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const BookAppointmentScreen()),
-            );
-          }),
-          const SizedBox(
-            height: 15,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSvgButton(String assetName, String label, VoidCallback onTap) {
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 8, 20, 0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Text(
-              label.toUpperCase(),
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(width: 8),
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: const Color(0xFF0D4C92).withOpacity(0.2),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: SvgPicture.asset(
-                assetName,
-                width: 35,
-              ),
-            ),
-          ],
         ),
       ),
     );
