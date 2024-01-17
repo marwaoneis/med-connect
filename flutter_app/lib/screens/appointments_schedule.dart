@@ -92,7 +92,7 @@ class AppointmentItem extends StatelessWidget {
                     'https://via.placeholder.com/150'), // Replace with actual patient image URL
                 radius: 20,
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: 22),
               Column(
                 children: [
                   Row(
@@ -112,7 +112,6 @@ class AppointmentItem extends StatelessWidget {
                         width: 10,
                       ),
                       Column(
-                        // crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
                             'Time',
