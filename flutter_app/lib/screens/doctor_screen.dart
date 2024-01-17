@@ -14,17 +14,15 @@ class DoctorScreen extends StatelessWidget {
       body: Column(
         children: <Widget>[
           TopBarWithBackground(
-            leadingContent: CircleAvatar(
+            leadingContent: const CircleAvatar(
               child: Text(
                 'D',
-                style: const TextStyle(color: Color(0xFF0D4C92)),
+                style: TextStyle(color: Color(0xFF0D4C92)),
               ),
             ),
-            titleContent: Text(
+            titleContent: const Text(
               'Hello Dr',
-              style: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.white),
+              style: TextStyle(fontSize: 20, color: Colors.white),
             ),
             trailingContent: IconButton(
               icon: SvgPicture.asset(
