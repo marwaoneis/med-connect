@@ -99,6 +99,12 @@ class DoctorScreen extends StatelessWidget {
                             appointmentStatus: 'Ongoing',
                             patientImageUrl: 'assets/doctor_image.png',
                           ),
+                          DoctorAppointmentInfo(
+                            patientName: 'Jane Doe',
+                            appointmentType: 'Online',
+                            appointmentStatus: 'Ongoing',
+                            patientImageUrl: 'assets/doctor_image.png',
+                          ),
                         ],
                       ),
                     ],
