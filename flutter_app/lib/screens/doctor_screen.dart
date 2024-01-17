@@ -32,7 +32,6 @@ class DoctorScreen extends StatelessWidget {
             status: 'Declined',
             statusColor: Colors.red,
           ),
-          // Add more appointment cards...
         ],
       ),
     );
