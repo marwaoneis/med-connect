@@ -20,7 +20,10 @@ class AppointmentCard extends StatelessWidget {
       leading: const CircleAvatar(
         child: Icon(Icons.person),
       ),
-      title: Text(name),
+      title: Text(
+        name,
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
       subtitle: Text(details),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,

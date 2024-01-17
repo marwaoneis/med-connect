@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'doctor_appointment_card.dart';
 
 class AppointmentList extends StatelessWidget {
-  final List<AppointmentCard> appointments;
+  final List appointments;
+  final String title;
 
   const AppointmentList({
     super.key,
+    required this.title,
     required this.appointments,
   });
 
@@ -21,11 +23,11 @@ class AppointmentList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(left: 8.0, bottom: 8.0),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
             child: Text(
-              'Appointment Requests',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              title,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
           ),
           ...appointments, // Spread the list of appointment cards

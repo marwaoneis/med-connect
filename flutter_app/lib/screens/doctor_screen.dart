@@ -49,6 +49,7 @@ class DoctorScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       AppointmentList(
+                        title: 'Appointment Requests',
                         appointments: [
                           AppointmentCard(
                             name: 'Patient Name',
@@ -77,11 +78,28 @@ class DoctorScreen extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 20),
-                      DoctorAppointmentInfo(
-                        patientName: 'Jane Doe',
-                        appointmentType: 'Online',
-                        appointmentStatus: 'Ongoing',
-                        patientImageUrl: 'assets/doctor_image.png',
+                      AppointmentList(
+                        title: 'Appointment Requests',
+                        appointments: [
+                          DoctorAppointmentInfo(
+                            patientName: 'Jane Doe',
+                            appointmentType: 'Online',
+                            appointmentStatus: 'Ongoing',
+                            patientImageUrl: 'assets/doctor_image.png',
+                          ),
+                          DoctorAppointmentInfo(
+                            patientName: 'Jane Doe',
+                            appointmentType: 'Online',
+                            appointmentStatus: 'Ongoing',
+                            patientImageUrl: 'assets/doctor_image.png',
+                          ),
+                          DoctorAppointmentInfo(
+                            patientName: 'Jane Doe',
+                            appointmentType: 'Online',
+                            appointmentStatus: 'Ongoing',
+                            patientImageUrl: 'assets/doctor_image.png',
+                          ),
+                        ],
                       ),
                     ],
                   ),
