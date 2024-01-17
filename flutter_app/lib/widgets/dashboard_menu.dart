@@ -49,24 +49,6 @@ class DashboardMenu extends StatelessWidget {
         );
       },
     ),
-    GridItem(
-      title: 'Setup Redminders',
-      imagePath: 'assets/setup_reminders.png',
-      onTap: (BuildContext context) {
-        // Navigate to the Symptom Checker page
-      },
-    ),
-    GridItem(
-      title: 'Consultations',
-      imagePath: 'assets/consultations.png',
-      onTap: (BuildContext context) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const BookAppointmentScreen()),
-        );
-      },
-    ),
   ];
 
   @override
@@ -76,10 +58,10 @@ class DashboardMenu extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
+        crossAxisCount: 2,
         crossAxisSpacing: 1,
         mainAxisSpacing: 1,
-        childAspectRatio: (50 / 43),
+        childAspectRatio: (1.5 / 1.08),
       ),
       itemCount: gridItems.length,
       itemBuilder: (context, index) {
@@ -97,9 +79,14 @@ class DashboardMenu extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Image.asset(
-              item.imagePath,
-              fit: BoxFit.contain,
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                child: Image.asset(
+                  item.imagePath,
+                  fit: BoxFit.fill,
+                ),
+              ),
             ),
             Container(
               height: 30.0,
@@ -110,7 +97,7 @@ class DashboardMenu extends StatelessWidget {
                   item.title,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    fontSize: 12.0,
+                    fontSize: 15.0,
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),

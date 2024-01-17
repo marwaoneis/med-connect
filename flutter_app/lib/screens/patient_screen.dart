@@ -34,9 +34,7 @@ class PatientScreenState extends State<PatientScreen> {
         setState(() {
           patientData = _fetchPatientData();
         });
-      } else {
-        // If userId is null, redirect to login or handle appropriately
-      }
+      } else {}
     });
   }
 
@@ -94,7 +92,7 @@ class PatientScreenState extends State<PatientScreen> {
                           children: <Widget>[
                             const SizedBox(height: 5),
                             SizedBox(
-                              height: 250,
+                              height: 300,
                               child: DashboardMenu(),
                             ),
                             const SizedBox(height: 10),
