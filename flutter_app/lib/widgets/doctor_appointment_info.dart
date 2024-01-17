@@ -24,7 +24,7 @@ class DoctorAppointmentInfo extends StatelessWidget {
       child: Row(
         children: [
           const SizedBox(
-            width: 10,
+            width: 6,
           ),
           CircleAvatar(
             backgroundImage: AssetImage(patientImageUrl),
@@ -83,7 +83,7 @@ class DoctorAppointmentInfo extends StatelessWidget {
             ),
           ],
           const SizedBox(
-            width: 10,
+            width: 6,
           ),
         ],
       ),
