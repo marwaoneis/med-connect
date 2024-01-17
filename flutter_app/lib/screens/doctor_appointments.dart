@@ -11,16 +11,16 @@ import '../screens/doctor_profile.dart';
 import 'message_screen.dart';
 import 'patient_screen.dart';
 
-class BookAppointmentScreen extends StatefulWidget {
+class DoctorAppointments extends StatefulWidget {
   final String title;
 
-  const BookAppointmentScreen({super.key, this.title = 'Doctors'});
+  const DoctorAppointments({super.key, this.title = 'Doctors'});
 
   @override
-  BookAppointmentScreenState createState() => BookAppointmentScreenState();
+  DoctorAppointmentsState createState() => DoctorAppointmentsState();
 }
 
-class BookAppointmentScreenState extends State<BookAppointmentScreen> {
+class DoctorAppointmentsState extends State<DoctorAppointments> {
   late Future<List<Doctor>> doctorsData;
 
   @override
@@ -66,41 +66,6 @@ class BookAppointmentScreenState extends State<BookAppointmentScreen> {
               },
             ),
           ),
-          Expanded(
-            child: FutureBuilder<List<Doctor>>(
-              future: doctorsData,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasData) {
-                    return NoGlowScrollWrapper(
-                      child: ListView.builder(
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final doctor = snapshot.data![index];
-                          return DoctorCard(
-                            doctor: doctor,
-                            rating: 4.5,
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      DoctorProfileScreen(doctor: doctor),
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      ),
-                    );
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
-                  }
-                }
-                return const Center(child: CircularProgressIndicator());
-              },
-            ),
-          ),
           const SizedBox(height: 5)
         ],
       ),
@@ -115,7 +80,7 @@ class BookAppointmentScreenState extends State<BookAppointmentScreen> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => const BookAppointmentScreen(
+                builder: (context) => const DoctorAppointments(
                       title: 'Book Appointment',
                     )),
           );

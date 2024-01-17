@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/doctor_profile.dart';
+import 'package:flutter_app/screens/message_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../models/doctor_model.dart';
 import '../widgets/appointment_list.dart';
 import '../widgets/doctor_appointment_card.dart';
+import '../widgets/footer.dart';
 import '../widgets/no_glow_scroll.dart';
 import '../widgets/top_bar_with_background.dart';
+import 'doctor_appointments.dart';
 
 class DoctorScreen extends StatelessWidget {
-  const DoctorScreen({super.key});
+  const DoctorScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +39,9 @@ class DoctorScreen extends StatelessWidget {
               onPressed: () {},
             ),
           ),
+          const SizedBox(
+            height: 5,
+          ),
           const Expanded(
             child: NoGlowScrollWrapper(
               child: SingleChildScrollView(
@@ -51,7 +61,18 @@ class DoctorScreen extends StatelessWidget {
                         status: 'Declined',
                         statusColor: Colors.red,
                       ),
-                      // Add more appointment cards...
+                      AppointmentCard(
+                        name: 'Patient Name',
+                        details: 'Age, Gender, Date, Time of request',
+                        status: 'Declined',
+                        statusColor: Colors.red,
+                      ),
+                      AppointmentCard(
+                        name: 'Patient Name',
+                        details: 'Age, Gender, Date, Time of request',
+                        status: 'Confirmed',
+                        statusColor: Colors.green,
+                      ),
                     ],
                   ),
                 ),
@@ -59,6 +80,35 @@ class DoctorScreen extends StatelessWidget {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: Footer(
+        onHomeTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const DoctorScreen()),
+          );
+        },
+        onAppointmentTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const DoctorAppointments(
+                      title: 'Your Appointments',
+                    )),
+          );
+        },
+        onChatTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const MessageScreen()),
+          );
+        },
+        onProfileTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const DoctorScreen()),
+          );
+        },
       ),
     );
   }
