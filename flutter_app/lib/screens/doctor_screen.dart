@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/appointment_list.dart';
 import '../widgets/doctor_appointment_card.dart';
 
 class DoctorScreen extends StatelessWidget {
@@ -9,30 +10,28 @@ class DoctorScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Doctor Screen'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.view_list),
-            onPressed: () {
-              // Implement view all action
-            },
-          ),
-        ],
       ),
-      body: ListView(
-        children: const [
-          AppointmentCard(
-            name: 'Patient Name',
-            details: 'Age, Gender, Date, Time of request',
-            status: 'Confirmed',
-            statusColor: Colors.green,
+      body: const SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: AppointmentList(
+            appointments: [
+              AppointmentCard(
+                name: 'Patient Name',
+                details: 'Age, Gender, Date, Time of request',
+                status: 'Confirmed',
+                statusColor: Colors.green,
+              ),
+              AppointmentCard(
+                name: 'Patient Name',
+                details: 'Age, Gender, Date, Time of request',
+                status: 'Declined',
+                statusColor: Colors.red,
+              ),
+              // Add more appointment cards...
+            ],
           ),
-          AppointmentCard(
-            name: 'Patient Name',
-            details: 'Age, Gender, Date, Time of request',
-            status: 'Declined',
-            statusColor: Colors.red,
-          ),
-        ],
+        ),
       ),
     );
   }
