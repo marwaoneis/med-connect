@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/widgets/no_glow_scroll.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../widgets/footer.dart';
 import '../widgets/top_bar_with_background.dart';
+import 'doctor_screen.dart';
+import 'message_screen.dart';
 
 class AppointmentScheduleScreen extends StatelessWidget {
   const AppointmentScheduleScreen({super.key});
@@ -64,6 +67,33 @@ class AppointmentScheduleScreen extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar: Footer(
+        onHomeTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const DoctorScreen()),
+          );
+        },
+        onAppointmentTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const AppointmentScheduleScreen()),
+          );
+        },
+        onChatTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const MessageScreen()),
+          );
+        },
+        onProfileTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const DoctorScreen()),
+          );
+        },
+      ),
     );
   }
 
@@ -91,7 +121,7 @@ class AppointmentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      // margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 5.0),
         child: Row(
@@ -114,7 +144,13 @@ class AppointmentItem extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
-                        Text(patientName, style: TextStyle(fontSize: 14)),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(patientName, style: const TextStyle(fontSize: 14)),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         _buildActionButton(context, 'Edit'),
                       ],
                     ),
@@ -128,7 +164,14 @@ class AppointmentItem extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
-                        Text(appointmentTime, style: TextStyle(fontSize: 14)),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(appointmentTime,
+                            style: const TextStyle(fontSize: 14)),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         _buildActionButton(context, 'Cancel'),
                       ],
                     ),
@@ -142,7 +185,14 @@ class AppointmentItem extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
-                        Text(appointmentDate, style: TextStyle(fontSize: 14)),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(appointmentDate,
+                            style: const TextStyle(fontSize: 14)),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         _buildActionButton(context, 'Medical History'),
                       ],
                     ),
@@ -154,7 +204,11 @@ class AppointmentItem extends StatelessWidget {
                         color: const Color(0xFF0D4C92),
                       ),
                       onPressed: () {
-                        // TODO: Implement message action
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MessageScreen()),
+                        );
                       },
                     ),
                   ],
