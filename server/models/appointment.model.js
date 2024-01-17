@@ -32,6 +32,10 @@ const appointmentSchema = new mongoose.Schema(
       required: true,
     },
     aiAssessment: AiAssessmentSchema,
+    type: {
+      type: String,
+      enum: ["Ongoing", "In Clinic"],
+    },
     status: {
       type: String,
       enum: ["Scheduled", "Completed", "Cancelled"],
