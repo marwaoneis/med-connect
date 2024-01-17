@@ -3,6 +3,7 @@ import 'package:flutter_app/screens/message_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/appointment_list.dart';
 import '../widgets/doctor_appointment_card.dart';
+import '../widgets/doctor_appointment_info.dart';
 import '../widgets/footer.dart';
 import '../widgets/no_glow_scroll.dart';
 import '../widgets/top_bar_with_background.dart';
@@ -45,31 +46,42 @@ class DoctorScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Padding(
                   padding: EdgeInsets.all(16.0),
-                  child: AppointmentList(
-                    appointments: [
-                      AppointmentCard(
-                        name: 'Patient Name',
-                        details: 'Age, Gender, Date, Time of request',
-                        status: 'Confirmed',
-                        statusColor: Colors.green,
+                  child: Column(
+                    children: [
+                      AppointmentList(
+                        appointments: [
+                          AppointmentCard(
+                            name: 'Patient Name',
+                            details: 'Age, Gender, Date, Time of request',
+                            status: 'Confirmed',
+                            statusColor: Colors.green,
+                          ),
+                          AppointmentCard(
+                            name: 'Patient Name',
+                            details: 'Age, Gender, Date, Time of request',
+                            status: 'Declined',
+                            statusColor: Colors.red,
+                          ),
+                          AppointmentCard(
+                            name: 'Patient Name',
+                            details: 'Age, Gender, Date, Time of request',
+                            status: 'Declined',
+                            statusColor: Colors.red,
+                          ),
+                          AppointmentCard(
+                            name: 'Patient Name',
+                            details: 'Age, Gender, Date, Time of request',
+                            status: 'Confirmed',
+                            statusColor: Colors.green,
+                          ),
+                        ],
                       ),
-                      AppointmentCard(
-                        name: 'Patient Name',
-                        details: 'Age, Gender, Date, Time of request',
-                        status: 'Declined',
-                        statusColor: Colors.red,
-                      ),
-                      AppointmentCard(
-                        name: 'Patient Name',
-                        details: 'Age, Gender, Date, Time of request',
-                        status: 'Declined',
-                        statusColor: Colors.red,
-                      ),
-                      AppointmentCard(
-                        name: 'Patient Name',
-                        details: 'Age, Gender, Date, Time of request',
-                        status: 'Confirmed',
-                        statusColor: Colors.green,
+                      SizedBox(height: 20),
+                      DoctorAppointmentInfo(
+                        patientName: 'Jane Doe',
+                        appointmentType: 'Online',
+                        appointmentStatus: 'Ongoing',
+                        patientImageUrl: 'assets/doctor_image.png',
                       ),
                     ],
                   ),
