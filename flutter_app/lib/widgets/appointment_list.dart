@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'doctor_appointment_card.dart';
 
 class AppointmentList extends StatelessWidget {
   final List appointments;
