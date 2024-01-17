@@ -19,13 +19,19 @@ class DoctorAppointmentInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     Color buttonColor = const Color(0xFF0D4C92);
 
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: Colors.grey.shade300, width: 1),
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: Row(
           children: [
+            const SizedBox(
+              width: 10,
+            ),
             CircleAvatar(
               backgroundImage: AssetImage(patientImageUrl),
               radius: 20,
@@ -37,7 +43,8 @@ class DoctorAppointmentInfo extends StatelessWidget {
                 children: [
                   Text(
                     patientName,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   Text(
                     appointmentType,
@@ -46,8 +53,13 @@ class DoctorAppointmentInfo extends StatelessWidget {
                 ],
               ),
             ),
-            SvgPicture.asset("assets/chat_icon.svg"),
-            const SizedBox(width: 8),
+            SvgPicture.asset(
+              "assets/chat_icon.svg",
+              height: 20,
+              width: 20,
+              color: Colors.black,
+            ),
+            const SizedBox(width: 10),
             if (appointmentStatus == 'Ongoing') ...[
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -76,6 +88,9 @@ class DoctorAppointmentInfo extends StatelessWidget {
                 ), // 'Time' will be replaced with actual time data
               ),
             ],
+            const SizedBox(
+              width: 10,
+            ),
           ],
         ),
       ),
