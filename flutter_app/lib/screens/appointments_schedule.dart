@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/widgets/no_glow_scroll.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../widgets/top_bar_with_background.dart';
 
 class AppointmentScheduleScreen extends StatelessWidget {
   const AppointmentScheduleScreen({super.key});
@@ -7,21 +10,47 @@ class AppointmentScheduleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Your Appointments'),
-        backgroundColor: const Color(0xFF0D4C92), // AppBar color
-      ),
-      body: ListView(
+      body: Column(
         children: [
-          _buildDateSection('Today'),
-          AppointmentItem(
-            patientName: 'John Doe',
-            appointmentTime: '09:00 AM',
-            appointmentDate: '2023-07-21',
+          TopBarWithBackground(
+            leadingContent: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.white),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            titleContent: const Text(
+              'Your Appointments',
+              style: TextStyle(fontSize: 20, color: Colors.white),
+            ),
+            trailingContent: IconButton(
+              icon: SvgPicture.asset(
+                'assets/notification_icon.svg', // Replace with your asset path
+                color: Colors.white,
+              ),
+              onPressed: () {
+                // TODO: Notification action
+              },
+            ),
           ),
-          // Repeat AppointmentItem for other appointments
-          _buildDateSection('Tomorrow'),
-          // Repeat for other dates
+          Expanded(
+            child: NoGlowScrollWrapper(
+              child: ListView(
+                children: [
+                  _buildDateSection('Today'),
+
+                  const AppointmentItem(
+                    patientName: 'John Doe',
+                    appointmentTime: '09:00 AM',
+                    appointmentDate: '2023-07-21',
+                  ),
+                  // Repeat AppointmentItem for other appointments
+                  _buildDateSection('Tomorrow'),
+                  // Repeat for other dates
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -53,60 +82,100 @@ class AppointmentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(patientName),
-                Text(appointmentTime),
-                Text(appointmentDate),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    // TODO: Implement edit action
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF0D4C92),
+          padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
+          child: Row(
+            children: [
+              const CircleAvatar(
+                backgroundImage: NetworkImage(
+                    'https://via.placeholder.com/150'), // Replace with actual patient image URL
+                radius: 20,
+              ),
+              const SizedBox(width: 10),
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          const Text(
+                            'Patient',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          Text(patientName, style: TextStyle(fontSize: 14)),
+                          _buildActionButton(context, 'Edit'),
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Column(
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Time',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          Text(appointmentTime, style: TextStyle(fontSize: 14)),
+                          _buildActionButton(context, 'Cancel'),
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Column(
+                        children: [
+                          const Text(
+                            'Date',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          Text(appointmentDate, style: TextStyle(fontSize: 14)),
+                          _buildActionButton(context, 'Medical History'),
+                        ],
+                      ),
+                    ],
                   ),
-                  child: const Text('Edit'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // TODO: Implement cancel action
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF0D4C92),
+                ],
+              ),
+              Row(
+                children: [
+                  IconButton(
+                    icon: SvgPicture.asset(
+                      "assets/chat_icon.svg",
+                      height: 20,
+                      width: 20,
+                      color: const Color(0xFF0D4C92),
+                    ),
+                    onPressed: () {
+                      // TODO: Implement message action
+                    },
                   ),
-                  child: const Text('Cancel'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // TODO: Implement medical history action
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF0D4C92),
-                  ),
-                  child: const Text('Medical History'),
-                ),
-                SvgPicture.asset(
-                  "assets/chat_icon.svg",
-                  height: 20,
-                  width: 20,
-                  color: const Color(0xFF0D4C92),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          )),
+    );
+  }
+
+  Widget _buildActionButton(BuildContext context, String text) {
+    return ElevatedButton(
+      onPressed: () {
+        // TODO: Implement action
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0xFF0D4C92),
+        foregroundColor: Colors.white,
+        textStyle: const TextStyle(fontSize: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
         ),
       ),
+      child: Text(text),
     );
   }
 }
