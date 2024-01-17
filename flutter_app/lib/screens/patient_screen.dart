@@ -60,7 +60,6 @@ class PatientScreenState extends State<PatientScreen> {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
             final String firstName = snapshot.data?['firstName'] ?? 'N/A';
-            final String address = snapshot.data?['address'] ?? 'N/A';
 
             return Scaffold(
               body: Column(
@@ -74,7 +73,7 @@ class PatientScreenState extends State<PatientScreen> {
                       ),
                     ),
                     titleContent: Text(
-                      '$firstName, $address',
+                      'Welcome $firstName',
                       style: const TextStyle(
                           fontSize: 20,
                           // fontWeight: FontWeight.bold,
