@@ -134,6 +134,16 @@ class SignUpScreenPart2State extends State<SignUpScreenPart2> {
                           const SizedBox(height: 15),
                           TextFormField(
                             decoration:
+                                const InputDecoration(labelText: 'Email'),
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (value) =>
+                                value!.isEmpty || !value.contains('@')
+                                    ? 'Enter a valid email'
+                                    : null,
+                            onSaved: (value) => widget.formData.email = value!,
+                          ),
+                          TextFormField(
+                            decoration:
                                 const InputDecoration(labelText: 'Address'),
                             onSaved: (value) =>
                                 widget.formData.address = value!,
@@ -193,17 +203,6 @@ class SignUpScreenPart2State extends State<SignUpScreenPart2> {
                                     _parseAdditionalInfo(value);
                               }
                             },
-                          ),
-                          TextFormField(
-                            decoration:
-                                const InputDecoration(labelText: 'Password'),
-                            obscureText: true,
-                            validator: (value) =>
-                                value!.isEmpty || value.length < 6
-                                    ? 'Enter a longer password'
-                                    : null,
-                            onSaved: (value) =>
-                                widget.formData.password = value!,
                           ),
                           const SizedBox(height: 35),
                           _isLoading

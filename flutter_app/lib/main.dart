@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
           '/patientScreen': (context) => const PatientScreen(),
           '/doctorScreen': (context) => const DoctorScreen(),
           '/pharmacyScreen': (context) => const PharmacyScreen(),
-          // ... other routes
         },
       ),
     );

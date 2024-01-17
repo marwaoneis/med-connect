@@ -20,7 +20,7 @@ class SignUpScreenPart1State extends State<SignUpScreenPart1> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: const Color(0xFFC7D3E1),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -31,12 +31,20 @@ class SignUpScreenPart1State extends State<SignUpScreenPart1> {
               const SizedBox(height: 25),
               Container(
                 width: double.infinity,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(25),
                     topRight: Radius.circular(25),
                   ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: const Offset(0, -2),
+                    ),
+                  ],
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -86,13 +94,14 @@ class SignUpScreenPart1State extends State<SignUpScreenPart1> {
                           onSaved: (value) => widget.formData.username = value!,
                         ),
                         TextFormField(
-                          decoration: const InputDecoration(labelText: 'Email'),
-                          keyboardType: TextInputType.emailAddress,
+                          decoration:
+                              const InputDecoration(labelText: 'Password'),
+                          obscureText: true,
                           validator: (value) =>
-                              value!.isEmpty || !value.contains('@')
-                                  ? 'Enter a valid email'
+                              value!.isEmpty || value.length < 6
+                                  ? 'Enter a longer password'
                                   : null,
-                          onSaved: (value) => widget.formData.email = value!,
+                          onSaved: (value) => widget.formData.password = value!,
                         ),
                         const SizedBox(height: 25),
                         ElevatedButton(
@@ -216,8 +225,9 @@ class SignUpScreenPart1State extends State<SignUpScreenPart1> {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              child: SvgPicture.asset(
-                                'assets/apple.svg',
+                              child: const Icon(
+                                Icons.apple,
+                                size: 40,
                               ),
                             ),
                             const SizedBox(height: 15),
