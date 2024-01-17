@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/doctor_profile.dart';
 import 'package:flutter_app/screens/message_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../models/doctor_model.dart';
 import '../widgets/appointment_list.dart';
 import '../widgets/doctor_appointment_card.dart';
 import '../widgets/footer.dart';

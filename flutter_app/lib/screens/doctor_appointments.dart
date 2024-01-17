@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/patient_profile.dart';
-import 'package:flutter_app/widgets/no_glow_scroll.dart';
 import '../api/api_service.dart';
 import '../config/request_config.dart';
-import '../widgets/doctor_card.dart';
 import '../widgets/footer.dart';
 import '../widgets/top_bar_with_background.dart';
 import '../models/doctor_model.dart';
-import '../screens/doctor_profile.dart';
 import 'message_screen.dart';
 import 'patient_screen.dart';
 
