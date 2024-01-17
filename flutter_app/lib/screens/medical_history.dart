@@ -100,7 +100,8 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => const BookAppointmentScreen()),
+                builder: (context) =>
+                    const BookAppointmentScreen(title: 'Book Appointment')),
           );
         },
         onChatTap: () {

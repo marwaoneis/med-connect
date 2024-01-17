@@ -134,7 +134,9 @@ class BuyMedicineScreenState extends State<BuyMedicineScreen> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => const BookAppointmentScreen()),
+                builder: (context) => const BookAppointmentScreen(
+                      title: 'Book Appointment',
+                    )),
           );
         },
         onChatTap: () {

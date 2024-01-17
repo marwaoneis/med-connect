@@ -69,7 +69,8 @@ class PatientProfileScreen extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const BookAppointmentScreen()),
+                    builder: (context) =>
+                        const BookAppointmentScreen(title: 'Book Appointment')),
               );
             }),
             _buildOption('assets/personal_info.svg', 'Personal Information', '',

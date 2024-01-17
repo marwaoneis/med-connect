@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/patient_appointments.dart';
 
 class Specialist {
   final String name;
@@ -66,7 +67,13 @@ class SpecialistList extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  // Handle "View all" tap
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const BookAppointmentScreen(
+                              title: 'Specialists',
+                            )),
+                  );
                 },
                 child: const Text(
                   'View all >',

@@ -125,7 +125,8 @@ class SymptomCheckerScreenState extends State<SymptomCheckerScreen> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => const BookAppointmentScreen()),
+                builder: (context) =>
+                    const BookAppointmentScreen(title: 'Book Appointment')),
           );
         },
         onChatTap: () {

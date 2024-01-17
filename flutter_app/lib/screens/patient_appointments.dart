@@ -12,7 +12,9 @@ import 'message_screen.dart';
 import 'patient_screen.dart';
 
 class BookAppointmentScreen extends StatefulWidget {
-  const BookAppointmentScreen({super.key});
+  final String title;
+
+  const BookAppointmentScreen({super.key, this.title = 'Doctors'});
 
   @override
   BookAppointmentScreenState createState() => BookAppointmentScreenState();
@@ -49,9 +51,9 @@ class BookAppointmentScreenState extends State<BookAppointmentScreen> {
                 Navigator.pop(context);
               },
             ),
-            titleContent: const Text(
-              'Nearby Doctors',
-              style: TextStyle(
+            titleContent: Text(
+              widget.title,
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
@@ -114,7 +116,9 @@ class BookAppointmentScreenState extends State<BookAppointmentScreen> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => const BookAppointmentScreen()),
+                builder: (context) => const BookAppointmentScreen(
+                      title: 'Book Appointment',
+                    )),
           );
         },
         onChatTap: () {
