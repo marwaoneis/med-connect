@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/medical_history.dart';
 import 'package:flutter_app/widgets/no_glow_scroll.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -151,7 +152,7 @@ class AppointmentItem extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
-                        _buildActionButton(context, 'Edit'),
+                        _buildActionButton(context, 'Edit', () {}),
                       ],
                     ),
                     const SizedBox(
@@ -172,7 +173,7 @@ class AppointmentItem extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
-                        _buildActionButton(context, 'Cancel'),
+                        _buildActionButton(context, 'Cancel', () {}),
                       ],
                     ),
                     const SizedBox(
@@ -193,7 +194,14 @@ class AppointmentItem extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
-                        _buildActionButton(context, 'Medical History'),
+                        _buildActionButton(context, 'Medical History', () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const MedicalHistoryScreen()),
+                          );
+                        }),
                       ],
                     ),
                     IconButton(
@@ -221,11 +229,10 @@ class AppointmentItem extends StatelessWidget {
     );
   }
 
-  Widget _buildActionButton(BuildContext context, String text) {
+  Widget _buildActionButton(
+      BuildContext context, String text, VoidCallback onPressed) {
     return ElevatedButton(
-      onPressed: () {
-        // TODO: Implement action
-      },
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xFF0D4C92),
         foregroundColor: Colors.white,
