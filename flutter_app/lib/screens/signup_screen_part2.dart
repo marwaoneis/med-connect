@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import '../data/sign_up_form_data.dart';
-import '../screens/patient_screen.dart';
+import 'patient_dashboard_screen.dart';
 
 class SignUpScreenPart2 extends StatefulWidget {
   final SignUpFormData formData;

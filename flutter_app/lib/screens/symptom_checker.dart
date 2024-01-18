@@ -3,7 +3,7 @@ import 'package:flutter_app/screens/patient_profile.dart';
 import 'patient_appointments.dart';
 import '../widgets/footer.dart';
 import 'message_screen.dart';
-import 'patient_screen.dart';
+import 'patient_dashboard_screen.dart';
 
 class SymptomCheckerScreen extends StatefulWidget {
   const SymptomCheckerScreen({super.key});

@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../widgets/footer.dart';
 import '../widgets/top_bar_with_background.dart';
-import 'doctor_screen.dart';
+import 'doctor_dashboard_screen.dart';
 import 'message_screen.dart';
 
 class AppointmentScheduleScreen extends StatelessWidget {

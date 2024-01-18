@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/patient_screen.dart';
+import 'package:flutter_app/screens/patient_dashboard_screen.dart';
 import '../models/medicine_model.dart';
 
 class CheckoutScreen extends StatelessWidget {

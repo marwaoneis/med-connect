@@ -10,7 +10,7 @@ import '../providers/auth_provider.dart';
 import '../widgets/footer.dart';
 import 'message_screen.dart';
 import 'patient_appointments.dart';
-import 'patient_screen.dart';
+import 'patient_dashboard_screen.dart';
 
 class PatientProfileScreen extends StatelessWidget {
   const PatientProfileScreen({super.key});

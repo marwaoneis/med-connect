@@ -10,7 +10,7 @@ import '../widgets/top_bar_with_background.dart';
 import 'message_screen.dart';
 import 'patient_appointments.dart';
 import 'patient_profile.dart';
-import 'patient_screen.dart';
+import 'patient_dashboard_screen.dart';
 
 class BuyMedicineScreen extends StatefulWidget {
   const BuyMedicineScreen({super.key});

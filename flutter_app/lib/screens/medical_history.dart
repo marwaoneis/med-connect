@@ -10,7 +10,7 @@ import '../widgets/no_glow_scroll.dart';
 import 'message_screen.dart';
 import 'patient_appointments.dart';
 import 'patient_profile.dart';
-import 'patient_screen.dart';
+import 'patient_dashboard_screen.dart';
 
 class MedicalHistoryScreen extends StatefulWidget {
   const MedicalHistoryScreen({super.key});

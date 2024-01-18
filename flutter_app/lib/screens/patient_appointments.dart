@@ -9,7 +9,7 @@ import '../widgets/top_bar_with_background.dart';
 import '../models/doctor_model.dart';
 import '../screens/doctor_profile.dart';
 import 'message_screen.dart';
-import 'patient_screen.dart';
+import 'patient_dashboard_screen.dart';
 
 class BookAppointmentScreen extends StatefulWidget {
   final String title;

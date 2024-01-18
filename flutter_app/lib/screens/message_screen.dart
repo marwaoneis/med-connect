@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/patient_profile.dart';
-import 'package:flutter_app/screens/patient_screen.dart';
+import 'package:flutter_app/screens/patient_dashboard_screen.dart';
 import '../widgets/message_list.dart';
 import '../widgets/footer.dart';
 import '../widgets/top_bar_with_background.dart';
