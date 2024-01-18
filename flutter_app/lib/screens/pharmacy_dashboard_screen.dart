@@ -22,7 +22,7 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
   late Future<int> medicineGroups;
   late Future<int> totalOrders;
   late Future<String> frequentlyBoughtItem;
-  late Future<Map<String, dynamic>> pharmacyData;
+  Future<Map<String, dynamic>> pharmacyData = Future.value({});
 
   @override
   void initState() {
@@ -89,10 +89,12 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
         ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
     final response =
         await apiService.fetchData('medication-orders/pharmacy/$pharmacyId');
+
     // Assuming the response is a list of medication orders
     List<MedicationOrder> orders = List<MedicationOrder>.from(
       response.map((x) => MedicationOrder.fromJson(x)),
     );
+    print("orders: $response");
     return orders.length;
   }
 
@@ -100,8 +102,8 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
     var headers = RequestConfig.getHeaders(context);
     final apiService =
         ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
-    final response =
-        await apiService.fetchData('medicationOrders/frequentItem/$pharmacyId');
+    final response = await apiService
+        .fetchData('medication-orders/frequentItem/$pharmacyId');
     // Assuming the response is a map with a 'name' key for the item
     if (response.isNotEmpty) {
       return response['name'];
