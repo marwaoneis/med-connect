@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-
+import '../api/api_service.dart';
+import '../config/request_config.dart';
 import '../providers/auth_provider.dart';
+import '../widgets/footer.dart';
+import '../widgets/no_glow_scroll.dart';
+import '../widgets/top_bar_with_background.dart';
 
 class PharmacyDashboard extends StatefulWidget {
   const PharmacyDashboard({super.key});
@@ -15,6 +20,7 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
   late Future<int> medicineGroups;
   late Future<int> totalOrders;
   late Future<String> frequentlyBoughtItem;
+  late Future<Map<String, dynamic>> pharmacyData;
 
   @override
   void initState() {
@@ -23,6 +29,7 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
       final pharmacyId = Provider.of<Auth>(context, listen: false).getUserId;
       if (pharmacyId != null) {
         setState(() {
+          pharmacyData = _fetchPharmacyData(pharmacyId);
           totalMedicines = _fetchTotalMedicines(pharmacyId);
           medicineGroups = _fetchMedicineGroups(pharmacyId);
           totalOrders = _fetchTotalOrders(pharmacyId);
@@ -30,6 +37,15 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
         });
       }
     });
+  }
+
+  Future<Map<String, dynamic>> _fetchPharmacyData(String pharmacyId) async {
+    var headers = RequestConfig.getHeaders(context);
+    final apiService =
+        ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
+    final data = await apiService.fetchData('pharmacies/$pharmacyId');
+    print('Fetched pharmacy data: $data');
+    return data;
   }
 
   Future<int> _fetchTotalMedicines(String pharmacyId) async {
@@ -61,28 +77,101 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Welcome Pharmacy Name'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: () {
-              // Handle navigation to menu or other actions
-            },
-          ),
-        ],
-      ),
-      body: ListView(
-        children: <Widget>[
-          // ... other widgets
-          _buildDashboardCard('Total no of Medicines', totalMedicines),
-          _buildDashboardCard('Medicine Groups', medicineGroups),
-          _buildDashboardCard('Total no of Orders', totalOrders),
-          _buildDashboardCard('Frequently Bought Item', frequentlyBoughtItem,
-              isItemName: true),
-        ],
-      ),
+    return FutureBuilder<Map<String, dynamic>>(
+      future: pharmacyData,
+      builder:
+          (BuildContext context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData) {
+            final String firstName = snapshot.data?['firstName'] ?? 'N/A';
+
+            return Scaffold(
+              body: Column(
+                children: <Widget>[
+                  TopBarWithBackground(
+                    leadingContent: CircleAvatar(
+                      child: Text(
+                        firstName[0],
+                        style: const TextStyle(color: Color(0xFF0D4C92)),
+                      ),
+                    ),
+                    titleContent: Text(
+                      'Welcome $firstName',
+                      style: const TextStyle(
+                          fontSize: 20,
+                          // fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                    trailingContent: IconButton(
+                      icon: SvgPicture.asset(
+                        'assets/notification_icon.svg',
+                        color: Colors.white,
+                      ),
+                      onPressed: () {},
+                    ),
+                  ),
+                  Expanded(
+                    child: NoGlowScrollWrapper(
+                      child: SingleChildScrollView(
+                        child: ListView(
+                          children: <Widget>[
+                            _buildDashboardCard(
+                                'Total no of Medicines', totalMedicines),
+                            _buildDashboardCard(
+                                'Medicine Groups', medicineGroups),
+                            _buildDashboardCard(
+                                'Total no of Orders', totalOrders),
+                            _buildDashboardCard(
+                                'Frequently Bought Item', frequentlyBoughtItem,
+                                isItemName: true),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              bottomNavigationBar: Footer(
+                onHomeTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PharmacyDashboard()),
+                  );
+                },
+                onAppointmentTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PharmacyDashboard()),
+                  );
+                },
+                onChatTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PharmacyDashboard()),
+                  );
+                },
+                onProfileTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PharmacyDashboard()),
+                  );
+                },
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Scaffold(
+              body: Center(child: Text('Error: ${snapshot.error}')),
+            );
+          }
+        }
+        return const Scaffold(
+          body: Center(child: CircularProgressIndicator()),
+        );
+      },
     );
   }
 
@@ -92,42 +181,19 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
       future: futureData,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
-          // If the future is complete and no errors occurred, display the data
           return ListTile(
             title: Text(title),
             subtitle: isItemName ? null : Text('Tap to see details'),
             trailing:
                 Text(isItemName ? snapshot.data : snapshot.data.toString()),
-            onTap: () {
-              // Handle tap
-            },
+            onTap: () {},
           );
         }
       },
     );
-  }
-}
-
-class RequestConfig {
-  static getHeaders(BuildContext context) {
-    // Return the headers required for the API
-    return {};
-  }
-}
-
-class ApiService {
-  final String baseUrl;
-  final Map<String, String> headers;
-
-  ApiService({required this.baseUrl, required this.headers});
-
-  Future<dynamic> fetchData(String endpoint) async {
-    // Implement your logic to fetch data from the backend
-    // Placeholder for now
-    return [];
   }
 }
