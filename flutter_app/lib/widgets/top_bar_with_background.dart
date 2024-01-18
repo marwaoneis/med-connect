@@ -30,7 +30,7 @@ class TopBarWithBackground extends StatelessWidget {
         Column(
           children: [
             const SizedBox(height: 50),
-            Container(
+            SizedBox(
               height: 45,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
