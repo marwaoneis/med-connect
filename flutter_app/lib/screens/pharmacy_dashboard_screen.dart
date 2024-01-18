@@ -156,92 +156,32 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
                     child: NoGlowScrollWrapper(
                       child: ListView(
                         children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.2),
-                                    spreadRadius: -4,
-                                    blurRadius: 6,
-                                    offset: const Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                              child: Card(
-                                color: Colors.white,
-                                elevation: 0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  side: const BorderSide(
-                                      color: Colors.grey, width: 1),
-                                ),
-                                margin: const EdgeInsets.all(8.0),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Padding(
-                                            padding: EdgeInsets.only(left: 8.0),
-                                            child: Text(
-                                              'Inventory',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 20.0,
-                                              ),
-                                            ),
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              // TODO: Navigate to configuration
-                                            },
-                                            child: const Text(
-                                              'Go to Configuration',
-                                              style: TextStyle(fontSize: 15),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const Divider(),
-                                      IntrinsicHeight(
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const SizedBox(
-                                              width: 10,
-                                            ),
-                                            Expanded(
-                                                child: _buildStatisticCounter(
-                                                    totalMedicines,
-                                                    'Total no of Medicines')),
-                                            const VerticalDivider(),
-                                            const SizedBox(
-                                              width: 10,
-                                            ),
-                                            Expanded(
-                                                child: _buildStatisticCounter(
-                                                    medicineGroups,
-                                                    'Medicine Groups')),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                          // Inventory Card
+                          _buildInfoCard(
+                            title: 'Inventory',
+                            buttonLabel: 'Go to Configuration',
+                            futureCount1: totalMedicines,
+                            label1: 'Total no of Medicines',
+                            futureCount2: medicineGroups,
+                            label2: 'Medicine Groups',
+                            onTapButton: () {
+                              // TODO: Handle navigation
+                            },
                           ),
-                          _buildDashboardCard(
-                              'Total no of Orders', totalOrders),
-                          _buildDashboardCard(
-                              'Frequently Bought Item', frequentlyBoughtItem,
-                              isItemName: true),
+
+                          // Orders Card
+                          _buildInfoCard(
+                            title: 'Orders',
+                            buttonLabel: 'View Orders',
+                            futureCount1: totalOrders,
+                            label1: 'Total no of Orders',
+                            futureCount2: frequentlyBoughtItem,
+                            label2: 'Frequently Bought Item',
+                            isItemName: true,
+                            onTapButton: () {
+                              // TODO: Handle navigation
+                            },
+                          ),
                         ],
                       ),
                     ),
@@ -292,7 +232,85 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
     );
   }
 
-  Widget _buildDashboardCard(String title, Future<dynamic> futureData,
+  Widget _buildInfoCard({
+    required String title,
+    required String buttonLabel,
+    required Future<dynamic> futureCount1,
+    required String label1,
+    required Future<dynamic> futureCount2,
+    required String label2,
+    bool isItemName = false,
+    VoidCallback? onTapButton,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: -4,
+              blurRadius: 6,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Card(
+          color: Colors.white,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            side: const BorderSide(color: Colors.grey, width: 1),
+          ),
+          margin: const EdgeInsets.all(8.0),
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: onTapButton,
+                      child: Text(
+                        buttonLabel,
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
+                ),
+                const Divider(),
+                IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                          child: _buildStatisticCounter(futureCount1, label1)),
+                      const VerticalDivider(),
+                      Expanded(
+                          child: _buildStatisticCounter(futureCount2, label2,
+                              isItemName: isItemName)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStatisticCounter(Future<dynamic> futureData, String label,
       {bool isItemName = false}) {
     return FutureBuilder<dynamic>(
       future: futureData,
@@ -302,40 +320,24 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
-          return ListTile(
-            title: Text(title),
-            subtitle: isItemName ? null : const Text('Tap to see details'),
-            trailing:
-                Text(isItemName ? snapshot.data : snapshot.data.toString()),
-            onTap: () {},
-          );
-        }
-      },
-    );
-  }
-
-  Widget _buildStatisticCounter(Future<int> counter, String label) {
-    return FutureBuilder<int>(
-      future: counter,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
-        } else if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
-        } else {
+          // The data is expected to be a String if isItemName is true, int otherwise.
+          String dataText =
+              isItemName ? snapshot.data ?? 'N/A' : snapshot.data.toString();
           return Padding(
-            padding: const EdgeInsets.symmetric(
-                vertical: 8.0), // Add vertical padding
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${snapshot.data ?? 'N/A'}',
+                  dataText,
                   style: const TextStyle(
                     fontWeight: FontWeight.w900,
-                    fontSize: 22.0,
+                    fontSize: 20.0,
                   ),
+                ),
+                const SizedBox(
+                  height: 5,
                 ),
                 Text(
                   label,
