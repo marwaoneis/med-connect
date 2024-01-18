@@ -64,7 +64,6 @@ class PatientScreenState extends State<PatientScreen> {
                 children: <Widget>[
                   TopBarWithBackground(
                     leadingContent: CircleAvatar(
-                      // backgroundColor: Colors.grey[200],
                       child: Text(
                         firstName[0],
                         style: const TextStyle(color: Color(0xFF0D4C92)),
