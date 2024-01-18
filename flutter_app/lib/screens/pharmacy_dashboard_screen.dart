@@ -68,9 +68,12 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
         ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
     final response =
         await apiService.fetchData('medicines/bypharmacy/$pharmacyId');
-    // The below line assumes you have an endpoint that returns medicines with their groups
-    final groups =
-        response.map((m) => m.group).toSet(); // Extracts unique groups
+    // Assuming the response is a list of medicines
+    List<Medicine> medicines = List<Medicine>.from(
+      response.map((x) => Medicine.fromJson(x)),
+    );
+    // Getting the distinct groups
+    final groups = medicines.map((m) => m.medicineDetails.first.group).toSet();
     return groups.length;
   }
 
