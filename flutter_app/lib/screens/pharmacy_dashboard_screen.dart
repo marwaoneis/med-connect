@@ -155,6 +155,7 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
                   Expanded(
                     child: NoGlowScrollWrapper(
                       child: ListView(
+                        padding: const EdgeInsets.only(top: 15.0),
                         children: <Widget>[
                           // Inventory Card
                           _buildInfoCard(
@@ -283,7 +284,8 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
                       onPressed: onTapButton,
                       child: Text(
                         buttonLabel,
-                        style: const TextStyle(fontSize: 15),
+                        style: const TextStyle(
+                            fontSize: 15, color: Color(0xFF0D4C92)),
                       ),
                     ),
                   ],
