@@ -15,7 +15,12 @@ const medicationOrderSchema = new mongoose.Schema(
     prescriptionId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Prescription",
-      required: true,
+      required: false,
+    },
+    medicineId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Medicine",
+      required: false, // This is not required since an order might be linked to a prescription
     },
   },
   { timestamps: true }
