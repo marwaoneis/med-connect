@@ -1,19 +1,19 @@
 class MedicationOrder {
   final String patientId;
   final String pharmacyId;
-  final String prescriptionId;
+  final String medicineId;
 
   MedicationOrder({
     required this.patientId,
     required this.pharmacyId,
-    required this.prescriptionId,
+    required this.medicineId,
   });
 
   factory MedicationOrder.fromJson(Map<String, dynamic> json) {
     return MedicationOrder(
       patientId: json['patientId'],
       pharmacyId: json['pharmacyId'],
-      prescriptionId: json['prescriptionId'],
+      medicineId: json['medicineId'],
     );
   }
 }
