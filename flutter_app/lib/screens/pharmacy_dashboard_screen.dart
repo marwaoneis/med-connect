@@ -90,7 +90,6 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
     final response =
         await apiService.fetchData('medication-orders/pharmacy/$pharmacyId');
 
-    // Assuming the response is a list of medication orders
     List<MedicationOrder> orders = List<MedicationOrder>.from(
       response.map((x) => MedicationOrder.fromJson(x)),
     );
@@ -143,10 +142,7 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
                     ),
                     titleContent: Text(
                       'Welcome $username',
-                      style: const TextStyle(
-                          fontSize: 20,
-                          // fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                      style: const TextStyle(fontSize: 20, color: Colors.white),
                     ),
                     trailingContent: IconButton(
                       icon: SvgPicture.asset(
@@ -160,10 +156,87 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
                     child: NoGlowScrollWrapper(
                       child: ListView(
                         children: <Widget>[
-                          _buildDashboardCard(
-                              'Total no of Medicines', totalMedicines),
-                          _buildDashboardCard(
-                              'Medicine Groups', medicineGroups),
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.2),
+                                    spreadRadius: -4,
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: Card(
+                                color: Colors.white,
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  side: const BorderSide(
+                                      color: Colors.grey, width: 1),
+                                ),
+                                margin: const EdgeInsets.all(8.0),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          const Padding(
+                                            padding: EdgeInsets.only(left: 8.0),
+                                            child: Text(
+                                              'Inventory',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20.0,
+                                              ),
+                                            ),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              // TODO: Navigate to configuration
+                                            },
+                                            child: const Text(
+                                              'Go to Configuration',
+                                              style: TextStyle(fontSize: 15),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const Divider(),
+                                      IntrinsicHeight(
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Expanded(
+                                                child: _buildStatisticCounter(
+                                                    totalMedicines,
+                                                    'Total no of Medicines')),
+                                            const VerticalDivider(),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Expanded(
+                                                child: _buildStatisticCounter(
+                                                    medicineGroups,
+                                                    'Medicine Groups')),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                           _buildDashboardCard(
                               'Total no of Orders', totalOrders),
                           _buildDashboardCard(
