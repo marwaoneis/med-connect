@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../api/api_service.dart';
 import '../config/request_config.dart';
+import '../models/medicine_model.dart';
 import '../providers/auth_provider.dart';
 import '../widgets/footer.dart';
 import '../widgets/no_glow_scroll.dart';
@@ -54,8 +55,11 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
         ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
     final response =
         await apiService.fetchData('medicines/bypharmacy/$pharmacyId');
-    // The below line assumes that the response is a list of medicines
-    return response.length;
+    // Assuming the response is a list of medicines
+    List<Medicine> medicines = List<Medicine>.from(
+      response.map((x) => Medicine.fromJson(x)),
+    );
+    return medicines.length;
   }
 
   Future<int> _fetchMedicineGroups(String pharmacyId) async {
