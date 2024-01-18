@@ -52,27 +52,42 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
     var headers = RequestConfig.getHeaders(context);
     final apiService =
         ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
-    final medicines =
+    final response =
         await apiService.fetchData('medicines/bypharmacy/$pharmacyId');
-    return medicines.length;
+    // The below line assumes that the response is a list of medicines
+    return response.length;
   }
 
   Future<int> _fetchMedicineGroups(String pharmacyId) async {
-    // This function should call an API endpoint that returns distinct groups of medicines
-    // For now, it's not clear how your API handles this, so this is a placeholder
-    return 0;
+    var headers = RequestConfig.getHeaders(context);
+    final apiService =
+        ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
+    final response =
+        await apiService.fetchData('medicines/bypharmacy/$pharmacyId');
+    // The below line assumes you have an endpoint that returns medicines with their groups
+    final groups =
+        response.map((m) => m.group).toSet(); // Extracts unique groups
+    return groups.length;
   }
 
   Future<int> _fetchTotalOrders(String pharmacyId) async {
-    // This function should call an API endpoint that returns orders for the pharmacy
-    // Placeholder for now as the orders endpoint is not provided
-    return 0;
+    var headers = RequestConfig.getHeaders(context);
+    final apiService =
+        ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
+    final response =
+        await apiService.fetchData('orders/bypharmacy/$pharmacyId');
+    // The below line assumes that the response is a list of orders
+    return response.length;
   }
 
   Future<String> _fetchFrequentlyBoughtItem(String pharmacyId) async {
-    // This function should call an API endpoint that returns the most frequently bought item
-    // Placeholder for now as the logic for determining this is not provided
-    return 'N/A';
+    var headers = RequestConfig.getHeaders(context);
+    final apiService =
+        ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
+    final response =
+        await apiService.fetchData('orders/mostfrequentitem/$pharmacyId');
+    // The below line assumes that the backend calculates the most frequent item and returns it
+    return response['name'];
   }
 
   @override
@@ -187,7 +202,7 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
         } else {
           return ListTile(
             title: Text(title),
-            subtitle: isItemName ? null : Text('Tap to see details'),
+            subtitle: isItemName ? null : const Text('Tap to see details'),
             trailing:
                 Text(isItemName ? snapshot.data : snapshot.data.toString()),
             onTap: () {},
