@@ -313,4 +313,40 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
       },
     );
   }
+
+  Widget _buildStatisticCounter(Future<int> counter, String label) {
+    return FutureBuilder<int>(
+      future: counter,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+                vertical: 8.0), // Add vertical padding
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${snapshot.data ?? 'N/A'}',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 22.0,
+                  ),
+                ),
+                Text(
+                  label,
+                  style: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          );
+        }
+      },
+    );
+  }
 }
