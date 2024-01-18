@@ -18,13 +18,27 @@ const getFrequentMedicationItemByPharmacyId = async (req, res) => {
 
     const items = await MedicationOrder.aggregate([
       { $match: { pharmacyId: new mongoose.Types.ObjectId(pharmacyId) } },
-      { $unwind: "$medicationItems" },
-      { $group: { _id: "$medicationItems", count: { $sum: 1 } } },
+      {
+        $lookup: {
+          from: "medicines",
+          localField: "medicineId",
+          foreignField: "_id",
+          as: "medicine",
+        },
+      },
+      { $unwind: "$medicine" },
+      { $unwind: "$medicine.medicineDetails" },
+      {
+        $group: {
+          _id: "$medicine.medicineDetails.name",
+          count: { $sum: 1 },
+        },
+      },
       { $sort: { count: -1 } },
       { $limit: 1 },
     ]);
 
-    if (items.length === 0) {
+    if (items.length === 0 || !items[0]._id) {
       return res.status(404).json({ message: "No items found" });
     }
 
