@@ -15,6 +15,10 @@ router.get(
   medicationOrderController.getMedicationOrdersByPatientId
 );
 router.get(
+  "/medication-orders/frequentItem/:pharmacyId",
+  medicationOrderController.getFrequentMedicationItemByPharmacyId
+);
+router.get(
   "/medication-orders/pharmacy/:pharmacyId",
   medicationOrderController.getMedicationOrdersByPharmacyId
 );
