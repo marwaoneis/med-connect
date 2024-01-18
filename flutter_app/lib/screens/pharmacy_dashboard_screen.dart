@@ -296,6 +296,9 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
                       Expanded(
                           child: _buildStatisticCounter(futureCount1, label1)),
                       const VerticalDivider(),
+                      const SizedBox(
+                        width: 5,
+                      ),
                       Expanded(
                           child: _buildStatisticCounter(futureCount2, label2,
                               isItemName: isItemName)),
@@ -320,7 +323,6 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
-          // The data is expected to be a String if isItemName is true, int otherwise.
           String dataText =
               isItemName ? snapshot.data ?? 'N/A' : snapshot.data.toString();
           return Padding(
