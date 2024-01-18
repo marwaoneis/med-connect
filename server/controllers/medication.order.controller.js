@@ -11,6 +11,31 @@ const createMedicationOrder = async (req, res) => {
   }
 };
 
+const getFrequentMedicationItemByPharmacyId = async (req, res) => {
+  try {
+    const pharmacyId = req.params.pharmacyId;
+    const mongoose = require("mongoose");
+
+    const items = await MedicationOrder.aggregate([
+      { $match: { pharmacyId: new mongoose.Types.ObjectId(pharmacyId) } },
+      { $unwind: "$medicationItems" },
+      { $group: { _id: "$medicationItems", count: { $sum: 1 } } },
+      { $sort: { count: -1 } },
+      { $limit: 1 },
+    ]);
+
+    if (items.length === 0) {
+      return res.status(404).json({ message: "No items found" });
+    }
+
+    const mostFrequentItem = items[0]._id;
+    res.json({ name: mostFrequentItem });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 // Get all medication orders by patientId
 const getMedicationOrdersByPatientId = async (req, res) => {
   try {
@@ -84,6 +109,7 @@ module.exports = {
   createMedicationOrder,
   getMedicationOrdersByPatientId,
   getMedicationOrdersByPharmacyId,
+  getFrequentMedicationItemByPharmacyId,
   getMedicationOrderById,
   updateMedicationOrderById,
   deleteMedicationOrderById,
