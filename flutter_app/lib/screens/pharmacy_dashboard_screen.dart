@@ -56,7 +56,6 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
         ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
     final response =
         await apiService.fetchData('medicines/bypharmacy/$pharmacyId');
-    // Assuming the response is a list of medicines
     List<Medicine> medicines = List<Medicine>.from(
       response.map((x) => Medicine.fromJson(x)),
     );
@@ -69,13 +68,19 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
         ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
     final response =
         await apiService.fetchData('medicines/bypharmacy/$pharmacyId');
-    // Assuming the response is a list of medicines
-    List<Medicine> medicines = List<Medicine>.from(
-      response.map((x) => Medicine.fromJson(x)),
-    );
-    // Getting the distinct groups
-    final groups = medicines.map((m) => m.medicineDetails.first.group).toSet();
-    return groups.length;
+
+    if (response is! List) {
+      throw 'Expected list of medicines, got: $response';
+    }
+
+    final allMedicineDetails = response
+        .expand((medicine) => (medicine['medicineDetails'] as List))
+        .toList();
+
+    final uniqueGroups =
+        allMedicineDetails.map((detail) => detail['group']).toSet();
+
+    return uniqueGroups.length;
   }
 
   Future<int> _fetchTotalOrders(String pharmacyId) async {
@@ -83,7 +88,7 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
     final apiService =
         ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
     final response =
-        await apiService.fetchData('medicationOrders/bypharmacy/$pharmacyId');
+        await apiService.fetchData('medication-orders/pharmacy/$pharmacyId');
     // Assuming the response is a list of medication orders
     List<MedicationOrder> orders = List<MedicationOrder>.from(
       response.map((x) => MedicationOrder.fromJson(x)),
@@ -112,7 +117,7 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
           (BuildContext context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
-            final String firstName = snapshot.data?['firstName'] ?? 'N/A';
+            final String username = snapshot.data?['username'] ?? 'N/A';
 
             return Scaffold(
               body: Column(
@@ -120,12 +125,12 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
                   TopBarWithBackground(
                     leadingContent: CircleAvatar(
                       child: Text(
-                        firstName[0],
+                        username[0],
                         style: const TextStyle(color: Color(0xFF0D4C92)),
                       ),
                     ),
                     titleContent: Text(
-                      'Welcome $firstName',
+                      'Welcome $username',
                       style: const TextStyle(
                           fontSize: 20,
                           // fontWeight: FontWeight.bold,
@@ -141,20 +146,18 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
                   ),
                   Expanded(
                     child: NoGlowScrollWrapper(
-                      child: SingleChildScrollView(
-                        child: ListView(
-                          children: <Widget>[
-                            _buildDashboardCard(
-                                'Total no of Medicines', totalMedicines),
-                            _buildDashboardCard(
-                                'Medicine Groups', medicineGroups),
-                            _buildDashboardCard(
-                                'Total no of Orders', totalOrders),
-                            _buildDashboardCard(
-                                'Frequently Bought Item', frequentlyBoughtItem,
-                                isItemName: true),
-                          ],
-                        ),
+                      child: ListView(
+                        children: <Widget>[
+                          _buildDashboardCard(
+                              'Total no of Medicines', totalMedicines),
+                          _buildDashboardCard(
+                              'Medicine Groups', medicineGroups),
+                          _buildDashboardCard(
+                              'Total no of Orders', totalOrders),
+                          _buildDashboardCard(
+                              'Frequently Bought Item', frequentlyBoughtItem,
+                              isItemName: true),
+                        ],
                       ),
                     ),
                   ),
