@@ -96,9 +96,12 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
     final apiService =
         ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
     final response =
-        await apiService.fetchData('orders/mostfrequentitem/$pharmacyId');
-    // The below line assumes that the backend calculates the most frequent item and returns it
-    return response['name'];
+        await apiService.fetchData('medicationOrders/frequentItem/$pharmacyId');
+    // Assuming the response is a map with a 'name' key for the item
+    if (response.isNotEmpty) {
+      return response['name'];
+    }
+    return 'N/A';
   }
 
   @override
