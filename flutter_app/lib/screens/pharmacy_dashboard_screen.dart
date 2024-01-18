@@ -102,13 +102,23 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
     var headers = RequestConfig.getHeaders(context);
     final apiService =
         ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
-    final response = await apiService
-        .fetchData('medication-orders/frequentItem/$pharmacyId');
-    // Assuming the response is a map with a 'name' key for the item
-    if (response.isNotEmpty) {
-      return response['name'];
+
+    try {
+      final response = await apiService
+          .fetchData('medication-orders/frequentItem/$pharmacyId');
+
+      if (response != null && response['name'] != null) {
+        print("Frequently Bought Item: ${response['name']}");
+        return response['name'];
+      } else {
+        // Handle null or missing 'name' key
+        print("No frequently bought item found or name is null");
+        return 'N/A';
+      }
+    } catch (e) {
+      print('Caught an exception: $e');
+      return 'N/A';
     }
-    return 'N/A';
   }
 
   @override
@@ -127,7 +137,7 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
                   TopBarWithBackground(
                     leadingContent: CircleAvatar(
                       child: Text(
-                        username[0],
+                        username[0].toUpperCase(),
                         style: const TextStyle(color: Color(0xFF0D4C92)),
                       ),
                     ),
