@@ -140,7 +140,6 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
         ),
       );
     } catch (e) {
-      // Handle exceptions, such as when fetching data fails.
       print('Error fetching data: $e');
     }
   }
