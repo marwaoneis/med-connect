@@ -28,104 +28,150 @@ class PharmacyMedicineInfoScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF0D4C92).withOpacity(0.2),
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      const Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Text(
-                          'Medicine',
-                          style: TextStyle(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    buildInfoBox(
+                      context,
+                      title: 'Medicine',
+                      leftValue: medicine.id,
+                      leftTitle: 'Medicine ID',
+                      rightValue: medicine.medicineDetails.first.group,
+                      rightTitle: 'Medicine Group',
+                    ),
+                    const SizedBox(height: 20),
+                    buildInfoBox(
+                      context,
+                      title: 'Inventory in Qty',
+                      leftValue: '${medicine.stockLevel}',
+                      leftTitle: 'Stock Qty',
+                    ),
+                    const SizedBox(height: 20),
+                    buildInfoBox(
+                      context,
+                      title: 'How to use',
+                      leftValue: medicine.medicineDetails.first.description,
+                      leftTitle: '',
+                    ),
+                    const SizedBox(height: 20),
+                    buildInfoBox(
+                      context,
+                      title: 'Inventory in Qty',
+                      leftValue: medicine.medicineDetails.first.sideEffects,
+                      leftTitle: '',
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildInfoBox(BuildContext context,
+      {required String title,
+      String? leftValue,
+      String? leftTitle,
+      String? rightValue,
+      String? rightTitle}) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFF0D4C92).withOpacity(0.2),
+        border: Border.all(color: Colors.black),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 8, 8, 8),
+            child: Text(
+              title,
+              style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w900,
+                fontSize: 24,
+              ),
+            ),
+          ),
+          const Divider(height: 2, thickness: 2),
+          IntrinsicHeight(
+            child: Row(
+              children: <Widget>[
+                if (leftValue != null && leftTitle != null) ...[
+                  Expanded(
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
                             color: Colors.black,
-                            fontWeight: FontWeight.w900,
-                            fontSize: 24,
                           ),
                         ),
                       ),
-                      IntrinsicHeight(
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                  border: Border(
-                                    top: BorderSide(
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                                padding: const EdgeInsets.all(20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Text(
-                                      medicine.id,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.w900,
-                                        fontSize: 22,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    const Text(
-                                      'Medicine ID',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            leftValue,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w900,
+                              fontSize: 22,
                             ),
-                            Container(
-                              decoration: const BoxDecoration(
-                                border: Border(
-                                  top: BorderSide(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                              padding: const EdgeInsets.all(20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                    medicine.medicineDetails.first.group,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w900,
-                                      fontSize: 22,
-                                    ),
-                                  ),
-                                  Text(
-                                    medicine.medicineDetails.first.group,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            leftTitle,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
                             ),
-                          ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+                if (rightValue != null && rightTitle != null) ...[
+                  Container(
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        top: BorderSide(
+                          color: Colors.black,
                         ),
                       ),
-                    ],
+                    ),
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          rightValue,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w900,
+                            fontSize: 22,
+                          ),
+                        ),
+                        Text(
+                          rightTitle,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ),
+                ],
+              ],
             ),
           ),
         ],
