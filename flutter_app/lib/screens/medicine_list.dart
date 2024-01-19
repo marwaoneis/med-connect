@@ -65,165 +65,170 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                   return const Center(child: Text('No medicines found'));
                 }
 
-                return Container(
-                  margin: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      DataTable(
-                        dataRowHeight: 80,
-                        columnSpacing: 0,
-                        horizontalMargin: 5,
-                        columns: const [
-                          DataColumn(
-                            label: SizedBox(
-                              width: 80,
-                              child: Text(
-                                'Medicine Name',
-                                softWrap: true,
-                                style: TextStyle(
-                                    fontSize: 13, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                          DataColumn(
-                            label: SizedBox(
-                              width: 80,
-                              child: Text('Medicine ID',
+                return SingleChildScrollView(
+                  child: Container(
+                    margin: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        DataTable(
+                          dataRowHeight: 80,
+                          columnSpacing: 0,
+                          horizontalMargin: 5,
+                          columns: const [
+                            DataColumn(
+                              label: SizedBox(
+                                width: 80,
+                                child: Text(
+                                  'Medicine Name',
                                   softWrap: true,
                                   style: TextStyle(
                                       fontSize: 13,
-                                      fontWeight: FontWeight.bold)),
-                            ),
-                          ),
-                          DataColumn(
-                            label: SizedBox(
-                              width: 80,
-                              child: Text('Group Name',
-                                  softWrap: true,
-                                  style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold)),
-                            ),
-                          ),
-                          DataColumn(
-                            label: SizedBox(
-                              width: 90,
-                              child: Text('Qty in Stock',
-                                  softWrap: true,
-                                  style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold)),
-                            ),
-                          ),
-                          DataColumn(
-                            label: SizedBox(
-                              width: 90,
-                              child: Text('Action',
-                                  softWrap: true,
-                                  style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold)),
-                            ),
-                          ),
-                        ],
-                        rows: snapshot.data!
-                            .map(
-                              (medicine) => DataRow(cells: [
-                                DataCell(Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 8, horizontal: 5),
-                                    child: Container(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                            medicine.medicineDetails.first.name,
-                                            style: const TextStyle(
-                                                fontSize: 12))))),
-                                DataCell(Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 8, horizontal: 5),
-                                    child: Container(
-                                        alignment: Alignment.center,
-                                        width: 70,
-                                        child: Text(medicine.id,
-                                            style: const TextStyle(
-                                                fontSize: 12))))),
-                                DataCell(Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 8, horizontal: 5),
-                                    child: Container(
-                                        alignment: Alignment.center,
-                                        width: 70,
-                                        child: Text(
-                                            medicine
-                                                .medicineDetails.first.group,
-                                            style: const TextStyle(
-                                                fontSize: 12))))),
-                                DataCell(Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 8, horizontal: 5),
-                                    child: Container(
-                                        alignment: Alignment.center,
-                                        width: 70,
-                                        child: Text('${medicine.stockLevel}',
-                                            style: const TextStyle(
-                                                fontSize: 12))))),
-                                DataCell(
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 8, horizontal: 5),
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      width: 100,
-                                      child: TextButton(
-                                        onPressed: () {},
-                                        style: TextButton.styleFrom(
-                                          padding: const EdgeInsets.only(
-                                            left: 0,
-                                            right: 50,
-                                            top: 4,
-                                            bottom: 4,
-                                          ),
-                                        ),
-                                        child: const Text('View Full Detail',
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: Colors.black)),
-                                      ),
-                                    ),
-                                  ),
+                                      fontWeight: FontWeight.bold),
                                 ),
-                              ]),
-                            )
-                            .toList(),
-                      ),
-                      const SizedBox(height: 12),
-                      Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            ElevatedButton.icon(
-                              onPressed: () {},
-                              icon: const Icon(Icons.add, color: Colors.white),
-                              label: const Text(
-                                'Add Medicine',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
                               ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFFE93B81),
-                                minimumSize: const Size(50, 50),
+                            ),
+                            DataColumn(
+                              label: SizedBox(
+                                width: 80,
+                                child: Text('Medicine ID',
+                                    softWrap: true,
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                            ),
+                            DataColumn(
+                              label: SizedBox(
+                                width: 80,
+                                child: Text('Group Name',
+                                    softWrap: true,
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                            ),
+                            DataColumn(
+                              label: SizedBox(
+                                width: 90,
+                                child: Text('Qty in Stock',
+                                    softWrap: true,
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                            ),
+                            DataColumn(
+                              label: SizedBox(
+                                width: 90,
+                                child: Text('Action',
+                                    softWrap: true,
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold)),
                               ),
                             ),
                           ],
+                          rows: snapshot.data!
+                              .map(
+                                (medicine) => DataRow(cells: [
+                                  DataCell(Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8, horizontal: 5),
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                              medicine
+                                                  .medicineDetails.first.name,
+                                              style: const TextStyle(
+                                                  fontSize: 12))))),
+                                  DataCell(Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8, horizontal: 5),
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          width: 70,
+                                          child: Text(medicine.id,
+                                              style: const TextStyle(
+                                                  fontSize: 12))))),
+                                  DataCell(Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8, horizontal: 5),
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          width: 70,
+                                          child: Text(
+                                              medicine
+                                                  .medicineDetails.first.group,
+                                              style: const TextStyle(
+                                                  fontSize: 12))))),
+                                  DataCell(Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8, horizontal: 5),
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          width: 70,
+                                          child: Text('${medicine.stockLevel}',
+                                              style: const TextStyle(
+                                                  fontSize: 12))))),
+                                  DataCell(
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8, horizontal: 5),
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        width: 100,
+                                        child: TextButton(
+                                          onPressed: () {},
+                                          style: TextButton.styleFrom(
+                                            padding: const EdgeInsets.only(
+                                              left: 0,
+                                              right: 50,
+                                              top: 4,
+                                              bottom: 4,
+                                            ),
+                                          ),
+                                          child: const Text('View Full Detail',
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  color: Colors.black)),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                              )
+                              .toList(),
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 12),
+                        Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ElevatedButton.icon(
+                                onPressed: () {},
+                                icon:
+                                    const Icon(Icons.add, color: Colors.white),
+                                label: const Text(
+                                  'Add Medicine',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFFE93B81),
+                                  minimumSize: const Size(50, 50),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
