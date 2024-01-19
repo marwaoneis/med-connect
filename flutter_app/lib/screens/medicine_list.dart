@@ -180,9 +180,7 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                                       alignment: Alignment.center,
                                       width: 100,
                                       child: TextButton(
-                                        onPressed: () {
-                                          // TODO: View details logic
-                                        },
+                                        onPressed: () {},
                                         style: TextButton.styleFrom(
                                           padding: const EdgeInsets.only(
                                             left: 0,
@@ -210,9 +208,7 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             ElevatedButton.icon(
-                              onPressed: () {
-                                // TODO: Add medicine logic
-                              },
+                              onPressed: () {},
                               icon: const Icon(Icons.add, color: Colors.white),
                               label: const Text(
                                 'Add Medicine',
