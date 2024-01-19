@@ -122,19 +122,27 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
   }
 
   void _navigateToInventory(BuildContext context) async {
-    final int resolvedTotalMedicines = await totalMedicines;
-    final int resolvedMedicineGroups = await medicineGroups;
+    final String pharmacyId =
+        Provider.of<Auth>(context, listen: false).getUserId ?? '';
+    try {
+      final int resolvedTotalMedicines = await totalMedicines;
+      final int resolvedMedicineGroups = await medicineGroups;
 
-    if (!mounted) return;
+      if (!mounted) return;
 
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => InventoryScreen(
-          totalMedicines: resolvedTotalMedicines,
-          medicineGroups: resolvedMedicineGroups,
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => InventoryScreen(
+            totalMedicines: resolvedTotalMedicines,
+            medicineGroups: resolvedMedicineGroups,
+            pharmacyId: pharmacyId,
+          ),
         ),
-      ),
-    );
+      );
+    } catch (e) {
+      // Handle exceptions, such as when fetching data fails.
+      print('Error fetching data: $e');
+    }
   }
 
   @override

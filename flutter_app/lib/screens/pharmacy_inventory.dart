@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/medicine_list.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 
 import '../widgets/top_bar_with_background.dart';
@@ -6,11 +7,13 @@ import '../widgets/top_bar_with_background.dart';
 class InventoryScreen extends StatelessWidget {
   final int totalMedicines;
   final int medicineGroups;
+  final String pharmacyId;
 
   const InventoryScreen({
     super.key,
     required this.totalMedicines,
     required this.medicineGroups,
+    required this.pharmacyId,
   });
 
   @override
@@ -47,7 +50,15 @@ class InventoryScreen extends StatelessWidget {
                     buttonText: 'View Full List',
                     buttonIcon: IconButton(
                       icon: const Icon(Icons.arrow_forward),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => MedicineListScreen(
+                              pharmacyId: pharmacyId,
+                            ),
+                          ),
+                        );
+                      },
                     ),
                     borderColor: const Color(0xFF0D4C92),
                     buttonColor: const Color(0xFF0093E9).withOpacity(0.3),
@@ -86,7 +97,7 @@ class InventoryScreen extends StatelessWidget {
     required Color buttonColor,
   }) {
     return Card(
-      margin: const EdgeInsets.only(bottom: 12.0), // Space between cards
+      margin: const EdgeInsets.only(bottom: 12.0),
       color: Colors.white,
       elevation: 0,
       shape: RoundedRectangleBorder(
