@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/pharmacy_inventory.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../api/api_service.dart';
@@ -120,6 +121,22 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
     }
   }
 
+  void _navigateToInventory(BuildContext context) async {
+    final int resolvedTotalMedicines = await totalMedicines;
+    final int resolvedMedicineGroups = await medicineGroups;
+
+    if (!mounted) return;
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => InventoryScreen(
+          totalMedicines: resolvedTotalMedicines,
+          medicineGroups: resolvedMedicineGroups,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, dynamic>>(
@@ -165,9 +182,7 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
                             label1: 'Total no of Medicines',
                             futureCount2: medicineGroups,
                             label2: 'Medicine Groups',
-                            onTapButton: () {
-                              // TODO: Handle navigation
-                            },
+                            onTapButton: () => _navigateToInventory(context),
                           ),
 
                           // Orders Card
