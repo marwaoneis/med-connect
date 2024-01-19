@@ -13,7 +13,7 @@ router.put("/medicines/:id", medicineController.updateMedicineById);
 router.delete("/medicines/:id", medicineController.deleteMedicineById);
 router.delete(
   "/medicines/bypharmacy/:id/:pharmacyId",
-  medicineController.deleteMedicinesByPharmacyId
+  medicineController.deleteMedicineInPharmacy
 );
 
 module.exports = router;

@@ -78,17 +78,21 @@ const deleteMedicineById = async (req, res) => {
   }
 };
 
-const deleteMedicinesByPharmacyId = async (req, res) => {
+const deleteMedicineInPharmacy = async (req, res) => {
   try {
-    const result = await Medicine.deleteMany({
-      pharmacyId: req.params.pharmacyId,
+    const { medicineId, pharmacyId } = req.params;
+    const medicine = await Medicine.findOneAndDelete({
+      _id: medicineId,
+      pharmacyId: pharmacyId,
     });
-    if (result.deletedCount === 0) {
+
+    if (!medicine) {
       return res
         .status(404)
-        .json({ error: "No medicines found for the given pharmacy ID" });
+        .json({ error: "Medicine not found in the specified pharmacy" });
     }
-    res.status(200).json({ message: "Medicines deleted" });
+
+    res.status(204).json({ message: "Medicine deleted from the pharmacy" });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -100,6 +104,6 @@ module.exports = {
   getMedicineById,
   updateMedicineById,
   deleteMedicineById,
-  deleteMedicinesByPharmacyId,
+  deleteMedicineInPharmacy,
   getMedicinesByPharmacyId,
 };
