@@ -189,7 +189,9 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     PharmacyMedicineInfoScreen(
-                                                        medicine: medicine),
+                                                  medicine: medicine,
+                                                  pharmacyId: widget.pharmacyId,
+                                                ),
                                               ),
                                             );
                                           },
