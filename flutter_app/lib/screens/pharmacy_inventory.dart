@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
+
+import '../widgets/top_bar_with_background.dart';
 
 class InventoryScreen extends StatelessWidget {
   final int totalMedicines;
@@ -14,33 +16,61 @@ class InventoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Inventory'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            _buildStatisticCard(
-              context,
-              iconData: Icons.medical_services,
-              statistic: totalMedicines.toString(),
-              label: 'Medicines Available',
-              buttonText: 'View Full List',
-              borderColor: Colors.blue,
-              buttonColor: Colors.lightBlue.shade100,
+      body: Column(
+        children: <Widget>[
+          TopBarWithBackground(
+            leadingContent: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.white),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
-            _buildStatisticCard(
-              context,
-              iconData: Icons.group_work,
-              statistic: medicineGroups.toString(),
-              label: 'Medicine Groups',
-              buttonText: 'View Groups',
-              borderColor: Colors.pink,
-              buttonColor: Colors.pink.shade100,
+            titleContent: const Text(
+              'Inventory',
+              style: TextStyle(fontSize: 20, color: Colors.white),
             ),
-          ],
-        ),
+            trailingContent: const Text(
+              '',
+              style: TextStyle(fontSize: 20, color: Colors.transparent),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: ListView(
+                children: [
+                  _buildStatisticCard(
+                    context,
+                    iconData: Icons.medical_services,
+                    statistic: totalMedicines.toString(),
+                    label: 'Medicines Available',
+                    buttonText: 'View Full List',
+                    buttonIcon: IconButton(
+                      icon: const Icon(Icons.arrow_forward),
+                      onPressed: () {},
+                    ),
+                    borderColor: const Color(0xFF0D4C92),
+                    buttonColor: const Color(0xFF0093E9).withOpacity(0.3),
+                  ),
+                  const SizedBox(height: 10),
+                  _buildStatisticCard(
+                    context,
+                    iconData: Icons.group_work,
+                    statistic: medicineGroups.toString(),
+                    label: 'Medicine Groups',
+                    buttonText: 'View Groups',
+                    buttonIcon: IconButton(
+                      icon: const Icon(Icons.arrow_forward),
+                      onPressed: () {},
+                    ),
+                    borderColor: const Color(0xFFE93B81),
+                    buttonColor: const Color(0xFFFF96AD).withOpacity(0.4),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -51,36 +81,49 @@ class InventoryScreen extends StatelessWidget {
     required String statistic,
     required String label,
     required String buttonText,
+    required Widget? buttonIcon,
     required Color borderColor,
     required Color buttonColor,
   }) {
     return Card(
+      margin: const EdgeInsets.only(bottom: 12.0), // Space between cards
+      color: Colors.white,
+      elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
         side: BorderSide(color: borderColor, width: 2),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(top: 16.0),
         child: Column(
           children: [
             Icon(iconData, size: 48.0, color: borderColor),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             Text(statistic,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-            SizedBox(height: 4.0),
-            Text(label, style: TextStyle(fontSize: 16)),
-            SizedBox(height: 16.0),
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 4.0),
+            Text(label, style: const TextStyle(fontSize: 16)),
+            const SizedBox(height: 16.0),
             Container(
+              width: double.infinity,
+              height: 60.0,
+              alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: buttonColor,
                 borderRadius: BorderRadius.circular(5.0),
                 border: Border.all(color: borderColor, width: 2),
               ),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
-                child: Text(buttonText, style: TextStyle(fontSize: 16)),
-              ),
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: buttonIcon != null
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(buttonText, style: const TextStyle(fontSize: 16)),
+                        buttonIcon,
+                      ],
+                    )
+                  : Text(buttonText, style: const TextStyle(fontSize: 16)),
             ),
           ],
         ),
