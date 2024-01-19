@@ -2,7 +2,7 @@ import 'package:flutter_app/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
 class RequestConfig {
-  static const url = 'http://10.0.2.2:3001';
+  static const url = 'localhost:3001';
   static const Map<String, String> headers = {
     'Content-Type': 'application/json'
   };

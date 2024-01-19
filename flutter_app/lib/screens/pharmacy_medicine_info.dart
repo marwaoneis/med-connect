@@ -3,7 +3,6 @@ import '../models/medicine_model.dart';
 import '../tools/request.dart';
 import '../widgets/no_glow_scroll.dart';
 import '../widgets/top_bar_with_background.dart';
-import 'package:http/http.dart' as http;
 
 class PharmacyMedicineInfoScreen extends StatelessWidget {
   final Medicine medicine;
@@ -100,8 +99,39 @@ class PharmacyMedicineInfoScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(3),
                         elevation: 0,
                       ),
-                      onPressed: () {
-                        // TODO: Implement delete logic
+                      onPressed: () async {
+                        ScaffoldMessengerState scaffoldMessenger =
+                            ScaffoldMessenger.of(context);
+
+                        String route =
+                            '/medicines/bypharmacy/$medicine.id/$pharmacyId';
+
+                        try {
+                          final response = await sendRequest(
+                            route: route,
+                            method: "DELETE",
+                            context: context,
+                          );
+
+                          if (response is! String) {
+                            scaffoldMessenger.showSnackBar(
+                              const SnackBar(
+                                  content:
+                                      Text('Medicine deleted successfully')),
+                            );
+                          } else {
+                            // Handle failure
+                            scaffoldMessenger.showSnackBar(
+                              const SnackBar(
+                                  content: Text('Failed to delete medicine')),
+                            );
+                          }
+                        } catch (e) {
+                          scaffoldMessenger.showSnackBar(
+                            const SnackBar(content: Text('An error occurred')),
+                          );
+                          print(e);
+                        }
                       },
                     ),
                   ),
@@ -122,42 +152,7 @@ class PharmacyMedicineInfoScreen extends StatelessWidget {
                         ),
                         elevation: 0,
                       ),
-                      onPressed: () async {
-                        String route =
-                            '/medicines/bypharmacy/$medicine.id/$pharmacyId';
-
-                        try {
-                          final response = await sendRequest(
-                            route: route,
-                            method: "DELETE",
-                            context: context,
-                          );
-
-                          // Check the response or status code here
-                          // For example, if successful, pop the screen or show a confirmation message
-                          if (response is! String) {
-                            // Assuming successful deletion returns a non-String response
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                  content:
-                                      Text('Medicine deleted successfully')),
-                            );
-                            Navigator.of(context)
-                                .pop(); // Go back to the previous screen
-                          } else {
-                            // Handle failure
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                  content: Text('Failed to delete medicine')),
-                            );
-                          }
-                        } catch (e) {
-                          // Handle any errors here
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('An error occurred')),
-                          );
-                        }
-                      },
+                      onPressed: () async {},
                     ),
                   ),
                 ),
