@@ -12,7 +12,7 @@ router.get("/medicines/:id", medicineController.getMedicineById);
 router.put("/medicines/:id", medicineController.updateMedicineById);
 router.delete("/medicines/:id", medicineController.deleteMedicineById);
 router.delete(
-  "/medicines/bypharmacy/:id/:pharmacyId",
+  "/medicines/bypharmacy/:medicineId/:pharmacyId",
   medicineController.deleteMedicineInPharmacy
 );
 
