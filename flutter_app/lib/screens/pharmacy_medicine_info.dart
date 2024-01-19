@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/medicine_model.dart';
+import '../widgets/no_glow_scroll.dart';
 import '../widgets/top_bar_with_background.dart';
 
 class PharmacyMedicineInfoScreen extends StatelessWidget {
@@ -25,43 +26,45 @@ class PharmacyMedicineInfoScreen extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    buildInfoBox(
-                      context,
-                      title: 'Medicine',
-                      leftValue: medicine.id,
-                      leftTitle: 'Medicine ID',
-                      rightValue: medicine.medicineDetails.first.group,
-                      rightTitle: 'Medicine Group',
-                    ),
-                    const SizedBox(height: 20),
-                    buildInfoBox(
-                      context,
-                      title: 'Inventory in Qty',
-                      leftValue: '${medicine.stockLevel}',
-                      leftTitle: 'Stock Qty',
-                    ),
-                    const SizedBox(height: 20),
-                    buildInfoBox(
-                      context,
-                      title: 'How to use',
-                      leftValue: medicine.medicineDetails.first.description,
-                      leftTitle: '',
-                    ),
-                    const SizedBox(height: 20),
-                    buildInfoBox(
-                      context,
-                      title: 'Inventory in Qty',
-                      leftValue: medicine.medicineDetails.first.sideEffects,
-                      leftTitle: '',
-                    ),
-                  ],
+            child: NoGlowScrollWrapper(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      buildInfoBox(
+                        context,
+                        title: 'Medicine',
+                        leftValue: medicine.id,
+                        leftTitle: 'Medicine ID',
+                        rightValue: medicine.medicineDetails.first.group,
+                        rightTitle: 'Medicine Group',
+                      ),
+                      const SizedBox(height: 20),
+                      buildInfoBox(
+                        context,
+                        title: 'Inventory in Qty',
+                        leftValue: '${medicine.stockLevel}',
+                        leftTitle: 'Stock Qty',
+                      ),
+                      const SizedBox(height: 20),
+                      buildInfoBox(
+                        context,
+                        title: 'How to use',
+                        leftValue: medicine.medicineDetails.first.description,
+                        leftTitle: '',
+                      ),
+                      const SizedBox(height: 20),
+                      buildInfoBox(
+                        context,
+                        title: 'Inventory in Qty',
+                        leftValue: medicine.medicineDetails.first.sideEffects,
+                        leftTitle: '',
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
