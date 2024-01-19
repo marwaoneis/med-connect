@@ -3,6 +3,7 @@ import 'package:flutter_app/widgets/top_bar_with_background.dart';
 import '../api/api_service.dart';
 import '../config/request_config.dart';
 import '../models/medicine_model.dart';
+import 'pharmacy_medicine_info.dart';
 
 class MedicineListScreen extends StatefulWidget {
   final String pharmacyId;
@@ -183,7 +184,15 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                                         alignment: Alignment.center,
                                         width: 100,
                                         child: TextButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PharmacyMedicineInfoScreen(
+                                                        medicine: medicine),
+                                              ),
+                                            );
+                                          },
                                           style: TextButton.styleFrom(
                                             padding: const EdgeInsets.only(
                                               left: 0,
