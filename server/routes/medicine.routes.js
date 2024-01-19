@@ -11,5 +11,9 @@ router.get(
 router.get("/medicines/:id", medicineController.getMedicineById);
 router.put("/medicines/:id", medicineController.updateMedicineById);
 router.delete("/medicines/:id", medicineController.deleteMedicineById);
+router.delete(
+  "/medicines/:pharmacyId",
+  medicineController.deleteMedicinesByPharmacyId
+);
 
 module.exports = router;
