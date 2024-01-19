@@ -3,7 +3,6 @@ import 'package:flutter_app/widgets/top_bar_with_background.dart';
 import '../api/api_service.dart';
 import '../config/request_config.dart';
 import '../models/medicine_model.dart';
-import '../widgets/no_glow_scroll.dart';
 
 class MedicineListScreen extends StatefulWidget {
   final String pharmacyId;
@@ -66,36 +65,66 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                   return const Center(child: Text('No medicines found'));
                 }
 
-                return NoGlowScrollWrapper(
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: DataTable(
-                      columns: const [
-                        DataColumn(label: Text('Medicine Name')),
-                        DataColumn(label: Text('Medicine ID')),
-                        DataColumn(label: Text('Group Name')),
-                        DataColumn(label: Text('Qty in Stock')),
-                        DataColumn(label: Text('Action')),
-                      ],
-                      rows: snapshot.data!
-                          .map(
-                            (medicine) => DataRow(cells: [
-                              DataCell(
-                                  Text(medicine.medicineDetails.first.name)),
-                              DataCell(Text(medicine.id)),
-                              DataCell(
-                                  Text(medicine.medicineDetails.first.group)),
-                              DataCell(Text('${medicine.stockLevel}')),
-                              DataCell(ElevatedButton(
-                                onPressed: () {
-                                  // TODO: View details logic
-                                },
-                                child: const Text('View Full Detail'),
-                              )),
-                            ]),
-                          )
-                          .toList(),
-                    ),
+                return Container(
+                  margin: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    children: [
+                      DataTable(
+                        columns: const [
+                          DataColumn(label: Text('Medicine Name')),
+                          DataColumn(label: Text('Medicine ID')),
+                          DataColumn(label: Text('Group Name')),
+                          DataColumn(label: Text('Qty in Stock')),
+                          DataColumn(label: Text('Action')),
+                        ],
+                        rows: snapshot.data!
+                            .map(
+                              (medicine) => DataRow(cells: [
+                                DataCell(
+                                    Text(medicine.medicineDetails.first.name)),
+                                DataCell(Text(medicine.id)),
+                                DataCell(
+                                    Text(medicine.medicineDetails.first.group)),
+                                DataCell(Text('${medicine.stockLevel}')),
+                                DataCell(ElevatedButton(
+                                  onPressed: () {
+                                    // TODO: View details logic
+                                  },
+                                  child: const Text('View Full Detail'),
+                                )),
+                              ]),
+                            )
+                            .toList(),
+                      ),
+                      const SizedBox(height: 12),
+                      Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ElevatedButton.icon(
+                              onPressed: () {
+                                // TODO: Add medicine logic
+                              },
+                              icon: const Icon(Icons.add, color: Colors.white),
+                              label: const Text(
+                                'Add Medicine',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFFE93B81),
+                                minimumSize: const Size(50, 50),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 );
               },
