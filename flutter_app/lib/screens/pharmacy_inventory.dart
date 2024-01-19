@@ -94,17 +94,19 @@ class InventoryScreen extends StatelessWidget {
         side: BorderSide(color: borderColor, width: 2),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(top: 16.0),
+        padding: const EdgeInsets.only(top: 25.0),
         child: Column(
           children: [
             Icon(iconData, size: 48.0, color: borderColor),
-            const SizedBox(height: 8.0),
+            const SizedBox(height: 15.0),
             Text(statistic,
                 style:
                     const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 4.0),
-            Text(label, style: const TextStyle(fontSize: 16)),
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 15.0),
+            Text(label,
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 30.0),
             Container(
               width: double.infinity,
               height: 60.0,
