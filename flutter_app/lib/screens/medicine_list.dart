@@ -41,7 +41,7 @@ class MedicineListScreenState extends State<MedicineListScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(medicine.medicineDetails.first.name),
-          Text(medicine.),
+          Text(medicine.id),
           Text(medicine.medicineDetails.first.group),
           Text('${medicine.stockLevel}'),
           ElevatedButton(
@@ -73,7 +73,7 @@ class MedicineListScreenState extends State<MedicineListScreen> {
           ),
           Expanded(
             child: FutureBuilder<List<Medicine>>(
-              future: _medicinesFuture,
+              future: medicinesFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
