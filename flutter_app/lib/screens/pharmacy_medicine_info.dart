@@ -66,6 +66,40 @@ class PharmacyMedicineInfoScreen extends StatelessWidget {
               ),
             ),
           ),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment
+                  .spaceEvenly, // This will create space between the buttons
+              children: [
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.delete, color: Color(0xFFE93B81)),
+                  label: const Text('Delete Medicine',
+                      style: TextStyle(fontSize: 18, color: Color(0xFFE93B81))),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white, // Background color
+                    foregroundColor: Colors.red, // Splash color
+                  ),
+                  onPressed: () {
+                    // TODO: Implement delete logic
+                  },
+                ),
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.edit, color: Colors.white),
+                  label: const Text('Edit Details',
+                      style: TextStyle(fontSize: 18, color: Colors.white)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        const Color(0xFF0D4C92), // Background color
+                  ),
+                  onPressed: () {
+                    // TODO: Implement edit details logic
+                  },
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
