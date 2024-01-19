@@ -51,6 +51,9 @@ class MedicineListScreenState extends State<MedicineListScreen> {
             ),
             trailingContent: Container(),
           ),
+          const SizedBox(
+            height: 15,
+          ),
           Expanded(
             child: FutureBuilder<List<Medicine>>(
               future: medicinesFuture,
