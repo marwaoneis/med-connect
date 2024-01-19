@@ -70,32 +70,56 @@ class PharmacyMedicineInfoScreen extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment
-                  .spaceEvenly, // This will create space between the buttons
               children: [
-                ElevatedButton.icon(
-                  icon: const Icon(Icons.delete, color: Color(0xFFE93B81)),
-                  label: const Text('Delete Medicine',
-                      style: TextStyle(fontSize: 18, color: Color(0xFFE93B81))),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white, // Background color
-                    foregroundColor: Colors.red, // Splash color
+                SizedBox(
+                  height: 50,
+                  width: 185,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 10.0),
+                    child: ElevatedButton.icon(
+                      icon: const Icon(Icons.delete, color: Color(0xFFE93B81)),
+                      label: const Text('Delete Medicine',
+                          style: TextStyle(
+                              fontSize: 18, color: Color(0xFFE93B81))),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white, // Background color
+                        foregroundColor: const Color(0xFFE93B81), // Text color
+                        side: const BorderSide(
+                            color: Color(0xFFE93B81)), // Border color
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(10), // Border radius
+                        ),
+                        padding: const EdgeInsets.all(3),
+                        elevation: 0,
+                      ),
+                      onPressed: () {
+                        // TODO: Implement delete logic
+                      },
+                    ),
                   ),
-                  onPressed: () {
-                    // TODO: Implement delete logic
-                  },
                 ),
-                ElevatedButton.icon(
-                  icon: const Icon(Icons.edit, color: Colors.white),
-                  label: const Text('Edit Details',
-                      style: TextStyle(fontSize: 18, color: Colors.white)),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        const Color(0xFF0D4C92), // Background color
+                SizedBox(
+                  height: 50,
+                  width: 185,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10.0),
+                    child: ElevatedButton.icon(
+                      icon: const Icon(Icons.edit, color: Colors.white),
+                      label: const Text('Edit Details',
+                          style: TextStyle(fontSize: 18, color: Colors.white)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF0D4C92),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        elevation: 0,
+                      ),
+                      onPressed: () {
+                        // TODO: Implement edit details logic
+                      },
+                    ),
                   ),
-                  onPressed: () {
-                    // TODO: Implement edit details logic
-                  },
                 ),
               ],
             ),
