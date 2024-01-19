@@ -31,6 +31,7 @@ class PharmacyMedicineInfoScreen extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     color: const Color(0xFF0D4C92).withOpacity(0.2),
+                    border: Border.all(color: Colors.black),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Column(
@@ -38,7 +39,7 @@ class PharmacyMedicineInfoScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       const Padding(
-                        padding: EdgeInsets.all(12),
+                        padding: EdgeInsets.all(20),
                         child: Text(
                           'Medicine',
                           style: TextStyle(
@@ -53,9 +54,12 @@ class PharmacyMedicineInfoScreen extends StatelessWidget {
                           children: <Widget>[
                             Expanded(
                               child: Container(
-                                decoration: BoxDecoration(
-                                  color:
-                                      const Color(0xFF0D4C92).withOpacity(0.2),
+                                decoration: const BoxDecoration(
+                                  border: Border(
+                                    top: BorderSide(
+                                      color: Colors.black,
+                                    ),
+                                  ),
                                 ),
                                 padding: const EdgeInsets.all(20),
                                 child: Column(
@@ -84,31 +88,35 @@ class PharmacyMedicineInfoScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Expanded(
-                              child: Container(
-                                color: const Color(0xFF0D4C92).withOpacity(0.2),
-                                padding: const EdgeInsets.all(20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Text(
-                                      medicine.medicineDetails.first.group,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.w900,
-                                        fontSize: 22,
-                                      ),
-                                    ),
-                                    Text(
-                                      medicine.medicineDetails.first.group,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ],
+                            Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Colors.black,
+                                  ),
                                 ),
+                              ),
+                              padding: const EdgeInsets.all(20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    medicine.medicineDetails.first.group,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 22,
+                                    ),
+                                  ),
+                                  Text(
+                                    medicine.medicineDetails.first.group,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
