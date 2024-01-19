@@ -21,19 +21,23 @@ class MedicineDetails {
 }
 
 class Medicine {
+  final String id;
   final String pharmacyId;
   final List<MedicineDetails> medicineDetails;
   final int stockLevel;
   final double price;
 
-  Medicine(
-      {required this.pharmacyId,
-      required this.medicineDetails,
-      required this.stockLevel,
-      required this.price});
+  Medicine({
+    required this.id,
+    required this.pharmacyId,
+    required this.medicineDetails,
+    required this.stockLevel,
+    required this.price,
+  });
 
   factory Medicine.fromJson(Map<String, dynamic> json) {
     return Medicine(
+      id: json['_id'], // This is where you get the ID from the JSON object
       pharmacyId: json['pharmacyId'],
       medicineDetails: List<MedicineDetails>.from(
           json['medicineDetails'].map((x) => MedicineDetails.fromJson(x))),
