@@ -127,8 +127,33 @@ const updateMedicineByPharmacyId = async (req, res) => {
   }
 };
 
+const addMedicineToPharmacy = async (req, res) => {
+  try {
+    const { pharmacyId } = req.params;
+    const { name, description, sideEffects, group, stockLevel, price } =
+      req.body;
+
+    const newMedicine = new Medicine({
+      pharmacyId: pharmacyId, // Set the pharmacyId from the parameters
+      medicineDetails: [{ name, description, sideEffects, group }], // Set the details from the body
+      stockLevel,
+      price,
+    });
+
+    await newMedicine.save();
+
+    res.status(201).json({
+      message: "New medicine added successfully",
+      medicine: newMedicine,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Error adding medicine", error: error });
+  }
+};
+
 module.exports = {
   createMedicine,
+  addMedicineToPharmacy,
   getAllMedicines,
   getMedicineById,
   updateMedicineById,

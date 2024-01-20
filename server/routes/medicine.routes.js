@@ -14,6 +14,11 @@ router.put(
   "/medicines/:medicineId/bypharmacy/:pharmacyId",
   medicineController.updateMedicineByPharmacyId
 );
+router.post(
+  "/medicines/bypharmacy/:pharmacyId",
+  medicineController.addMedicineToPharmacy
+);
+
 router.delete("/medicines/:id", medicineController.deleteMedicineById);
 router.delete(
   "/medicines/bypharmacy/:medicineId/:pharmacyId",
