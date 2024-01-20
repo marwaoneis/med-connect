@@ -3,6 +3,7 @@ import 'package:flutter_app/widgets/top_bar_with_background.dart';
 import '../api/api_service.dart';
 import '../config/request_config.dart';
 import '../models/medicine_model.dart';
+import 'add_medicine.dart';
 import 'pharmacy_medicine_info.dart';
 
 class MedicineListScreen extends StatefulWidget {
@@ -222,7 +223,14 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               ElevatedButton.icon(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => AddMedicineScreen(
+                                          pharmacyId: widget.pharmacyId),
+                                    ),
+                                  );
+                                },
                                 icon:
                                     const Icon(Icons.add, color: Colors.white),
                                 label: const Text(
