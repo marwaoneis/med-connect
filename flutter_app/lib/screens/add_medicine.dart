@@ -151,24 +151,21 @@ class AddMedicineScreenState extends State<AddMedicineScreen> {
                 ),
                 const SizedBox(height: 20),
                 SizedBox(
-                  width: 200, // Set the button's width
-                  height: 40, // Set the button's height
+                  width: 200,
+                  height: 40,
                   child: ElevatedButton(
                     onPressed: _saveMedicine,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE93B81), // Button color
-                      foregroundColor: Colors.white, // Text color
+                      backgroundColor: const Color(0xFFE93B81),
+                      foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            10), // The border radius of the button
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      padding:
-                          EdgeInsets.zero, // Reset default padding if necessary
+                      padding: EdgeInsets.zero,
                     ),
                     child: const Text(
                       'Save Details',
-                      style: TextStyle(
-                          fontSize: 18), // Adjust font size if necessary
+                      style: TextStyle(fontSize: 18),
                     ),
                   ),
                 ),
@@ -184,6 +181,9 @@ class AddMedicineScreenState extends State<AddMedicineScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const SizedBox(
+          height: 10,
+        ),
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: Text(
@@ -193,10 +193,8 @@ class AddMedicineScreenState extends State<AddMedicineScreen> {
         ),
         Container(
           decoration: BoxDecoration(
-            border: Border.all(
-                color: Colors.grey[400]!), // Set the border color here
-            borderRadius:
-                BorderRadius.circular(10), // Set the border radius here
+            border: Border.all(color: Colors.grey[400]!),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Padding(
             padding:
