@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/widgets/no_glow_scroll.dart';
 import '../models/medicine_group_model.dart';
+import '../tools/request.dart';
 import '../widgets/top_bar_with_background.dart';
 
 class MedicineDetailsScreen extends StatelessWidget {
@@ -10,6 +11,37 @@ class MedicineDetailsScreen extends StatelessWidget {
     super.key,
     required this.medicineGroup,
   });
+
+  Future<void> _removeMedicine(
+      BuildContext context, String medicineId, String pharmacyId) async {
+    final String route = "/medicines/bypharmacy/$medicineId/$pharmacyId";
+    try {
+      print('DELETE request URL: $route');
+
+      final result = await sendRequest(
+        route: route,
+        method: "DELETE",
+        context: context,
+      );
+
+      if (result != null && result['error'] == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Medicine removed successfully')),
+        );
+        // TODO: Update the UI or remove the item from the list
+      } else {
+        // If there is an error message from the server, display it
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: ${result['error']}')),
+        );
+      }
+    } catch (error) {
+      // Handle the error
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to remove medicine: $error')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,9 +134,8 @@ class MedicineDetailsScreen extends StatelessWidget {
                             ),
                             Expanded(
                               child: TextButton.icon(
-                                onPressed: () {
-                                  // TODO: Implement remove medicine logic
-                                },
+                                onPressed: () => _removeMedicine(
+                                    context, medicine.id, medicine.pharmacyId),
                                 icon: const Icon(
                                   Icons.delete,
                                   size: 14,
