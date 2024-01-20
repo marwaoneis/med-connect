@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/medicine_list.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 
+import '../widgets/no_glow_scroll.dart';
 import '../widgets/top_bar_with_background.dart';
 
 class InventoryScreen extends StatelessWidget {
@@ -38,46 +39,48 @@ class InventoryScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: ListView(
-                children: [
-                  _buildStatisticCard(
-                    context,
-                    iconData: Icons.medical_services,
-                    statistic: totalMedicines.toString(),
-                    label: 'Medicines Available',
-                    buttonText: 'View Full List',
-                    buttonIcon: IconButton(
-                      icon: const Icon(Icons.arrow_forward),
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => MedicineListScreen(
-                              pharmacyId: pharmacyId,
+            child: NoGlowScrollWrapper(
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: ListView(
+                  children: [
+                    _buildStatisticCard(
+                      context,
+                      iconData: Icons.medical_services,
+                      statistic: totalMedicines.toString(),
+                      label: 'Medicines Available',
+                      buttonText: 'View Full List',
+                      buttonIcon: IconButton(
+                        icon: const Icon(Icons.arrow_forward),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => MedicineListScreen(
+                                pharmacyId: pharmacyId,
+                              ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
+                      borderColor: const Color(0xFF0D4C92),
+                      buttonColor: const Color(0xFF0093E9).withOpacity(0.3),
                     ),
-                    borderColor: const Color(0xFF0D4C92),
-                    buttonColor: const Color(0xFF0093E9).withOpacity(0.3),
-                  ),
-                  const SizedBox(height: 10),
-                  _buildStatisticCard(
-                    context,
-                    iconData: Icons.group_work,
-                    statistic: medicineGroups.toString(),
-                    label: 'Medicine Groups',
-                    buttonText: 'View Groups',
-                    buttonIcon: IconButton(
-                      icon: const Icon(Icons.arrow_forward),
-                      onPressed: () {},
+                    const SizedBox(height: 10),
+                    _buildStatisticCard(
+                      context,
+                      iconData: Icons.group_work,
+                      statistic: medicineGroups.toString(),
+                      label: 'Medicine Groups',
+                      buttonText: 'View Groups',
+                      buttonIcon: IconButton(
+                        icon: const Icon(Icons.arrow_forward),
+                        onPressed: () {},
+                      ),
+                      borderColor: const Color(0xFFE93B81),
+                      buttonColor: const Color(0xFFFF96AD).withOpacity(0.4),
                     ),
-                    borderColor: const Color(0xFFE93B81),
-                    buttonColor: const Color(0xFFFF96AD).withOpacity(0.4),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
