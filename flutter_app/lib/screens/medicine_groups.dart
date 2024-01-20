@@ -58,18 +58,18 @@ class MedicineGroupsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFFE93B81), // background color
-                onPrimary: Colors.white, // foreground color
-                minimumSize: Size(180, 60),
-              ),
-              onPressed: () {
-                // Implement the logic to add new group
-              },
-              child: Text('Add New Group'),
-            ),
+            // SizedBox(height: 20),
+            // ElevatedButton(
+            //   style: ElevatedButton.styleFrom(
+            //     primary: Color(0xFFE93B81), // background color
+            //     onPrimary: Colors.white, // foreground color
+            //     minimumSize: Size(180, 60),
+            //   ),
+            //   onPressed: () {
+            //     // Implement the logic to add new group
+            //   },
+            //   child: Text('Add New Group'),
+            // ),
           ],
         ),
       ),

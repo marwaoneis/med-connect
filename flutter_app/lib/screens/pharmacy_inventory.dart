@@ -4,6 +4,7 @@ import 'package:flutter_app/screens/medicine_list.dart';
 
 import '../widgets/no_glow_scroll.dart';
 import '../widgets/top_bar_with_background.dart';
+import 'medicine_groups.dart';
 
 class InventoryScreen extends StatelessWidget {
   final int totalMedicines;
@@ -74,7 +75,18 @@ class InventoryScreen extends StatelessWidget {
                       buttonText: 'View Groups',
                       buttonIcon: IconButton(
                         icon: const Icon(Icons.arrow_forward),
-                        onPressed: () {},
+                        onPressed: () {
+                          // Navigate to the MedicineGroupsScreen with the necessary data
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => MedicineGroupsScreen(
+                                totalMedicines: totalMedicines,
+                                medicineGroups: medicineGroups,
+                                pharmacyId: pharmacyId,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                       borderColor: const Color(0xFFE93B81),
                       buttonColor: const Color(0xFFFF96AD).withOpacity(0.4),
