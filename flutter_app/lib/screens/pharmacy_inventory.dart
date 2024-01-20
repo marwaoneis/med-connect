@@ -68,6 +68,7 @@ class InventoryScreenState extends State<InventoryScreen> {
         MaterialPageRoute(
           builder: (context) => MedicineGroupsScreen(
             medicineGroups: medicineGroups,
+            pharmacyId: widget.pharmacyId,
           ),
         ),
       );
