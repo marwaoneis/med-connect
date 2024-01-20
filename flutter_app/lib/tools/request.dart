@@ -44,7 +44,6 @@ Future sendRequest({
     final response = await http.delete(
       url,
       headers: headers,
-      body: json.encode(load),
     );
     final data = json.decode(response.body);
     print(response.body);

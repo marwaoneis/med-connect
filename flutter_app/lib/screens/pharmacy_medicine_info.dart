@@ -102,9 +102,10 @@ class PharmacyMedicineInfoScreen extends StatelessWidget {
                       onPressed: () async {
                         ScaffoldMessengerState scaffoldMessenger =
                             ScaffoldMessenger.of(context);
+                        NavigatorState navigator = Navigator.of(context);
 
                         String route =
-                            '/medicines/bypharmacy/$medicine.id/$pharmacyId';
+                            '/medicines/bypharmacy/${medicine.id}/$pharmacyId';
 
                         try {
                           final response = await sendRequest(
@@ -119,6 +120,7 @@ class PharmacyMedicineInfoScreen extends StatelessWidget {
                                   content:
                                       Text('Medicine deleted successfully')),
                             );
+                            navigator.pop();
                           } else {
                             // Handle failure
                             scaffoldMessenger.showSnackBar(
@@ -130,7 +132,6 @@ class PharmacyMedicineInfoScreen extends StatelessWidget {
                           scaffoldMessenger.showSnackBar(
                             const SnackBar(content: Text('An error occurred')),
                           );
-                          print(e);
                         }
                       },
                     ),
