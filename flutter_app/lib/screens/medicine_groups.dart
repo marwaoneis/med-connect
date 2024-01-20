@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
 class MedicineGroupsScreen extends StatelessWidget {
-  final List<Map<String, dynamic>> medicineGroupsData;
+  final int totalMedicines;
+  final int medicineGroups;
+  final String pharmacyId;
 
   const MedicineGroupsScreen({
     super.key,
-    required this.medicineGroupsData,
+    required this.totalMedicines,
+    required this.medicineGroups,
+    required this.pharmacyId,
   });
 
   @override
@@ -27,9 +31,9 @@ class MedicineGroupsScreen extends StatelessWidget {
                   border: Border.all(color: Colors.grey),
                 ),
                 child: ListView.separated(
-                  itemCount: medicineGroupsData.length,
+                  itemCount: totalMedicines,
                   itemBuilder: (context, index) {
-                    var group = medicineGroupsData[index];
+                    var group = medicineGroups;
                     return Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8.0, vertical: 16),
