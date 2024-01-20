@@ -19,7 +19,6 @@ class MedicineDetailsScreen extends StatelessWidget {
         "/medicines/bypharmacy/$medicineId/$loggedInPharmacyId";
     try {
       print('DELETE request URL: $route');
-
       final result = await sendRequest(
         route: route,
         method: "DELETE",
@@ -30,15 +29,12 @@ class MedicineDetailsScreen extends StatelessWidget {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Medicine removed successfully')),
         );
-        // TODO: Update the UI or remove the item from the list
       } else {
-        // If there is an error message from the server, display it
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error: ${result['error']}')),
         );
       }
     } catch (error) {
-      // Handle the error
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to remove medicine: $error')),
       );
@@ -50,15 +46,14 @@ class MedicineDetailsScreen extends StatelessWidget {
     final filteredMedicines = medicineGroup.medicines
         .where((medicine) => medicine.pharmacyId == loggedInPharmacyId)
         .toList();
+
     return Scaffold(
       body: Column(
         children: <Widget>[
           TopBarWithBackground(
             leadingContent: IconButton(
               icon: const Icon(Icons.arrow_back, color: Colors.white),
-              onPressed: () {
-                Navigator.pop(context);
-              },
+              onPressed: () => Navigator.pop(context),
             ),
             titleContent: Text(
               medicineGroup.groupName,
@@ -75,8 +70,7 @@ class MedicineDetailsScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.grey),
                 ),
-                child: ListView(
-                  padding: EdgeInsets.zero,
+                child: Column(
                   children: [
                     const Padding(
                       padding: EdgeInsets.symmetric(
@@ -85,79 +79,75 @@ class MedicineDetailsScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                            child: Text(
-                              'Medicine Name',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
-                            ),
+                            child: Text('Medicine Name',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold)),
                           ),
                           Expanded(
-                            child: Text(
-                              'No of Medicines',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
-                            ),
+                            child: Text('No of Medicines',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold)),
                           ),
                           Expanded(
-                            child: Text(
-                              'Action',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
-                            ),
+                            child: Text('Action',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold)),
                           ),
                         ],
                       ),
                     ),
                     const Divider(),
-                    ...medicineGroup.medicines.map((medicine) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12.0,
-                          vertical: 13.0,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                medicine.medicineDetails.first.name,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Expanded(
-                              child: Text(
-                                '${medicine.stockLevel}',
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Expanded(
-                              child: TextButton.icon(
-                                onPressed: () => _removeMedicine(
-                                    context, medicine.id, medicine.pharmacyId),
-                                icon: const Icon(
-                                  Icons.delete,
-                                  size: 14,
-                                  color: Color(0xFFE93B81),
+                    Expanded(
+                      child: ListView.builder(
+                        padding: EdgeInsets.zero,
+                        itemCount: filteredMedicines.length,
+                        itemBuilder: (context, index) {
+                          final medicine = filteredMedicines[index];
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12.0, vertical: 13.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    medicine.medicineDetails.first.name,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
-                                label: const Text(
-                                  'Remove from group',
-                                  style: TextStyle(
-                                      fontSize: 12, color: Color(0xFFE93B81)),
+                                Expanded(
+                                  child: Text(
+                                    '${medicine.stockLevel}',
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
-                              ),
+                                Expanded(
+                                  child: TextButton.icon(
+                                    onPressed: () =>
+                                        _removeMedicine(context, medicine.id),
+                                    icon: const Icon(Icons.delete,
+                                        size: 14, color: Color(0xFFE93B81)),
+                                    label: const Text('Remove from group',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: Color(0xFFE93B81))),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      );
-                    }).toList(),
-                    // Additional buttons
+                          );
+                        },
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20.0),
                       child: Row(
@@ -165,8 +155,7 @@ class MedicineDetailsScreen extends StatelessWidget {
                         children: [
                           ElevatedButton.icon(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red, // Background color
-                            ),
+                                backgroundColor: Colors.red),
                             onPressed: () {
                               // TODO: Implement delete group logic
                             },
@@ -175,9 +164,8 @@ class MedicineDetailsScreen extends StatelessWidget {
                                 style: TextStyle(color: Colors.white)),
                           ),
                           ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.green, // Background color
-                            ),
+                            style:
+                                ElevatedButton.styleFrom(primary: Colors.green),
                             onPressed: () {
                               // TODO: Implement add medicine logic
                             },
