@@ -13,6 +13,8 @@ class MedicineGroupsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double containerMaxHeight = MediaQuery.of(context).size.height * 0.6;
+
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -29,14 +31,17 @@ class MedicineGroupsScreen extends StatelessWidget {
             ),
             trailingContent: Container(),
           ),
-          Expanded(
-            child: NoGlowScrollWrapper(
-              child: Container(
-                margin: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF0D4C92).withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.grey),
+          NoGlowScrollWrapper(
+            child: Container(
+              margin: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: const Color(0xFF0D4C92).withOpacity(0.2),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.grey),
+              ),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxHeight: containerMaxHeight,
                 ),
                 child: ListView(
                   padding: EdgeInsets.zero,
