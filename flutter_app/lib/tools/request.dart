@@ -46,7 +46,6 @@ Future sendRequest({
       headers: headers,
     );
     final data = json.decode(response.body);
-    print(response.body);
     return data;
   }
 
