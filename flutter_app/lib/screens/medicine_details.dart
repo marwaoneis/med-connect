@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/medicine_details.dart';
 import 'package:flutter_app/widgets/no_glow_scroll.dart';
 import '../models/medicine_group_model.dart';
 import '../widgets/top_bar_with_background.dart';
 
-class MedicineGroupsScreen extends StatelessWidget {
-  final List<MedicineGroup> medicineGroups;
+class MedicineDetailsScreen extends StatelessWidget {
+  final MedicineGroup medicineGroup;
 
-  const MedicineGroupsScreen({
+  const MedicineDetailsScreen({
     super.key,
-    required this.medicineGroups,
+    required this.medicineGroup,
   });
 
   @override
@@ -24,9 +23,9 @@ class MedicineGroupsScreen extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
-            titleContent: const Text(
-              'Medicine Groups',
-              style: TextStyle(fontSize: 20, color: Colors.white),
+            titleContent: Text(
+              medicineGroup.groupName,
+              style: const TextStyle(fontSize: 20, color: Colors.white),
             ),
             trailingContent: Container(),
           ),
@@ -50,7 +49,7 @@ class MedicineGroupsScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              'Group Name',
+                              'Medicine Name',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
@@ -76,18 +75,18 @@ class MedicineGroupsScreen extends StatelessWidget {
                       ),
                     ),
                     const Divider(),
-                    ...medicineGroups.map((group) {
+                    ...medicineGroup.medicines.map((medicine) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 12.0,
+                          horizontal: 12.0,
+                          vertical: 13.0,
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Expanded(
                               child: Text(
-                                group.groupName,
+                                medicine.medicineDetails.first.name,
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.bold),
@@ -95,34 +94,64 @@ class MedicineGroupsScreen extends StatelessWidget {
                             ),
                             Expanded(
                               child: Text(
-                                '${group.numberOfMedicines}',
+                                '${medicine.stockLevel}',
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.bold),
                               ),
                             ),
                             Expanded(
-                              child: TextButton(
+                              child: TextButton.icon(
                                 onPressed: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          MedicineDetailsScreen(
-                                              medicineGroup: group),
-                                    ),
-                                  );
+                                  // TODO: Implement remove medicine logic
                                 },
-                                child: const Text(
-                                  'View Full Detail',
+                                icon: const Icon(
+                                  Icons.delete,
+                                  size: 14,
+                                  color: Color(0xFFE93B81),
+                                ),
+                                label: const Text(
+                                  'Remove from group',
                                   style: TextStyle(
-                                      fontSize: 16, color: Colors.black),
+                                      fontSize: 12, color: Color(0xFFE93B81)),
                                 ),
                               ),
                             ),
                           ],
                         ),
                       );
-                    }),
+                    }).toList(),
+                    // Additional buttons
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red, // Background color
+                            ),
+                            onPressed: () {
+                              // TODO: Implement delete group logic
+                            },
+                            icon: const Icon(Icons.delete, color: Colors.white),
+                            label: const Text('Delete Group',
+                                style: TextStyle(color: Colors.white)),
+                          ),
+                          ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.green, // Background color
+                            ),
+                            onPressed: () {
+                              // TODO: Implement add medicine logic
+                            },
+                            icon: const Icon(Icons.add, color: Colors.white),
+                            label: const Text('Add Medicine',
+                                style: TextStyle(color: Colors.white)),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
