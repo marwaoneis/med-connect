@@ -21,7 +21,7 @@ class MedicineDetailsScreen extends StatelessWidget {
     final String route =
         "/medicines/bypharmacy/$medicineId/$loggedInPharmacyId";
     try {
-      print('DELETE request URL: $route');
+      // print('DELETE request URL: $route');
       final result = await sendRequest(
         route: route,
         method: "DELETE",
@@ -29,20 +29,20 @@ class MedicineDetailsScreen extends StatelessWidget {
       );
 
       if (result != null && result['error'] == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Medicine removed successfully')),
+        scaffoldMessenger.showSnackBar(
+          const SnackBar(content: Text('Medicine removed successfully')),
         );
-        print('About to navigate back');
-        Navigator.of(context).pop();
-        print('Navigation should have happened');
+        // print('About to navigate back');
+        navigator.pop();
+        // print('Navigation should have happened');
       } else {
         final error = result['error'] ?? 'Unknown error';
-        ScaffoldMessenger.of(context).showSnackBar(
+        scaffoldMessenger.showSnackBar(
           SnackBar(content: Text('Error: $error')),
         );
       }
     } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
+      scaffoldMessenger.showSnackBar(
         SnackBar(
             content: Text('Failed to remove medicine: ${error.toString()}')),
       );
