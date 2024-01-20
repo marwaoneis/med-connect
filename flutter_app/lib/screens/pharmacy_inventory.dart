@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/medicine_list.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 
+import '../api/api_service.dart';
+import '../config/request_config.dart';
+import '../models/medicine_group_model.dart';
+import '../models/medicine_model.dart';
 import '../widgets/no_glow_scroll.dart';
 import '../widgets/top_bar_with_background.dart';
 import 'medicine_groups.dart';
 
-class InventoryScreen extends StatelessWidget {
+class InventoryScreen extends StatefulWidget {
   final int totalMedicines;
   final int medicineGroups;
   final String pharmacyId;
@@ -17,6 +21,60 @@ class InventoryScreen extends StatelessWidget {
     required this.medicineGroups,
     required this.pharmacyId,
   });
+
+  @override
+  InventoryScreenState createState() => InventoryScreenState();
+}
+
+class InventoryScreenState extends State<InventoryScreen> {
+  late Future<List<Medicine>> allMedicines;
+
+  @override
+  void initState() {
+    super.initState();
+    allMedicines = _fetchMedicines(widget.pharmacyId);
+  }
+
+  Future<List<Medicine>> _fetchMedicines(String pharmacyId) async {
+    var headers = RequestConfig.getHeaders(context);
+    final apiService =
+        ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
+    final response =
+        await apiService.fetchData('medicines/bypharmacy/$pharmacyId');
+    return List<Medicine>.from(
+      response.map((x) => Medicine.fromJson(x)),
+    );
+  }
+
+  void _navigateToMedicineGroups(BuildContext context) async {
+    try {
+      final List<Medicine> medicines = await allMedicines;
+
+      Map<String, List<Medicine>> groupedMedicines = {};
+      for (var medicine in medicines) {
+        for (var detail in medicine.medicineDetails) {
+          groupedMedicines.putIfAbsent(detail.group, () => []).add(medicine);
+        }
+      }
+
+      List<MedicineGroup> medicineGroups =
+          groupedMedicines.entries.map((entry) {
+        return MedicineGroup(groupName: entry.key, medicines: entry.value);
+      }).toList();
+
+      if (!mounted) return;
+
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => MedicineGroupsScreen(
+            medicineGroups: medicineGroups,
+          ),
+        ),
+      );
+    } catch (e) {
+      print('Error fetching medicines: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +106,7 @@ class InventoryScreen extends StatelessWidget {
                     _buildStatisticCard(
                       context,
                       iconData: Icons.medical_services,
-                      statistic: totalMedicines.toString(),
+                      statistic: widget.totalMedicines.toString(),
                       label: 'Medicines Available',
                       buttonText: 'View Full List',
                       buttonIcon: IconButton(
@@ -57,7 +115,7 @@ class InventoryScreen extends StatelessWidget {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => MedicineListScreen(
-                                pharmacyId: pharmacyId,
+                                pharmacyId: widget.pharmacyId,
                               ),
                             ),
                           );
@@ -70,22 +128,13 @@ class InventoryScreen extends StatelessWidget {
                     _buildStatisticCard(
                       context,
                       iconData: Icons.group_work,
-                      statistic: medicineGroups.toString(),
+                      statistic: widget.medicineGroups.toString(),
                       label: 'Medicine Groups',
                       buttonText: 'View Groups',
                       buttonIcon: IconButton(
                         icon: const Icon(Icons.arrow_forward),
                         onPressed: () {
-                          // Navigate to the MedicineGroupsScreen with the necessary data
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => MedicineGroupsScreen(
-                                totalMedicines: totalMedicines,
-                                medicineGroups: medicineGroups,
-                                pharmacyId: pharmacyId,
-                              ),
-                            ),
-                          );
+                          _navigateToMedicineGroups(context);
                         },
                       ),
                       borderColor: const Color(0xFFE93B81),
