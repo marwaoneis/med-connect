@@ -32,115 +32,87 @@ class MedicineGroupsScreen extends StatelessWidget {
           Expanded(
             child: NoGlowScrollWrapper(
               child: Container(
-                padding: const EdgeInsets.all(20),
-                child: Column(
+                margin: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF0D4C92).withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.grey),
+                ),
+                child: ListView(
+                  padding: EdgeInsets.zero,
                   children: [
-                    Expanded(
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF0D4C92).withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: Colors.grey),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 12.0, vertical: 12.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'Group Name',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              'No of Medicines',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              'Action',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Divider(),
+                    ...medicineGroups.map((group) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 12.0,
                         ),
-                        child: Column(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 8.0, vertical: 8.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      'Group Name',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      'No of Medicines',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      'Action',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ],
+                            Expanded(
+                              child: Text(
+                                group.groupName,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
-                            const Divider(),
                             Expanded(
-                              child: ListView.separated(
-                                itemCount: medicineGroups.length,
-                                itemBuilder: (context, index) {
-                                  var group = medicineGroups[index];
-                                  return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0, vertical: 16),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            group.groupName,
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            '${group.numberOfMedicines}',
-                                            textAlign: TextAlign.center,
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: TextButton(
-                                            onPressed: () {},
-                                            child: const Text(
-                                              'View Full Detail',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  color: Colors.black),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                                separatorBuilder: (context, index) =>
-                                    const Divider(),
+                              child: Text(
+                                '${group.numberOfMedicines}',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Expanded(
+                              child: TextButton(
+                                onPressed: () {},
+                                child: const Text(
+                                  'View Full Detail',
+                                  style: TextStyle(color: Colors.black),
+                                ),
                               ),
                             ),
                           ],
                         ),
-                      ),
-                    ),
-                    // SizedBox(height: 20),
-                    // ElevatedButton(
-                    //   style: ElevatedButton.styleFrom(
-                    //     primary: Color(0xFFE93B81), // background color
-                    //     onPrimary: Colors.white, // foreground color
-                    //     minimumSize: Size(180, 60),
-                    //   ),
-                    //   onPressed: () {
-                    //     // Implement the logic to add new group
-                    //   },
-                    //   child: Text('Add New Group'),
-                    // ),
+                      );
+                    }),
                   ],
                 ),
               ),
