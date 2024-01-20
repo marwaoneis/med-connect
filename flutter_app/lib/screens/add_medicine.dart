@@ -150,22 +150,26 @@ class AddMedicineScreenState extends State<AddMedicineScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                SizedBox(
-                  width: 200,
-                  height: 40,
-                  child: ElevatedButton(
-                    onPressed: _saveMedicine,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE93B81),
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                Align(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    width: 180,
+                    height: 60,
+                    child: ElevatedButton(
+                      onPressed: _saveMedicine,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFE93B81),
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        padding: EdgeInsets.zero,
                       ),
-                      padding: EdgeInsets.zero,
-                    ),
-                    child: const Text(
-                      'Save Details',
-                      style: TextStyle(fontSize: 18),
+                      child: const Text(
+                        'Save Details',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.normal),
+                      ),
                     ),
                   ),
                 ),

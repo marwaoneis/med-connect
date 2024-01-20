@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/edit_medicine.dart';
 import '../models/medicine_model.dart';
 import '../tools/request.dart';
 import '../widgets/no_glow_scroll.dart';
