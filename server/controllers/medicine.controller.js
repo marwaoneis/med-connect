@@ -98,12 +98,42 @@ const deleteMedicineInPharmacy = async (req, res) => {
   }
 };
 
+const updateMedicineByPharmacyId = async (req, res) => {
+  try {
+    const { medicineId, pharmacyId } = req.params;
+    const updateData = req.body;
+
+    const medicine = await Medicine.findOne({
+      _id: medicineId,
+      pharmacyId: pharmacyId,
+    });
+
+    if (!medicine) {
+      return res
+        .status(404)
+        .json({ error: "Medicine not found in the specified pharmacy" });
+    }
+
+    Object.assign(medicine, updateData);
+
+    await medicine.save();
+
+    res
+      .status(200)
+      .json({ message: "Medicine updated successfully", medicine });
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+    console.error(error);
+  }
+};
+
 module.exports = {
   createMedicine,
   getAllMedicines,
   getMedicineById,
   updateMedicineById,
   deleteMedicineById,
+  updateMedicineByPharmacyId,
   deleteMedicineInPharmacy,
   getMedicinesByPharmacyId,
 };
