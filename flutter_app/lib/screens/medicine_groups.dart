@@ -6,10 +6,12 @@ import '../widgets/top_bar_with_background.dart';
 
 class MedicineGroupsScreen extends StatelessWidget {
   final List<MedicineGroup> medicineGroups;
+  final String pharmacyId;
 
   const MedicineGroupsScreen({
     super.key,
     required this.medicineGroups,
+    required this.pharmacyId,
   });
 
   @override
@@ -108,7 +110,9 @@ class MedicineGroupsScreen extends StatelessWidget {
                                     MaterialPageRoute(
                                       builder: (context) =>
                                           MedicineDetailsScreen(
-                                              medicineGroup: group),
+                                        medicineGroup: group,
+                                        loggedInPharmacyId: pharmacyId,
+                                      ),
                                     ),
                                   );
                                 },
