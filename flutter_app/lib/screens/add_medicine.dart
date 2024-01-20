@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/widgets/no_glow_scroll.dart';
 
+import '../tools/request.dart';
+
 class AddMedicineScreen extends StatefulWidget {
   final String pharmacyId;
 
@@ -18,17 +20,62 @@ class AddMedicineScreenState extends State<AddMedicineScreen> {
   TextEditingController howToUseController = TextEditingController();
   TextEditingController sideEffectsController = TextEditingController();
   String? selectedGroup;
+  TextEditingController priceController = TextEditingController();
 
-  List<String> groups = ['Group 1', 'Group 2', 'Group 3'];
+  List<String> groups = [
+    'Analgesics',
+    'Antibiotics',
+    'Antidepressants',
+    'Antihistamines',
+    'Antipsychotics',
+    'Antivirals',
+    'Bronchodilators',
+    'Diuretics',
+    'Hormones',
+    'Statins',
+    'Anticoagulants',
+    'Immunosuppressants',
+    'Calcium Channel Blockers'
+  ];
 
-  void _saveMedicine() {
+  void _saveMedicine() async {
     if (_formKey.currentState!.validate()) {
-      print('Name: ${nameController.text}');
-      print('ID: ${idController.text}');
-      print('Group: $selectedGroup');
-      print('Quantity: ${quantityController.text}');
-      print('How to Use: ${howToUseController.text}');
-      print('Side Effects: ${sideEffectsController.text}');
+      var medicineData = {
+        'name': nameController.text,
+        'description': howToUseController.text,
+        'sideEffects': sideEffectsController.text,
+        'group': selectedGroup,
+        'stockLevel': int.tryParse(quantityController.text) ?? 0,
+        'price':
+            double.tryParse(priceController.text) ?? 0.0, // parsing to double
+      };
+
+      final String route = '/medicines/bypharmacy/${widget.pharmacyId}';
+
+      try {
+        final response = await sendRequest(
+          route: route,
+          method: "POST",
+          load: medicineData,
+          context: context,
+        );
+
+        if (response != null && response['error'] == null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Medicine added successfully')),
+          );
+          Navigator.of(context).pop();
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text('Failed to add medicine: ${response['error']}')),
+          );
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('An error occurred: $e')),
+        );
+      }
     }
   }
 
@@ -147,6 +194,26 @@ class AddMedicineScreenState extends State<AddMedicineScreen> {
                         labelStyle: TextStyle(
                             fontSize: 24, fontWeight: FontWeight.w500)),
                     maxLines: 3,
+                  ),
+                ),
+                _buildInputField(
+                  label: 'Price',
+                  child: TextFormField(
+                    controller: priceController,
+                    decoration: const InputDecoration(
+                      hintText: 'Enter price',
+                      border: InputBorder.none,
+                      // Remove labelStyle if you don't need label inside the field
+                    ),
+                    keyboardType:
+                        TextInputType.numberWithOptions(decimal: true),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter the price';
+                      }
+                      // Add more validation logic if required
+                      return null;
+                    },
                   ),
                 ),
                 const SizedBox(height: 20),
