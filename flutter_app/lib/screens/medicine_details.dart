@@ -15,6 +15,9 @@ class MedicineDetailsScreen extends StatelessWidget {
   });
 
   Future<void> _removeMedicine(BuildContext context, String medicineId) async {
+    ScaffoldMessengerState scaffoldMessenger = ScaffoldMessenger.of(context);
+    NavigatorState navigator = Navigator.of(context);
+
     final String route =
         "/medicines/bypharmacy/$medicineId/$loggedInPharmacyId";
     try {
@@ -26,16 +29,17 @@ class MedicineDetailsScreen extends StatelessWidget {
       );
 
       if (result != null && result['error'] == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Medicine removed successfully')),
+        scaffoldMessenger.showSnackBar(
+          const SnackBar(content: Text('Medicine removed successfully')),
         );
+        navigator.pop();
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
+        scaffoldMessenger.showSnackBar(
           SnackBar(content: Text('Error: ${result['error']}')),
         );
       }
     } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
+      scaffoldMessenger.showSnackBar(
         SnackBar(content: Text('Failed to remove medicine: $error')),
       );
     }
