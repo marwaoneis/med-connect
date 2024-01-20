@@ -112,58 +112,51 @@ class MedicineDetailsScreen extends StatelessWidget {
                       ),
                     ),
                     const Divider(),
-                    ListView.builder(
-                        padding: EdgeInsets.zero,
-                        itemCount: filteredMedicines.length,
-                        itemBuilder: (context, index) {
-                          final medicine = filteredMedicines[index];
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12.0,
-                              vertical: 13.0,
+                    ...medicineGroup.medicines.map((medicine) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12.0,
+                          vertical: 13.0,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                medicine.medicineDetails.first.name,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    medicine.medicineDetails.first.name,
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    '${medicine.stockLevel}',
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: TextButton.icon(
-                                    onPressed: () =>
-                                        _removeMedicine(context, medicine.id),
-                                    icon: const Icon(
-                                      Icons.delete,
-                                      size: 14,
-                                      color: Color(0xFFE93B81),
-                                    ),
-                                    label: const Text(
-                                      'Remove from group',
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          color: Color(0xFFE93B81)),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                            Expanded(
+                              child: Text(
+                                '${medicine.stockLevel}',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
                             ),
-                          );
-                        }),
+                            Expanded(
+                              child: TextButton.icon(
+                                onPressed: () => _removeMedicine(
+                                    context, medicine.id, medicine.pharmacyId),
+                                icon: const Icon(
+                                  Icons.delete,
+                                  size: 14,
+                                  color: Color(0xFFE93B81),
+                                ),
+                                label: const Text(
+                                  'Remove from group',
+                                  style: TextStyle(
+                                      fontSize: 12, color: Color(0xFFE93B81)),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
                     // Additional buttons
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20.0),
