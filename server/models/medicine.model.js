@@ -1,17 +1,5 @@
 const mongoose = require("mongoose");
 
-const medicineGroupSchema = new mongoose.Schema({
-  pharmacyId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Pharmacy",
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-});
-
 const medicineDetailsSchema = new mongoose.Schema(
   {
     name: {
@@ -27,7 +15,7 @@ const medicineDetailsSchema = new mongoose.Schema(
       required: true,
     },
     group: {
-      type: medicineGroupSchema,
+      type: String,
       required: true,
     },
   },
