@@ -107,7 +107,15 @@ class MedicineGroupsScreen extends StatelessWidget {
                             ),
                             Expanded(
                               child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          MedicineDetailsScreen(
+                                              medicineGroup: group),
+                                    ),
+                                  );
+                                },
                                 child: const Text(
                                   'View Full Detail',
                                   style: TextStyle(color: Colors.black),
