@@ -34,6 +34,15 @@ const getDoctorById = async (req, res) => {
   }
 };
 
+const getSpecializations = async (req, res) => {
+  try {
+    const specializations = await Doctor.distinct("specialization");
+    res.json(specializations);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 // Update a doctor by ID
 const updateDoctorById = async (req, res) => {
   try {
@@ -99,5 +108,6 @@ module.exports = {
   getDoctorById,
   updateDoctorById,
   deleteDoctorById,
+  getSpecializations,
   getDoctorByUsername,
 };
