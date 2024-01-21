@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../screens/chat_screen.dart';
 
-class MessageList extends StatelessWidget {
-  const MessageList({super.key});
+class ChatsList extends StatelessWidget {
+  const ChatsList({super.key});
 
   @override
   Widget build(BuildContext context) {
