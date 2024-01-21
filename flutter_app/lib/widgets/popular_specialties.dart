@@ -7,12 +7,25 @@ import 'no_glow_scroll.dart';
 class PopularSpecialtiesWidget extends StatelessWidget {
   const PopularSpecialtiesWidget({super.key});
 
-  Future<List<String>> fetchSpecializations() async {
+  Future<List<Specialty>> fetchSpecializations(BuildContext context) async {
     var headers = RequestConfig.getHeaders(context);
     final apiService =
         ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
     final data = await apiService.fetchData('specializations/');
-    return List<String>.from(data);
+    return List<String>.from(data)
+        .map((name) => Specialty(name, getIconPathForSpecialty(name)))
+        .toList();
+  }
+
+  String getIconPathForSpecialty(String specialtyName) {
+    switch (specialtyName) {
+      case "Cardiology":
+        return "assets/cardiologist.svg";
+      case "Dermatology":
+        return "assets/dermatologist.svg";
+      default:
+        return "assets/dentist.svg";
+    }
   }
 
   @override
@@ -23,7 +36,7 @@ class PopularSpecialtiesWidget extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 15.0),
           child: Text(
-            "Most popular Specialties",
+            "Most Popular Specialties",
             style: TextStyle(
               fontSize: 16.0,
               fontWeight: FontWeight.w900,
@@ -31,43 +44,67 @@ class PopularSpecialtiesWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 15),
-        FutureBuilder<List<String>>(
-          future: fetchSpecializations(),
+        FutureBuilder<List<Specialty>>(
+          future: fetchSpecializations(context),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator(); // Show loading indicator
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
-            } else {
-              // Your specialties are in snapshot.data
-              List<Specialty> specialties = snapshot.data!
-                  .map((name) => Specialty(name, getIconPathForSpecialty(name)))
-                  .toList();
-
+            } else if (snapshot.hasData) {
+              var specialties = snapshot.data!;
               return SizedBox(
                 height: 120,
                 child: NoGlowScrollWrapper(
                   child: ListView.builder(
-                      // ... same as before, but use 'specialties' for the data
-                      ),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: specialties.length,
+                    itemBuilder: (context, index) {
+                      var specialty = specialties[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              width: 60,
+                              height: 60,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF0D4C92).withOpacity(0.2),
+                                shape: BoxShape.circle,
+                              ),
+                              child: SvgPicture.asset(
+                                specialty.iconPath,
+                                semanticsLabel: specialty.name,
+                                width: 35,
+                                height: 35,
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            Text(
+                              specialty.name,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13.0,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
+            } else {
+              return const Text("No Specialties Found");
             }
           },
         ),
       ],
     );
-  }
-
-  String getIconPathForSpecialty(String specialtyName) {
-    // Here, map specialty names to icon paths
-    switch (specialtyName) {
-      case "Cardiology":
-        return "assets/cardiologist.svg";
-      // ... add cases for each specialty
-      default:
-        return "assets/default_icon.svg";
-    }
   }
 }
 
