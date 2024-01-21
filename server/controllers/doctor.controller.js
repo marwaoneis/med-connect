@@ -43,6 +43,18 @@ const getSpecializations = async (req, res) => {
   }
 };
 
+const getDoctorsBySpecialization = async (req, res) => {
+  try {
+    const specialization = req.params.specialization;
+    const doctors = await Doctor.find({ specialization: specialization });
+    res.json(doctors);
+  } catch (error) {
+    res.status(500).send({
+      message: error.message || "Some error occurred while retrieving doctors.",
+    });
+  }
+};
+
 // Update a doctor by ID
 const updateDoctorById = async (req, res) => {
   try {
@@ -109,5 +121,6 @@ module.exports = {
   updateDoctorById,
   deleteDoctorById,
   getSpecializations,
+  getDoctorsBySpecialization,
   getDoctorByUsername,
 };
