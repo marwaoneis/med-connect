@@ -36,8 +36,8 @@ const getDoctorById = async (req, res) => {
 
 const getSpecializations = async (req, res) => {
   try {
-    const specializations = await Doctor.distinct("specialization");
-    res.json(specializations);
+    const specializationsEnum = Doctor.schema.path("specialization").enumValues;
+    res.json(specializationsEnum);
   } catch (error) {
     res.status(500).send(error);
   }
