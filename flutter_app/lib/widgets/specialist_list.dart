@@ -1,46 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/patient_appointments.dart';
 
+import '../screens/chat_screen.dart';
+
 class Specialist {
   final String name;
   final String specialty;
   final String imageUrl;
   final double price;
+  final String id;
 
   Specialist({
     required this.name,
     required this.specialty,
     required this.imageUrl,
     required this.price,
+    required this.id,
   });
 }
 
 class SpecialistList extends StatelessWidget {
   final List<Specialist> specialists = [
     Specialist(
-      name: 'Miles, Esther',
-      specialty: 'Neurology',
-      imageUrl: 'assets/doctor_image.png',
-      price: 80,
-    ),
+        name: 'Miles, Esther',
+        specialty: 'Neurology',
+        imageUrl: 'assets/doctor_image.png',
+        price: 80,
+        id: "658b471bbb1317230a9ed875"),
     Specialist(
-      name: 'Flores, Juanita',
-      specialty: 'Geriatrics',
-      imageUrl: 'assets/doctor_image.png',
-      price: 60,
-    ),
+        name: 'Flores, Juanita',
+        specialty: 'Geriatrics',
+        imageUrl: 'assets/doctor_image.png',
+        price: 60,
+        id: "2"),
     Specialist(
-      name: 'Miles, Esther',
-      specialty: 'Neurology',
-      imageUrl: 'assets/doctor_image.png',
-      price: 80,
-    ),
+        name: 'Miles, Esther',
+        specialty: 'Neurology',
+        imageUrl: 'assets/doctor_image.png',
+        price: 80,
+        id: "3"),
     Specialist(
-      name: 'Flores, Juanita',
-      specialty: 'Geriatrics',
-      imageUrl: 'assets/doctor_image.png',
-      price: 60,
-    ),
+        name: 'Flores, Juanita',
+        specialty: 'Geriatrics',
+        imageUrl: 'assets/doctor_image.png',
+        price: 60,
+        id: "4"),
     // Add more specialists
   ];
 
@@ -141,7 +145,14 @@ class SpecialistList extends StatelessWidget {
                                   ),
                                   ElevatedButton(
                                     onPressed: () {
-                                      // Handle chat button press
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => ChatScreen(
+                                                    receiverId: specialist.id,
+                                                    receiverName:
+                                                        specialist.name,
+                                                  )));
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: const Color(0xFF0D4C92),
