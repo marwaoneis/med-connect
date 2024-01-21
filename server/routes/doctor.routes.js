@@ -8,7 +8,7 @@ router.get("/doctors/:id", doctorController.getDoctorById);
 router.put("/doctors/:id", doctorController.updateDoctorById);
 router.delete("/doctors/:id", doctorController.deleteDoctorById);
 router.get("/doctors/username/:username", doctorController.getDoctorByUsername);
-router.get("/doctors/specializations", doctorController.getSpecializations);
+router.get("/specializations", doctorController.getSpecializations);
 router.get(
   "/doctors/specialization/:specialization",
   doctorController.getDoctorsBySpecialization
