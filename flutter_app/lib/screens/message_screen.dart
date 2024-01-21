@@ -35,8 +35,11 @@ class MessageScreen extends StatelessWidget {
               },
             ),
           ),
-          const Expanded(
-            child: MessageList(),
+          Expanded(
+            child: Chats(
+              chatsStream:
+                  chatsProvider.getUserChats(currentUserId, chatProvider),
+            ),
           ),
         ],
       ),
