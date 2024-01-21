@@ -8,7 +8,8 @@ class RequestConfig {
   };
 
   static Map<String, String> getHeaders(context) {
-    final token = Provider.of<Auth>(context, listen: false).getToken;
+    final token = Provider.of<Auth>(context, listen: false).getToken();
+    print("token is " + token!);
     if (token != null) {
       return {...headers, 'Authorization': 'Bearer $token'};
     } else {
