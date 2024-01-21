@@ -16,7 +16,7 @@ class DoctorProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(doctor.specialization),
+        title: Text(doctor.specialization.name),
         actions: [
           IconButton(
             icon: const Icon(Icons.star_border),
@@ -56,7 +56,7 @@ class DoctorProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              doctor.specialization,
+              doctor.specialization.name,
               style: const TextStyle(fontSize: 18, color: Colors.grey),
             ),
             const SizedBox(height: 16),

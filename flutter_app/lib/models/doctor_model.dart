@@ -1,3 +1,35 @@
+enum DoctorSpecialization {
+  Cardiology,
+  Dermatology,
+  EmergencyMedicine,
+  Gastroenterology,
+  GeneralSurgery,
+  InternalMedicine,
+  Neurology,
+  ObstetricsGynecology,
+  Oncology,
+  Ophthalmology,
+  Orthopedics,
+  Pediatrics,
+  Psychiatry,
+  Pulmonology,
+  Radiology,
+  Urology,
+  Anesthesiology,
+  Endocrinology,
+  Nephrology,
+  Rheumatology,
+}
+
+extension DoctorSpecializationExtension on DoctorSpecialization {
+  String get name => this
+      .toString()
+      .split('.')
+      .last
+      .replaceAll('Gynecology', 'Gynecology')
+      .replaceAll('Medicine', ' Medicine');
+}
+
 class Doctor {
   String username;
   String firstName;
@@ -6,7 +38,7 @@ class Doctor {
   String address;
   String phone;
   String gender;
-  String specialization;
+  DoctorSpecialization specialization;
   int yearsOfExperience;
   double appointmentPrice;
   Timing timing;
@@ -24,7 +56,7 @@ class Doctor {
     required this.yearsOfExperience,
     required this.appointmentPrice,
     required this.timing,
-    this.role = "Doctor", // Default value set as "Doctor"
+    this.role = "Doctor",
   });
 
   factory Doctor.fromJson(Map<String, dynamic> json) {
@@ -36,7 +68,10 @@ class Doctor {
       address: json['address'],
       phone: json['phone'],
       gender: json['gender'],
-      specialization: json['specialization'],
+      specialization: DoctorSpecialization.values.firstWhere(
+        (e) => e.name == json['specialization'],
+        orElse: () => DoctorSpecialization.GeneralSurgery,
+      ),
       yearsOfExperience: json['yearsOfExperience']?.toInt() ?? 0,
       appointmentPrice: (json['appointmentPrice'] as num).toDouble(),
       timing: Timing.fromJson(json['timing']),
@@ -47,14 +82,13 @@ class Doctor {
   Map<String, dynamic> toJson() {
     return {
       'username': username,
-      // Do not include the password in the toJson for security reasons.
       'firstName': firstName,
       'lastName': lastName,
       'email': email,
       'address': address,
       'phone': phone,
       'gender': gender,
-      'specialization': specialization,
+      'specialization': specialization.name,
       'yearsOfExperience': yearsOfExperience,
       'appointmentPrice': appointmentPrice,
       'timing': timing.toJson(),
