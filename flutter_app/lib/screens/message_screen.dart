@@ -31,8 +31,8 @@ class _MessageScreen extends State<MessageScreen> {
     authProvider = context.read<Auth>();
     chatsProvider = context.read<ChatsProvider>();
     chatProvider = context.read<ChatProvider>();
-    if (authProvider.getUserId()?.isNotEmpty == true) {
-      currentUserId = authProvider.getUserId()!;
+    if (authProvider.getUserId?.isNotEmpty == true) {
+      currentUserId = authProvider.getUserId!;
     } else {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => const LoginScreen()),
