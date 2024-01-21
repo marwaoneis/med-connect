@@ -124,6 +124,7 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
   void _navigateToInventory(BuildContext context) async {
     final String pharmacyId =
         Provider.of<Auth>(context, listen: false).getUserId ?? '';
+
     try {
       final int resolvedTotalMedicines = await totalMedicines;
       final int resolvedMedicineGroups = await medicineGroups;
