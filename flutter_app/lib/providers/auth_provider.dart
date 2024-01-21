@@ -84,7 +84,7 @@ class Auth with ChangeNotifier {
     notifyListeners();
   }
 
-  String? getUserId() {
+  String? get getUserId {
     return prefs.getString(FirestoreConstants.id);
   }
 
