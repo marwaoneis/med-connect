@@ -74,7 +74,7 @@ class SpecialistDoctorsScreenState extends State<SpecialistDoctorsScreen> {
               future: doctorsData,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasData) {
+                  if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                     return NoGlowScrollWrapper(
                       child: ListView.builder(
                         itemCount: snapshot.data!.length,
@@ -82,8 +82,7 @@ class SpecialistDoctorsScreenState extends State<SpecialistDoctorsScreen> {
                           final doctor = snapshot.data![index];
                           return DoctorCard(
                             doctor: doctor,
-                            rating:
-                                4.5, // Assuming a static rating, adjust as needed
+                            rating: 4.5,
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -98,9 +97,19 @@ class SpecialistDoctorsScreenState extends State<SpecialistDoctorsScreen> {
                       ),
                     );
                   } else if (snapshot.hasError) {
+                    // Handle error
                     return Center(child: Text('Error: ${snapshot.error}'));
+                  } else {
+                    return const Center(
+                      child: Text(
+                        'No doctors are found in this specialty',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    );
                   }
                 }
+                // While data is loading
                 return const Center(child: CircularProgressIndicator());
               },
             ),
