@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "617197621509",
+    "project_id": "medconnect-411119",
+    "storage_bucket": "medconnect-411119.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617197621509:android:fb4801a66560b2569a276c",
+        "android_client_info": {
+          "package_name": "com.example.flutter_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2-ovVRyveF_4Gn_zgWSGEWxCnii3CRDQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
