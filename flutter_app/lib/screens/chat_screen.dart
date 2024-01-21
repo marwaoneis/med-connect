@@ -34,10 +34,10 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     chatProvider = context.read<ChatProvider>();
     _scrollController = ScrollController();
 
-    if (authProvider.getUserId()?.isNotEmpty == true) {
-      senderId = authProvider.getUserId()!;
+    if (authProvider.getUserId?.isNotEmpty == true) {
+      senderId = authProvider.getUserId!;
       senderName =
-          authProvider.getUserId()!; // This should be replaced with userName
+          authProvider.getUserId!; // This should be replaced with userName
     } else {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => const LoginScreen()),
