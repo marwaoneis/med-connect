@@ -11,7 +11,7 @@ class PopularSpecialtiesWidget extends StatelessWidget {
     var headers = RequestConfig.getHeaders(context);
     final apiService =
         ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
-    final data = await apiService.fetchData('specializations/');
+    final data = await apiService.fetchData('doctors/specializations/');
     return List<String>.from(data)
         .map((name) => Specialty(name, getIconPathForSpecialty(name)))
         .toList();
