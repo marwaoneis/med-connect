@@ -1,32 +1,20 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../config/request_config.dart';
 // import '../models/exception_model.dart';
+import '../constants/firestore_constants.dart';
 import '../data/sign_up_form_data.dart';
 
 enum UserType { patient, doctor, pharmacy }
 
 class Auth with ChangeNotifier {
-  String? userId;
-  String? token;
+  final SharedPreferences prefs;
+  final FirebaseFirestore firebaseFirestore;
 
-  String? get getUserId {
-    if (userId != null) {
-      return userId;
-    }
-
-    return null;
-  }
-
-  String? get getToken {
-    if (token != null) {
-      return token;
-    }
-
-    return null;
-  }
+  Auth(this.prefs, this.firebaseFirestore);
 
   Future<void> login(
       String username, String password, UserType userType) async {
@@ -87,25 +75,37 @@ class Auth with ChangeNotifier {
   Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.clear();
-    userId = null;
-    token = null;
     notifyListeners();
   }
 
-  Future<void> _saveUserData(dynamic responseData) async {
-    final prefs = await SharedPreferences.getInstance();
-    userId = responseData['id'];
-    token = responseData['token'];
-
-    if (userId != null && token != null) {
-      await prefs.setString('id', userId!);
-      await prefs.setString('token', token!);
-    } else {
-      print("Error: User ID or Token is null.");
-    }
-
-    print("User ID in _saveUserData: $userId");
-    print("User token in _saveUserData: $token");
+  void _saveUserData(dynamic responseData) async {
+    await prefs.setString(FirestoreConstants.id, responseData['id']);
+    await prefs.setString(FirestoreConstants.token, responseData['token']);
     notifyListeners();
+  }
+
+  String? getUserId() {
+    return prefs.getString(FirestoreConstants.id);
+  }
+
+  String? getToken() {
+    return prefs.getString(FirestoreConstants.token);
   }
 }
+//   Future<void> _saveUserData(dynamic responseData) async {
+//     final prefs = await SharedPreferences.getInstance();
+//     userId = responseData['id'];
+//     token = responseData['token'];
+
+//     if (userId != null && token != null) {
+//       await prefs.setString('id', userId!);
+//       await prefs.setString('token', token!);
+//     } else {
+//       print("Error: User ID or Token is null.");
+//     }
+
+//     print("User ID in _saveUserData: $userId");
+//     print("User token in _saveUserData: $token");
+//     notifyListeners();
+//   }
+// }
