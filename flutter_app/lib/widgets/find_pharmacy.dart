@@ -141,7 +141,7 @@ class FindPharmacyWidgetState extends State<FindPharmacyWidget> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          pharmacy!.username,
+                          nearestPharmacy!.username,
                           style: const TextStyle(
                             fontWeight: FontWeight.w900,
                             fontSize: 18,
