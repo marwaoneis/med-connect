@@ -74,8 +74,12 @@ class FindPharmacyWidgetState extends State<FindPharmacyWidget> {
       return const Center(child: CircularProgressIndicator());
     }
 
-    if (pharmacy == null) {
-      return const Center(child: Text("No pharmacies found."));
+    if (errorMessage != null) {
+      return Center(child: Text('Error: $errorMessage'));
+    }
+
+    if (nearestPharmacy == null) {
+      return const Center(child: Text("No nearest pharmacy found."));
     }
 
     return Column(
