@@ -3,7 +3,19 @@ const Pharmacy = require("./../models/pharmacy.model");
 // Create a new pharmacy
 const createPharmacy = async (req, res) => {
   try {
-    const pharmacy = new Pharmacy(req.body);
+    const { username, password, address, phone, location } = req.body;
+
+    const pharmacyData = {
+      username,
+      password,
+      address,
+      phone,
+      ...(location && {
+        location: { type: "Point", coordinates: [location.lng, location.lat] },
+      }),
+    };
+
+    const pharmacy = new Pharmacy(pharmacyData);
     await pharmacy.save();
     res.status(201).json(pharmacy);
   } catch (error) {
