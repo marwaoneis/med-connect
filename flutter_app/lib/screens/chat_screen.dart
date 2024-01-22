@@ -1,17 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/auth_provider.dart';
-import 'package:flutter_app/screens/login_screen.dart';
 import 'package:provider/provider.dart';
 
+import '../constants/firestore_constants.dart';
 import '../providers/chat_provider.dart';
 
 class ChatScreen extends StatefulWidget {
   final String receiverId;
   final String receiverName;
+  final String senderName;
 
-  const ChatScreen(
-      {super.key, required this.receiverId, required this.receiverName});
+  const ChatScreen({
+    super.key,
+    required this.receiverId,
+    required this.receiverName,
+    required this.senderName,
+  });
 
   @override
   State createState() => ChatScreenState();
@@ -34,27 +39,30 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     chatProvider = context.read<ChatProvider>();
     _scrollController = ScrollController();
 
-    if (authProvider.getUserId?.isNotEmpty == true) {
-      senderId = authProvider.getUserId!;
-      senderName =
-          authProvider.getUserId!; // This should be replaced with userName
-    } else {
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const LoginScreen()),
-          (Route<dynamic> route) => false);
-    }
+    senderId = authProvider.getUserId ?? "";
+    senderName = authProvider.getFullName ?? "You";
+
+    receiverName = widget.receiverName;
 
     chatProvider
         .getChatMessages(senderId, widget.receiverId, 10)
         .listen((QuerySnapshot snapshot) {
       List<Message> newMessages = snapshot.docs.map((doc) {
-        var messageContent = doc.data() as Map<String, dynamic>;
+        Map<String, dynamic> messageData = doc.data() as Map<String, dynamic>;
+        bool isCurrentUserSender =
+            messageData[FirestoreConstants.idFrom] == senderId;
+        String displayName =
+            isCurrentUserSender ? senderName : widget.receiverName;
+
         return Message(
-            text: messageContent['content']!,
-            animationController: AnimationController(
-              duration: const Duration(milliseconds: 700),
-              vsync: this,
-            ));
+          senderName: displayName,
+          text: messageData[FirestoreConstants.content] ??
+              'Message not available',
+          animationController: AnimationController(
+            duration: const Duration(milliseconds: 700),
+            vsync: this,
+          ),
+        );
       }).toList();
 
       setState(() {
@@ -67,6 +75,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     if (text.trim().isNotEmpty) {
       _textController.clear();
       Message message = Message(
+        senderName: widget.senderName,
         text: text,
         animationController: AnimationController(
           duration: const Duration(milliseconds: 700),
@@ -78,7 +87,6 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
       });
       message.animationController.forward();
 
-      // Scroll to the newly added message
       _scrollController.animateTo(
         0.0,
         duration: const Duration(milliseconds: 300),
@@ -86,7 +94,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
       );
 
       chatProvider.sendChatMessage(text, 0, senderId, widget.receiverId,
-          widget.receiverName, senderName);
+          widget.receiverName, widget.senderName);
     } else {
       // TODO: IMPLEMENT WHAT TO DO IN CASE MESSAGE WAS EMPTY
     }
@@ -153,12 +161,17 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
 }
 
 class Message extends StatelessWidget {
-  Message({required this.text, required this.animationController, super.key}) {
-    animationController.forward();
-  }
-
+  final String senderName;
   final String text;
   final AnimationController animationController;
+
+  Message(
+      {required this.senderName,
+      required this.text,
+      required this.animationController,
+      super.key}) {
+    animationController.forward();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -173,13 +186,13 @@ class Message extends StatelessWidget {
           children: <Widget>[
             Container(
               margin: const EdgeInsets.only(right: 16.0),
-              child: const CircleAvatar(child: Text('Your Initials')),
+              child: CircleAvatar(child: Text(senderName[0])),
             ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('Your Name',
+                  Text(senderName,
                       style: Theme.of(context).textTheme.titleMedium),
                   Container(
                     margin: const EdgeInsets.only(top: 5.0),
