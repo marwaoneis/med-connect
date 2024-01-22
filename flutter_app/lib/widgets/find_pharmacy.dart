@@ -45,6 +45,14 @@ class FindPharmacyWidgetState extends State<FindPharmacyWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    if (pharmacy == null) {
+      return const Center(child: Text("No pharmacies found."));
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -103,9 +111,9 @@ class FindPharmacyWidgetState extends State<FindPharmacyWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text(
-                          'Center Pharmacy',
-                          style: TextStyle(
+                        Text(
+                          pharmacy!.username,
+                          style: const TextStyle(
                             fontWeight: FontWeight.w900,
                             fontSize: 18,
                           ),
