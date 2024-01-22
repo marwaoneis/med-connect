@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/patient_appointments.dart';
+import 'package:provider/provider.dart';
 
 import '../api/api_service.dart';
 import '../config/request_config.dart';
 import '../models/doctor_model.dart';
+import '../providers/auth_provider.dart';
 import '../screens/chat_screen.dart';
 
 class Specialist {
@@ -23,7 +25,7 @@ class Specialist {
 }
 
 class SpecialistList extends StatefulWidget {
-  SpecialistList({Key? key}) : super(key: key);
+  SpecialistList({super.key});
 
   @override
   SpecialistListState createState() => SpecialistListState();
@@ -69,6 +71,9 @@ class SpecialistListState extends State<SpecialistList> {
 
   @override
   Widget build(BuildContext context) {
+    Auth authProvider = Provider.of<Auth>(context, listen: false);
+    String senderName = authProvider.getFullName ?? "Unknown";
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -168,6 +173,9 @@ class SpecialistListState extends State<SpecialistList> {
                                             builder: (context) => ChatScreen(
                                                   receiverId: specialist.id,
                                                   receiverName: specialist.name,
+                                                  senderName: authProvider
+                                                          .getFullName ??
+                                                      "Unknown",
                                                 )),
                                       );
                                     },
