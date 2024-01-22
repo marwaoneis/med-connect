@@ -19,6 +19,7 @@ class AppointmentCard extends StatefulWidget {
 class AppointmentCardState extends State<AppointmentCard> {
   Appointment? appointment;
   Doctor? doctor;
+  String? errorMessage;
   bool isLoading = true;
 
   @override
@@ -61,8 +62,18 @@ class AppointmentCardState extends State<AppointmentCard> {
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading || appointment == null || doctor == null) {
+    if (isLoading) {
       return const Center(child: CircularProgressIndicator());
+    }
+
+    if (errorMessage != null) {
+      return Center(child: Text(errorMessage!));
+    }
+
+    if (appointment == null) {
+      return const Center(
+        child: Text("You have no appointments."),
+      );
     }
 
     String formattedDate =
