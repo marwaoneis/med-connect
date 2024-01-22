@@ -81,7 +81,12 @@ const updatePharmacyById = async (req, res) => {
     if (updateData.password) pharmacy.password = updateData.password;
     if (updateData.address) pharmacy.address = updateData.address;
     if (updateData.phone) pharmacy.phone = updateData.phone;
-
+    if (updateData.location) {
+      pharmacy.location = {
+        type: "Point",
+        coordinates: [updateData.location.lng, updateData.location.lat],
+      };
+    }
     const updatedPharmacy = await pharmacy.save();
 
     res.status(200).json(updatedPharmacy);
