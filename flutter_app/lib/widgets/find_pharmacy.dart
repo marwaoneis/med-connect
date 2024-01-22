@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
 import '../api/api_service.dart';
 import '../config/request_config.dart';
@@ -12,13 +13,25 @@ class FindPharmacyWidget extends StatefulWidget {
 }
 
 class FindPharmacyWidgetState extends State<FindPharmacyWidget> {
-  Pharmacy? pharmacy;
+  Pharmacy? nearestPharmacy;
   bool isLoading = true;
+  String? errorMessage;
 
   @override
   void initState() {
     super.initState();
-    _loadPharmacy();
+    _findNearestPharmacy();
+  }
+
+  Future<void> _findNearestPharmacy() async {
+    try {
+      Position position = await _determinePosition();
+      nearestPharmacy = await fetchNearestPharmacy(position);
+    } catch (e) {
+      errorMessage = e.toString();
+    } finally {
+      setState(() => isLoading = false);
+    }
   }
 
   Future<Pharmacy> fetchNearestPharmacy(Position position) async {
@@ -30,14 +43,29 @@ class FindPharmacyWidgetState extends State<FindPharmacyWidget> {
     return Pharmacy.fromJson(response);
   }
 
-  void _loadPharmacy() async {
-    try {
-      pharmacy = await fetchFirstPharmacy();
-    } catch (e) {
-      print('Error fetching pharmacy: $e');
-    } finally {
-      setState(() => isLoading = false);
+  Future<Position> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
     }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    return await Geolocator.getCurrentPosition();
   }
 
   @override
