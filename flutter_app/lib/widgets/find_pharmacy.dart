@@ -40,7 +40,12 @@ class FindPharmacyWidgetState extends State<FindPharmacyWidget> {
         ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
     final response = await apiService.fetchData(
         'pharmacies/nearest?lat=${position.latitude}&lng=${position.longitude}');
-    return Pharmacy.fromJson(response);
+    if (response.statusCode == 200) {
+      return Pharmacy.fromJson(response);
+    } else {
+      // Handle non-200 responses
+      throw Exception('Failed to load data from the server');
+    }
   }
 
   Future<Position> _determinePosition() async {
