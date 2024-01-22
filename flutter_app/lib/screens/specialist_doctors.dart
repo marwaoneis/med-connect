@@ -109,7 +109,6 @@ class SpecialistDoctorsScreenState extends State<SpecialistDoctorsScreen> {
                     );
                   }
                 }
-                // While data is loading
                 return const Center(child: CircularProgressIndicator());
               },
             ),

@@ -58,6 +58,7 @@ class PatientScreenState extends State<PatientScreen> {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
             final String firstName = snapshot.data?['firstName'] ?? 'N/A';
+            final String patientId = snapshot.data?['_id'];
 
             return Scaffold(
               body: Column(
@@ -95,9 +96,11 @@ class PatientScreenState extends State<PatientScreen> {
                               child: DashboardMenu(),
                             ),
                             const SizedBox(height: 10),
-                            PopularSpecialtiesWidget(),
+                            const PopularSpecialtiesWidget(),
                             const SizedBox(height: 10),
-                            const AppointmentCard(),
+                            AppointmentCard(
+                              patientId: patientId,
+                            ),
                             const SizedBox(height: 10),
                             const FindPharmacyWidget(),
                             const SizedBox(height: 10),
