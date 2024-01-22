@@ -61,4 +61,6 @@ pharmacySchema.pre(
   }
 );
 
+pharmacySchema.index({ location: "2dsphere" });
+
 module.exports = mongoose.model("Pharmacy", pharmacySchema);
