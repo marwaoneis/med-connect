@@ -81,10 +81,13 @@ class Auth with ChangeNotifier {
   void _saveUserData(dynamic responseData) async {
     await prefs.setString(FirestoreConstants.id, responseData['id']);
     await prefs.setString(FirestoreConstants.token, responseData['token']);
-    String fullName =
-        '${responseData['firstName']} ${responseData['lastName']}';
-    await prefs.setString(FirestoreConstants.fullName, fullName);
-    notifyListeners();
+
+    if (responseData.containsKey('firstName') &&
+        responseData.containsKey('lastName')) {
+      String fullName =
+          '${responseData['firstName']} ${responseData['lastName']}';
+      await prefs.setString(FirestoreConstants.fullName, fullName);
+    }
   }
 
   String? get getUserId {
