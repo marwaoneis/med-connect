@@ -18,6 +18,19 @@ class ChatProvider {
         .update(dataUpdate);
   }
 
+  Future<String> getUserName(String userId) async {
+    DocumentSnapshot userDoc = await firebaseFirestore
+        .collection(FirestoreConstants.pathUserCollection)
+        .doc(userId)
+        .get();
+
+    if (userDoc.exists) {
+      return userDoc.data()[FirestoreConstants.fullName] ?? "Unknown";
+    } else {
+      return "Unknown";
+    }
+  }
+
   void createChat(
       String senderId, String receiverName, String receiverId) async {
     Map<String, dynamic> receiverData = {

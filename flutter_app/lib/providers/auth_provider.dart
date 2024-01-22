@@ -81,6 +81,9 @@ class Auth with ChangeNotifier {
   void _saveUserData(dynamic responseData) async {
     await prefs.setString(FirestoreConstants.id, responseData['id']);
     await prefs.setString(FirestoreConstants.token, responseData['token']);
+    String fullName =
+        '${responseData['firstName']} ${responseData['lastName']}';
+    await prefs.setString(FirestoreConstants.fullName, fullName);
     notifyListeners();
   }
 
@@ -90,6 +93,10 @@ class Auth with ChangeNotifier {
 
   String? getToken() {
     return prefs.getString(FirestoreConstants.token);
+  }
+
+  String? get getFullName {
+    return prefs.getString(FirestoreConstants.fullName);
   }
 }
 //   Future<void> _saveUserData(dynamic responseData) async {
