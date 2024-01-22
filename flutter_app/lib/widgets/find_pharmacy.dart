@@ -1,7 +1,47 @@
 import 'package:flutter/material.dart';
 
-class FindPharmacyWidget extends StatelessWidget {
+import '../api/api_service.dart';
+import '../config/request_config.dart';
+import '../models/pharmacy_model.dart';
+
+class FindPharmacyWidget extends StatefulWidget {
   const FindPharmacyWidget({super.key});
+
+  @override
+  FindPharmacyWidgetState createState() => FindPharmacyWidgetState();
+}
+
+class FindPharmacyWidgetState extends State<FindPharmacyWidget> {
+  Pharmacy? pharmacy;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPharmacy();
+  }
+
+  Future<Pharmacy> fetchFirstPharmacy() async {
+    var headers = RequestConfig.getHeaders(context);
+    final apiService =
+        ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
+    final response = await apiService.fetchData('pharmacies');
+    final pharmacies =
+        (response as List).map((json) => Pharmacy.fromJson(json)).toList();
+    return pharmacies.isNotEmpty
+        ? pharmacies.first
+        : throw Exception('No pharmacies found');
+  }
+
+  void _loadPharmacy() async {
+    try {
+      pharmacy = await fetchFirstPharmacy();
+    } catch (e) {
+      print('Error fetching pharmacy: $e');
+    } finally {
+      setState(() => isLoading = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
