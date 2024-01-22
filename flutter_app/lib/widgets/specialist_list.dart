@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/patient_appointments.dart';
 
+import '../api/api_service.dart';
+import '../config/request_config.dart';
+import '../models/doctor_model.dart';
 import '../screens/chat_screen.dart';
 
 class Specialist {
@@ -19,36 +22,50 @@ class Specialist {
   });
 }
 
-class SpecialistList extends StatelessWidget {
-  final List<Specialist> specialists = [
-    Specialist(
-        name: 'Miles, Esther',
-        specialty: 'Neurology',
-        imageUrl: 'assets/doctor_image.png',
-        price: 80,
-        id: "658b471bbb1317230a9ed875"),
-    Specialist(
-        name: 'Flores, Juanita',
-        specialty: 'Geriatrics',
-        imageUrl: 'assets/doctor_image.png',
-        price: 60,
-        id: "2"),
-    Specialist(
-        name: 'Miles, Esther',
-        specialty: 'Neurology',
-        imageUrl: 'assets/doctor_image.png',
-        price: 80,
-        id: "3"),
-    Specialist(
-        name: 'Flores, Juanita',
-        specialty: 'Geriatrics',
-        imageUrl: 'assets/doctor_image.png',
-        price: 60,
-        id: "4"),
-    // Add more specialists
-  ];
+class SpecialistList extends StatefulWidget {
+  SpecialistList({Key? key}) : super(key: key);
 
-  SpecialistList({super.key});
+  @override
+  SpecialistListState createState() => SpecialistListState();
+}
+
+class SpecialistListState extends State<SpecialistList> {
+  List<Specialist> specialists = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchDoctorData();
+  }
+
+  Future<List<Doctor>> fetchDoctorData() async {
+    try {
+      var headers = RequestConfig.getHeaders(context);
+      final apiService =
+          ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
+      final data = await apiService.fetchData('doctors/');
+
+      List<Doctor> doctors = (data as List)
+          .map((doctorJson) => Doctor.fromJson(doctorJson))
+          .toList();
+
+      setState(() {
+        specialists = doctors.map((doctor) {
+          return Specialist(
+            name: '${doctor.firstName} ${doctor.lastName}',
+            specialty: doctor.specialization.name,
+            imageUrl: 'assets/doctor_image.png',
+            price: doctor.appointmentPrice,
+            id: doctor.username,
+          );
+        }).toList();
+      });
+      return doctors;
+    } catch (error) {
+      print('Error fetching doctor data: $error');
+      throw error;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
