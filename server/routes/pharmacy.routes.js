@@ -24,5 +24,6 @@ router.get(
   "/pharmacies/address/:address",
   pharmacyController.getPharmaciesByAddress
 );
+router.get("/pharmacies/nearest", pharmacyController.getNearestPharmacy);
 
 module.exports = router;

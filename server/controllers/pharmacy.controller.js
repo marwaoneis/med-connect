@@ -11,6 +11,25 @@ const createPharmacy = async (req, res) => {
   }
 };
 
+const getNearestPharmacy = async (req, res) => {
+  const { lat, lng } = req.query; // Get latitude and longitude from query params
+  try {
+    const nearestPharmacy = await Pharmacy.findOne({
+      location: {
+        $near: {
+          $geometry: {
+            type: "Point",
+            coordinates: [lng, lat],
+          },
+        },
+      },
+    });
+    res.json(nearestPharmacy);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 // Get all pharmacies
 const getAllPharmacies = async (req, res) => {
   try {
@@ -102,5 +121,6 @@ module.exports = {
   updatePharmacyById,
   deletePharmacyById,
   getPharmacyByUsername,
+  getNearestPharmacy,
   getPharmaciesByAddress,
 };
