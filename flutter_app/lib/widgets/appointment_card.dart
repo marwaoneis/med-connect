@@ -126,7 +126,7 @@ class AppointmentCardState extends State<AppointmentCard> {
                           ),
                           const SizedBox(height: 5),
                           Text(
-                            '${doctor?.specialization}',
+                            '${doctor?.specialization.name}',
                             style: const TextStyle(
                               fontSize: 14,
                               color: Colors.black,
