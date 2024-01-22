@@ -24,20 +24,21 @@ const createPharmacy = async (req, res) => {
 };
 
 const getNearestPharmacy = async (req, res) => {
-  const { lat, lng } = req.query; // Get latitude and longitude from query params
+  const { lat, lng } = req.query;
   try {
     const nearestPharmacy = await Pharmacy.findOne({
       location: {
         $near: {
           $geometry: {
             type: "Point",
-            coordinates: [lng, lat],
+            coordinates: [parseFloat(lng), parseFloat(lat)],
           },
         },
       },
     });
     res.json(nearestPharmacy);
   } catch (error) {
+    console.log(error.message);
     res.status(500).json({ error: error.message });
   }
 };
