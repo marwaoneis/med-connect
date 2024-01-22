@@ -47,19 +47,15 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     chatProvider
         .getChatMessages(senderId, widget.receiverId, 10)
         .listen((QuerySnapshot snapshot) {
-      List<Message> newMessages = [];
-
-      for (QueryDocumentSnapshot doc in snapshot.docs) {
-        // Assuming you have a method to convert a document to a Message
+      List<Message> newMessages = snapshot.docs.map((doc) {
         var messageContent = doc.data() as Map<String, dynamic>;
-        Message message = Message(
+        return Message(
             text: messageContent['content']!,
             animationController: AnimationController(
               duration: const Duration(milliseconds: 700),
               vsync: this,
             ));
-        newMessages.add(message);
-      }
+      }).toList();
 
       setState(() {
         _messages = newMessages;

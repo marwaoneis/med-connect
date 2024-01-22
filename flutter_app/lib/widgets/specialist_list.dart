@@ -163,13 +163,13 @@ class SpecialistListState extends State<SpecialistList> {
                                   ElevatedButton(
                                     onPressed: () {
                                       Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => ChatScreen(
-                                                    receiverId: specialist.id,
-                                                    receiverName:
-                                                        specialist.name,
-                                                  )));
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ChatScreen(
+                                                  receiverId: specialist.id,
+                                                  receiverName: specialist.name,
+                                                )),
+                                      );
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: const Color(0xFF0D4C92),

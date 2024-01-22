@@ -47,29 +47,37 @@ class ChatProvider {
 
   void sendChatMessage(String content, int type, String sender, String receiver,
       String receiverName, String senderName) async {
-    // createChat for receiving & sending user
-    var senderChatSnapshot = await doesChatExist(sender, receiver);
-    if (senderChatSnapshot != null && !senderChatSnapshot.exists) {
-      createChat(sender, receiver, receiverName);
-    }
-    var receiverChatSnapshot = await doesChatExist(receiver, sender);
-    if (receiverChatSnapshot != null && !receiverChatSnapshot.exists) {
-      createChat(receiver, sender, senderName);
-    }
     String chatId = getChatId(sender, receiver);
-    DocumentReference documentReference = firebaseFirestore
-        .collection(FirestoreConstants.pathMessageCollection)
-        .doc(chatId)
-        .collection(chatId)
-        .doc(DateTime.now().millisecondsSinceEpoch.toString());
-    ChatMessage chatMessages = ChatMessage(
+
+    // Check if chat session exists for the sender, create if not
+    var senderChatSnapshot = await doesChatExist(sender, receiver);
+    if (senderChatSnapshot == null || !senderChatSnapshot.exists) {
+      createChat(sender, receiverName, receiver);
+    }
+
+    // Check if chat session exists for the receiver, create if not
+    var receiverChatSnapshot = await doesChatExist(receiver, sender);
+    if (receiverChatSnapshot == null || !receiverChatSnapshot.exists) {
+      createChat(receiver, senderName, sender);
+    }
+
+    // Prepare the chat message
+    ChatMessage chatMessage = ChatMessage(
         idFrom: sender,
         idTo: receiver,
         timestamp: DateTime.now().millisecondsSinceEpoch.toString(),
         content: content,
         type: type);
+
+    // Save the message to Firestore
+    DocumentReference messageRef = firebaseFirestore
+        .collection(FirestoreConstants.pathMessageCollection)
+        .doc(chatId)
+        .collection(chatId)
+        .doc(DateTime.now().millisecondsSinceEpoch.toString());
+
     FirebaseFirestore.instance.runTransaction((transaction) async {
-      transaction.set(documentReference, chatMessages.toJson());
+      transaction.set(messageRef, chatMessage.toJson());
     });
   }
 
