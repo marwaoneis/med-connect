@@ -21,16 +21,13 @@ class FindPharmacyWidgetState extends State<FindPharmacyWidget> {
     _loadPharmacy();
   }
 
-  Future<Pharmacy> fetchFirstPharmacy() async {
+  Future<Pharmacy> fetchNearestPharmacy(Position position) async {
     var headers = RequestConfig.getHeaders(context);
     final apiService =
         ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
-    final response = await apiService.fetchData('pharmacies');
-    final pharmacies =
-        (response as List).map((json) => Pharmacy.fromJson(json)).toList();
-    return pharmacies.isNotEmpty
-        ? pharmacies.first
-        : throw Exception('No pharmacies found');
+    final response = await apiService.fetchData(
+        'pharmacies/nearest?lat=${position.latitude}&lng=${position.longitude}');
+    return Pharmacy.fromJson(response);
   }
 
   void _loadPharmacy() async {
