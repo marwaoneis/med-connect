@@ -165,7 +165,7 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
     List<Widget> surgeryWidgets = _createListWidgets(data['priorSurgeries']);
     List<Widget> allergyWidgets = _createListWidgets(data['allergies']);
     List<Widget> emergencyContactWidgets =
-        _createEmergencyContactWidgets(data['emergencyContacts']);
+        _createListWidgets(data['emergencyContacts']);
 
     return SingleChildScrollView(
       child: Padding(
