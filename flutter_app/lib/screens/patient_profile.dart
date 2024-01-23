@@ -159,8 +159,7 @@ class PatientProfileScreenState extends State<PatientProfileScreen> {
     String patientId = patientData['_id'];
     TextEditingController usernameController =
         TextEditingController(text: patientData['username']);
-    TextEditingController passwordController =
-        TextEditingController(text: patientData['password']);
+    TextEditingController passwordController = TextEditingController();
     TextEditingController firstNameController =
         TextEditingController(text: patientData['firstName']);
     TextEditingController lastNameController =
@@ -181,6 +180,10 @@ class PatientProfileScreenState extends State<PatientProfileScreen> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
+        ScaffoldMessengerState scaffoldMessenger =
+            ScaffoldMessenger.of(context);
+        NavigatorState navigator = Navigator.of(context);
+
         return AlertDialog(
           title: const Text('Edit Personal Information'),
           content: SingleChildScrollView(
@@ -192,7 +195,8 @@ class PatientProfileScreenState extends State<PatientProfileScreen> {
                 ),
                 TextFormField(
                   controller: passwordController,
-                  decoration: const InputDecoration(labelText: 'Password'),
+                  decoration: const InputDecoration(
+                      labelText: 'Password', hintText: 'Edit Password'),
                   obscureText: true,
                 ),
                 TextFormField(
@@ -202,7 +206,6 @@ class PatientProfileScreenState extends State<PatientProfileScreen> {
                 TextFormField(
                   controller: lastNameController,
                   decoration: const InputDecoration(labelText: 'Last Name'),
-                  obscureText: true,
                 ),
                 TextFormField(
                   controller: emailController,
@@ -211,7 +214,6 @@ class PatientProfileScreenState extends State<PatientProfileScreen> {
                 TextFormField(
                   controller: addressController,
                   decoration: const InputDecoration(labelText: 'Address'),
-                  obscureText: true,
                 ),
                 TextFormField(
                   controller: phoneController,
@@ -220,17 +222,21 @@ class PatientProfileScreenState extends State<PatientProfileScreen> {
                 TextFormField(
                   controller: dobController,
                   decoration: const InputDecoration(labelText: 'Date of Birth'),
-                  obscureText: true,
                 ),
                 TextFormField(
                   controller: genderController,
                   decoration: const InputDecoration(labelText: 'Gender'),
-                  obscureText: true,
                 ),
               ],
             ),
           ),
           actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
             TextButton(
               child: const Text('Save'),
               onPressed: () async {
@@ -246,16 +252,39 @@ class PatientProfileScreenState extends State<PatientProfileScreen> {
                   "gender": genderController.text,
                 };
 
-                // Send PUT request
-                dynamic response = await sendRequest(
-                  route: '/patients/$patientId',
-                  method: "PUT",
-                  load: updateData,
-                  context: context,
-                );
+                try {
+                  dynamic response = await sendRequest(
+                    route: '/patients/$patientId',
+                    method: "PUT",
+                    load: updateData,
+                    context: context,
+                  );
 
-                // Handle response
-                // ...
+                  if (response != null) {
+                    Map<String, dynamic> updatedPatientData =
+                        await _fetchPatientData();
+
+                    setState(() {
+                      patientData = updatedPatientData;
+                    });
+                    navigator.pop();
+                    scaffoldMessenger.showSnackBar(
+                      const SnackBar(
+                          content: Text('Personal Info updated successfully!')),
+                    );
+                  } else {
+                    navigator.pop(); // Close the dialog
+                    scaffoldMessenger.showSnackBar(
+                      const SnackBar(content: Text('Failed to update data')),
+                    );
+                  }
+                } catch (error) {
+                  if (!mounted) return;
+                  Navigator.of(context).pop();
+                  scaffoldMessenger.showSnackBar(
+                    SnackBar(content: Text('Error: $error')),
+                  );
+                }
               },
             ),
           ],
