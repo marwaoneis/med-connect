@@ -4,16 +4,42 @@ import 'package:flutter_app/screens/login_screen.dart';
 import 'package:flutter_app/screens/medical_history.dart';
 import 'package:flutter_app/screens/symptom_checker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../api/api_service.dart';
+import '../config/request_config.dart';
 import '../providers/auth_provider.dart';
 import '../widgets/footer.dart';
 import 'message_screen.dart';
 import 'patient_appointments.dart';
 import 'patient_dashboard_screen.dart';
 
-class PatientProfileScreen extends StatelessWidget {
+class PatientProfileScreen extends StatefulWidget {
   const PatientProfileScreen({super.key});
+
+  @override
+  PatientProfileScreenState createState() => PatientProfileScreenState();
+}
+
+class PatientProfileScreenState extends State<PatientProfileScreen> {
+  late Future<Map<String, dynamic>> patientData;
+
+  @override
+  void initState() {
+    super.initState();
+    patientData = _fetchPatientData();
+  }
+
+  Future<Map<String, dynamic>> _fetchPatientData() async {
+    var headers = RequestConfig.getHeaders(context);
+
+    final apiService =
+        ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
+    final userId = Provider.of<Auth>(context, listen: false).getUserId;
+    var data = await apiService.fetchData('patients/$userId');
+    return data;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,23 +48,14 @@ class PatientProfileScreen extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+            );
           },
         ),
         title: const Text('Profile', style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.email_outlined,
-              color: Color(0xFF0D4C92),
-              size: 30,
-            ),
-            onPressed: () {
-              // TODO: Add edit profile action
-            },
-          ),
-        ],
         centerTitle: true,
         elevation: 0,
       ),
@@ -46,7 +63,26 @@ class PatientProfileScreen extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            _buildProfileCard(),
+            FutureBuilder<Map<String, dynamic>>(
+              future: patientData,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else if (snapshot.hasData) {
+                  var patient = snapshot.data!;
+                  return _buildProfileCard(
+                    patient['firstName'] ?? 'N/A',
+                    patient['lastName'] ?? 'N/A',
+                    patient['phone'] ?? 'N/A',
+                    patient['dateOfBirth']?.toString() ?? 'N/A',
+                  );
+                } else {
+                  return const Text('No data available');
+                }
+              },
+            ),
             const SizedBox(height: 20),
             _buildOption("assets/medical.svg", 'Medical History',
                 'Check Your Medical History', onTap: () {
@@ -94,7 +130,7 @@ class PatientProfileScreen extends StatelessWidget {
               await authProvider.logout().then((_) {
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
                   (Route<dynamic> route) => false,
                 );
               }).catchError((error) {
@@ -107,7 +143,7 @@ class PatientProfileScreen extends StatelessWidget {
                       TextButton(
                         child: const Text('Okay'),
                         onPressed: () {
-                          Navigator.of(ctx).pop(); // Dismiss the dialog
+                          Navigator.of(ctx).pop();
                         },
                       ),
                     ],
@@ -149,7 +185,15 @@ class PatientProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildProfileCard() {
+  Widget _buildProfileCard(
+      String firstName, String lastName, String phone, String dob) {
+    String formattedDate;
+    try {
+      DateTime parsedDate = DateTime.parse(dob);
+      formattedDate = DateFormat('yyyy-MM-dd').format(parsedDate);
+    } catch (e) {
+      formattedDate = 'Invalid Date';
+    }
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
@@ -165,39 +209,52 @@ class PatientProfileScreen extends StatelessWidget {
           ),
         ],
       ),
-      child: const Padding(
-        padding: EdgeInsets.all(16),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
         child: Row(
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 40,
               backgroundImage: NetworkImage('https://via.placeholder.com/150'),
             ),
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Cooper, Birnard',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-                  Text('04/12/1978',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500)),
-                  Text('(316) 555-0116',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500)),
+                  Text('$firstName, $lastName',
+                      style: const TextStyle(
+                          fontSize: 25, fontWeight: FontWeight.bold)),
+                  Row(
+                    children: [
+                      const Text('Date of Birth:',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w800)),
+                      Text(formattedDate,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500)),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Text('Phone Number:',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w800)),
+                      Text(phone,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500)),
+                    ],
+                  ),
                 ],
               ),
-            ),
-            Icon(
-              Icons.edit,
-              color: Color(0xFF0D4C92),
-              size: 30,
             ),
           ],
         ),
@@ -208,7 +265,6 @@ class PatientProfileScreen extends StatelessWidget {
   Widget _buildOption(String svgAssetPath, String title, String subtitle,
       {VoidCallback? onTap}) {
     Color iconBackgroundColor = const Color(0xFF0D4C92).withOpacity(0.2);
-    // Color iconColor = const Color(0xFF0D4C92);
 
     return Center(
       child: SizedBox(
@@ -230,8 +286,6 @@ class PatientProfileScreen extends StatelessWidget {
                 ),
                 child: SvgPicture.asset(
                   svgAssetPath,
-                  // width: 32,
-                  // height: 32,
                 ),
               ),
               title: Text(
