@@ -47,6 +47,7 @@ const patientSchema = new mongoose.Schema({
   gender: {
     type: String,
     enum: ["Female", "Male"],
+    required: true,
   },
   additionalInfo: {
     type: Map,
