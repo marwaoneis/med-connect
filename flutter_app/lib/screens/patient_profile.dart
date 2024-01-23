@@ -215,12 +215,9 @@ class PatientProfileScreenState extends State<PatientProfileScreen> {
               },
             ),
             _buildOption('assets/personal_info.svg', 'Personal Information', '',
-                onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const BookAppointmentScreen()),
-              );
+                onTap: () async {
+              var patient = await _fetchPatientData();
+              _showEditPersonalInfoDialog(context, patient);
             }),
             _buildOption('assets/health_safety.svg', 'Symptom Checker', '',
                 onTap: () {
