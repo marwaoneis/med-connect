@@ -1,4 +1,8 @@
+import 'dart:typed_data';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +16,9 @@ import 'message_screen.dart';
 import 'patient_appointments.dart';
 import 'patient_profile.dart';
 import 'patient_dashboard_screen.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
 
 class MedicalHistoryScreen extends StatefulWidget {
   const MedicalHistoryScreen({super.key});
@@ -24,6 +31,7 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
   late Future<Map<String, dynamic>> medicalHistoryData;
   Map<String, dynamic> editableData = {};
   bool isEditing = false;
+  GlobalKey _printKey = GlobalKey();
 
   @override
   void initState() {
@@ -95,6 +103,27 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
     }
   }
 
+  Future<void> _printCard() async {
+    RenderRepaintBoundary boundary =
+        _printKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+    var image = await boundary.toImage();
+    ByteData? byteData = await image.toByteData(format: ImageByteFormat.png);
+    Uint8List pngBytes = byteData!.buffer.asUint8List();
+
+    final doc = pw.Document();
+    final imageProvider = pw.MemoryImage(pngBytes);
+
+    doc.addPage(pw.Page(
+      build: (pw.Context context) {
+        return pw.Center(
+          child: pw.Image(imageProvider, fit: pw.BoxFit.contain),
+        );
+      },
+    ));
+
+    await Printing.layoutPdf(onLayout: (PdfPageFormat format) => doc.save());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,7 +152,12 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
                   onPressed: _saveMedicalHistory,
                 )
               ]
-            : [],
+            : [
+                IconButton(
+                  icon: const Icon(Icons.print, color: Colors.black),
+                  onPressed: _printCard,
+                ),
+              ],
       ),
       body: NoGlowScrollWrapper(
         child: FutureBuilder<Map<String, dynamic>>(
@@ -136,7 +170,10 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
                     Expanded(
                       child: ListView(
                         children: [
-                          _buildMedicalHistoryContent(snapshot.data!),
+                          RepaintBoundary(
+                            key: _printKey,
+                            child: _buildMedicalHistoryContent(snapshot.data!),
+                          ),
                         ],
                       ),
                     ),
@@ -287,7 +324,7 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
                               });
                             }),
                             _buildSvgIconButton(
-                                'assets/print.svg', 'Print', () {}),
+                                'assets/print.svg', 'Print', _printCard),
                           ],
                         ),
                       ),
