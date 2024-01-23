@@ -88,6 +88,8 @@ const updatePatient = async (req, res) => {
     if (updateData.phone) patient.phone = updateData.phone;
     if (updateData.dateOfBirth) patient.dateOfBirth = updateData.dateOfBirth;
     if (updateData.gender) patient.gender = updateData.gender;
+    if (updateData.additionalInfo)
+      patient.additionalInfo = updateData.additionalInfo;
 
     // Save the document
     const updatedPatient = await patient.save();
