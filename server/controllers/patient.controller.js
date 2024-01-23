@@ -72,27 +72,37 @@ const updatePatient = async (req, res) => {
   try {
     const patientId = req.params.id;
     const updateData = req.body;
+    const updateFields = {};
 
-    const patient = await Patient.findById(patientId);
+    // Build the update fields object
+    if (updateData.username) updateFields.username = updateData.username;
+    if (updateData.password) updateFields.password = updateData.password;
+    if (updateData.firstName) updateFields.firstName = updateData.firstName;
+    if (updateData.lastName) updateFields.lastName = updateData.lastName;
+    if (updateData.email) updateFields.email = updateData.email;
+    if (updateData.address) updateFields.address = updateData.address;
+    if (updateData.phone) updateFields.phone = updateData.phone;
+    if (updateData.dateOfBirth)
+      updateFields.dateOfBirth = updateData.dateOfBirth;
+    if (updateData.gender) updateFields.gender = updateData.gender;
 
-    if (!patient) {
-      return res.status(404).json({ error: "Patient not found" });
+    // Update individual additionalInfo fields without affecting other fields
+    if (updateData.additionalInfo) {
+      for (const [key, value] of Object.entries(updateData.additionalInfo)) {
+        updateFields[`additionalInfo.${key}`] = value;
+      }
     }
 
-    if (updateData.username) patient.username = updateData.username;
-    if (updateData.password) patient.password = updateData.password;
-    if (updateData.firstName) patient.firstName = updateData.firstName;
-    if (updateData.lastName) patient.lastName = updateData.lastName;
-    if (updateData.email) patient.email = updateData.email;
-    if (updateData.address) patient.address = updateData.address;
-    if (updateData.phone) patient.phone = updateData.phone;
-    if (updateData.dateOfBirth) patient.dateOfBirth = updateData.dateOfBirth;
-    if (updateData.gender) patient.gender = updateData.gender;
-    if (updateData.additionalInfo)
-      patient.additionalInfo = updateData.additionalInfo;
+    // Find the document and update it
+    const updatedPatient = await Patient.findByIdAndUpdate(
+      patientId,
+      { $set: updateFields },
+      { new: true, runValidators: true }
+    );
 
-    // Save the document
-    const updatedPatient = await patient.save();
+    if (!updatedPatient) {
+      return res.status(404).json({ error: "Patient not found" });
+    }
 
     res.status(200).json(updatedPatient);
   } catch (error) {
