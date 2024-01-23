@@ -24,12 +24,20 @@ class PatientProfileScreen extends StatefulWidget {
 }
 
 class PatientProfileScreenState extends State<PatientProfileScreen> {
-  late Future<Map<String, dynamic>> patientData;
+  Map<String, dynamic>? patientData;
+  bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    patientData = _fetchPatientData();
+    _fetchPatientData().then((data) {
+      if (mounted) {
+        setState(() {
+          patientData = data;
+          isLoading = false;
+        });
+      }
+    });
   }
 
   Future<Map<String, dynamic>> _fetchPatientData() async {
@@ -155,7 +163,7 @@ class PatientProfileScreenState extends State<PatientProfileScreen> {
           onPressed: () {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()),
+              MaterialPageRoute(builder: (context) => const PatientScreen()),
             );
           },
         ),
@@ -168,26 +176,18 @@ class PatientProfileScreenState extends State<PatientProfileScreen> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            FutureBuilder<Map<String, dynamic>>(
-              future: patientData,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
-                } else if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
-                } else if (snapshot.hasData) {
-                  var patient = snapshot.data!;
-                  return _buildProfileCard(
-                    patient['firstName'] ?? 'N/A',
-                    patient['lastName'] ?? 'N/A',
-                    patient['phone'] ?? 'N/A',
-                    patient['dateOfBirth']?.toString() ?? 'N/A',
-                  );
-                } else {
-                  return const Text('No data available');
-                }
-              },
-            ),
+            if (!isLoading && patientData != null)
+              _buildProfileCard(
+                patientData!['firstName'] ?? 'N/A',
+                patientData!['lastName'] ?? 'N/A',
+                patientData!['phone'] ?? 'N/A',
+                patientData!['dateOfBirth']?.toString() ?? 'N/A',
+              ),
+            if (isLoading)
+              const Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Text('Loading patient data...'),
+              ),
             const SizedBox(height: 20),
             _buildOption("assets/medical.svg", 'Medical History',
                 'Check Your Medical History', onTap: () {
