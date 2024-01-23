@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
+pharmacySchema.index({ location: "2dsphere" });
+
 const pharmacySchema = new mongoose.Schema({
   username: {
     type: String,
@@ -60,7 +62,5 @@ pharmacySchema.pre(
     timestamps: true,
   }
 );
-
-pharmacySchema.index({ location: "2dsphere" });
 
 module.exports = mongoose.model("Pharmacy", pharmacySchema);

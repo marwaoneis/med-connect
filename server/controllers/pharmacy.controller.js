@@ -25,6 +25,21 @@ const createPharmacy = async (req, res) => {
 
 const getNearestPharmacy = async (req, res) => {
   const { lat, lng } = req.query;
+  if (
+    !lat ||
+    !lng ||
+    isNaN(lat) ||
+    isNaN(lng) ||
+    lat < -90 ||
+    lat > 90 ||
+    lng < -180 ||
+    lng > 180
+  ) {
+    return res
+      .status(400)
+      .json({ error: "Invalid latitude or longitude values." });
+  }
+
   try {
     const nearestPharmacy = await Pharmacy.findOne({
       location: {
@@ -36,6 +51,11 @@ const getNearestPharmacy = async (req, res) => {
         },
       },
     });
+
+    if (!nearestPharmacy) {
+      return res.status(404).json({ error: "No nearby pharmacy found." });
+    }
+
     res.json(nearestPharmacy);
   } catch (error) {
     console.log(error.message);

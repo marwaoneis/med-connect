@@ -5,11 +5,11 @@ const cors = require("cors");
 
 //Initilizing app as express method
 const app = express();
-app.use(express.json());
 
 // Middlewares for parsing JSON and URL-encoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors({ origin: "http://localhost:3000" }));
 
 // patient auth route
 const patientAuthRoutes = require("./routes/patient.auth.routes");
@@ -35,7 +35,7 @@ app.use("/", authenticateToken, prescriptionRoutes);
 
 // pharmacy routes
 const pharmacyRoutes = require("./routes/pharmacy.routes");
-app.use("/", authenticateToken, pharmacyRoutes);
+app.use("/", pharmacyRoutes);
 
 // medicine routes
 const medicineRoutes = require("./routes/medicine.routes");
@@ -57,7 +57,21 @@ app.use("/", authenticateToken, chatRoutes);
 const appointmentRoutes = require("./routes/appintment.routes");
 app.use("/", authenticateToken, appointmentRoutes);
 
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use((err, req, res, next) => {
+  console.error(err); // Log the full error to the console
+
+  // Send a detailed error message in the response (only in development mode)
+  if (process.env.NODE_ENV === "development") {
+    res.status(500).json({
+      error: "Internal Server Error",
+      message: err.message,
+      stack: err.stack,
+    });
+  } else {
+    // In production, send a generic message
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 //Listening on server port and logging status
 const PORT = process.env.PORT;
