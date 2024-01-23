@@ -154,6 +154,116 @@ class PatientProfileScreenState extends State<PatientProfileScreen> {
     );
   }
 
+  Future<void> _showEditPersonalInfoDialog(
+      BuildContext context, Map<String, dynamic> patientData) async {
+    String patientId = patientData['_id'];
+    TextEditingController usernameController =
+        TextEditingController(text: patientData['username']);
+    TextEditingController passwordController =
+        TextEditingController(text: patientData['password']);
+    TextEditingController firstNameController =
+        TextEditingController(text: patientData['firstName']);
+    TextEditingController lastNameController =
+        TextEditingController(text: patientData['lastName']);
+    TextEditingController emailController =
+        TextEditingController(text: patientData['email']);
+    TextEditingController addressController =
+        TextEditingController(text: patientData['address']);
+    TextEditingController phoneController =
+        TextEditingController(text: patientData['phone']);
+    TextEditingController dobController = TextEditingController(
+        text: DateFormat('yyyy-MM-dd')
+            .format(DateTime.parse(patientData['dateOfBirth'])));
+    TextEditingController genderController =
+        TextEditingController(text: patientData['gender']);
+
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Edit Personal Information'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                TextFormField(
+                  controller: usernameController,
+                  decoration: const InputDecoration(labelText: 'Username'),
+                ),
+                TextFormField(
+                  controller: passwordController,
+                  decoration: const InputDecoration(labelText: 'Password'),
+                  obscureText: true,
+                ),
+                TextFormField(
+                  controller: firstNameController,
+                  decoration: const InputDecoration(labelText: 'First Name'),
+                ),
+                TextFormField(
+                  controller: lastNameController,
+                  decoration: const InputDecoration(labelText: 'Last Name'),
+                  obscureText: true,
+                ),
+                TextFormField(
+                  controller: emailController,
+                  decoration: const InputDecoration(labelText: 'Email'),
+                ),
+                TextFormField(
+                  controller: addressController,
+                  decoration: const InputDecoration(labelText: 'Address'),
+                  obscureText: true,
+                ),
+                TextFormField(
+                  controller: phoneController,
+                  decoration: const InputDecoration(labelText: 'Phone Number'),
+                ),
+                TextFormField(
+                  controller: dobController,
+                  decoration: const InputDecoration(labelText: 'Date of Birth'),
+                  obscureText: true,
+                ),
+                TextFormField(
+                  controller: genderController,
+                  decoration: const InputDecoration(labelText: 'Gender'),
+                  obscureText: true,
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Save'),
+              onPressed: () async {
+                Map<String, dynamic> updateData = {
+                  "username": usernameController.text,
+                  "password": passwordController.text,
+                  "firstName": firstNameController.text,
+                  "lastName": lastNameController.text,
+                  "email": emailController.text,
+                  "address": addressController.text,
+                  "phone": phoneController.text,
+                  "dateOfBirth": dobController.text,
+                  "gender": genderController.text,
+                };
+
+                // Send PUT request
+                dynamic response = await sendRequest(
+                  route: '/patients/$patientId',
+                  method: "PUT",
+                  load: updateData,
+                  context: context,
+                );
+
+                // Handle response
+                // ...
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
