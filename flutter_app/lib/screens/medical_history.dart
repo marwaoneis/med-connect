@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../api/api_service.dart';
 import '../config/request_config.dart';
 import '../providers/auth_provider.dart';
+import '../tools/request.dart';
 import '../widgets/footer.dart';
 import '../widgets/no_glow_scroll.dart';
 import 'message_screen.dart';
@@ -21,6 +22,8 @@ class MedicalHistoryScreen extends StatefulWidget {
 
 class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
   late Future<Map<String, dynamic>> medicalHistoryData;
+  Map<String, dynamic> editableData = {};
+  bool isEditing = false;
 
   @override
   void initState() {
@@ -60,6 +63,38 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
     };
   }
 
+  Future<void> _saveMedicalHistory() async {
+    final authProvider = Provider.of<Auth>(context, listen: false);
+    final userId = authProvider.getUserId;
+    final updateData = {
+      'additionalInfo': {
+        'height': editableData['height'],
+        'weight': editableData['weight'],
+        'bloodGroup': editableData['bloodGroup'],
+        'vaccinations': editableData['vaccinations'],
+        'priorSurgeries': editableData['priorSurgeries'],
+        'allergies': editableData['allergies'],
+        'emergencyContacts': editableData['emergencyContacts'],
+      }
+    };
+
+    var response = await sendRequest(
+      route: '/patients/$userId',
+      method: "PUT",
+      load: updateData,
+      context: context,
+    );
+
+    if (response != null) {
+      setState(() {
+        isEditing = false;
+        medicalHistoryData = _fetchMedicalHistoryData(); // Refetch data
+      });
+    } else {
+      // Handle error
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,13 +103,27 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const PatientProfileScreen()),
-            );
+            if (isEditing) {
+              setState(() {
+                isEditing = false;
+              });
+            } else {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const PatientProfileScreen()),
+              );
+            }
           },
         ),
+        actions: isEditing
+            ? [
+                IconButton(
+                  icon: const Icon(Icons.check, color: Colors.black),
+                  onPressed: _saveMedicalHistory,
+                )
+              ]
+            : [],
       ),
       body: NoGlowScrollWrapper(
         child: FutureBuilder<Map<String, dynamic>>(
@@ -134,38 +183,47 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
   }
 
   Widget _buildMedicalHistoryContent(Map<String, dynamic> data) {
-    String formattedDateOfBirth = data['dateOfBirth'] != 'N/A'
-        ? DateFormat('dd/MM/yyyy').format(DateTime.parse(data['dateOfBirth']))
+    if (!isEditing) {
+      editableData = Map.from(data);
+    }
+
+    String formattedDateOfBirth = editableData['dateOfBirth'] != 'N/A'
+        ? DateFormat('dd/MM/yyyy')
+            .format(DateTime.parse(editableData['dateOfBirth']))
         : 'N/A';
 
     Map<String, dynamic> infoList = {
-      'Gender': data['gender'],
+      'Gender': editableData['gender'],
       'Birthday': formattedDateOfBirth,
-      'Height': data['height'],
-      'Weight': data['weight'],
-      'Blood Group': data['bloodGroup'],
+      'Height': editableData['height'],
+      'Weight': editableData['weight'],
+      'Blood Group': editableData['bloodGroup'],
     };
 
-    // print('vaccinations type: ${data['vaccinations'].runtimeType}');
-    // print('priorSurgeries type: ${data['priorSurgeries'].runtimeType}');
-    // print('allergies type: ${data['allergies'].runtimeType}');
-    // print('emergencyContacts type: ${data['emergencyContacts'].runtimeType}');
-
     List<Widget> infoWidgets = infoList.entries.map((entry) {
-      return ListTile(
-        title: Text(
-          entry.key,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        subtitle: Text(entry.value.toString()),
-      );
+      return isEditing
+          ? _buildEditableField(entry.key, entry.value)
+          : ListTile(
+              title: Text(
+                entry.key,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(entry.value.toString()),
+            );
     }).toList();
 
-    List<Widget> vaccinationWidgets = _createListWidgets(data['vaccinations']);
-    List<Widget> surgeryWidgets = _createListWidgets(data['priorSurgeries']);
-    List<Widget> allergyWidgets = _createListWidgets(data['allergies']);
-    List<Widget> emergencyContactWidgets =
-        _createListWidgets(data['emergencyContacts']);
+    List<Widget> vaccinationWidgets = isEditing
+        ? _buildEditableList('vaccinations', data['vaccinations'])
+        : _createListWidgets(data['vaccinations']);
+    List<Widget> surgeryWidgets = isEditing
+        ? _buildEditableList('priorSurgeries', data['priorSurgeries'])
+        : _createListWidgets(data['priorSurgeries']);
+    List<Widget> allergyWidgets = isEditing
+        ? _buildEditableList('allergies', data['allergies'])
+        : _createListWidgets(data['allergies']);
+    List<Widget> emergencyContactWidgets = isEditing
+        ? _buildEditableList('emergencyContacts', data['emergencyContacts'])
+        : _createListWidgets(data['emergencyContacts']);
 
     return SingleChildScrollView(
       child: Padding(
@@ -181,7 +239,7 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
                   children: <Widget>[
                     Center(
                       child: Text(
-                        "${data['firstName']} ${data['lastName']}",
+                        "${editableData['firstName']} ${editableData['lastName']}",
                         style: const TextStyle(
                             fontSize: 26, fontWeight: FontWeight.w900),
                         textAlign: TextAlign.center,
@@ -217,18 +275,22 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     ...emergencyContactWidgets,
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          _buildSvgIconButton(
-                              'assets/edit.svg', 'Edit', context),
-                          _buildSvgIconButton(
-                              'assets/print.svg', 'Print', context),
-                        ],
+                    if (!isEditing)
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            _buildSvgIconButton('assets/edit.svg', 'Edit', () {
+                              setState(() {
+                                isEditing = true;
+                              });
+                            }),
+                            _buildSvgIconButton(
+                                'assets/print.svg', 'Print', () {}),
+                          ],
+                        ),
                       ),
-                    ),
                   ],
                 ),
               ),
@@ -237,6 +299,43 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
         ),
       ),
     );
+  }
+
+  Widget _buildEditableField(String label, dynamic value) {
+    return ListTile(
+      title: Text(
+        label,
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
+      subtitle: TextFormField(
+        initialValue: value.toString(),
+        onChanged: (newValue) {
+          setState(() {
+            editableData[label.toLowerCase()] = newValue;
+          });
+        },
+      ),
+    );
+  }
+
+  List<Widget> _buildEditableList(String key, List<dynamic> items) {
+    List<TextEditingController> controllers = items
+        .map((item) => TextEditingController(text: item.toString()))
+        .toList();
+
+    return List<Widget>.generate(controllers.length, (index) {
+      return ListTile(
+        title: TextFormField(
+          controller: controllers[index],
+          decoration: InputDecoration(hintText: 'Enter $key'),
+          onChanged: (newValue) {
+            setState(() {
+              editableData[key][index] = newValue;
+            });
+          },
+        ),
+      );
+    });
   }
 
   List<Widget> _createListWidgets(List<dynamic> items) {
@@ -267,7 +366,7 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
   }
 
   Widget _buildSvgIconButton(
-      String assetName, String tooltip, BuildContext context) {
+      String assetName, String tooltip, VoidCallback onTap) {
     return Container(
       margin: const EdgeInsets.all(4),
       decoration: BoxDecoration(
@@ -275,7 +374,7 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
         borderRadius: BorderRadius.circular(8),
       ),
       child: IconButton(
-        onPressed: () {},
+        onPressed: onTap,
         tooltip: tooltip,
         icon: SvgPicture.asset(
           assetName,
