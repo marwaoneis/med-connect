@@ -43,9 +43,14 @@ class PatientProfileScreenState extends State<PatientProfileScreen> {
   }
 
   Future<void> _showEditWeightHeightDialog(
-      BuildContext context, String patientId) async {
-    String newWeight = '';
-    String newHeight = '';
+      BuildContext context, Map<String, dynamic> patientData) async {
+    String patientId = patientData['_id'];
+    String currentWeight = patientData['additionalInfo']['weight'] ?? '';
+    String currentHeight = patientData['additionalInfo']['height'] ?? '';
+    String newWeight = currentWeight;
+    String newHeight = currentHeight;
+    ScaffoldMessengerState scaffoldMessenger = ScaffoldMessenger.of(context);
+    NavigatorState navigator = Navigator.of(context);
 
     return showDialog<void>(
       context: context,
@@ -57,11 +62,15 @@ class PatientProfileScreenState extends State<PatientProfileScreen> {
             child: ListBody(
               children: <Widget>[
                 TextFormField(
-                  decoration: InputDecoration(hintText: 'Enter Weight'),
+                  initialValue: currentWeight,
+                  decoration:
+                      const InputDecoration(hintText: 'Enter Weight in kg'),
                   onChanged: (value) => newWeight = value,
                 ),
                 TextFormField(
-                  decoration: InputDecoration(hintText: 'Enter Height'),
+                  initialValue: currentHeight,
+                  decoration:
+                      const InputDecoration(hintText: 'Enter Height in cm'),
                   onChanged: (value) => newHeight = value,
                 ),
               ],
@@ -71,17 +80,64 @@ class PatientProfileScreenState extends State<PatientProfileScreen> {
             TextButton(
               child: const Text('Save'),
               onPressed: () async {
-                // Update patient data
-                Map<String, dynamic> updateData = {
-                  "additionalInfo": {"weight": newWeight, "height": newHeight}
-                };
-                await sendRequest(
-                  route: '/patients/$patientId',
-                  method: "PUT",
-                  load: updateData,
-                  context: context,
-                );
-                Navigator.of(context).pop();
+                try {
+                  dynamic response;
+                  if (currentWeight.isEmpty && currentHeight.isEmpty) {
+                    response = await sendRequest(
+                      route: '/patients/$patientId/additional-info',
+                      method: "POST",
+                      load: {"key": "weight", "value": newWeight},
+                      context: context,
+                    );
+                    if (!mounted) return;
+                    response = await sendRequest(
+                      route: '/patients/$patientId/additional-info',
+                      method: "POST",
+                      load: {"key": "height", "value": newHeight},
+                      context: context,
+                    );
+                  } else {
+                    response = await sendRequest(
+                      route: '/patients/$patientId',
+                      method: "PUT",
+                      load: {
+                        "additionalInfo": {
+                          "weight": newWeight,
+                          "height": newHeight
+                        }
+                      },
+                      context: context,
+                    );
+                  }
+
+                  if (!mounted) return;
+
+                  if (response != null) {
+                    Map<String, dynamic> updatedPatientData =
+                        await _fetchPatientData();
+
+                    setState(() {
+                      patientData = updatedPatientData;
+                    });
+                    navigator.pop();
+                    scaffoldMessenger.showSnackBar(
+                      const SnackBar(
+                          content:
+                              Text('Weight and Height updated successfully!')),
+                    );
+                  } else {
+                    navigator.pop(); // Close the dialog
+                    scaffoldMessenger.showSnackBar(
+                      const SnackBar(content: Text('Failed to update data')),
+                    );
+                  }
+                } catch (error) {
+                  if (!mounted) return;
+                  Navigator.of(context).pop();
+                  scaffoldMessenger.showSnackBar(
+                    SnackBar(content: Text('Error: $error')),
+                  );
+                }
               },
             ),
           ],
@@ -92,8 +148,6 @@ class PatientProfileScreenState extends State<PatientProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final userId = Provider.of<Auth>(context, listen: false).getUserId;
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -155,7 +209,10 @@ class PatientProfileScreenState extends State<PatientProfileScreen> {
               'assets/weight_scale.svg',
               'Weight and Height',
               '',
-              onTap: () => _showEditWeightHeightDialog(context, "$userId"),
+              onTap: () async {
+                var patient = await _fetchPatientData();
+                _showEditWeightHeightDialog(context, patient);
+              },
             ),
             _buildOption('assets/personal_info.svg', 'Personal Information', '',
                 onTap: () {
