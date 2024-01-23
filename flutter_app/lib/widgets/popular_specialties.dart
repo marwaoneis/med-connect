@@ -35,6 +35,42 @@ class PopularSpecialtiesWidget extends StatelessWidget {
         return "assets/cardiologist.svg";
       case "Dermatology":
         return "assets/dermatologist.svg";
+      case "EmergencyMedicine":
+        return "assets/cardiologist.svg";
+      case "Gastroenterology":
+        return "assets/dermatologist.svg";
+      case "GeneralSurgery":
+        return "assets/cardiologist.svg";
+      case "InternalMedicine":
+        return "assets/dermatologist.svg";
+      case "Neurology":
+        return "assets/cardiologist.svg";
+      case "ObstetricsGynecology":
+        return "assets/dermatologist.svg";
+      case "Oncology":
+        return "assets/cardiologist.svg";
+      case "Ophthalmology":
+        return "assets/dermatologist.svg";
+      case "Orthopedics":
+        return "assets/cardiologist.svg";
+      case "Pediatrics":
+        return "assets/dermatologist.svg";
+      case "Psychiatry":
+        return "assets/dermatologist.svg";
+      case "Pulmonology":
+        return "assets/cardiologist.svg";
+      case "Radiology":
+        return "assets/dermatologist.svg";
+      case "Urology":
+        return "assets/cardiologist.svg";
+      case "Anesthesiology":
+        return "assets/dermatologist.svg";
+      case "Endocrinology":
+        return "assets/cardiologist.svg";
+      case "Nephrology":
+        return "assets/dermatologist.svg";
+      case "Rheumatology":
+        return "assets/cardiologist.svg";
       default:
         return "assets/dentist.svg";
     }

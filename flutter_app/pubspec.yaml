@@ -103,7 +103,25 @@ flutter:
     - assets/medicine_img.svg
     - assets/medicine_img.png
     - assets/cover_medicine.png
-    - assets/dermatologist.png
+    - assets/anesthesiology.svg
+    - assets/dermatology.svg
+    - assets/emergencymedicine.svg
+    - assets/endocrinology.svg
+    - assets/gastroenterology.svg
+    - assets/generalsurgery.svg
+    - assets/internalmedicine.svg
+    - assets/nephrology.svg
+    - assets/neurology.svg
+    - assets/obstetricsgynecology.svg
+    - assets/oncology.svg
+    - assets/ophthalmology.svg
+    - assets/orthopedics.svg
+    - assets/pediatrics.svg
+    - assets/psychiatry.svg
+    - assets/pulmonology.svg
+    - assets/radiology.svg
+    - assets/rheumatology.svg
+    - assets/urology.svg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
