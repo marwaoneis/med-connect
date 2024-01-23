@@ -49,8 +49,6 @@ const doctorSchema = new mongoose.Schema({
     required: true,
     enum: [
       "Cardiology",
-      "Dermatology",
-      "Emergency Medicine",
       "Gastroenterology",
       "General Surgery",
       "Internal Medicine",
@@ -64,6 +62,8 @@ const doctorSchema = new mongoose.Schema({
       "Pulmonology",
       "Radiology",
       "Urology",
+      "Dermatology",
+      "Emergency Medicine",
       "Anesthesiology",
       "Endocrinology",
       "Nephrology",
