@@ -63,7 +63,19 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Medical History')),
+      appBar: AppBar(
+        title: const Text('Medical History'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const PatientProfileScreen()),
+            );
+          },
+        ),
+      ),
       body: NoGlowScrollWrapper(
         child: FutureBuilder<Map<String, dynamic>>(
           future: medicalHistoryData,
