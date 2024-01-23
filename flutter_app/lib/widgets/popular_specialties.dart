@@ -34,43 +34,43 @@ class PopularSpecialtiesWidget extends StatelessWidget {
       case "Cardiology":
         return "assets/cardiologist.svg";
       case "Dermatology":
-        return "assets/dermatologist.svg";
-      case "EmergencyMedicine":
-        return "assets/cardiologist.svg";
+        return "assets/dermatology.svg";
       case "Gastroenterology":
-        return "assets/dermatologist.svg";
-      case "GeneralSurgery":
-        return "assets/cardiologist.svg";
-      case "InternalMedicine":
-        return "assets/dermatologist.svg";
+        return "assets/gastroenterology.svg";
+      case "General Surgery":
+        return "assets/generalsurgery.svg";
+      case "Internal Medicine":
+        return "assets/internalmedicine.svg";
       case "Neurology":
-        return "assets/cardiologist.svg";
-      case "ObstetricsGynecology":
-        return "assets/dermatologist.svg";
+        return "assets/neurology.svg";
+      case "Obstetrics/Gynecology":
+        return "assets/obstetricsgynecology.svg";
       case "Oncology":
-        return "assets/cardiologist.svg";
+        return "assets/oncology.svg";
       case "Ophthalmology":
-        return "assets/dermatologist.svg";
+        return "assets/ophthalmology.svg";
       case "Orthopedics":
-        return "assets/cardiologist.svg";
+        return "assets/orthopedics.svg";
       case "Pediatrics":
-        return "assets/dermatologist.svg";
+        return "assets/pediatrics.svg";
       case "Psychiatry":
-        return "assets/dermatologist.svg";
+        return "assets/psychiatry.svg";
       case "Pulmonology":
-        return "assets/cardiologist.svg";
+        return "assets/pulmonology.svg";
       case "Radiology":
-        return "assets/dermatologist.svg";
+        return "assets/radiology.svg";
       case "Urology":
-        return "assets/cardiologist.svg";
+        return "assets/urology.svg";
       case "Anesthesiology":
-        return "assets/dermatologist.svg";
+        return "assets/anesthesiology.svg";
       case "Endocrinology":
-        return "assets/cardiologist.svg";
+        return "assets/endocrinology.svg";
       case "Nephrology":
-        return "assets/dermatologist.svg";
+        return "assets/nephrology.svg";
+      case "Emergency Medicine":
+        return "assets/emergencymedicine.svg";
       case "Rheumatology":
-        return "assets/cardiologist.svg";
+        return "assets/rheumatology.svg";
       default:
         return "assets/dentist.svg";
     }

@@ -1,7 +1,5 @@
 enum DoctorSpecialization {
   Cardiology,
-  Dermatology,
-  EmergencyMedicine,
   Gastroenterology,
   GeneralSurgery,
   InternalMedicine,
@@ -13,6 +11,8 @@ enum DoctorSpecialization {
   Pediatrics,
   Psychiatry,
   Pulmonology,
+  Dermatology,
+  EmergencyMedicine,
   Radiology,
   Urology,
   Anesthesiology,
