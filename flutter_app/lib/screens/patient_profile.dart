@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import '../api/api_service.dart';
 import '../config/request_config.dart';
 import '../providers/auth_provider.dart';
+import '../tools/request.dart';
 import '../widgets/footer.dart';
 import 'message_screen.dart';
 import 'patient_appointments.dart';
@@ -41,8 +42,58 @@ class PatientProfileScreenState extends State<PatientProfileScreen> {
     return data;
   }
 
+  Future<void> _showEditWeightHeightDialog(
+      BuildContext context, String patientId) async {
+    String newWeight = '';
+    String newHeight = '';
+
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Edit Weight and Height'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                TextFormField(
+                  decoration: InputDecoration(hintText: 'Enter Weight'),
+                  onChanged: (value) => newWeight = value,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(hintText: 'Enter Height'),
+                  onChanged: (value) => newHeight = value,
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Save'),
+              onPressed: () async {
+                // Update patient data
+                Map<String, dynamic> updateData = {
+                  "additionalInfo": {"weight": newWeight, "height": newHeight}
+                };
+                await sendRequest(
+                  route: '/patients/$patientId',
+                  method: "PUT",
+                  load: updateData,
+                  context: context,
+                );
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final userId = Provider.of<Auth>(context, listen: false).getUserId;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -100,15 +151,12 @@ class PatientProfileScreenState extends State<PatientProfileScreen> {
                     builder: (context) => const BuyMedicineScreen()),
               );
             }),
-            _buildOption('assets/weight_scale.svg', 'Weight and Height', '',
-                onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        const BookAppointmentScreen(title: 'Book Appointment')),
-              );
-            }),
+            _buildOption(
+              'assets/weight_scale.svg',
+              'Weight and Height',
+              '',
+              onTap: () => _showEditWeightHeightDialog(context, "$userId"),
+            ),
             _buildOption('assets/personal_info.svg', 'Personal Information', '',
                 onTap: () {
               Navigator.pushReplacement(
