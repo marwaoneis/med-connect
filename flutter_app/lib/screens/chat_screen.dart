@@ -50,15 +50,22 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
       List<Message> newMessages = [];
 
       for (QueryDocumentSnapshot doc in snapshot.docs) {
-        // Assuming you have a method to convert a document to a Message
         var messageContent = doc.data() as Map<String, dynamic>;
+        print("Message content: ${messageContent}");
+        bool isSenderMessage = messageContent['idFrom'] == senderId;
+        print("Message senderid: ${senderId}");
+
         Message message = Message(
-            text: messageContent['content']!,
-            animationController: AnimationController(
-              duration: const Duration(milliseconds: 700),
-              vsync: this,
-            ));
+          text: messageContent['content']!,
+          animationController: AnimationController(
+            duration: const Duration(milliseconds: 700),
+            vsync: this,
+          ),
+          isSender: isSenderMessage,
+        );
+
         newMessages.add(message);
+        message.animationController.forward();
       }
 
       setState(() {
@@ -70,12 +77,14 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   void _handleSubmitted(String text) {
     if (text.trim().isNotEmpty) {
       _textController.clear();
+
       Message message = Message(
         text: text,
         animationController: AnimationController(
           duration: const Duration(milliseconds: 700),
           vsync: this,
         ),
+        isSender: true, // Since this message is sent by the local user
       );
       setState(() {
         _messages.insert(0, message);
@@ -157,43 +166,64 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
 }
 
 class Message extends StatelessWidget {
-  Message({required this.text, required this.animationController, super.key}) {
-    animationController.forward();
-  }
-
+  final bool isSender;
   final String text;
   final AnimationController animationController;
 
+  Message({
+    required this.text,
+    required this.animationController,
+    required this.isSender,
+    super.key,
+  }) {
+    animationController.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final alignToLeft = CrossAxisAlignment.start;
+    final alignToRight = CrossAxisAlignment.end;
+
+    // print(isSender);
     return SizeTransition(
       sizeFactor:
           CurvedAnimation(parent: animationController, curve: Curves.easeOut),
       axisAlignment: 0.0,
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+      child: Row(
+        mainAxisAlignment:
+            isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
+        children: <Widget>[
+          if (!isSender)
             Container(
               margin: const EdgeInsets.only(right: 16.0),
-              child: const CircleAvatar(child: Text('Your Initials')),
+              child: CircleAvatar(child: Text('R')),
             ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text('Your Name',
-                      style: Theme.of(context).textTheme.titleMedium),
-                  Container(
-                    margin: const EdgeInsets.only(top: 5.0),
-                    child: Text(text),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: isSender ? alignToRight : alignToLeft,
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.only(top: 15.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 8.0),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF0D4C92).withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
-                ],
-              ),
+                  child: Text(
+                    text,
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          if (isSender)
+            Container(
+              margin: const EdgeInsets.only(left: 16.0),
+              child: CircleAvatar(child: Text('S')),
+            ),
+        ],
       ),
     );
   }
