@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../constants/firestore_constants.dart';
-import '../providers/auth_provider.dart';
 import '../screens/chat_screen.dart';
 
 class ChatsList extends StatelessWidget {
@@ -9,15 +7,8 @@ class ChatsList extends StatelessWidget {
 
   const ChatsList({super.key, required this.chatsStream});
 
-  String getSenderName(Auth authProvider) {
-    return authProvider.getFullName ?? "Unknown";
-  }
-
   @override
   Widget build(BuildContext context) {
-    Auth authProvider = Provider.of<Auth>(context, listen: false);
-    String senderName = getSenderName(authProvider);
-
     return StreamBuilder<List<Map<String, dynamic>>>(
       stream: chatsStream,
       builder: (BuildContext context,
@@ -28,7 +19,7 @@ class ChatsList extends StatelessWidget {
             return ListView.builder(
               itemCount: chats.data!.length,
               itemBuilder: (context, index) =>
-                  buildItem(context, chats.data![index], senderName),
+                  buildItem(context, chats.data![index]),
             );
           } else {
             return const Center(
@@ -48,8 +39,7 @@ class ChatsList extends StatelessWidget {
     );
   }
 
-  Widget buildItem(
-      BuildContext context, Map<String, dynamic> chat, String senderName) {
+  Widget buildItem(BuildContext context, Map<String, dynamic> chat) {
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -58,7 +48,6 @@ class ChatsList extends StatelessWidget {
             builder: (context) => ChatScreen(
               receiverId: chat[FirestoreConstants.id],
               receiverName: chat[FirestoreConstants.fullName],
-              senderName: senderName,
             ),
           ),
         );

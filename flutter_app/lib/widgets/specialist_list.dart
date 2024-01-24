@@ -72,8 +72,6 @@ class SpecialistListState extends State<SpecialistList> {
   @override
   Widget build(BuildContext context) {
     Auth authProvider = Provider.of<Auth>(context, listen: false);
-    String senderName = authProvider.getFullName ?? "Unknown";
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -173,9 +171,6 @@ class SpecialistListState extends State<SpecialistList> {
                                             builder: (context) => ChatScreen(
                                                   receiverId: specialist.id,
                                                   receiverName: specialist.name,
-                                                  senderName: authProvider
-                                                          .getFullName ??
-                                                      "Unknown",
                                                 )),
                                       );
                                     },
