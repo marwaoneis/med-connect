@@ -3,13 +3,13 @@ const router = express.Router();
 const pharmacyController = require("../controllers/pharmacy.controller");
 const { pharmacyMiddleware } = require("../middleware/pharmacy.middleware.js");
 
+router.get("/pharmacies/nearest", pharmacyController.getNearestPharmacy);
 router.post(
   "/pharmacies",
   pharmacyMiddleware,
   pharmacyController.createPharmacy
 );
 router.get("/pharmacies", pharmacyController.getAllPharmacies);
-router.get("/pharmacies/:id", pharmacyController.getPharmacyById);
 router.put(
   "/pharmacies/:id",
   pharmacyMiddleware,
@@ -24,6 +24,6 @@ router.get(
   "/pharmacies/address/:address",
   pharmacyController.getPharmaciesByAddress
 );
-router.get("/pharmacies/nearest", pharmacyController.getNearestPharmacy);
+router.get("/pharmacies/:id", pharmacyController.getPharmacyById);
 
 module.exports = router;
