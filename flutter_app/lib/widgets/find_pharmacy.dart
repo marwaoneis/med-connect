@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-
 import '../api/api_service.dart';
 import '../config/request_config.dart';
 import '../models/pharmacy_model.dart';
