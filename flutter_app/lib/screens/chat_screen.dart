@@ -205,7 +205,7 @@ class Message extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.only(top: 15.0),
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 10.0, vertical: 8.0),
+                      horizontal: 15.0, vertical: 8.0),
                   decoration: BoxDecoration(
                     color: Color(0xFF0D4C92).withOpacity(0.2),
                     borderRadius: BorderRadius.circular(10.0),
