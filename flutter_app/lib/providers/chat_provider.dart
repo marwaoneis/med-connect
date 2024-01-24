@@ -18,55 +18,19 @@ class ChatProvider {
         .update(dataUpdate);
   }
 
-  void createChat(String senderId, String receiverName, String receiverId,
-      {String? senderFullName}) async {
-    senderFullName ??= await fetchFullName(senderId) ?? "Unknown User";
-
-    await firebaseFirestore
-        .collection(FirestoreConstants.pathUserCollection)
-        .doc(senderId)
-        .collection(FirestoreConstants.pathChatsCollection)
-        .doc(receiverId)
-        .set({
+  void createChat(
+      String senderId, String receiverName, String receiverId) async {
+    Map<String, dynamic> receiverData = {
       FirestoreConstants.fullName: receiverName,
       FirestoreConstants.id: receiverId,
-    });
+    };
 
     await firebaseFirestore
         .collection(FirestoreConstants.pathUserCollection)
-        .doc(receiverId)
-        .collection(FirestoreConstants.pathChatsCollection)
         .doc(senderId)
-        .set({
-      FirestoreConstants.fullName: senderFullName,
-      FirestoreConstants.id: senderId,
-    });
-  }
-
-  Future<String?> fetchFullName(String userId) async {
-    try {
-      DocumentSnapshot userDoc = await firebaseFirestore
-          .collection(FirestoreConstants.pathUserCollection)
-          .doc(userId)
-          .get();
-
-      if (userDoc.exists) {
-        Map<String, dynamic> userData =
-            userDoc.data() as Map<String, dynamic>? ?? {};
-
-        String firstName = userData['firstName'] ?? '';
-        String lastName = userData['lastName'] ?? '';
-
-        // Return the full name if both firstName and lastName are available
-        return (firstName.isNotEmpty && lastName.isNotEmpty)
-            ? '$firstName $lastName'
-            : null;
-      }
-      return null;
-    } catch (e) {
-      print("Error fetching user's full name: $e");
-      return null;
-    }
+        .collection(FirestoreConstants.pathChatsCollection)
+        .doc(receiverId)
+        .set(receiverData);
   }
 
   Stream<QuerySnapshot> getChatMessages(
@@ -81,57 +45,31 @@ class ChatProvider {
         .snapshots();
   }
 
-  Future<void> sendChatMessage(String content, int type, String senderId,
-      String receiverId, String receiverName, String senderFullName) async {
-    String chatId = getChatId(senderId, receiverId);
-
-    // Check if chat session exists for the sender and create if not.
-    var senderChatDocRef = firebaseFirestore
-        .collection(FirestoreConstants.pathUserCollection)
-        .doc(senderId)
-        .collection(FirestoreConstants.pathChatsCollection)
-        .doc(receiverId);
-    var senderChatSnapshot = await senderChatDocRef.get();
-    if (!senderChatSnapshot.exists) {
-      await senderChatDocRef.set({
-        FirestoreConstants.fullName: receiverName,
-        FirestoreConstants.id: receiverId,
-      });
+  void sendChatMessage(String content, int type, String sender, String receiver,
+      String receiverName, String senderName) async {
+    // createChat for receiving & sending user
+    var senderChatSnapshot = await doesChatExist(sender, receiver);
+    if (senderChatSnapshot != null && !senderChatSnapshot.exists) {
+      createChat(sender, receiver, receiverName);
     }
-
-    // Check if chat session exists for the receiver and create if not.
-    var receiverChatDocRef = firebaseFirestore
-        .collection(FirestoreConstants.pathUserCollection)
-        .doc(receiverId)
-        .collection(FirestoreConstants.pathChatsCollection)
-        .doc(senderId);
-    var receiverChatSnapshot = await receiverChatDocRef.get();
-    if (!receiverChatSnapshot.exists) {
-      await receiverChatDocRef.set({
-        FirestoreConstants.fullName: senderFullName,
-        FirestoreConstants.id: senderId,
-      });
+    var receiverChatSnapshot = await doesChatExist(receiver, sender);
+    if (receiverChatSnapshot != null && !receiverChatSnapshot.exists) {
+      createChat(receiver, sender, senderName);
     }
-
-    // Prepare the chat message.
-    ChatMessage chatMessage = ChatMessage(
-      idFrom: senderId,
-      idTo: receiverId,
-      timestamp: DateTime.now().millisecondsSinceEpoch.toString(),
-      content: content,
-      type: type,
-      senderFullName: senderFullName,
-    );
-
-    // Save the message to Firestore.
-    DocumentReference messageRef = firebaseFirestore
+    String chatId = getChatId(sender, receiver);
+    DocumentReference documentReference = firebaseFirestore
         .collection(FirestoreConstants.pathMessageCollection)
         .doc(chatId)
-        .collection(FirestoreConstants.pathChatsCollection)
+        .collection(chatId)
         .doc(DateTime.now().millisecondsSinceEpoch.toString());
-
-    await firebaseFirestore.runTransaction((transaction) async {
-      transaction.set(messageRef, chatMessage.toJson());
+    ChatMessage chatMessages = ChatMessage(
+        idFrom: sender,
+        idTo: receiver,
+        timestamp: DateTime.now().millisecondsSinceEpoch.toString(),
+        content: content,
+        type: type);
+    FirebaseFirestore.instance.runTransaction((transaction) async {
+      transaction.set(documentReference, chatMessages.toJson());
     });
   }
 
