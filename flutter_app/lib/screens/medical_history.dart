@@ -1,9 +1,7 @@
 import 'dart:typed_data';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../api/api_service.dart';
@@ -145,19 +143,17 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
             }
           },
         ),
-        actions: isEditing
-            ? [
-                IconButton(
-                  icon: const Icon(Icons.check, color: Colors.black),
-                  onPressed: _saveMedicalHistory,
-                )
-              ]
-            : [
-                IconButton(
-                  icon: const Icon(Icons.print, color: Colors.black),
-                  onPressed: _printCard,
-                ),
-              ],
+        actions: [
+          if (!isEditing)
+            IconButton(
+              icon: const Icon(Icons.edit, color: Color(0xFF0D4C92)),
+              onPressed: () {
+                setState(() {
+                  isEditing = true;
+                });
+              },
+            ),
+        ],
       ),
       body: NoGlowScrollWrapper(
         child: FutureBuilder<Map<String, dynamic>>(
@@ -312,22 +308,21 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     ...emergencyContactWidgets,
-                    if (!isEditing)
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            _buildSvgIconButton('assets/edit.svg', 'Edit', () {
-                              setState(() {
-                                isEditing = true;
-                              });
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // Only add the Check icon if in editing mode
+                          if (isEditing)
+                            _buildSvgIconButton(Icons.check, 'Save', () {
+                              _saveMedicalHistory();
                             }),
-                            _buildSvgIconButton(
-                                'assets/print.svg', 'Print', _printCard),
-                          ],
-                        ),
+                          // Always add the Print icon
+                          _buildSvgIconButton(Icons.print, 'Print', _printCard),
+                        ],
                       ),
+                    ),
                   ],
                 ),
               ),
@@ -403,7 +398,7 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
   }
 
   Widget _buildSvgIconButton(
-      String assetName, String tooltip, VoidCallback onTap) {
+      IconData icon, String tooltip, VoidCallback onTap) {
     return Container(
       margin: const EdgeInsets.all(4),
       decoration: BoxDecoration(
@@ -413,9 +408,7 @@ class MedicalHistoryScreenState extends State<MedicalHistoryScreen> {
       child: IconButton(
         onPressed: onTap,
         tooltip: tooltip,
-        icon: SvgPicture.asset(
-          assetName,
-        ),
+        icon: Icon(icon, color: const Color(0xFF0D4C92)),
       ),
     );
   }
