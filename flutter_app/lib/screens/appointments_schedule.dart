@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/doctor_message_screen.dart';
+import 'package:flutter_app/screens/doctor_profile_logout.dart';
 import 'package:flutter_app/screens/medical_history.dart';
 import 'package:flutter_app/widgets/no_glow_scroll.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -85,13 +87,15 @@ class AppointmentScheduleScreen extends StatelessWidget {
         onChatTap: () {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const MessageScreen()),
+            MaterialPageRoute(
+                builder: (context) => const DoctorMessageScreen()),
           );
         },
         onProfileTap: () {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const DoctorScreen()),
+            MaterialPageRoute(
+                builder: (context) => const DoctorProfileLogoutScreen()),
           );
         },
       ),
