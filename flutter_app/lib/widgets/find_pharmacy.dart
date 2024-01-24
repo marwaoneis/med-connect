@@ -28,6 +28,7 @@ class FindPharmacyWidgetState extends State<FindPharmacyWidget> {
       nearestPharmacy = await fetchNearestPharmacy(position);
     } catch (e) {
       errorMessage = e.toString();
+      print(e);
     } finally {
       setState(() => isLoading = false);
     }
@@ -39,10 +40,9 @@ class FindPharmacyWidgetState extends State<FindPharmacyWidget> {
         ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
     final response = await apiService.fetchData(
         'pharmacies/nearest?lat=${position.latitude}&lng=${position.longitude}');
-    if (response.statusCode == 200) {
+    if (response['_id'] != null && response['username'] != null) {
       return Pharmacy.fromJson(response);
     } else {
-      // Handle non-200 responses
       throw Exception('Failed to load data from the server');
     }
   }
@@ -121,12 +121,19 @@ class FindPharmacyWidgetState extends State<FindPharmacyWidget> {
         ),
         Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Card(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 1,
+                  blurRadius: 3,
+                  offset: const Offset(0, 2),
+                ),
+              ],
             ),
-            elevation: 4,
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Row(
@@ -145,7 +152,7 @@ class FindPharmacyWidgetState extends State<FindPharmacyWidget> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          nearestPharmacy!.username,
+                          "${nearestPharmacy!.username} Pharmacy",
                           style: const TextStyle(
                             fontWeight: FontWeight.w900,
                             fontSize: 18,
