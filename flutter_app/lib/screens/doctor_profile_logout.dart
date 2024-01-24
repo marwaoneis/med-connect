@@ -1,23 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/buy_medicine.dart';
-import 'package:flutter_app/screens/doctor_appointments.dart';
 import 'package:flutter_app/screens/login_screen.dart';
-import 'package:flutter_app/screens/medical_history.dart';
-import 'package:flutter_app/screens/symptom_checker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
 import '../api/api_service.dart';
 import '../config/request_config.dart';
 import '../providers/auth_provider.dart';
-import '../tools/request.dart';
 import '../widgets/footer.dart';
 import 'appointments_schedule.dart';
 import 'doctor_dashboard_screen.dart';
 import 'doctor_message_screen.dart';
-import 'message_screen.dart';
-import 'patient_appointments.dart';
 import 'patient_dashboard_screen.dart';
 
 class DoctorProfileLogoutScreen extends StatefulWidget {
