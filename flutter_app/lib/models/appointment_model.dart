@@ -3,6 +3,7 @@ class Appointment {
   final String patientId;
   final String doctorId;
   final AiAssessment? aiAssessment;
+  final String type;
   final String status;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -12,6 +13,7 @@ class Appointment {
     required this.patientId,
     required this.doctorId,
     this.aiAssessment,
+    required this.type,
     required this.status,
     required this.createdAt,
     required this.updatedAt,
@@ -19,15 +21,20 @@ class Appointment {
 
   factory Appointment.fromJson(Map<String, dynamic> json) {
     return Appointment(
-      id: json['_id'],
-      patientId: json['patientId'],
-      doctorId: json['doctorId'],
+      id: json['_id'] ?? 'default_id',
+      patientId: json['patientId'] ?? 'default_patient_id',
+      doctorId: json['doctorId'] ?? 'default_doctor_id',
       aiAssessment: json['aiAssessment'] != null
           ? AiAssessment.fromJson(json['aiAssessment'])
           : null,
-      status: json['status'],
-      createdAt: DateTime.parse(json['createdAt']),
-      updatedAt: DateTime.parse(json['updatedAt']),
+      type: json['type'] ?? 'default_type',
+      status: json['status'] ?? 'default_status',
+      createdAt: json['createdAt'] != null
+          ? DateTime.parse(json['createdAt'])
+          : DateTime.now(),
+      updatedAt: json['updatedAt'] != null
+          ? DateTime.parse(json['updatedAt'])
+          : DateTime.now(),
     );
   }
 
@@ -37,6 +44,7 @@ class Appointment {
       'patientId': patientId,
       'doctorId': doctorId,
       'aiAssessment': aiAssessment?.toJson(),
+      'type': type,
       'status': status,
       'createdAt': createdAt.toIso8601String(),
       'updatedAt': updatedAt.toIso8601String(),
