@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/appointments_schedule.dart';
-import 'package:flutter_app/screens/message_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../api/api_service.dart';
@@ -14,7 +13,6 @@ import '../widgets/doctor_appointment_info.dart';
 import '../widgets/footer.dart';
 import '../widgets/no_glow_scroll.dart';
 import '../widgets/top_bar_with_background.dart';
-import 'doctor_appointments.dart';
 import 'doctor_message_screen.dart';
 import 'doctor_profile_logout.dart';
 
