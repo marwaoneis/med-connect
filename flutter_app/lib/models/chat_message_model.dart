@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/src/animation/animation_controller.dart';
 import '../constants/firestore_constants.dart';
 
 class ChatMessage {
@@ -8,18 +7,13 @@ class ChatMessage {
   String timestamp;
   String content;
   int type;
-  String senderFullName;
-  AnimationController? animationController;
 
-  ChatMessage({
-    required this.idFrom,
-    required this.idTo,
-    required this.timestamp,
-    required this.content,
-    required this.type,
-    required this.senderFullName,
-    this.animationController,
-  });
+  ChatMessage(
+      {required this.idFrom,
+      required this.idTo,
+      required this.timestamp,
+      required this.content,
+      required this.type});
 
   Map<String, dynamic> toJson() {
     return {
@@ -28,7 +22,6 @@ class ChatMessage {
       FirestoreConstants.timestamp: timestamp,
       FirestoreConstants.content: content,
       FirestoreConstants.type: type,
-      FirestoreConstants.fullName: senderFullName,
     };
   }
 
@@ -38,14 +31,12 @@ class ChatMessage {
     String timestamp = documentSnapshot.get(FirestoreConstants.timestamp);
     String content = documentSnapshot.get(FirestoreConstants.content);
     int type = documentSnapshot.get(FirestoreConstants.type);
-    String senderFullName = documentSnapshot.get(FirestoreConstants.fullName);
 
     return ChatMessage(
         idFrom: idFrom,
         idTo: idTo,
         timestamp: timestamp,
         content: content,
-        type: type,
-        senderFullName: senderFullName);
+        type: type);
   }
 }
