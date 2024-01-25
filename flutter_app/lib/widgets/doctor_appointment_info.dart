@@ -3,8 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart'; // If you're using SVGs for icons
 
 class DoctorAppointmentInfo extends StatelessWidget {
   final String patientName;
-  final String appointmentType; // 'At Clinic' or 'Online'
-  final String appointmentStatus; // 'Ongoing' or 'Time'
+  final String appointmentType;
+  final String appointmentStatus;
   final String patientImageUrl;
 
   const DoctorAppointmentInfo({
