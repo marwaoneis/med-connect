@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/appointments_schedule.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../api/api_service.dart';
 import '../config/request_config.dart';
@@ -14,6 +14,7 @@ import '../widgets/doctor_appointment_info.dart';
 import '../widgets/footer.dart';
 import '../widgets/no_glow_scroll.dart';
 import '../widgets/top_bar_with_background.dart';
+import 'appointments_schedule.dart';
 import 'doctor_message_screen.dart';
 import 'doctor_profile_logout.dart';
 
@@ -94,36 +95,80 @@ class DoctorScreenState extends State<DoctorScreen> {
           _appointmentsFuture?.then((appointments) {
             var appointment =
                 appointments.firstWhere((a) => a.id == appointmentId);
-            appointment.status =
-                newStatus; // Update the status in the appointment object
+            appointment.status = newStatus;
           });
         });
       }
     }
   }
 
+  void _deleteAppointment(String appointmentId) async {
+    try {
+      final response = await sendRequest(
+        route: "/appointments/$appointmentId",
+        method: "DELETE",
+        context: context,
+      );
+
+      if (response['success']) {
+        setState(() {
+          _appointmentsFuture = _appointmentsFuture?.then((appointments) =>
+              appointments
+                  .where((appointment) => appointment.id != appointmentId)
+                  .toList());
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Appointment cancelled successfully')),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Failed to cancel appointment')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to cancel appointment: $e')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<Auth>(context, listen: false);
+    final doctorId = authProvider.getUserId;
+
     return Scaffold(
       body: Column(children: <Widget>[
-        TopBarWithBackground(
-          leadingContent: const CircleAvatar(
-            child: Text(
-              'D',
-              style: TextStyle(color: Color(0xFF0D4C92)),
-            ),
-          ),
-          titleContent: const Text(
-            'Hello Dr',
-            style: TextStyle(fontSize: 20, color: Colors.white),
-          ),
-          trailingContent: IconButton(
-            icon: SvgPicture.asset(
-              'assets/notification_icon.svg',
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          ),
+        FutureBuilder<Doctor>(
+          future: fetchDoctorById(doctorId!),
+          builder: (context, snapshot) {
+            String initialLetter = snapshot.hasData
+                ? snapshot.data!.firstName.substring(0, 1)
+                : 'D';
+            String doctorFirstName =
+                snapshot.hasData ? 'Dr. ${snapshot.data!.firstName}' : 'Dr.';
+
+            return TopBarWithBackground(
+              leadingContent: CircleAvatar(
+                child: Text(
+                  initialLetter,
+                  style: const TextStyle(color: Color(0xFF0D4C92)),
+                ),
+              ),
+              titleContent: Text(
+                'Hello $doctorFirstName',
+                style: const TextStyle(fontSize: 20, color: Colors.white),
+              ),
+              trailingContent: IconButton(
+                icon: SvgPicture.asset(
+                  'assets/notification_icon.svg',
+                  color: Colors.white,
+                ),
+                onPressed: () {},
+              ),
+            );
+          },
         ),
         const SizedBox(
           height: 5,
@@ -132,7 +177,7 @@ class DoctorScreenState extends State<DoctorScreen> {
           child: NoGlowScrollWrapper(
             child: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
                     AppointmentList(
@@ -143,14 +188,13 @@ class DoctorScreenState extends State<DoctorScreen> {
                           builder: (context, appointmentSnapshot) {
                             if (appointmentSnapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return CircularProgressIndicator();
+                              return const CircularProgressIndicator();
                             } else if (appointmentSnapshot.hasError) {
                               return Text(
                                   'Error: ${appointmentSnapshot.error}');
                             } else if (appointmentSnapshot.hasData) {
                               var appointments = appointmentSnapshot.data!;
 
-                              // Filter appointments with status "Scheduled"
                               var scheduledAppointments = appointments
                                   .where((appointment) =>
                                       appointment.status == 'Scheduled')
@@ -172,17 +216,24 @@ class DoctorScreenState extends State<DoctorScreen> {
                                     builder: (context, patientSnapshot) {
                                       if (patientSnapshot.connectionState ==
                                           ConnectionState.waiting) {
-                                        return CircularProgressIndicator();
+                                        return const CircularProgressIndicator();
                                       } else if (patientSnapshot.hasError) {
                                         return Text(
                                             'Error: ${patientSnapshot.error}');
                                       } else if (patientSnapshot.hasData) {
                                         var patient = patientSnapshot.data!;
+                                        final formattedDate =
+                                            DateFormat('yyyy-MM-dd')
+                                                .format(appointment.updatedAt);
+                                        final formattedTime =
+                                            DateFormat('HH:mm')
+                                                .format(appointment.updatedAt);
+
                                         return AppointmentCard(
                                           name:
                                               '${patient['firstName']} ${patient['lastName']}',
                                           details:
-                                              'Gender: ${patient['gender']}, Date: ${appointment.createdAt}, Time of request: ${appointment.updatedAt}',
+                                              'Gender: ${patient['gender']}, Date: $formattedDate, Time of request: $formattedTime',
                                           status: appointment.status,
                                           statusColor:
                                               appointment.status == 'Confirmed'
@@ -208,10 +259,7 @@ class DoctorScreenState extends State<DoctorScreen> {
                         ),
                       ],
                     ),
-
                     SizedBox(height: 20),
-
-                    // Second Appointment List using FutureBuilder
                     AppointmentList(
                       title: 'Appointment Requests',
                       appointments: [
@@ -241,12 +289,16 @@ class DoctorScreenState extends State<DoctorScreen> {
                                       } else if (patientSnapshot.hasData) {
                                         var patient = patientSnapshot.data!;
                                         return DoctorAppointmentInfo(
+                                          patientId: patient['_id'],
                                           patientName:
                                               '${patient['firstName']} ${patient['lastName']}',
+                                          appointmentId: appointment.id,
                                           appointmentType: appointment.type,
                                           appointmentStatus: appointment.status,
                                           patientImageUrl:
-                                              'assets/doctor_image.png', // Replace with actual patient image URL
+                                              'assets/doctor_image.png',
+                                          onCancel: () => _deleteAppointment(
+                                              appointment.id),
                                         );
                                       } else {
                                         return const SizedBox();
@@ -280,7 +332,8 @@ class DoctorScreenState extends State<DoctorScreen> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => const AppointmentScheduleScreen()),
+              builder: (context) => const AppointmentScheduleScreen(),
+            ),
           );
         },
         onChatTap: () {
