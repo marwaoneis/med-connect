@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppointmentList extends StatelessWidget {
-  final List appointments;
+  final List<FutureBuilder> appointments;
   final String title;
 
   const AppointmentList({
@@ -29,7 +29,11 @@ class AppointmentList extends StatelessWidget {
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
           ),
-          ...appointments, // Spread the list of appointment cards
+          ListView(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            children: appointments,
+          ),
         ],
       ),
     );
