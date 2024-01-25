@@ -125,6 +125,8 @@ flutter:
     - assets/radiology.svg
     - assets/rheumatology.svg
     - assets/urology.svg
+    - assets/recommended_specialist.svg
+    - assets/recommended_specialist.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
