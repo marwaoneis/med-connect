@@ -43,7 +43,7 @@ class PopularSpecialtiesWidget extends StatelessWidget {
         return "assets/internalmedicine.svg";
       case "Neurology":
         return "assets/neurology.svg";
-      case "Obstetrics/Gynecology":
+      case "Gynecology":
         return "assets/obstetricsgynecology.svg";
       case "Oncology":
         return "assets/oncology.svg";
