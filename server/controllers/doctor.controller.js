@@ -114,6 +114,54 @@ const getDoctorByUsername = async (req, res) => {
   }
 };
 
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const aiModel = genAI.getGenerativeModel({ model: "gemini-pro" });
+
+const getAIDrivenRecommendation = async (req, res) => {
+  const symptoms = req.body.symptoms;
+
+  const prompt =
+    `Patient has reported the following symptoms: ${symptoms}\n\n` +
+    `Possible Reasons:\n` +
+    `[Provide two lines of possible non-sensitive reasons based on the symptoms.]\n\n` +
+    `Recommendation:\n` +
+    `[Please offer a short paragraph of general advice and recommendations for the symptoms without suggesting specific medications or treatments.]\n\n` +
+    `Recommended Specialzation:\n` +
+    `[Please suggest only one medical specialization to consult. Choose one from the following list based on the symptoms logged: ",
+    "Gastroenterology",
+    "General Surgery",
+    "Internal Medicine",
+    "Neurology",
+    "Gynecology",
+    "Oncology",
+    "Ophthalmology",
+    "Orthopedics",
+    "Pediatrics",
+    "Psychiatry",
+    "Pulmonology",
+    "Radiology",
+    "Urology",
+    "Dermatology",
+    "Emergency Medicine",
+    "Anesthesiology",
+    "Endocrinology",
+    "Nephrology",
+    "Rheumatology",]`;
+
+  try {
+    const aiResult = await aiModel.generateContent(prompt);
+    const aiResponse = await aiResult.response;
+    let aiText = await aiResponse.text();
+
+    res.status(200).json({ aiText: aiText });
+  } catch (error) {
+    console.error("Error during AI-driven recommendation:", error);
+    res.status(500).json({ error: "Internal Server Error: " + error.message });
+  }
+};
+
 module.exports = {
   createDoctor,
   getAllDoctors,
@@ -123,4 +171,5 @@ module.exports = {
   getSpecializations,
   getDoctorsBySpecialization,
   getDoctorByUsername,
+  getAIDrivenRecommendation,
 };
