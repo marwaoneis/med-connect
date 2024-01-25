@@ -1,20 +1,95 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/api_service.dart';
 import 'package:flutter_app/screens/doctor_message_screen.dart';
 import 'package:flutter_app/screens/doctor_profile_logout.dart';
 import 'package:flutter_app/screens/medical_history.dart';
 import 'package:flutter_app/widgets/no_glow_scroll.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import '../config/request_config.dart';
+import '../models/appointment_model.dart';
+import '../models/doctor_model.dart';
+import '../providers/auth_provider.dart';
 import '../widgets/footer.dart';
 import '../widgets/top_bar_with_background.dart';
 import 'doctor_dashboard_screen.dart';
 import 'message_screen.dart';
+import 'patient_medical_history_Screen.dart';
 
-class AppointmentScheduleScreen extends StatelessWidget {
-  const AppointmentScheduleScreen({super.key});
+class AppointmentScheduleScreen extends StatefulWidget {
+  final String? selectedPatientId;
+
+  const AppointmentScheduleScreen({
+    super.key,
+    this.selectedPatientId,
+  });
+
+  @override
+  AppointmentScheduleScreenState createState() =>
+      AppointmentScheduleScreenState();
+}
+
+class AppointmentScheduleScreenState extends State<AppointmentScheduleScreen> {
+  Doctor? _doctor;
+  List<Appointment>? _appointments;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeData();
+  }
+
+  void _initializeData() async {
+    final authProvider = Provider.of<Auth>(context, listen: false);
+    final doctorId = authProvider.getUserId;
+
+    if (doctorId != null) {
+      Doctor doctorData = await fetchDoctorById(doctorId);
+      List<Appointment> appointmentsData =
+          await fetchAppointmentsByDoctorId(doctorId);
+
+      setState(() {
+        _doctor = doctorData;
+        _appointments = appointmentsData;
+      });
+    }
+  }
+
+  Future<Doctor> fetchDoctorById(String doctorId) async {
+    var headers = RequestConfig.getHeaders(context);
+    final apiService =
+        ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
+    final json = await apiService.fetchData('doctors/$doctorId');
+    return Doctor.fromJson(json);
+  }
+
+  Future<Map<String, dynamic>> fetchPatientById(String patientId) async {
+    var headers = RequestConfig.getHeaders(context);
+    final apiService =
+        ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
+    final json = await apiService.fetchData('patients/$patientId');
+    return json;
+  }
+
+  Future<List<Appointment>> fetchAppointmentsByDoctorId(String doctorId) async {
+    var headers = RequestConfig.getHeaders(context);
+    final apiService =
+        ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
+    final response =
+        await apiService.fetchData('appointments/doctor/$doctorId');
+    final appointments =
+        (response as List).map((json) => Appointment.fromJson(json)).toList();
+    return appointments;
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (_doctor == null || _appointments == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
     return Scaffold(
       body: Column(
         children: [
@@ -41,30 +116,39 @@ class AppointmentScheduleScreen extends StatelessWidget {
           ),
           Expanded(
             child: NoGlowScrollWrapper(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(15.0, 0, 15.0, 15.0),
-                child: ListView(
-                  children: [
-                    const Text(
-                      'Your Appointments',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    _buildDateSection('Today'),
+              child: ListView.builder(
+                padding: EdgeInsets.all(20),
+                itemCount: _appointments!.length,
+                itemBuilder: (context, index) {
+                  final appointment = _appointments![index];
 
-                    const AppointmentItem(
-                      patientName: 'John Doe',
-                      appointmentTime: '09:00 AM',
-                      appointmentDate: '2023-07-21',
-                    ),
-                    // Repeat AppointmentItem for other appointments
-                    _buildDateSection('Tomorrow'),
-                    // Repeat for other dates
-                  ],
-                ),
+                  return FutureBuilder<Map<String, dynamic>>(
+                    future: fetchPatientById(appointment.patientId),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else if (snapshot.hasData) {
+                        final patientData = snapshot.data!;
+                        final formattedDate = DateFormat('yyyy-MM-dd')
+                            .format(appointment.updatedAt);
+                        final formattedTime =
+                            DateFormat('HH:mm').format(appointment.updatedAt);
+
+                        return AppointmentItem(
+                          patientName:
+                              '${patientData['firstName']} ${patientData['lastName']}',
+                          appointmentTime: formattedTime,
+                          appointmentDate: formattedDate,
+                          patientId: patientData['_id'],
+                        );
+                      } else {
+                        return const SizedBox.shrink();
+                      }
+                    },
+                  );
+                },
               ),
             ),
           ),
@@ -81,7 +165,9 @@ class AppointmentScheduleScreen extends StatelessWidget {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => const AppointmentScheduleScreen()),
+                builder: (context) => AppointmentScheduleScreen(
+                      selectedPatientId: _appointments?.first.patientId,
+                    )),
           );
         },
         onChatTap: () {
@@ -115,12 +201,14 @@ class AppointmentItem extends StatelessWidget {
   final String patientName;
   final String appointmentTime;
   final String appointmentDate;
+  final String patientId;
 
   const AppointmentItem({
     super.key,
     required this.patientName,
     required this.appointmentTime,
     required this.appointmentDate,
+    required this.patientId,
   });
 
   @override
@@ -128,104 +216,94 @@ class AppointmentItem extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 5.0),
+        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: <Widget>[
             const CircleAvatar(
               backgroundImage: NetworkImage('https://via.placeholder.com/150'),
-              radius: 20,
+              radius: 25,
             ),
-            const SizedBox(width: 10),
-            Column(
-              children: [
-                Row(
-                  children: [
-                    Column(
-                      children: [
-                        const Text(
-                          'Patient',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(patientName, style: const TextStyle(fontSize: 14)),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        _buildActionButton(context, 'Edit', () {}),
-                      ],
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Column(
-                      children: [
-                        const Text(
-                          'Time',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(appointmentTime,
-                            style: const TextStyle(fontSize: 14)),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        _buildActionButton(context, 'Cancel', () {}),
-                      ],
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Column(
-                      children: [
-                        const Text(
-                          'Date',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(appointmentDate,
-                            style: const TextStyle(fontSize: 14)),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        _buildActionButton(context, 'Medical History', () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const MedicalHistoryScreen()),
-                          );
-                        }),
-                      ],
-                    ),
-                    IconButton(
-                      icon: SvgPicture.asset(
-                        "assets/chat_icon.svg",
-                        height: 25,
-                        width: 25,
-                        color: const Color(0xFF0D4C92),
+            const SizedBox(width: 15),
+            Expanded(
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          const Text(
+                            'Patient',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(patientName,
+                              style: const TextStyle(fontSize: 14)),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          _buildActionButton(context, 'Edit', () {}),
+                        ],
                       ),
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MessageScreen()),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ],
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Column(
+                        children: [
+                          const Text(
+                            'Time',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(appointmentTime,
+                              style: const TextStyle(fontSize: 14)),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          _buildActionButton(context, 'Cancel', () {}),
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Column(
+                        children: [
+                          const Text(
+                            'Date',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(appointmentDate,
+                              style: const TextStyle(fontSize: 14)),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          _buildActionButton(context, 'Medical History', () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    PatientMedicalHistoryScreen(
+                                        patientId: patientId),
+                              ),
+                            );
+                          }),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),
