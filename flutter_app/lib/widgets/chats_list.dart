@@ -37,10 +37,11 @@ class ChatsList extends StatelessWidget {
                       children: [
                         ListView.builder(
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: chats.data!.length,
                           itemBuilder: (context, index) =>
                               buildItem(context, chats.data![index]),
+                          padding: const EdgeInsets.only(top: 15.0),
                         ),
                       ],
                     ),
