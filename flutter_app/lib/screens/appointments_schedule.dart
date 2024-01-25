@@ -13,11 +13,12 @@ import '../config/request_config.dart';
 import '../models/appointment_model.dart';
 import '../models/doctor_model.dart';
 import '../providers/auth_provider.dart';
+import '../tools/request.dart';
 import '../widgets/footer.dart';
 import '../widgets/top_bar_with_background.dart';
 import 'doctor_dashboard_screen.dart';
 import 'message_screen.dart';
-import 'patient_medical_history_Screen.dart';
+import 'patient_medical_history_screen.dart';
 
 class AppointmentScheduleScreen extends StatefulWidget {
   final String? selectedPatientId;
@@ -40,6 +41,44 @@ class AppointmentScheduleScreenState extends State<AppointmentScheduleScreen> {
   void initState() {
     super.initState();
     _initializeData();
+  }
+
+  void _deleteAppointment(String appointmentId) async {
+    try {
+      final response = await sendRequest(
+        route: "/appointments/$appointmentId",
+        method: "DELETE",
+        context: context,
+      );
+
+      if (response['success']) {
+        setState(() {
+          _appointments!
+              .removeWhere((appointment) => appointment.id == appointmentId);
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Appointment cancelled successfully')),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Failed to cancel appointment')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to cancel appointment: $e')),
+      );
+    }
+  }
+
+  void _deleteAppointmentAndUpdateList(String appointmentId) async {
+    _deleteAppointment(appointmentId); // Call your delete request
+    setState(() {
+      _appointments = _appointments!
+          .where((appointment) => appointment.id != appointmentId)
+          .toList();
+    });
   }
 
   void _initializeData() async {
@@ -137,12 +176,13 @@ class AppointmentScheduleScreenState extends State<AppointmentScheduleScreen> {
                             DateFormat('HH:mm').format(appointment.updatedAt);
 
                         return AppointmentItem(
-                          patientName:
-                              '${patientData['firstName']} ${patientData['lastName']}',
-                          appointmentTime: formattedTime,
-                          appointmentDate: formattedDate,
-                          patientId: patientData['_id'],
-                        );
+                            patientName:
+                                '${patientData['firstName']} ${patientData['lastName']}',
+                            appointmentTime: formattedTime,
+                            appointmentDate: formattedDate,
+                            patientId: patientData['_id'],
+                            onDelete: () => _deleteAppointmentAndUpdateList(
+                                appointment.id));
                       } else {
                         return const SizedBox.shrink();
                       }
@@ -202,14 +242,15 @@ class AppointmentItem extends StatelessWidget {
   final String appointmentTime;
   final String appointmentDate;
   final String patientId;
+  final VoidCallback onDelete;
 
-  const AppointmentItem({
-    super.key,
-    required this.patientName,
-    required this.appointmentTime,
-    required this.appointmentDate,
-    required this.patientId,
-  });
+  const AppointmentItem(
+      {super.key,
+      required this.patientName,
+      required this.appointmentTime,
+      required this.appointmentDate,
+      required this.patientId,
+      required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -267,7 +308,7 @@ class AppointmentItem extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          _buildActionButton(context, 'Cancel', () {}),
+                          _buildActionButton(context, 'Cancel', onDelete),
                         ],
                       ),
                       const SizedBox(
