@@ -4,7 +4,7 @@ enum DoctorSpecialization {
   GeneralSurgery,
   InternalMedicine,
   Neurology,
-  ObstetricsGynecology,
+  Gynecology,
   Oncology,
   Ophthalmology,
   Orthopedics,
