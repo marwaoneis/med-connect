@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // If you're using SVGs for icons
+import 'package:flutter/rendering.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../screens/appointments_schedule.dart';
+import '../screens/chat_screen.dart';
+import '../tools/request.dart';
 
 class DoctorAppointmentInfo extends StatelessWidget {
+  final String patientId;
   final String patientName;
+  final String appointmentId;
   final String appointmentType;
   final String appointmentStatus;
   final String patientImageUrl;
+  final VoidCallback onCancel;
 
-  const DoctorAppointmentInfo({
-    super.key,
-    required this.patientName,
-    required this.appointmentType,
-    required this.appointmentStatus,
-    required this.patientImageUrl,
-  });
+  const DoctorAppointmentInfo(
+      {super.key,
+      required this.patientId,
+      required this.patientName,
+      required this.appointmentId,
+      required this.appointmentType,
+      required this.appointmentStatus,
+      required this.patientImageUrl,
+      required this.onCancel});
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +56,26 @@ class DoctorAppointmentInfo extends StatelessWidget {
               ],
             ),
           ),
-          SvgPicture.asset(
-            "assets/chat_icon.svg",
-            height: 20,
-            width: 20,
-            color: Colors.black,
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ChatScreen(
+                          receiverId: patientId,
+                          receiverName: patientName,
+                        )),
+              );
+            },
+            icon: SvgPicture.asset(
+              "assets/chat_icon.svg",
+              height: 20,
+              width: 20,
+              color: Colors.black,
+            ),
           ),
-          const SizedBox(width: 10),
-          if (appointmentStatus == 'Ongoing') ...[
+          const SizedBox(width: 5),
+          if (appointmentStatus == 'Confirmed') ...[
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: buttonColor,
@@ -63,23 +84,31 @@ class DoctorAppointmentInfo extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                // TODO: Add action for ongoing appointment
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AppointmentScheduleScreen(
+                      selectedPatientId: patientId,
+                    ),
+                  ),
+                );
               },
-              child: const Text('Ongoing',
-                  style: TextStyle(
+              child: Text(appointmentStatus,
+                  style: const TextStyle(
                       color: Colors.white, fontWeight: FontWeight.normal)),
             ),
           ] else ...[
-            TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: buttonColor,
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: buttonColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
               ),
-              onPressed: () {
-                // TODO: Add action for scheduled time
-              },
-              child: Text(
-                appointmentStatus,
-              ), // 'Time' will be replaced with actual time data
+              onPressed: onCancel,
+              child: const Text("Cancelled",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.normal)),
             ),
           ],
           const SizedBox(
