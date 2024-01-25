@@ -4,7 +4,7 @@ class Appointment {
   final String doctorId;
   final AiAssessment? aiAssessment;
   final String type;
-  final String status;
+  String status;
   final DateTime createdAt;
   final DateTime updatedAt;
 
