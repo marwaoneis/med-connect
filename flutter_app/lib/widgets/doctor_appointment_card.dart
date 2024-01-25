@@ -33,32 +33,34 @@ class AppointmentCardState extends State<AppointmentCard> {
         widget.name,
         style: const TextStyle(fontWeight: FontWeight.bold),
       ),
+      contentPadding: const EdgeInsets.only(left: 16, right: 10),
       subtitle: Text(widget.details),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (widget.status == 'Scheduled')
-            IconButton(
-              icon: Icon(Icons.check, color: Colors.green),
-              onPressed: () {
-                widget.onStatusChanged('Confirmed');
-              },
+      trailing: widget.status == 'Scheduled'
+          ? Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.check, color: Colors.green),
+                  onPressed: () {
+                    widget.onStatusChanged('Confirmed');
+                  },
+                  iconSize: 30,
+                ),
+                IconButton(
+                  icon: Icon(Icons.close, color: Colors.red),
+                  onPressed: () {
+                    widget.onStatusChanged('Cancelled');
+                  },
+                  iconSize: 30,
+                ),
+              ],
+            )
+          : Text(
+              widget.status,
+              style: TextStyle(
+                color: widget.status == 'Confirmed' ? Colors.green : Colors.red,
+              ),
             ),
-          if (widget.status == 'Scheduled')
-            IconButton(
-              icon: Icon(Icons.close, color: Colors.red),
-              onPressed: () {
-                widget.onStatusChanged('Cancelled');
-              },
-            ),
-          Text(
-            widget.status,
-            style: TextStyle(
-              color: widget.status == 'Confirmed' ? Colors.green : Colors.red,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
