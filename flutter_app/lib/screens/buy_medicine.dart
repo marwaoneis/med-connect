@@ -60,7 +60,11 @@ class BuyMedicineScreenState extends State<BuyMedicineScreen> {
             leadingContent: IconButton(
               icon: const Icon(Icons.arrow_back, color: Colors.white),
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const PatientScreen()),
+                );
               },
             ),
             titleContent: const Text(
