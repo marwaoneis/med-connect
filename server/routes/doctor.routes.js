@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const doctorController = require("../controllers/doctor.controller");
 
+router.post("/ai-symptom-analysis", doctorController.getAIDrivenRecommendation);
 router.post("/doctors", doctorController.createDoctor);
 router.get("/doctors", doctorController.getAllDoctors);
 router.get("/doctors/:id", doctorController.getDoctorById);
