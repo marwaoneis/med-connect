@@ -5,6 +5,7 @@ import '../api/api_service.dart';
 import '../config/request_config.dart';
 import '../models/appointment_model.dart';
 import '../models/doctor_model.dart';
+import '../screens/chat_screen.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 
 class AppointmentCard extends StatefulWidget {
@@ -199,7 +200,15 @@ class AppointmentCardState extends State<AppointmentCard> {
                           size: 30,
                         ),
                         onPressed: () {
-                          // Handle email tap
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ChatScreen(
+                                      receiverId: doctor!.id,
+                                      receiverName:
+                                          '${doctor!.firstName} ${doctor!.lastName}',
+                                    )),
+                          );
                         },
                       ),
                       IconButton(
