@@ -118,11 +118,11 @@ class DoctorProfileLogoutScreenState extends State<DoctorProfileLogoutScreen> {
           );
         },
         onAppointmentTap: () {
-          // Navigator.pushReplacement(
-          //   context,
-          //   MaterialPageRoute(
-          //       builder: (context) => const AppointmentScheduleScreen()),
-          // );
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const AppointmentScheduleScreen()),
+          );
         },
         onChatTap: () {
           Navigator.pushReplacement(

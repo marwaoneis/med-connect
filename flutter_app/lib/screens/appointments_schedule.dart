@@ -16,6 +16,7 @@ import '../providers/auth_provider.dart';
 import '../tools/request.dart';
 import '../widgets/footer.dart';
 import '../widgets/top_bar_with_background.dart';
+import 'chat_screen.dart';
 import 'doctor_dashboard_screen.dart';
 import 'message_screen.dart';
 import 'patient_medical_history_screen.dart';
@@ -287,7 +288,18 @@ class AppointmentItem extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          _buildActionButton(context, 'Edit', () {}),
+                          _buildActionButton(
+                            context,
+                            'Chat',
+                            () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChatScreen(
+                                        receiverId: patientId,
+                                        receiverName: patientName,
+                                      )),
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(

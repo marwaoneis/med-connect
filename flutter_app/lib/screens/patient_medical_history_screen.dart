@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_app/screens/appointments_schedule.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +12,9 @@ import '../providers/auth_provider.dart';
 import '../tools/request.dart';
 import '../widgets/footer.dart';
 import '../widgets/no_glow_scroll.dart';
+import 'doctor_dashboard_screen.dart';
+import 'doctor_message_screen.dart';
+import 'doctor_profile_logout.dart';
 import 'message_screen.dart';
 import 'patient_appointments.dart';
 import 'patient_profile.dart';
@@ -106,28 +110,28 @@ class PatientMedicalHistoryScreenState
         onHomeTap: () {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const PatientScreen()),
+            MaterialPageRoute(builder: (context) => const DoctorScreen()),
           );
         },
         onAppointmentTap: () {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    const BookAppointmentScreen(title: 'Book Appointment')),
+                builder: (context) => const AppointmentScheduleScreen()),
           );
         },
         onChatTap: () {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const MessageScreen()),
+            MaterialPageRoute(
+                builder: (context) => const DoctorMessageScreen()),
           );
         },
         onProfileTap: () {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => const PatientProfileScreen()),
+                builder: (context) => const DoctorProfileLogoutScreen()),
           );
         },
       ),
@@ -146,11 +150,6 @@ class PatientMedicalHistoryScreenState
       'Weight': data['weight'],
       'Blood Group': data['bloodGroup'],
     };
-
-    // print('vaccinations type: ${data['vaccinations'].runtimeType}');
-    // print('priorSurgeries type: ${data['priorSurgeries'].runtimeType}');
-    // print('allergies type: ${data['allergies'].runtimeType}');
-    // print('emergencyContacts type: ${data['emergencyContacts'].runtimeType}');
 
     List<Widget> infoWidgets = infoList.entries.map((entry) {
       return ListTile(
