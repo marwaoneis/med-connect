@@ -31,6 +31,7 @@ extension DoctorSpecializationExtension on DoctorSpecialization {
 }
 
 class Doctor {
+  final String id;
   String username;
   String firstName;
   String lastName;
@@ -45,6 +46,7 @@ class Doctor {
   String role;
 
   Doctor({
+    required this.id,
     required this.username,
     required this.firstName,
     required this.lastName,
@@ -61,6 +63,7 @@ class Doctor {
 
   factory Doctor.fromJson(Map<String, dynamic> json) {
     return Doctor(
+      id: json['_id'],
       username: json['username'],
       firstName: json['firstName'],
       lastName: json['lastName'],
@@ -81,6 +84,7 @@ class Doctor {
 
   Map<String, dynamic> toJson() {
     return {
+      '_id': id,
       'username': username,
       'firstName': firstName,
       'lastName': lastName,
