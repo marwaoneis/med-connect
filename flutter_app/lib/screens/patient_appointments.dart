@@ -34,9 +34,14 @@ class BookAppointmentScreenState extends State<BookAppointmentScreen> {
     final apiService =
         ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
     final data = await apiService.fetchData('doctors/');
-    return (data as List)
+    final doctors = (data as List)
         .map((doctorJson) => Doctor.fromJson(doctorJson))
         .toList();
+
+    for (var doctor in doctors) {
+      print('Doctor ID: ${doctor.id}');
+    }
+    return doctors;
   }
 
   @override
@@ -81,13 +86,18 @@ class BookAppointmentScreenState extends State<BookAppointmentScreen> {
                             doctor: doctor,
                             rating: 4.5,
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      DoctorProfileScreen(doctor: doctor),
-                                ),
-                              );
+                              if (doctor.id != null) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        DoctorProfileScreen(doctor: doctor),
+                                  ),
+                                );
+                              } else {
+                                print("Doctor ID is null");
+                                // Optionally show an error message to the user
+                              }
                             },
                           );
                         },
