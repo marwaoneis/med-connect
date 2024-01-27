@@ -4,17 +4,9 @@ const pharmacyController = require("../controllers/pharmacy.controller");
 const { pharmacyMiddleware } = require("../middleware/pharmacy.middleware.js");
 
 router.get("/pharmacies/nearest", pharmacyController.getNearestPharmacy);
-router.post(
-  "/pharmacies",
-  pharmacyMiddleware,
-  pharmacyController.createPharmacy
-);
+router.post("/pharmacies", pharmacyController.createPharmacy);
 router.get("/pharmacies", pharmacyController.getAllPharmacies);
-router.put(
-  "/pharmacies/:id",
-  pharmacyMiddleware,
-  pharmacyController.updatePharmacyById
-);
+router.put("/pharmacies/:id", pharmacyController.updatePharmacyById);
 router.delete("/pharmacies/:id", pharmacyController.deletePharmacyById);
 router.get(
   "/pharmacies/username/:username",
