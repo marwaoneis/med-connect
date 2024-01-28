@@ -89,11 +89,11 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 ### Common User Screens
 
-| Welcome Screen                               | Info Screen 1                         | Info Screen 2                         | Info Screen 3                           |
-| -------------------------------------------- | ------------------------------------- | ------------------------------------- | --------------------------------------- |
-| ![Landing](./readme/demo/welcome-screen.png) | ![fsdaf](./readme/demo/next1.png)     | ![fsdaf](./readme/demo/next2.png)     | ![fsdaf](./readme/demo/next3.png)       |
-| Login Screen                                 | First Register Screen                 | Second Register Screen                | Forget Password Screen                  |
-| ![Landing](./readme/demo/login-screen.png)   | ![fsdaf](./readme/demo/register1.png) | ![fsdaf](./readme/demo/register2.png) | ![fsdaf](./readme/demo/forget-pass.png) |
+| Welcome Screen                                            | Info Screen 1                                        | Info Screen 2                                        | Info Screen 3                                          |
+| --------------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------ |
+| <img src="./readme/demo/welcome-screen.png" height="100"> | <img src="./readme/demo/next1.png" height="100">     | <img src="./readme/demo/next2.png" height="100">     | <img src="./readme/demo/next3.png" height="100">       |
+| Login Screen                                              | First Register Screen                                | Second Register Screen                               | Forget Password Screen                                 |
+| <img src="./readme/demo/login-screen.png" height="100">   | <img src="./readme/demo/register1.png" height="100"> | <img src="./readme/demo/register2.png" height="100"> | <img src="./readme/demo/forget-pass.png" height="100"> |
 
 ### Patient User Screens
 
