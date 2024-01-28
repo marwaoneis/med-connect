@@ -91,15 +91,15 @@ Stay connected with us for more updates and enhancements on MedConnect!
 <!-- Implementation -->
 <img src="./readme/title6.svg"/>
 
-### Patient User Screens
+### Patient Screens
 
 | Doctors List Screen                            | Book Appointment Screen                      | Symptom Checker Screen                      |
 | ---------------------------------------------- | -------------------------------------------- | ------------------------------------------- |
 | ![Landing](./readme/demo/book-appointment.png) | ![fsdaf](./readme/demo/book-appointment.gif) | ![fsdaf](./readme/demo/symptom-checker.gif) |
 | Medicine Info Screen                           | Buy Medicine List Screen                     | Medical History Screen                      |
-| ![Landing](./readme/demo/medicine-info.png)    | ![fsdaf](./readme/demo/buy-medicine.png.png) | ![fsdaf](./readme/demo/medical-history.gif) |
+| ![Landing](./readme/demo/medicine-info.png)    | ![fsdaf](./readme/demo/buy-medicine.png)     | ![fsdaf](./readme/demo/medical-history.gif) |
 
-### Admin Screens
+### Doctor Screens
 
 | Login screen                            | Register screen                       | Landing screen                        |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
