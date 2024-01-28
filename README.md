@@ -97,9 +97,9 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 ### Patient User Screens
 
-| Login Screen                                      | Register Screen                              | Register Screen                        | Dashboard Screen                            |
+| Dashboard Screen                                  | Register Screen                              | Register Screen                        | Dashboard Screen                            |
 | ------------------------------------------------- | -------------------------------------------- | -------------------------------------- | ------------------------------------------- |
-| ![Landing](./readme/demo/login.png)               | ![fsdaf](./readme/demo/register-1.png)       | ![fsdaf](./readme/demo/register-2.png) | ![fsdaf](./readme/demo/home-screen.png)     |
+| ![Landing](./readme/demo/patient-dashboard.gif)   | ![fsdaf](./readme/demo/register-1.png)       | ![fsdaf](./readme/demo/register-2.png) | ![fsdaf](./readme/demo/home-screen.png)     |
 | Doctors List Screen                               | Book Appointment Screen                      | Specific Doctor Speciality Screen      | Symptom Checker Screen                      |
 | ![Landing](./readme/demo/doctors-appointment.png) | ![fsdaf](./readme/demo/book-appointment.gif) | ![fsdaf](./readme/demo/specialist.png) | ![fsdaf](./readme/demo/symptom-checker.gif) |
 
