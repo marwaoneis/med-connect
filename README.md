@@ -59,9 +59,9 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 ### Mockups
 
-| Patient Home Screen                       | Book Appointment Screen                         | Symptom Checker Screen                      |
-| ----------------------------------------- | ----------------------------------------------- | ------------------------------------------- |
-| ![Landing](./readme/demo/home-screen.png) | ![fsdaf](./readme/demo/doctors-appointment.png) | ![fsdaf](./readme/demo/symptom-checker.png) |
+| Patient Home Screen                             | Book Appointment Screen                         | Symptom Checker Screen                      |
+| ----------------------------------------------- | ----------------------------------------------- | ------------------------------------------- |
+| ![Landing](./readme/demo/patient-dashboard.gif) | ![fsdaf](./readme/demo/doctors-appointment.png) | ![fsdaf](./readme/demo/symptom-checker.png) |
 
 | Patient Profile Screen                       | Medical History Screen                           | Chating Screen                   |
 | -------------------------------------------- | ------------------------------------------------ | -------------------------------- |
@@ -89,11 +89,9 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 ### Common User Screens
 
-| Welcome Screen                                            | Info Screen 1                                        | Info Screen 2                                        | Info Screen 3                                          |
-| --------------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------ |
-| <img src="./readme/demo/welcome-screen.png" height="300"> | <img src="./readme/demo/next1.png" height="300">     | <img src="./readme/demo/next2.png" height="300">     | <img src="./readme/demo/next3.png" height="300">       |
-| Login Screen                                              | First Register Screen                                | Second Register Screen                               | Forget Password Screen                                 |
-| <img src="./readme/demo/login-screen.png" height="300">   | <img src="./readme/demo/register1.png" height="300"> | <img src="./readme/demo/register2.png" height="300"> | <img src="./readme/demo/forget-pass.png" height="300"> |
+| Welcome Screen                                            | Info Screen                                      | Login Screen 2                                          |
+| --------------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------- |
+| <img src="./readme/demo/welcome-screen.png" height="500"> | <img src="./readme/demo/next1.png" height="500"> | <img src="./readme/demo/login-screen.png" height="500"> |
 
 ### Patient User Screens
 
