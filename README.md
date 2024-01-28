@@ -107,6 +107,33 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 <br><br>
 
+<!-- Prompt Engineering -->
+<img src="./readme/title7.svg"/>
+
+### Mastering AI Interaction: Unveiling the Power of Prompt Engineering:
+
+- This project uses advanced prompt engineering techniques to optimize the interaction with natural language processing models. By skillfully crafting input instructions, we tailor the behavior of the models to achieve precise and efficient language understanding and generation for various tasks and preferences.
+
+<br><br>
+
+<!-- AWS Deployment -->
+<img src="./readme/title8.svg"/>
+
+### Efficient AI Deployment: Unleashing the Potential with AWS Integration:
+
+- This project leverages AWS deployment strategies to seamlessly integrate and deploy natural language processing models. With a focus on scalability, reliability, and performance, we ensure that AI applications powered by these models deliver robust and responsive solutions for diverse use cases.
+
+<br><br>
+
+<!-- Unit Testing -->
+<img src="./readme/title9.svg"/>
+
+### Precision in Development: Harnessing the Power of Unit Testing:
+
+- This project employs rigorous unit testing methodologies to ensure the reliability and accuracy of code components. By systematically evaluating individual units of the software, we guarantee a robust foundation, identifying and addressing potential issues early in the development process.
+
+<br><br>
+
 <!-- How to run -->
 <img src="./readme/title6.svg"/>
 
@@ -142,18 +169,22 @@ _Below is an example of how you can instruct your audience on installing and set
    ```js
    MONGODB_URI = "ENTER YOUR URI";
    ```
-6. Run the server
+6. Enter your API in `config.js`
+   ```js
+   const API_KEY = "ENTER YOUR API";
+   ```
+7. Run the server
    ```sh
    nodemon .
    ```
-7. Install [Flutter SDK](https://docs.flutter.dev/get-started/install?gclid=Cj0KCQiAveebBhD_ARIsAFaAvrEXbca0gKEuW9ROxwC86eiEtJUUO5tm-AIIzds41AXpzsjkbESCw2EaAsTwEALw_wcB&gclsrc=aw.ds)
-8. Go to flutter_app directory
+8. Install [Flutter SDK](https://docs.flutter.dev/get-started/install?gclid=Cj0KCQiAveebBhD_ARIsAFaAvrEXbca0gKEuW9ROxwC86eiEtJUUO5tm-AIIzds41AXpzsjkbESCw2EaAsTwEALw_wcB&gclsrc=aw.ds)
+9. Go to flutter_app directory
    ```sh
    cd flutter_app
    ```
-9. Run flutter_app
-   ```sh
-   flutter run
-   ```
+10. Run flutter_app
+    ```sh
+    flutter run
+    ```
 
 Now, you should be able to run MedConnect locally and explore its features.
