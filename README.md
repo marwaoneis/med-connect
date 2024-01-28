@@ -105,6 +105,12 @@ Stay connected with us for more updates and enhancements on MedConnect!
 | ---------------------------------------------- | ------------------------------------ |
 | ![Landing](./readme/demo/doctor-dashboard.gif) | ![fsdaf](./readme/demo/schedule.gif) |
 
+### Pharmacy Screens
+
+| Dashboard screen                               | Appointments Schedule Screen         |
+| ---------------------------------------------- | ------------------------------------ |
+| ![Landing](./readme/demo/doctor-dashboard.gif) | ![fsdaf](./readme/demo/schedule.gif) |
+
 <br><br>
 
 <!-- Prompt Engineering -->
