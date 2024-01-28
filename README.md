@@ -93,11 +93,11 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 ### Patient User Screens
 
-| Doctors List Screen                               | Book Appointment Screen                      | Symptom Checker Screen                      | Medicine List Screen                        |
-| ------------------------------------------------- | -------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| ![Landing](./readme/demo/book-appointment.png)    | ![fsdaf](./readme/demo/book-appointment.gif) | ![fsdaf](./readme/demo/symptom-checker.gif) | ![fsdaf](./readme/demo/medicine-list.png)   |
-| Doctors List Screen                               | Book Appointment Screen                      | Specific Doctor Speciality Screen           | Symptom Checker Screen                      |
-| ![Landing](./readme/demo/doctors-appointment.png) | ![fsdaf](./readme/demo/book-appointment.gif) | ![fsdaf](./readme/demo/specialist.png)      | ![fsdaf](./readme/demo/symptom-checker.gif) |
+| Doctors List Screen                            | Book Appointment Screen                      | Symptom Checker Screen                      | Buy Medicine List Screen                     |
+| ---------------------------------------------- | -------------------------------------------- | ------------------------------------------- | -------------------------------------------- |
+| ![Landing](./readme/demo/book-appointment.png) | ![fsdaf](./readme/demo/book-appointment.gif) | ![fsdaf](./readme/demo/symptom-checker.gif) | ![fsdaf](./readme/demo/buy-medicine.png.png) |
+| Medicine Info Screen                           | Medical History Screen                       | Chating Screen                              | Symptom Checker Screen                       |
+| ![Landing](./readme/demo/medicine-info.png)    | ![fsdaf](./readme/demo/medical-history.gif)  | ![fsdaf](./readme/demo/chat.png)            | ![fsdaf](./readme/demo/symptom-checker.gif)  |
 
 ### Admin Screens
 
