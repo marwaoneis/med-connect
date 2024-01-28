@@ -91,9 +91,9 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 | Welcome Screen                                            | Info Screen 1                                        | Info Screen 2                                        | Info Screen 3                                          |
 | --------------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------ |
-| <img src="./readme/demo/welcome-screen.png" height="100"> | <img src="./readme/demo/next1.png" height="100">     | <img src="./readme/demo/next2.png" height="100">     | <img src="./readme/demo/next3.png" height="100">       |
+| <img src="./readme/demo/welcome-screen.png" height="670"> | <img src="./readme/demo/next1.png" height="670">     | <img src="./readme/demo/next2.png" height="670">     | <img src="./readme/demo/next3.png" height="670">       |
 | Login Screen                                              | First Register Screen                                | Second Register Screen                               | Forget Password Screen                                 |
-| <img src="./readme/demo/login-screen.png" height="100">   | <img src="./readme/demo/register1.png" height="100"> | <img src="./readme/demo/register2.png" height="100"> | <img src="./readme/demo/forget-pass.png" height="100"> |
+| <img src="./readme/demo/login-screen.png" height="670">   | <img src="./readme/demo/register1.png" height="670"> | <img src="./readme/demo/register2.png" height="670"> | <img src="./readme/demo/forget-pass.png" height="670"> |
 
 ### Patient User Screens
 
