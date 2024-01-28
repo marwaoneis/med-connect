@@ -169,20 +169,21 @@ _Below is an example of how you can instruct your audience on installing and set
    ```js
    MONGODB_URI = "ENTER YOUR URI";
    ```
-6. Enter your API in `config.js`
+6. Get a free API Key at [Google API](https://makersuite.google.com/app/apikey)
+7. Enter your API in `config.js`
    ```js
    const API_KEY = "ENTER YOUR API";
    ```
-7. Run the server
+8. Run the server
    ```sh
    nodemon .
    ```
-8. Install [Flutter SDK](https://docs.flutter.dev/get-started/install?gclid=Cj0KCQiAveebBhD_ARIsAFaAvrEXbca0gKEuW9ROxwC86eiEtJUUO5tm-AIIzds41AXpzsjkbESCw2EaAsTwEALw_wcB&gclsrc=aw.ds)
-9. Go to flutter_app directory
-   ```sh
-   cd flutter_app
-   ```
-10. Run flutter_app
+9. Install [Flutter SDK](https://docs.flutter.dev/get-started/install?gclid=Cj0KCQiAveebBhD_ARIsAFaAvrEXbca0gKEuW9ROxwC86eiEtJUUO5tm-AIIzds41AXpzsjkbESCw2EaAsTwEALw_wcB&gclsrc=aw.ds)
+10. Go to flutter_app directory
+    ```sh
+    cd flutter_app
+    ```
+11. Run flutter_app
     ```sh
     flutter run
     ```
