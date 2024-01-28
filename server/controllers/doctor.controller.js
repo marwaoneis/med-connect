@@ -11,6 +11,20 @@ const createDoctor = async (req, res) => {
   }
 };
 
+const uploadProfilePicture = async (req, res) => {
+  try {
+    const doctor = await Doctor.findById(req.params.id);
+    if (!doctor) {
+      return res.status(404).json({ error: "Doctor not found" });
+    }
+    doctor.profilePicture = req.file.path; // Update the profile picture path
+    await doctor.save();
+    res.status(200).json(doctor);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 // Get all doctors
 const getAllDoctors = async (req, res) => {
   try {
@@ -172,4 +186,5 @@ module.exports = {
   getDoctorsBySpecialization,
   getDoctorByUsername,
   getAIDrivenRecommendation,
+  uploadProfilePicture,
 };

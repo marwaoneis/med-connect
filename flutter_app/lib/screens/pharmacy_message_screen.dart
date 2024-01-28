@@ -6,6 +6,7 @@ import 'package:flutter_app/screens/appointments_schedule.dart';
 import 'package:flutter_app/screens/doctor_dashboard_screen.dart';
 import 'package:flutter_app/screens/doctor_profile_logout.dart';
 import 'package:flutter_app/screens/pharmacy_dashboard_screen.dart';
+import 'package:flutter_app/screens/pharmacy_logout_screen.dart';
 import 'package:provider/provider.dart';
 import '../widgets/chats_list.dart';
 import '../widgets/footer.dart';
@@ -103,7 +104,7 @@ class _PharmacyMessageScreen extends State<PharmacyMessageScreen> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => const DoctorProfileLogoutScreen()),
+                builder: (context) => const PharmacyLogoutScreen()),
           );
         },
       ),

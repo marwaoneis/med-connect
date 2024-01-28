@@ -44,6 +44,7 @@ class Doctor {
   double appointmentPrice;
   Timing timing;
   String role;
+  String profilePicture;
 
   Doctor({
     required this.id,
@@ -59,6 +60,7 @@ class Doctor {
     required this.appointmentPrice,
     required this.timing,
     this.role = "Doctor",
+    this.profilePicture = "",
   });
 
   factory Doctor.fromJson(Map<String, dynamic> json) {
@@ -79,6 +81,7 @@ class Doctor {
       appointmentPrice: (json['appointmentPrice'] as num).toDouble(),
       timing: Timing.fromJson(json['timing']),
       role: json['role'] ?? "Doctor",
+      profilePicture: json['profilePicture'] ?? "",
     );
   }
 
@@ -97,6 +100,7 @@ class Doctor {
       'appointmentPrice': appointmentPrice,
       'timing': timing.toJson(),
       'role': role,
+      'profilePicture': profilePicture,
     };
   }
 }

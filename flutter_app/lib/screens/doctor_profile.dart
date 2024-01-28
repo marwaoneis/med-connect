@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/patient_appointments.dart';
 import 'package:provider/provider.dart';
 // import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -46,6 +47,12 @@ class DoctorProfileScreenState extends State<DoctorProfileScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Appointment created successfully')),
         );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BookAppointmentScreen(),
+          ),
+        );
       } else {
         final errorMessage = response['error'] ?? 'Unknown error';
         ScaffoldMessenger.of(context).showSnackBar(
@@ -66,6 +73,16 @@ class DoctorProfileScreenState extends State<DoctorProfileScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const BookAppointmentScreen()),
+            );
+          },
+        ),
         title: Text(
           widget.doctor.specialization.name,
           style: const TextStyle(fontWeight: FontWeight.bold),
@@ -98,7 +115,7 @@ class DoctorProfileScreenState extends State<DoctorProfileScreen> {
               'Dr. ${doctor.firstName} ${doctor.lastName}',
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 10),
             Text(
               doctor.specialization.name,
               style: const TextStyle(
@@ -106,7 +123,7 @@ class DoctorProfileScreenState extends State<DoctorProfileScreen> {
                   color: Color(0xFF0D4C92),
                   fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -118,6 +135,7 @@ class DoctorProfileScreenState extends State<DoctorProfileScreen> {
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
+                    const SizedBox(height: 10),
                     Text(
                       '${doctor.yearsOfExperience} years',
                       style: const TextStyle(
@@ -133,6 +151,7 @@ class DoctorProfileScreenState extends State<DoctorProfileScreen> {
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
+                    const SizedBox(height: 10),
                     Text(
                       '\$${doctor.appointmentPrice}',
                       style: const TextStyle(
@@ -153,49 +172,82 @@ class DoctorProfileScreenState extends State<DoctorProfileScreen> {
       margin: const EdgeInsets.all(16.0),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Working Hours: ${doctor.timing.startTime} - ${doctor.timing.endTime}',
-              style: const TextStyle(fontSize: 16),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () => _showDaySelectionDialog(context, doctor),
-              child: const Text('Select Day'),
-            ),
-            Text(
-              'Selected Day: ${selectedDay ?? 'Not Selected'}',
-              style: const TextStyle(fontSize: 16),
-            ),
-            Text(
-              'Selected Time: ${selectedTime?.format(context) ?? 'Not Selected'}',
-              style: const TextStyle(fontSize: 16),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                final TimeOfDay? pickedTime = await showTimePicker(
-                  context: context,
-                  initialTime: selectedTime ?? TimeOfDay.now(),
-                );
-                if (pickedTime != null && pickedTime != selectedTime) {
-                  setState(() {
-                    selectedTime = pickedTime;
-                  });
-                }
-              },
-              child: const Text('Select Time'),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: selectedDay != null && selectedTime != null
-                  ? () => _confirmAndCreateAppointment(
-                      context, doctor, selectedDay!, selectedTime!)
-                  : null,
-              child: const Text('Confirm Appointment'),
-            ),
-          ],
+        child: Center(
+          // Centers the contents horizontally
+          child: Column(
+            mainAxisAlignment:
+                MainAxisAlignment.center, // Centers the contents vertically
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Working Hours: ${doctor.timing.startTime} - ${doctor.timing.endTime}',
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 16),
+              Column(
+                children: [
+                  ElevatedButton(
+                    onPressed: () => _showDaySelectionDialog(context, doctor),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF0D4C92)),
+                    child: const Text('Select Day',
+                        style: TextStyle(color: Colors.white, fontSize: 18)),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Selected Day: ${selectedDay ?? 'Not Selected'}',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Column(
+                children: [
+                  ElevatedButton(
+                    onPressed: () async {
+                      final TimeOfDay? pickedTime = await showTimePicker(
+                        context: context,
+                        initialTime: selectedTime ?? TimeOfDay.now(),
+                      );
+                      if (pickedTime != null && pickedTime != selectedTime) {
+                        setState(() {
+                          selectedTime = pickedTime;
+                        });
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF0D4C92)),
+                    child: const Text('Select Time',
+                        style: TextStyle(color: Colors.white, fontSize: 18)),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Selected Time: ${selectedTime?.format(context) ?? 'Not Selected'}',
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: selectedDay != null && selectedTime != null
+                    ? () => _confirmAndCreateAppointment(
+                        context, doctor, selectedDay!, selectedTime!)
+                    : null,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF0D4C92),
+                  disabledForegroundColor: Colors.grey.withOpacity(0.38),
+                  disabledBackgroundColor: Colors.grey.withOpacity(0.12),
+                ),
+                child: const Text('Confirm Appointment',
+                    style: TextStyle(color: Colors.white, fontSize: 18)),
+              ),
+            ],
+          ),
         ),
       ),
     );

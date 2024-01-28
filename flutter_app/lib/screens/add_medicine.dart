@@ -228,7 +228,7 @@ class AddMedicineScreenState extends State<AddMedicineScreen> {
                         backgroundColor: const Color(0xFFE93B81),
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
+                          borderRadius: BorderRadius.circular(50),
                         ),
                         padding: EdgeInsets.zero,
                       ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/pharmacy_inventory.dart';
+import 'package:flutter_app/screens/pharmacy_logout_screen.dart';
+import 'package:flutter_app/screens/pharmacy_message_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../api/api_service.dart';
@@ -231,14 +233,14 @@ class PharmacyDashboardState extends State<PharmacyDashboard> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const PharmacyDashboard()),
+                        builder: (context) => const PharmacyMessageScreen()),
                   );
                 },
                 onProfileTap: () {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const PharmacyDashboard()),
+                        builder: (context) => const PharmacyLogoutScreen()),
                   );
                 },
               ),

@@ -58,6 +58,15 @@ class SymptomCheckerScreenState extends State<SymptomCheckerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const PatientScreen()),
+            );
+          },
+        ),
         title: const Text('Symptom Checker'),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,

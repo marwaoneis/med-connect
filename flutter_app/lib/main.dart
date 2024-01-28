@@ -46,6 +46,7 @@ class MyApp extends StatelessWidget {
                 prefs: prefs, firebaseFirestore: firebaseFirestore))
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'MedConnect',
         theme: ThemeData(
           primarySwatch: Colors.blue,

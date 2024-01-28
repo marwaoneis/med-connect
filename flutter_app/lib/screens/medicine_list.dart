@@ -96,28 +96,28 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                             ),
                             DataColumn(
                               label: SizedBox(
-                                width: 80,
-                                child: Text('Medicine ID',
-                                    softWrap: true,
-                                    style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.bold)),
-                              ),
-                            ),
-                            DataColumn(
-                              label: SizedBox(
-                                width: 80,
-                                child: Text('Group Name',
-                                    softWrap: true,
-                                    style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.bold)),
-                              ),
-                            ),
-                            DataColumn(
-                              label: SizedBox(
                                 width: 90,
-                                child: Text('Qty in Stock',
+                                child: Text('Medicine\n ID',
+                                    softWrap: true,
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                            ),
+                            DataColumn(
+                              label: SizedBox(
+                                width: 80,
+                                child: Text('Group\n Name',
+                                    softWrap: true,
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                            ),
+                            DataColumn(
+                              label: SizedBox(
+                                width: 80,
+                                child: Text('Qty in\n Stock',
                                     softWrap: true,
                                     style: TextStyle(
                                         fontSize: 13,
@@ -147,7 +147,7 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                                               medicine
                                                   .medicineDetails.first.name,
                                               style: const TextStyle(
-                                                  fontSize: 12))))),
+                                                  fontSize: 14))))),
                                   DataCell(Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8, horizontal: 5),
@@ -156,7 +156,7 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                                           width: 70,
                                           child: Text(medicine.id,
                                               style: const TextStyle(
-                                                  fontSize: 12))))),
+                                                  fontSize: 14))))),
                                   DataCell(Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8, horizontal: 5),
@@ -167,23 +167,23 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                                               medicine
                                                   .medicineDetails.first.group,
                                               style: const TextStyle(
-                                                  fontSize: 12))))),
+                                                  fontSize: 14))))),
                                   DataCell(Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8, horizontal: 5),
                                       child: Container(
                                           alignment: Alignment.center,
-                                          width: 70,
+                                          width: 40,
                                           child: Text('${medicine.stockLevel}',
                                               style: const TextStyle(
-                                                  fontSize: 12))))),
+                                                  fontSize: 14))))),
                                   DataCell(
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          vertical: 8, horizontal: 5),
+                                          vertical: 8, horizontal: 0),
                                       child: Container(
                                         alignment: Alignment.center,
-                                        width: 100,
+                                        width: 90,
                                         child: TextButton(
                                           onPressed: () {
                                             Navigator.of(context).push(
@@ -206,7 +206,7 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                                           ),
                                           child: const Text('View Full Detail',
                                               style: TextStyle(
-                                                  fontSize: 10,
+                                                  fontSize: 12,
                                                   color: Colors.black)),
                                         ),
                                       ),

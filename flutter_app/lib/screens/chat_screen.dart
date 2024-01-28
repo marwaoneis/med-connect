@@ -45,7 +45,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     }
 
     chatProvider
-        .getChatMessages(senderId, widget.receiverId, 10)
+        .getChatMessages(senderName, widget.receiverName, 10)
         .listen((QuerySnapshot snapshot) {
       List<Message> newMessages = [];
 
@@ -98,7 +98,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
         curve: Curves.easeOut,
       );
 
-      chatProvider.sendChatMessage(text, 0, senderId, widget.receiverId,
+      chatProvider.sendChatMessage(text, 0, senderId, widget.receiverName,
           widget.receiverName, senderName);
     } else {
       // TODO: IMPLEMENT WHAT TO DO IN CASE MESSAGE WAS EMPTY

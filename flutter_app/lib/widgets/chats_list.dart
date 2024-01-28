@@ -68,8 +68,8 @@ class ChatsList extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => ChatScreen(
-              receiverId: chat[FirestoreConstants.id],
               receiverName: chat[FirestoreConstants.fullName],
+              receiverId: chat[FirestoreConstants.id],
             ),
           ),
         );

@@ -88,7 +88,7 @@ class SignUpScreenPart2State extends State<SignUpScreenPart2> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: const Color(0xFFC7D3E1),
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           SafeArea(
@@ -100,12 +100,20 @@ class SignUpScreenPart2State extends State<SignUpScreenPart2> {
                 const SizedBox(height: 25),
                 Container(
                   width: double.infinity,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(25),
                       topRight: Radius.circular(25),
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 5,
+                        offset: const Offset(0, -2),
+                      ),
+                    ],
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),

@@ -10,89 +10,43 @@ import 'appointments_schedule.dart';
 import 'doctor_dashboard_screen.dart';
 import 'doctor_message_screen.dart';
 import 'patient_dashboard_screen.dart';
-import 'dart:io';
-import 'package:image_picker/image_picker.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import '../config/request_config.dart';
 
-class DoctorProfileLogoutScreen extends StatefulWidget {
-  const DoctorProfileLogoutScreen({super.key});
+class PharmacyLogoutScreen extends StatefulWidget {
+  const PharmacyLogoutScreen({super.key});
 
   @override
-  DoctorProfileLogoutScreenState createState() =>
-      DoctorProfileLogoutScreenState();
+  PharmacyLogoutScreenState createState() => PharmacyLogoutScreenState();
 }
 
-class DoctorProfileLogoutScreenState extends State<DoctorProfileLogoutScreen> {
-  Map<String, dynamic>? doctorData;
+class PharmacyLogoutScreenState extends State<PharmacyLogoutScreen> {
+  Map<String, dynamic>? pharmacyData;
   bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _fetchDoctorData().then((data) {
+    _fetchpharmacyData().then((data) {
       if (mounted) {
         setState(() {
-          doctorData = data;
+          pharmacyData = data;
           isLoading = false;
         });
       }
     });
   }
 
-  Future<void> _uploadProfilePicture(
-      BuildContext context, String userId) async {
-    final ImagePicker _picker = ImagePicker();
-    // Pick an image
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-
-    if (image != null) {
-      var uri = Uri.http(RequestConfig.url, '/doctors/$userId/profile-picture');
-      var request = http.MultipartRequest('POST', uri);
-      request.headers.addAll(RequestConfig.getHeaders(context));
-
-      // Attach the file in the request
-      request.files
-          .add(await http.MultipartFile.fromPath('profilePicture', image.path));
-
-      try {
-        var streamedResponse = await request.send();
-        var response = await http.Response.fromStream(streamedResponse);
-        if (response.statusCode == 200) {
-          // Handle successful upload
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Profile picture updated successfully!')),
-          );
-        } else {
-          // Handle error
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Failed to upload profile picture')),
-          );
-        }
-      } catch (e) {
-        // Handle exception
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: $e')),
-        );
-      }
-    }
-  }
-
-  Future<Map<String, dynamic>> _fetchDoctorData() async {
+  Future<Map<String, dynamic>> _fetchpharmacyData() async {
     var headers = RequestConfig.getHeaders(context);
 
     final apiService =
         ApiService(baseUrl: 'http://10.0.2.2:3001', headers: headers);
     final userId = Provider.of<Auth>(context, listen: false).getUserId;
-    var data = await apiService.fetchData('doctors/$userId');
+    var data = await apiService.fetchData('pharmacies/$userId');
     return data;
   }
 
   @override
   Widget build(BuildContext context) {
-    String doctorId = doctorData?['_id'] ?? '';
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -113,15 +67,9 @@ class DoctorProfileLogoutScreenState extends State<DoctorProfileLogoutScreen> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            if (!isLoading && doctorData != null)
-              _buildProfileCard(
-                doctorData!['firstName'] ?? 'N/A',
-                doctorData!['lastName'] ?? 'N/A',
-                doctorData!['phone'] ?? 'N/A',
-                doctorData!['specialization'] ?? 'N/A',
-                doctorData!['profilePicture'],
-                doctorId,
-              ),
+            if (!isLoading && pharmacyData != null)
+              _buildProfileCard(pharmacyData!['username'] ?? 'N/A',
+                  pharmacyData!['phone'] ?? 'N/A'),
             if (isLoading)
               const Padding(
                 padding: EdgeInsets.all(20.0),
@@ -182,15 +130,14 @@ class DoctorProfileLogoutScreenState extends State<DoctorProfileLogoutScreen> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => const DoctorProfileLogoutScreen()),
+                builder: (context) => const PharmacyLogoutScreen()),
           );
         },
       ),
     );
   }
 
-  Widget _buildProfileCard(String firstName, String lastName, String phone,
-      String speciality, String? profilePictureUrl, String doctorId) {
+  Widget _buildProfileCard(String username, String phone) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
@@ -210,29 +157,18 @@ class DoctorProfileLogoutScreenState extends State<DoctorProfileLogoutScreen> {
         padding: const EdgeInsets.all(16),
         child: Row(
           children: [
-            _buildProfilePicture(context, profilePictureUrl, doctorId),
+            const CircleAvatar(
+              radius: 40,
+              backgroundImage: NetworkImage('https://via.placeholder.com/150'),
+            ),
             const SizedBox(width: 20),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('$firstName $lastName',
+                  Text('$username',
                       style: const TextStyle(
                           fontSize: 25, fontWeight: FontWeight.bold)),
-                  Row(
-                    children: [
-                      const Text('Specialization:',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w800)),
-                      Text(speciality,
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500)),
-                    ],
-                  ),
                   Row(
                     children: [
                       const Text('Phone Number:',
@@ -295,32 +231,6 @@ class DoctorProfileLogoutScreenState extends State<DoctorProfileLogoutScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildProfilePicture(
-      BuildContext context, String? profileImageUrl, String userId) {
-    String imageUrl = profileImageUrl != null && profileImageUrl.isNotEmpty
-        ? profileImageUrl
-        : 'https://png.pngtree.com/png-clipart/20230918/ourmid/pngtree-photo-men-doctor-physician-chest-smiling-png-image_10132895.png';
-
-    return Stack(
-      alignment: Alignment.bottomRight,
-      children: [
-        CircleAvatar(
-          radius: 40,
-          backgroundImage: NetworkImage(imageUrl),
-        ),
-        IconButton(
-          onPressed: () => _uploadProfilePicture(context, userId),
-          icon: const Icon(Icons.camera_alt),
-          style: IconButton.styleFrom(
-            padding: const EdgeInsets.all(10),
-            // backgroundColor: Colors.blue,
-            foregroundColor: Colors.white,
-          ),
-        ),
-      ],
     );
   }
 }

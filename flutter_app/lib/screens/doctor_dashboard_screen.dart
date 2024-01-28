@@ -259,9 +259,9 @@ class DoctorScreenState extends State<DoctorScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     AppointmentList(
-                      title: 'Appointment Requests',
+                      title: 'Appointments Status',
                       appointments: [
                         FutureBuilder<List<Appointment>>(
                           future: _appointmentsFuture,

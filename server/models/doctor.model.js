@@ -96,6 +96,11 @@ const doctorSchema = new mongoose.Schema({
     type: String,
     default: "Doctor",
   },
+  profilePicture: {
+    type: String,
+    default:
+      "https://www.vhv.rs/dpng/d/315-3159706_doctor-with-stethoscope-png-png-download-transparent-background.png",
+  },
 });
 
 doctorSchema.pre(

@@ -20,6 +20,21 @@ class MedicineInfoScreen extends StatefulWidget {
 
 class MedicineInfoScreenState extends State<MedicineInfoScreen> {
   int quantity = 1;
+  double totalPrice;
+
+  MedicineInfoScreenState() : totalPrice = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    totalPrice = widget.price;
+  }
+
+  void updatePrice() {
+    setState(() {
+      totalPrice = widget.price * quantity;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,44 +94,44 @@ class MedicineInfoScreenState extends State<MedicineInfoScreen> {
                     const SizedBox(height: 16),
                     const Text(
                       'Group:',
-                      style: TextStyle(
-                          color: Color(0xFF7E7E7E),
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 5),
                     Text(
                       widget.medicineDetails.group,
                       style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.w500),
+                          color: Color(0xFF7E7E7E),
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(height: 15),
                     const Text(
                       'Uses:',
-                      style: TextStyle(
-                          color: Color(0xFF7E7E7E),
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 5),
                     Text(
                       widget.medicineDetails.description,
                       style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.w500),
+                          color: Color(0xFF7E7E7E),
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(height: 15),
                     const Text(
                       'Side Effects:',
-                      style: TextStyle(
-                          color: Color(0xFF7E7E7E),
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 5),
                     Text(
                       widget.medicineDetails.sideEffects,
                       style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.w500),
+                          color: Color(0xFF7E7E7E),
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(height: 16),
                     const Divider(),
@@ -145,6 +160,7 @@ class MedicineInfoScreenState extends State<MedicineInfoScreen> {
                                 if (quantity > 1) {
                                   setState(() {
                                     quantity--;
+                                    updatePrice();
                                   });
                                 }
                               },
@@ -160,6 +176,7 @@ class MedicineInfoScreenState extends State<MedicineInfoScreen> {
                               onPressed: () {
                                 setState(() {
                                   quantity++;
+                                  updatePrice();
                                 });
                               },
                             ),
@@ -174,7 +191,7 @@ class MedicineInfoScreenState extends State<MedicineInfoScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '\$${widget.price.toStringAsFixed(2)}',
+                          '\$${totalPrice.toStringAsFixed(2)}',
                           style: const TextStyle(
                               fontSize: 24, fontWeight: FontWeight.w900),
                         ),

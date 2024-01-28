@@ -5,7 +5,7 @@
 <!-- project philosophy -->
 <img src="./readme/title2.svg"/>
 
-> A Progressive Healthcare Management System, an application that connects between patients, doctors, and health care providers.
+> A Progressive Healthcare Management System mobile application that connects between patients, doctors, and health care providers.
 >
 > MedConnect is an application designed to benefit patients, doctors, and healthcare providers. Patients enjoy convenience with features like virtual consultations, an AI-assisted symptom checker, and automated medication reminders. Doctors benefit from more efficient workflows and improved communication. Hospitals and medical centers witness increased administrative efficiency, leading to an overall enhancement of patient care effectiveness.
 
@@ -15,11 +15,7 @@ Patient:
 
 - As a patient, I want to effortlessly request medication refills through the app, so I can ensure a smooth process and timely access to my prescriptions.
 - As a patient experiencing symptoms, I want to input my symptoms into the app's Symptom Checker, receiving AI-powered assessments and suggestions for appropriate next steps, so I can better understand and manage my health.
-- As a patient in need of healthcare services, I want to utilize Geo-location services to easily find nearby healthcare providers, pharmacies, or medical facilities, so I can ensure accessibility and convenience.
 - As a patient, I want the option for virtual consultations with doctors through the Tele-medicine feature, providing a convenient and flexible healthcare experience without the need to physically visit a clinic.
-- As a user, I want to schedule appointments seamlessly through the app, so I can save time and ensure timely access to healthcare services.
-- As a patient, I expect healthcare providers to electronically prescribe medications through the app, streamlining the process and allowing prescriptions to be sent directly to my preferred pharmacies.
-- As a patient managing multiple medications, I want to set up reminders and track my medication adherence within the app, so I can stay on top of my prescribed treatment plan.
 
 Doctor:
 
@@ -31,42 +27,75 @@ Pharmacy:
 
 - As a pharmacy, I want to seamlessly integrate with the app to receive electronic prescriptions and coordinate efficiently with healthcare providers, so I can ensure accurate and timely medication dispensing.
 - As a pharmacy, I want to receive and process medication refill requests from patients through the app, streamlining the refill process and enhancing customer service.
+
   <br><br>
+  <!-- Tech stack -->
+  <img src="./readme/title3.svg"/>
 
-<!-- Prototyping -->
-<img src="./readme/title3.svg"/>
+### MedConnect is built using a combination of modern technologies. Below is an overview of the key technologies employed in the development of MedConnect.
 
-> We designed MedConnect using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
-> The database structure was first drafted in [Excalidraw](https://excalidraw.com/) for basic planning, then refined with detailed designs and animations in Figma.
+- **Framework**: [Flutter](https://flutter.dev/)
+- **Description**: Flutter is a versatile and powerful cross-platform framework that allows us to develop MedConnect with a single codebase for both mobile and web platforms.
+- **Language**: [Dart](https://dart.dev/) is used as the primary programming language, complementing Flutter for a smooth and responsive UI.
+- **Platform**: [Firebase](https://firebase.google.com/) for real-time chatting features are powered by Firebase. We are currently working on integrating Firebase for robust and efficient push notifications.
+- **Technology**: [NodeJS](https://nodejs.org/). Its purpose is utilized for its efficient handling of asynchronous events and high throughput, which powers the server-side of MedConnect.
+- **Database**: [MongoDB](https://www.mongodb.com/) used for its flexible data storage capabilities, aiding in the efficient management and retrieval of data.
+- **Framework**: [Express](https://expressjs.com/) is integrated as a back-end web application framework for Node.js, simplifying the server-side logic and routing for MedConnect.
 
-> <img src="./readme/app-diagram.svg"/>
+> 🚨 **Important Note**:I am actively working on refining the notification system for an improved user experience.
 
-### Wireframes
+MedConnect employs material design principles for its UI, offering an intuitive and user-friendly interface. The primary font used is tailored to ensure readability and visual appeal.
 
-| Login screen                            | Register screen                       | Landing screen                        |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+Stay connected with us for more updates and enhancements on MedConnect!
+
+<br><br>
+
+<!-- UI UX -->
+<img src="./readme/title4.svg"/>
+
+> In designing MedConnect, we employed a meticulous approach, starting with detailed wireframes and progressing to comprehensive mockups. This iterative design process was instrumental in refining the user interface, ensuring that each layout was optimized for ease of navigation and a seamless user experience. Our dedication to this process has culminated in an intuitive design that not only meets but exceeds the expectations of our users.
+
+- Project Figma design [figma](https://www.figma.com/file/ecj29Eu5rKlfrUcjcrX4Gu/UI-UX-Final-Project---MedConnect?type=design&node-id=184%3A36&mode=design&t=WI17ii4fHIhcSCn1-1)
 
 ### Mockups
 
-| Home screen                             | Menu Screen                           | Order Screen                          |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| Patient Home Screen                       | Book Appointment Screen                         | Symptom Checker Screen                      |
+| ----------------------------------------- | ----------------------------------------------- | ------------------------------------------- |
+| ![Landing](./readme/demo/home-screen.png) | ![fsdaf](./readme/demo/doctors-appointment.png) | ![fsdaf](./readme/demo/symptom-checker.png) |
+
+<br><br>
+
+| Patient Profile Screen                       | Medical History Screen                           | Chating Screen                   |
+| -------------------------------------------- | ------------------------------------------------ | -------------------------------- |
+| ![Landing](./readme/demo/profile-screen.png) | ![fsdaf](./readme/demo/medical-history-info.png) | ![fsdaf](./readme/demo/chat.png) |
+
+<br><br>
+
+| Doctor Dashboard Screen                          | Appointments Schedule Screen Screen      | Medicine List Screen                      |
+| ------------------------------------------------ | ---------------------------------------- | ----------------------------------------- |
+| ![Landing](./readme/demo/doctor-home-screen.png) | ![fsdaf](./readme/demo/appointments.png) | ![fsdaf](./readme/demo/medicine-list.png) |
+
+<br><br>
+
+<!-- Database Design -->
+<img src="./readme/title5.svg"/>
+
+### Architecting Data Excellence: Innovative Database Design Strategies:
+
+<img src="./readme/app-diagram.svg"/>
 
 <br><br>
 
 <!-- Implementation -->
-<img src="./readme/title4.svg"/>
+<img src="./readme/title6.svg"/>
 
-> Using the wireframes and mockups as a guide, we implemented the MedConnect app with the following features:
+### Patient User Screens (Mobile)
 
-### User Screens (Mobile)
-
-| Login screen                              | Register screen                         | Landing screen                          | Loading screen                          |
-| ----------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
-| Home screen                               | Menu Screen                             | Order Screen                            | Checkout Screen                         |
-| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
+| Login Screen                                      | Register Screen                              | Register Screen                        | Dashboard Screen                            |
+| ------------------------------------------------- | -------------------------------------------- | -------------------------------------- | ------------------------------------------- |
+| ![Landing](./readme/demo/login.png)               | ![fsdaf](./readme/demo/register-1.png)       | ![fsdaf](./readme/demo/register-2.png) | ![fsdaf](./readme/demo/home-screen.png)     |
+| Doctors List Screen                               | Book Appointment Screen                      | Specific Doctor Speciality Screen      | Symptom Checker Screen                      |
+| ![Landing](./readme/demo/doctors-appointment.png) | ![fsdaf](./readme/demo/book-appointment.gif) | ![fsdaf](./readme/demo/specialist.png) | ![fsdaf](./readme/demo/symptom-checker.gif) |
 
 ### Admin Screens (Web)
 
@@ -75,23 +104,6 @@ Pharmacy:
 | ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
 | Home screen                             | Menu Screen                           | Order Screen                          |
 | ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
-
-<br><br>
-
-<!-- Tech stack -->
-<img src="./readme/title5.svg"/>
-
-### MedConnect is built using the following technologies:
-
-Here's a brief high-level overview of the tech stack the Well app uses:
-
-- This project uses the [Flutter app development framework](https://flutter.dev/). Flutter is a cross-platform hybrid app development platform which allows us to use a single codebase for apps on mobile, desktop, and the web.
-
-- The app uses [Node.js](https://nodejs.org/en/)for the backend. Node.js is a JavaScript runtime environment that allow running JavaScript code outside of a browser. Node.js is designed to build scalable network applications. Using [Express.js](https://expressjs.com/) which is a web application framework for Node.js. It provides a robust set of features to develop web and mobile applications.
-
-- For trusted database foundation, the app uses the [MongoDB Atlas](https://www.mongodb.com/atlas/database) that enables you to work with data the way you want – easily and effortlessly.
-
-- For notifications, the app uses [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging) which is a cross-platform messaging solution that lets you reliably deliver messages at no cost.
 
 <br><br>
 
