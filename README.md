@@ -87,7 +87,7 @@ Stay connected with us for more updates and enhancements on MedConnect!
 <!-- Implementation -->
 <img src="./readme/title6.svg"/>
 
-### Common User Screens (Mobile)
+### Common User Screens
 
 | Welcome Screen                               | Info Screen 1                         | Info Screen 2                         | Info Screen 3                           |
 | -------------------------------------------- | ------------------------------------- | ------------------------------------- | --------------------------------------- |
@@ -95,7 +95,7 @@ Stay connected with us for more updates and enhancements on MedConnect!
 | Login Screen                                 | First Register Screen                 | Second Register Screen                | Forget Password Screen                  |
 | ![Landing](./readme/demo/login-screen.png)   | ![fsdaf](./readme/demo/register1.png) | ![fsdaf](./readme/demo/register2.png) | ![fsdaf](./readme/demo/forget-pass.png) |
 
-### Patient User Screens (Mobile)
+### Patient User Screens
 
 | Login Screen                                      | Register Screen                              | Register Screen                        | Dashboard Screen                            |
 | ------------------------------------------------- | -------------------------------------------- | -------------------------------------- | ------------------------------------------- |
@@ -103,7 +103,7 @@ Stay connected with us for more updates and enhancements on MedConnect!
 | Doctors List Screen                               | Book Appointment Screen                      | Specific Doctor Speciality Screen      | Symptom Checker Screen                      |
 | ![Landing](./readme/demo/doctors-appointment.png) | ![fsdaf](./readme/demo/book-appointment.gif) | ![fsdaf](./readme/demo/specialist.png) | ![fsdaf](./readme/demo/symptom-checker.gif) |
 
-### Admin Screens (Web)
+### Admin Screens
 
 | Login screen                            | Register screen                       | Landing screen                        |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
