@@ -29,8 +29,9 @@ Pharmacy:
 - As a pharmacy, I want to receive and process medication refill requests from patients through the app, streamlining the refill process and enhancing customer service.
 
   <br><br>
-  <!-- Tech stack -->
-  <img src="./readme/title3.svg"/>
+
+<!-- Tech stack -->
+ <img src="./readme/title3.svg"/>
 
 ### MedConnect is built using a combination of modern technologies. Below is an overview of the key technologies employed in the development of MedConnect.
 
