@@ -89,7 +89,7 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                                   'Medicine Name',
                                   softWrap: true,
                                   style: TextStyle(
-                                      fontSize: 13,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -97,20 +97,10 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                             DataColumn(
                               label: SizedBox(
                                 width: 90,
-                                child: Text('Medicine\n ID',
-                                    softWrap: true,
-                                    style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.bold)),
-                              ),
-                            ),
-                            DataColumn(
-                              label: SizedBox(
-                                width: 80,
                                 child: Text('Group\n Name',
                                     softWrap: true,
                                     style: TextStyle(
-                                        fontSize: 13,
+                                        fontSize: 15,
                                         fontWeight: FontWeight.bold)),
                               ),
                             ),
@@ -120,7 +110,7 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                                 child: Text('Qty in\n Stock',
                                     softWrap: true,
                                     style: TextStyle(
-                                        fontSize: 13,
+                                        fontSize: 15,
                                         fontWeight: FontWeight.bold)),
                               ),
                             ),
@@ -130,7 +120,7 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                                 child: Text('Action',
                                     softWrap: true,
                                     style: TextStyle(
-                                        fontSize: 13,
+                                        fontSize: 15,
                                         fontWeight: FontWeight.bold)),
                               ),
                             ),
@@ -142,21 +132,12 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8, horizontal: 5),
                                       child: Container(
-                                          alignment: Alignment.center,
+                                          // alignment: Alignment.center,
                                           child: Text(
                                               medicine
                                                   .medicineDetails.first.name,
                                               style: const TextStyle(
-                                                  fontSize: 14))))),
-                                  DataCell(Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8, horizontal: 5),
-                                      child: Container(
-                                          alignment: Alignment.center,
-                                          width: 70,
-                                          child: Text(medicine.id,
-                                              style: const TextStyle(
-                                                  fontSize: 14))))),
+                                                  fontSize: 15))))),
                                   DataCell(Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8, horizontal: 5),
@@ -167,7 +148,7 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                                               medicine
                                                   .medicineDetails.first.group,
                                               style: const TextStyle(
-                                                  fontSize: 14))))),
+                                                  fontSize: 15))))),
                                   DataCell(Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8, horizontal: 5),
@@ -176,7 +157,7 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                                           width: 40,
                                           child: Text('${medicine.stockLevel}',
                                               style: const TextStyle(
-                                                  fontSize: 14))))),
+                                                  fontSize: 15))))),
                                   DataCell(
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
@@ -199,7 +180,7 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                                           style: TextButton.styleFrom(
                                             padding: const EdgeInsets.only(
                                               left: 0,
-                                              right: 50,
+                                              right: 0,
                                               top: 4,
                                               bottom: 4,
                                             ),
@@ -207,7 +188,7 @@ class MedicineListScreenState extends State<MedicineListScreen> {
                                           child: const Text('View Full Detail',
                                               style: TextStyle(
                                                   fontSize: 12,
-                                                  color: Colors.black)),
+                                                  color: Colors.blue)),
                                         ),
                                       ),
                                     ),

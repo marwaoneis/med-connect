@@ -40,8 +40,6 @@ class PharmacyMedicineInfoScreen extends StatelessWidget {
                       buildInfoBox(
                         context,
                         title: 'Medicine',
-                        leftValue: medicine.id,
-                        leftTitle: 'Medicine ID',
                         rightValue: medicine.medicineDetails.first.group,
                         rightTitle: 'Medicine Group',
                       ),

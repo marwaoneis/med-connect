@@ -110,23 +110,6 @@ class AddMedicineScreenState extends State<AddMedicineScreen> {
                   ),
                 ),
                 _buildInputField(
-                  label: 'Medicine ID',
-                  child: TextFormField(
-                    controller: idController,
-                    decoration: const InputDecoration(
-                        hintText: 'Enter medicine ID',
-                        border: InputBorder.none,
-                        labelStyle: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w500)),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter medicine ID';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                _buildInputField(
                   label: 'Medicine Group',
                   child: DropdownButtonFormField(
                     value: selectedGroup,
@@ -269,7 +252,7 @@ class AddMedicineScreenState extends State<AddMedicineScreen> {
           ),
           child: Padding(
             padding:
-                const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+                const EdgeInsets.symmetric(horizontal: 12.0, vertical: 0.0),
             child: child,
           ),
         ),

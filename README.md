@@ -99,15 +99,18 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 ### Doctor Screens
 
-| Dashboard screen                               | Appointments Schedule Screen         |
+| Doctor Dashboard screen                        | Appointments Schedule Screen         |
 | ---------------------------------------------- | ------------------------------------ |
 | ![Landing](./readme/demo/doctor-dashboard.gif) | ![fsdaf](./readme/demo/schedule.gif) |
 
 ### Pharmacy Screens
 
-| Dashboard screen                               | Appointments Schedule Screen         |
-| ---------------------------------------------- | ------------------------------------ |
-| ![Landing](./readme/demo/doctor-dashboard.gif) | ![fsdaf](./readme/demo/schedule.gif) |
+| Pharmacy Dashboard screen                        | Inventory Screen                         |
+| ------------------------------------------------ | ---------------------------------------- |
+| ![Landing](./readme/demo/pharmacy-dashboard.png) | ![fsdaf](./readme/demo/inventory.png)    |
+| Medicines List Screen                            | Medicines Group Screen                   |
+| ------------------------------------------------ | -------------------------------------    |
+| ![Landing](./readme/demo/remove-medicine.gif)    | ![fsdaf](./readme/demo/remove-group.gif) |
 
 <br><br>
 
