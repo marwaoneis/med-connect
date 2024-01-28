@@ -35,8 +35,7 @@ Pharmacy:
 
 ### MedConnect is built using a combination of modern technologies. Below is an overview of the key technologies employed in the development of MedConnect.
 
-- **Framework**: [Flutter](https://flutter.dev/)
-- **Description**: Flutter is a versatile and powerful cross-platform framework that allows us to develop MedConnect with a single codebase for both mobile and web platforms.
+- **Framework**: [Flutter](https://flutter.dev/) is a versatile and powerful cross-platform framework that allows us to develop MedConnect with a single codebase for both mobile and web platforms.
 - **Language**: [Dart](https://dart.dev/) is used as the primary programming language, complementing Flutter for a smooth and responsive UI.
 - **Platform**: [Firebase](https://firebase.google.com/) for real-time chatting features are powered by Firebase. We are currently working on integrating Firebase for robust and efficient push notifications.
 - **Technology**: [NodeJS](https://nodejs.org/). Its purpose is utilized for its efficient handling of asynchronous events and high throughput, which powers the server-side of MedConnect.
