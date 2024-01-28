@@ -43,7 +43,7 @@ Pharmacy:
 - **Database**: [MongoDB](https://www.mongodb.com/) used for its flexible data storage capabilities, aiding in the efficient management and retrieval of data.
 - **Framework**: [Express](https://expressjs.com/) is integrated as a back-end web application framework for Node.js, simplifying the server-side logic and routing for MedConnect.
 
-> 🚨 **Important Note**:I am actively working on refining the notification system for an improved user experience.
+> 🚨 **Note**:I am actively working on refining the notification system for an improved user experience.
 
 MedConnect employs material design principles for its UI, offering an intuitive and user-friendly interface. The primary font used is tailored to ensure readability and visual appeal.
 
@@ -89,6 +89,14 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 <!-- Implementation -->
 <img src="./readme/title6.svg"/>
+
+### Common User Screens (Mobile)
+
+| Welcome Screen                               | Info Screen 1                         | Info Screen 2                         | Info Screen 3                           |
+| -------------------------------------------- | ------------------------------------- | ------------------------------------- | --------------------------------------- |
+| ![Landing](./readme/demo/welcome-screen.png) | ![fsdaf](./readme/demo/next1.png)     | ![fsdaf](./readme/demo/next2.png)     | ![fsdaf](./readme/demo/next3.png)       |
+| Login Screen                                 | First Register Screen                 | Second Register Screen                | Forget Password Screen                  |
+| ![Landing](./readme/demo/login-screen.png)   | ![fsdaf](./readme/demo/register1.png) | ![fsdaf](./readme/demo/register2.png) | ![fsdaf](./readme/demo/forget-pass.png) |
 
 ### Patient User Screens (Mobile)
 
