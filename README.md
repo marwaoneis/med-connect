@@ -59,6 +59,10 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 ### Mockups
 
+| Welcome Screen                               | Info Screen                       | Login Screen                             |
+| -------------------------------------------- | --------------------------------- | ---------------------------------------- |
+| ![Landing](./readme/demo/welcome-screen.png) | ![fsdaf](./readme/demo/next1.png) | ![fsdaf](./readme/demo/login-screen.png) |
+
 | Patient Home Screen                             | Book Appointment Screen                         | Symptom Checker Screen                      |
 | ----------------------------------------------- | ----------------------------------------------- | ------------------------------------------- |
 | ![Landing](./readme/demo/patient-dashboard.gif) | ![fsdaf](./readme/demo/doctors-appointment.png) | ![fsdaf](./readme/demo/symptom-checker.png) |
@@ -86,12 +90,6 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 <!-- Implementation -->
 <img src="./readme/title6.svg"/>
-
-### Common User Screens
-
-| Welcome Screen                                            | Info Screen                                      | Login Screen 2                                          |
-| --------------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------- |
-| <img src="./readme/demo/welcome-screen.png" height="500"> | <img src="./readme/demo/next1.png" height="500"> | <img src="./readme/demo/login-screen.png" height="500"> |
 
 ### Patient User Screens
 
