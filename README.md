@@ -59,17 +59,17 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 ### Mockups
 
-| Welcome Screen                               | Info Screen                       | Login Screen                             | Patient Home Screen                             |
-| -------------------------------------------- | --------------------------------- | ---------------------------------------- | ----------------------------------------------- |
-| ![Landing](./readme/demo/welcome-screen.png) | ![fsdaf](./readme/demo/next1.png) | ![fsdaf](./readme/demo/login-screen.png) | ![Landing](./readme/demo/patient-dashboard.gif) |
+| Info Screen                       | Login Screen                             | Patient Home Screen                             |
+| --------------------------------- | ---------------------------------------- | ----------------------------------------------- |
+| ![fsdaf](./readme/demo/next1.png) | ![fsdaf](./readme/demo/login-screen.png) | ![Landing](./readme/demo/patient-dashboard.gif) |
 
-| Patient Profile Screen                       | Medical History Screen                           | Chating Screen                   | Doctor Dashboard Screen                          |
-| -------------------------------------------- | ------------------------------------------------ | -------------------------------- | ------------------------------------------------ |
-| ![Landing](./readme/demo/profile-screen.png) | ![fsdaf](./readme/demo/medical-history-info.png) | ![fsdaf](./readme/demo/chat.png) | ![Landing](./readme/demo/doctor-home-screen.png) |
+| Patient Profile Screen                       | Medical History Screen                           | Chating Screen                   |
+| -------------------------------------------- | ------------------------------------------------ | -------------------------------- |
+| ![Landing](./readme/demo/profile-screen.png) | ![fsdaf](./readme/demo/medical-history-info.png) | ![fsdaf](./readme/demo/chat.png) |
 
-| Book Appointment Screen                         | Symptom Checker Screen                      | Appointments Schedule Screen Screen      | Medicine List Screen                      |
-| ----------------------------------------------- | ------------------------------------------- | ---------------------------------------- | ----------------------------------------- |
-| ![fsdaf](./readme/demo/doctors-appointment.png) | ![fsdaf](./readme/demo/symptom-checker.png) | ![fsdaf](./readme/demo/appointments.png) | ![fsdaf](./readme/demo/medicine-list.png) |
+| Symptom Checker Screen                      | Appointments Schedule Screen Screen      | Doctor Dashboard Screen                        |
+| ------------------------------------------- | ---------------------------------------- | ---------------------------------------------- |
+| ![fsdaf](./readme/demo/symptom-checker.png) | ![fsdaf](./readme/demo/appointments.png) | ![fsdaf](./readme/demo/doctor-home-screen.png) |
 
 <br><br>
 
@@ -95,9 +95,9 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 ### Doctor Screens
 
-| Doctor Dashboard screen                        | Appointments Schedule Screen         |
-| ---------------------------------------------- | ------------------------------------ |
-| ![Landing](./readme/demo/doctor-dashboard.gif) | ![fsdaf](./readme/demo/schedule.gif) |
+| Doctor Dashboard screen                        | Appointments Schedule Screen         | Confirm Appointment and Chat Screen      |
+| ---------------------------------------------- | ------------------------------------ | ---------------------------------------- |
+| ![Landing](./readme/demo/doctor-dashboard.gif) | ![fsdaf](./readme/demo/schedule.gif) | ![fsdaf](./readme/demo/confirm-chat.gif) |
 
 ### Pharmacy Screens
 
