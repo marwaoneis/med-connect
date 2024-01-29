@@ -101,11 +101,9 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 ### Pharmacy Screens
 
-| Pharmacy Dashboard screen                        | Inventory Screen                         |
-| ------------------------------------------------ | ---------------------------------------- |
-| ![Landing](./readme/demo/pharmacy-dashboard.png) | ![fsdaf](./readme/demo/inventory.png)    |
-| Medicines List Screen                            | Medicines Group Screen                   |
-| ![Landing](./readme/demo/remove-medicine.gif)    | ![fsdaf](./readme/demo/remove-group.gif) |
+| Pharmacy Dashboard screen                        | Medicines List Screen                       | Medicines Group Screen                   |
+| ------------------------------------------------ | ------------------------------------------- | ---------------------------------------- |
+| ![Landing](./readme/demo/pharmacy-dashboard.gif) | ![fsdaf](./readme/demo/remove-medicine.gif) | ![fsdaf](./readme/demo/remove-group.gif) |
 
 <br><br>
 
