@@ -73,13 +73,19 @@ app.use((err, req, res, next) => {
   }
 });
 
+//Listening on server port and logging status
 const PORT = process.env.PORT;
-if (require.main === module) {
-  // Only start the server if this script is the main entry point
-  app.listen(PORT, () => {
-    console.log("Server listening on PORT: ", PORT);
-    connectToMongoDB(); // Connect to MongoDB only when starting the server
-  });
-}
+app.listen(PORT, () => {
+  console.log("Server listining on PORT: ", PORT);
+  connectToMongoDB();
+});
+
+// const PORT = process.env.PORT;
+// if (require.main === module) {
+//   app.listen(PORT, () => {
+//     console.log("Server listening on PORT: ", PORT);
+//     connectToMongoDB(); // Connect to MongoDB only when starting the server
+//   });
+// }
 
 module.exports = app;
