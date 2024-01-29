@@ -67,7 +67,6 @@ Stay connected with us for more updates and enhancements on MedConnect!
 | Patient Profile Screen                           | Medical History Screen                           | Chating Screen                              |
 | ![Landing](./readme/demo/profile-screen.png)     | ![fsdaf](./readme/demo/medical-history-info.png) | ![fsdaf](./readme/demo/chat.png)            |
 | Doctor Dashboard Screen                          | Appointments Schedule Screen Screen              | Medicine List Screen                        |
-| ------------------------------------------------ | ----------------------------------------         | -----------------------------------------   |
 | ![Landing](./readme/demo/doctor-home-screen.png) | ![fsdaf](./readme/demo/appointments.png)         | ![fsdaf](./readme/demo/medicine-list.png)   |
 
 <br><br>
