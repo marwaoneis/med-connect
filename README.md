@@ -132,6 +132,10 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 - This project employs rigorous unit testing methodologies to ensure the reliability and accuracy of code components. By systematically evaluating individual units of the software, we guarantee a robust foundation, identifying and addressing potential issues early in the development process.
 
+| Features testing                                  |
+| ------------------------------------------------- |
+| ![Features testing](./readme/demo/unit-tests.png) |
+
 <br><br>
 
 <!-- How to run -->
