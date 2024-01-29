@@ -55,9 +55,7 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 > In designing MedConnect, we employed a meticulous approach, starting with detailed wireframes and progressing to comprehensive mockups. This iterative design process was instrumental in refining the user interface, ensuring that each layout was optimized for ease of navigation and a seamless user experience. Our dedication to this process has culminated in an intuitive design that not only meets but exceeds the expectations of our users.
 
-- Project Figma design [figma](https://www.figma.com/file/ecj29Eu5rKlfrUcjcrX4Gu/UI-UX-Final-Project---MedConnect?type=design&node-id=184%3A36&mode=design&t=WI17ii4fHIhcSCn1-1)
-
-### Mockups
+### Mockups Examples
 
 | Info Screen                       | Login Screen                             | Patient Home Screen                             |
 | --------------------------------- | ---------------------------------------- | ----------------------------------------------- |
@@ -70,6 +68,8 @@ Stay connected with us for more updates and enhancements on MedConnect!
 | Symptom Checker Screen                      | Appointments Schedule Screen Screen      | Doctor Dashboard Screen                        |
 | ------------------------------------------- | ---------------------------------------- | ---------------------------------------------- |
 | ![fsdaf](./readme/demo/symptom-checker.png) | ![fsdaf](./readme/demo/appointments.png) | ![fsdaf](./readme/demo/doctor-home-screen.png) |
+
+- Check more mockups on [Figma](https://www.figma.com/file/ecj29Eu5rKlfrUcjcrX4Gu/UI-UX-Final-Project---MedConnect?type=design&node-id=184%3A36&mode=design&t=WI17ii4fHIhcSCn1-1)
 
 <br><br>
 
@@ -110,9 +110,13 @@ Stay connected with us for more updates and enhancements on MedConnect!
 <!-- Prompt Engineering -->
 <img src="./readme/title7.svg"/>
 
-### Mastering AI Interaction: Unveiling the Power of Prompt Engineering:
+### Enhancing AI Capabilities with Google Gemini and Prompt Engineering:
 
-- This project uses advanced prompt engineering techniques to optimize the interaction with natural language processing models. By skillfully crafting input instructions, we tailor the behavior of the models to achieve precise and efficient language understanding and generation for various tasks and preferences.
+- This project leverages the sophisticated capabilities of Google Gemini in AI implementation, significantly enhancing our interaction with natural language processing models. By employing refined prompt engineering strategies, we have customized the AI's responsiveness to understand and generate language more precisely and efficiently for diverse tasks. A key feature developed using this approach is our symptom checker. This intuitive tool patiently waits for users to describe their health symptoms or feelings. Upon receiving this input, the AI analyzes it to suggest potential causes, offer recommendations, and even identify suitable specialists for consultation. Below is a screenshot demonstrating the specific prompt used to achieve this functionality.
+
+| Google Gemini prompt                                      |
+| --------------------------------------------------------- |
+| ![Features testing](./readme/demo/prompt-engineering.png) |
 
 <br><br>
 
