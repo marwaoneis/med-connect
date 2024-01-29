@@ -59,16 +59,17 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 ### Mockups
 
-| Welcome Screen                                  | Info Screen                                      | Login Screen                             | Patient Home Screen                       |
-| ----------------------------------------------- | ------------------------------------------------ | ---------------------------------------- | ----------------------------------------- |
-| ![Landing](./readme/demo/welcome-screen.png)    | ![fsdaf](./readme/demo/next1.png)                |
-| ![fsdaf](./readme/demo/login-screen.png)        | ![Landing](./readme/demo/patient-dashboard.gif)  |
-| Book Appointment Screen                         | Symptom Checker Screen                           |
-| Patient Profile Screen                          | Medical History Screen                           |
-| ![fsdaf](./readme/demo/doctors-appointment.png) | ![fsdaf](./readme/demo/symptom-checker.png)      |
-| ![Landing](./readme/demo/profile-screen.png)    | ![fsdaf](./readme/demo/medical-history-info.png) |
-| Chating Screen                                  | Doctor Dashboard Screen                          | Appointments Schedule Screen Screen      | Medicine List Screen                      |
-| ![fsdaf](./readme/demo/chat.png)                | ![Landing](./readme/demo/doctor-home-screen.png) | ![fsdaf](./readme/demo/appointments.png) | ![fsdaf](./readme/demo/medicine-list.png) |
+| Welcome Screen                               | Info Screen                       | Login Screen                             | Patient Home Screen                             |
+| -------------------------------------------- | --------------------------------- | ---------------------------------------- | ----------------------------------------------- |
+| ![Landing](./readme/demo/welcome-screen.png) | ![fsdaf](./readme/demo/next1.png) | ![fsdaf](./readme/demo/login-screen.png) | ![Landing](./readme/demo/patient-dashboard.gif) |
+
+| Patient Profile Screen                       | Medical History Screen                           | Chating Screen                   | Doctor Dashboard Screen                          |
+| -------------------------------------------- | ------------------------------------------------ | -------------------------------- | ------------------------------------------------ |
+| ![Landing](./readme/demo/profile-screen.png) | ![fsdaf](./readme/demo/medical-history-info.png) | ![fsdaf](./readme/demo/chat.png) | ![Landing](./readme/demo/doctor-home-screen.png) |
+
+| Book Appointment Screen                         | Symptom Checker Screen                      | Appointments Schedule Screen Screen      | Medicine List Screen                      |
+| ----------------------------------------------- | ------------------------------------------- | ---------------------------------------- | ----------------------------------------- |
+| ![fsdaf](./readme/demo/doctors-appointment.png) | ![fsdaf](./readme/demo/symptom-checker.png) | ![fsdaf](./readme/demo/appointments.png) | ![fsdaf](./readme/demo/medicine-list.png) |
 
 <br><br>
 
