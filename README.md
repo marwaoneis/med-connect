@@ -63,7 +63,6 @@ Stay connected with us for more updates and enhancements on MedConnect!
 | ------------------------------------------------- | ------------------------------------------------ | ------------------------------------------- |
 | ![Landing](./readme/demo/welcome-screen.png)      | ![fsdaf](./readme/demo/next1.png)                | ![fsdaf](./readme/demo/login-screen.png)    |
 | Patient Home Screen                               |
-| ------------------------------------------------- |
 | ![Landing](./readme/demo/home-screen.png)         |
 | Book Appointment                                  | Doctor Info Screen                               | Symptom Checker Screen                      |
 | -----------------------------------------------   | -----------------------------------------------  | ------------------------------------------- |
