@@ -63,7 +63,6 @@ Stay connected with us for more updates and enhancements on MedConnect!
 | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------- |
 | ![Landing](./readme/demo/welcome-screen.png)     | ![fsdaf](./readme/demo/next1.png)                | ![fsdaf](./readme/demo/login-screen.png)    |
 | Patient Home Screen                              | Book Appointment Screen                          | Symptom Checker Screen                      |
-| -----------------------------------------------  | -----------------------------------------------  | ------------------------------------------- |
 | ![Landing](./readme/demo/patient-dashboard.gif)  | ![fsdaf](./readme/demo/doctors-appointment.png)  | ![fsdaf](./readme/demo/symptom-checker.png) |
 | Patient Profile Screen                           | Medical History Screen                           | Chating Screen                              |
 | --------------------------------------------     | ------------------------------------------------ | --------------------------------            |
