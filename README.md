@@ -59,9 +59,9 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 ### Mockups Examples
 
-| Patient Profile Screen                     | Chating Screen                   | Doctor Dashboard Screen                          |
-| ------------------------------------------ | -------------------------------- | ------------------------------------------------ |
-| ![fsdaf](./readme/demo/profile-screen.png) | ![fsdaf](./readme/demo/chat.png) | ![Landing](./readme/demo/doctor-home-screen.png) |
+| Info Screen                       | Chating Screen                   | Doctor Dashboard Screen                          |
+| --------------------------------- | -------------------------------- | ------------------------------------------------ |
+| ![fsdaf](./readme/demo/next1.png) | ![fsdaf](./readme/demo/chat.png) | ![Landing](./readme/demo/doctor-home-screen.png) |
 
 - Check more mockups on [Figma...](https://www.figma.com/file/ecj29Eu5rKlfrUcjcrX4Gu/UI-UX-Final-Project---MedConnect?type=design&node-id=184%3A36&mode=design&t=WI17ii4fHIhcSCn1-1)
 
@@ -81,11 +81,11 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 ### Patient Screens
 
-| Patient Home Screen                             | Book Appointment Screen                      | Symptom Checker Screen                       |
-| ----------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| ![Landing](./readme/demo/patient-dashboard.gif) | ![fsdaf](./readme/demo/book-appointment.gif) | ![fsdaf](./readme/demo/symptom-checker.gif)  |
-| Medicine Info Screen                            | Buy Medicine List Screen                     | Doctors List Screen                          |
-| ![Landing](./readme/demo/medicine-info.png)     | ![fsdaf](./readme/demo/buy-medicine.png)     | ![fsdaf](./readme/demo/book-appointment.png) |
+| Patient Home Screen                             | Patient Profile Screen                     | Symptom Checker Screen                       |
+| ----------------------------------------------- | ------------------------------------------ | -------------------------------------------- |
+| ![Landing](./readme/demo/patient-dashboard.gif) | ![fsdaf](./readme/demo/profile-screen.png) | ![fsdaf](./readme/demo/symptom-checker.gif)  |
+| Medicine Info Screen                            | Buy Medicine List Screen                   | Doctors List Screen                          |
+| ![Landing](./readme/demo/medicine-info.png)     | ![fsdaf](./readme/demo/buy-medicine.png)   | ![fsdaf](./readme/demo/book-appointment.png) |
 
 ### Doctor Screens
 
