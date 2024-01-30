@@ -25,8 +25,8 @@ Doctor
 
 Pharmacy
 
-- As a pharmacy, I want to seamlessly integrate with the app to receive electronic prescriptions and coordinate efficiently with healthcare providers, so I can ensure accurate and timely medication dispensing.
-- As a pharmacy, I want to receive and process medication refill requests from patients through the app, streamlining the refill process and enhancing customer service.
+- As a pharmacy Representative, I want to seamlessly integrate with the app to receive electronic prescriptions and coordinate efficiently with healthcare providers, so I can ensure accurate and timely medication dispensing.
+- As a pharmacy Representative, I want to receive and process medication refill requests from patients through the app, streamlining the refill process and enhancing customer service.
 
   <br><br>
 
