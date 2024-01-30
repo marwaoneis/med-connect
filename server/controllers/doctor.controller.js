@@ -17,7 +17,7 @@ const uploadProfilePicture = async (req, res) => {
     if (!doctor) {
       return res.status(404).json({ error: "Doctor not found" });
     }
-    doctor.profilePicture = req.file.path; // Update the profile picture path
+    doctor.profilePicture = req.file.path;
     await doctor.save();
     res.status(200).json(doctor);
   } catch (error) {

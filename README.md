@@ -81,11 +81,11 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 ### Patient Screens
 
-| Patient Home Screen                             | Patient Profile Screen                     | Symptom Checker Screen                       |
-| ----------------------------------------------- | ------------------------------------------ | -------------------------------------------- |
-| ![Landing](./readme/demo/patient-dashboard.gif) | ![fsdaf](./readme/demo/profile-screen.png) | ![fsdaf](./readme/demo/symptom-checker.gif)  |
-| Medicine Info Screen                            | Buy Medicine List Screen                   | Doctors List Screen                          |
-| ![Landing](./readme/demo/medicine-info.png)     | ![fsdaf](./readme/demo/buy-medicine.png)   | ![fsdaf](./readme/demo/book-appointment.png) |
+| Patient Home Screen                             | Patient Profile Screen                   | Symptom Checker Screen                       |
+| ----------------------------------------------- | ---------------------------------------- | -------------------------------------------- |
+| ![Landing](./readme/demo/patient-dashboard.gif) | ![fsdaf](./readme/demo/myprofile.png)    | ![fsdaf](./readme/demo/symptom-checker.gif)  |
+| Medicine Info Screen                            | Buy Medicine List Screen                 | Doctors List Screen                          |
+| ![Landing](./readme/demo/medicine-info.png)     | ![fsdaf](./readme/demo/buy-medicine.png) | ![fsdaf](./readme/demo/book-appointment.png) |
 
 ### Doctor Screens
 
