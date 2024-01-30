@@ -9,8 +9,6 @@
 >
 > MedConnect is an application designed to benefit patients, doctors, and healthcare providers. Patients enjoy convenience with features like virtual consultations, an AI-assisted symptom checker, and automated medication reminders. Doctors benefit from more efficient workflows and improved communication. Hospitals and medical centers witness increased administrative efficiency, leading to an overall enhancement of patient care effectiveness.
 
-<div style="padding:218.3% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/907750926?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="symptomai-print"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-
 [![MedConnect short demo](./readme/demo/thumb.png)]([https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID](https://vimeo.com/907750926?share=copy)
 
 ### User Stories
