@@ -57,19 +57,11 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 ### Mockups Examples
 
-| Info Screen                       | Login Screen                             | Patient Home Screen                             |
-| --------------------------------- | ---------------------------------------- | ----------------------------------------------- |
-| ![fsdaf](./readme/demo/next1.png) | ![fsdaf](./readme/demo/login-screen.png) | ![Landing](./readme/demo/patient-dashboard.gif) |
+| Patient Profile Screen                     | Chating Screen                   | Doctor Dashboard Screen                          |
+| ------------------------------------------ | -------------------------------- | ------------------------------------------------ |
+| ![fsdaf](./readme/demo/profile-screen.png) | ![fsdaf](./readme/demo/chat.png) | ![Landing](./readme/demo/doctor-home-screen.png) |
 
-| Patient Profile Screen                       | Medical History Screen                           | Chating Screen                   |
-| -------------------------------------------- | ------------------------------------------------ | -------------------------------- |
-| ![Landing](./readme/demo/profile-screen.png) | ![fsdaf](./readme/demo/medical-history-info.png) | ![fsdaf](./readme/demo/chat.png) |
-
-| Symptom Checker Screen                      | Appointments Schedule Screen Screen      | Doctor Dashboard Screen                        |
-| ------------------------------------------- | ---------------------------------------- | ---------------------------------------------- |
-| ![fsdaf](./readme/demo/symptom-checker.png) | ![fsdaf](./readme/demo/appointments.png) | ![fsdaf](./readme/demo/doctor-home-screen.png) |
-
-- Check more mockups on [Figma](https://www.figma.com/file/ecj29Eu5rKlfrUcjcrX4Gu/UI-UX-Final-Project---MedConnect?type=design&node-id=184%3A36&mode=design&t=WI17ii4fHIhcSCn1-1)
+- Check more mockups on [Figma...](https://www.figma.com/file/ecj29Eu5rKlfrUcjcrX4Gu/UI-UX-Final-Project---MedConnect?type=design&node-id=184%3A36&mode=design&t=WI17ii4fHIhcSCn1-1)
 
 <br><br>
 
