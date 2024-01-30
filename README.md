@@ -9,7 +9,7 @@
 >
 > MedConnect is an application designed to benefit patients, doctors, and healthcare providers. Patients enjoy convenience with features like virtual consultations, an AI-assisted symptom checker, and automated medication reminders. Doctors benefit from more efficient workflows and improved communication. Hospitals and medical centers witness increased administrative efficiency, leading to an overall enhancement of patient care effectiveness.
 
-https://githubusercontent.com/marwaoneis/med-connect/main/readme/demo/symptomai-print.mp4
+https://github.com/marwaoneis/med-connect/assets/110203332/70bf384e-d000-41ac-a0f8-94b79d586244
 
 ### User Stories
 
