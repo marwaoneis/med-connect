@@ -59,9 +59,9 @@ Stay connected with us for more updates and enhancements on MedConnect!
 
 ### Mockups Examples
 
-| Info Screen                       | Chating Screen                   | Doctor Dashboard Screen                          |
-| --------------------------------- | -------------------------------- | ------------------------------------------------ |
-| ![fsdaf](./readme/demo/next1.png) | ![fsdaf](./readme/demo/chat.png) | ![Landing](./readme/demo/doctor-home-screen.png) |
+| Info Screen                         | Chating Screen                   | Doctor Dashboard Screen                          |
+| ----------------------------------- | -------------------------------- | ------------------------------------------------ |
+| ![fsdaf](./readme/demo/welcome.png) | ![fsdaf](./readme/demo/chat.png) | ![Landing](./readme/demo/doctor-home-screen.png) |
 
 - Check more mockups on [Figma...](https://www.figma.com/file/ecj29Eu5rKlfrUcjcrX4Gu/UI-UX-Final-Project---MedConnect?type=design&node-id=184%3A36&mode=design&t=WI17ii4fHIhcSCn1-1)
 
