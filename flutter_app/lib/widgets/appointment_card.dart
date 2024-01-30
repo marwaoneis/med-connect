@@ -162,6 +162,7 @@ class AppointmentCardState extends State<AppointmentCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text('Date', style: TextStyle(fontSize: 14)),
                           Text(formattedDate,
@@ -184,7 +185,12 @@ class AppointmentCardState extends State<AppointmentCard> {
                     children: <Widget>[
                       const Icon(Icons.location_on, color: Color(0xFF0D4C92)),
                       const SizedBox(width: 8),
-                      Text(doctor!.address),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Text(doctor!.address),
+                        ),
+                      ),
                       const Spacer(),
                       const Text('Open in Google Maps'),
                     ],
