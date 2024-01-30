@@ -456,14 +456,14 @@ class PatientProfileScreenState extends State<PatientProfileScreen> {
           children: [
             const CircleAvatar(
               radius: 40,
-              backgroundImage: NetworkImage('https://via.placeholder.com/150'),
+              backgroundImage: AssetImage("assets/myprofile.png"),
             ),
             const SizedBox(width: 20),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('$firstName, $lastName',
+                  Text('$firstName $lastName',
                       style: const TextStyle(
                           fontSize: 25, fontWeight: FontWeight.bold)),
                   Row(
