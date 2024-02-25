@@ -74,10 +74,6 @@ class FindPharmacyWidgetState extends State<FindPharmacyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
     if (errorMessage != null) {
       return Center(child: Text('Error: $errorMessage'));
     }

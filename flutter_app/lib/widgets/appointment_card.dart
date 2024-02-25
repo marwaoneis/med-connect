@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import '../api/api_service.dart';
 import '../config/request_config.dart';
 import '../models/appointment_model.dart';
 import '../models/doctor_model.dart';
 import '../screens/chat_screen.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
 
 class AppointmentCard extends StatefulWidget {
   final String patientId;
@@ -63,10 +61,6 @@ class AppointmentCardState extends State<AppointmentCard> {
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
     if (errorMessage != null) {
       return Center(child: Text(errorMessage!));
     }

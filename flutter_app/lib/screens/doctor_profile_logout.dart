@@ -10,11 +10,8 @@ import 'appointments_schedule.dart';
 import 'doctor_dashboard_screen.dart';
 import 'doctor_message_screen.dart';
 import 'patient_dashboard_screen.dart';
-import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../config/request_config.dart';
 
 class DoctorProfileLogoutScreen extends StatefulWidget {
   const DoctorProfileLogoutScreen({super.key});

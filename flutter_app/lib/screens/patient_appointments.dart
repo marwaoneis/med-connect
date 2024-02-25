@@ -66,9 +66,7 @@ class BookAppointmentScreenState extends State<BookAppointmentScreen> {
             ),
             trailingContent: IconButton(
               icon: const Icon(Icons.filter_list, color: Colors.white),
-              onPressed: () {
-                // TODO: Sort action
-              },
+              onPressed: () {},
             ),
           ),
           Expanded(

@@ -1,10 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/api_service.dart';
 import 'package:flutter_app/screens/doctor_message_screen.dart';
 import 'package:flutter_app/screens/doctor_profile_logout.dart';
-import 'package:flutter_app/screens/medical_history.dart';
 import 'package:flutter_app/widgets/no_glow_scroll.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
@@ -18,7 +15,6 @@ import '../widgets/footer.dart';
 import '../widgets/top_bar_with_background.dart';
 import 'chat_screen.dart';
 import 'doctor_dashboard_screen.dart';
-import 'message_screen.dart';
 import 'patient_medical_history_screen.dart';
 
 class AppointmentScheduleScreen extends StatefulWidget {

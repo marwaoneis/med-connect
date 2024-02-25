@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_app/widgets/forgot_password_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'signup_screen_part1.dart';
 import '../data/sign_up_form_data.dart';
@@ -19,6 +20,11 @@ class LoginScreenState extends State<LoginScreen> {
   String _password = '';
   bool _isLoading = false;
 
+  void _forgotPassword() {
+    // Navigator.of(context).push(
+    //     MaterialPageRoute(builder: (context) => const ForgotPasswordScreen()));
+  }
+
   Future<void> _login() async {
     if (!_formKey.currentState!.validate()) return;
     _formKey.currentState!.save();
@@ -30,6 +36,8 @@ class LoginScreenState extends State<LoginScreen> {
         _password,
         _userType,
       );
+
+      if (!mounted) return;
 
       switch (_userType) {
         case UserType.patient:
@@ -43,10 +51,13 @@ class LoginScreenState extends State<LoginScreen> {
           break;
       }
     } catch (error) {
+      if (!mounted) return;
       _showErrorDialog(error.toString());
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
     }
-
-    setState(() => _isLoading = false);
   }
 
   void _showErrorDialog(String message) {
@@ -160,9 +171,7 @@ class LoginScreenState extends State<LoginScreen> {
                         Align(
                           alignment: Alignment.centerRight,
                           child: TextButton(
-                            onPressed: () {
-                              // forgot password functionality
-                            },
+                            onPressed: _forgotPassword,
                             style: TextButton.styleFrom(
                               padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,

@@ -95,9 +95,7 @@ class PopularSpecialtiesWidget extends StatelessWidget {
         FutureBuilder<List<Specialty>>(
           future: fetchSpecializations(context),
           builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
+            if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else if (snapshot.hasData) {
               var specialties = snapshot.data!;
