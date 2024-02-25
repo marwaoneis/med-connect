@@ -101,27 +101,45 @@ class SymptomCheckerScreenState extends State<SymptomCheckerScreen> {
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 15),
-                    TextField(
-                      onChanged: (value) {
-                        _inputText = value;
-                      },
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      minLines: 1,
-                      decoration: InputDecoration(
-                        hintText: 'Type your symptoms here',
-                        suffixIcon: IconButton(
-                          icon: const Icon(Icons.search,
-                              size: 30, color: Color(0xFF0D4C92)),
-                          onPressed: _onSearch,
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        TextField(
+                          onChanged: (value) {
+                            _inputText = value;
+                          },
+                          keyboardType: TextInputType.multiline,
+                          maxLines: null,
+                          minLines: 1,
+                          decoration: InputDecoration(
+                            hintText: 'Type your symptoms here',
+                            suffixIcon: IconButton(
+                              icon: const Icon(Icons.search,
+                                  size: 30, color: Color(0xFF0D4C92)),
+                              onPressed: _onSearch,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            fillColor: const Color(0xFF0D4C92).withOpacity(0.2),
+                            filled: true,
+                          ),
                         ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        fillColor: const Color(0xFF0D4C92).withOpacity(0.2),
-                        filled: true,
-                      ),
+                      ],
                     ),
+                    if (!_showResult)
+                      Column(
+                        children: [
+                          const SizedBox(height: 50),
+                          Center(
+                            child: Image.asset(
+                              'assets/empty_symptom.png',
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ],
+                      ),
                     const SizedBox(height: 20),
                     if (_showResult) ...[
                       _buildAIResponse(),

@@ -129,6 +129,7 @@ flutter:
     - assets/recommended_specialist.svg
     - assets/recommended_specialist.png
     - assets/myprofile.png
+    - assets/empty_symptom.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
