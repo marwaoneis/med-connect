@@ -31,7 +31,7 @@ class NextScreenThree extends StatelessWidget {
                       const Padding(
                         padding: EdgeInsets.only(top: 8.0),
                         child: Text(
-                          'improve coordination between healthcare providers and pharmacists.',
+                          'Improve coordination between healthcare providers and pharmacists.',
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.black,

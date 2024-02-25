@@ -31,7 +31,7 @@ class NextScreenOne extends StatelessWidget {
                       const Padding(
                         padding: EdgeInsets.only(top: 8.0),
                         child: Text(
-                          'Find a Doctor and make an appointment at your nearest location.',
+                          'Find a doctor and make an appointment at your nearest location.',
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.black,
