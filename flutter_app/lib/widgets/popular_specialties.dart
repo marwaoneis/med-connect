@@ -112,36 +112,42 @@ class PopularSpecialtiesWidget extends StatelessWidget {
                             context, specialty.name),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                width: 60,
-                                height: 60,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color:
-                                      const Color(0xFF0D4C92).withOpacity(0.2),
-                                  shape: BoxShape.circle,
+                          child: SizedBox(
+                            width: 62,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  width: 60,
+                                  height: 60,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF0D4C92)
+                                        .withOpacity(0.2),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: SvgPicture.asset(
+                                    specialty.iconPath,
+                                    semanticsLabel: specialty.name,
+                                    width: 35,
+                                    height: 35,
+                                  ),
                                 ),
-                                child: SvgPicture.asset(
-                                  specialty.iconPath,
-                                  semanticsLabel: specialty.name,
-                                  width: 35,
-                                  height: 35,
+                                const SizedBox(height: 5),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Text(
+                                    specialty.name,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13.0,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 5),
-                              Text(
-                                specialty.name,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13.0,
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       );
